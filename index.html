@@ -3,97 +3,376 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StylePlanIt Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <title>StylePlanIt | Define Your New Life. Design Your New Look.</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
     <style>
+        /* --- RESET & BASE STYLES --- */
+        :root {
+            --gold: #D4AF37;
+            --black: #0a0a0a;
+            --charcoal: #1f1f1f;
+            --white: #ffffff;
+            --light-gray: #f8f8f8;
+            --text-gray: #555555;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body {
             font-family: 'Lato', sans-serif;
-            background-color: black;
-            color: gold;
-            margin: 0;
-            padding: 0;
+            color: var(--black);
+            line-height: 1.6;
+            background-color: var(--white);
+            overflow-x: hidden;
         }
-        h1, h2 {
+
+        h1, h2, h3, h4 {
             font-family: 'Playfair Display', serif;
+            font-weight: 700;
         }
-        header {
-            padding: 20px;
+
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        ul { list-style: none; }
+
+        /* --- UTILITIES --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 35px;
+            background-color: var(--black);
+            color: var(--white);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            border: 1px solid var(--black);
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: transparent;
+            color: var(--black);
+        }
+
+        .btn-gold {
+            background-color: var(--gold);
+            border-color: var(--gold);
+            color: var(--white);
+        }
+
+        .btn-gold:hover {
+            background-color: transparent;
+            color: var(--gold);
+        }
+
+        .section-padding { padding: 100px 0; }
+        .text-center { text-align: center; }
+        
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-subtitle {
+            font-size: 1rem;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .nav-links { display: flex; gap: 40px; }
+        .nav-links a { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
+        .nav-links a:hover { color: var(--gold); }
+        .cta-nav { border-bottom: 1px solid var(--black); padding-bottom: 2px; }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1496747611176-843222e1e57c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80'); /* Placeholder Luxury Image */
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 40px;
+            font-weight: 300;
+        }
+
+        /* --- ABOUT SECTION --- */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            background-color: #eee; /* Placeholder for Ayushi & Deepesh Photo */
+        }
+
+        /* --- SERVICES SPLIT --- */
+        .service-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 60px;
+            gap: 20px;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding-bottom: 10px;
+            color: var(--text-gray);
+            border-bottom: 2px solid transparent;
+        }
+
+        .tab-btn.active {
+            color: var(--black);
+            border-color: var(--gold);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            display: none; /* Hidden by default, JS toggles this */
+        }
+
+        .services-grid.active { display: grid; }
+
+        .service-card {
+            background: var(--light-gray);
+            padding: 40px;
+            transition: 0.3s;
+            border: 1px solid transparent;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--gold);
+            background: var(--white);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .service-card h3 { font-size: 1.5rem; margin-bottom: 15px; }
+        .service-card p { color: var(--text-gray); font-size: 0.95rem; margin-bottom: 20px; }
+        .price-tag { display: block; font-weight: 700; margin-top: 15px; color: var(--gold); }
+
+        /* --- HNI SECTION (Velvet Rope) --- */
+        .hni-section {
+            background-color: var(--black);
+            color: var(--white);
             text-align: center;
         }
-        nav {
-            margin: 20px 0;
+
+        .hni-content { max-width: 800px; margin: 0 auto; }
+        .hni-section h2 { color: var(--gold); }
+        .hni-section p { color: #ccc; margin-bottom: 40px; }
+
+        /* --- FOOTER --- */
+        footer {
+            background: var(--white);
+            padding: 50px 0;
+            border-top: 1px solid #eee;
+            text-align: center;
         }
-        nav a {
-            color: gold;
-            text-decoration: none;
-            padding: 10px 20px;
-        }
-        .service {
-            margin: 20px;
-            padding: 20px;
-            background: rgba(255, 215, 0, 0.1);
-            border-radius: 8px;
-        }
-        .service-card {
-            border: 1px solid gold;
-            border-radius: 8px;
-            padding: 10px;
-            margin: 10px 0;
-        }
-        @media (max-width: 600px) {
-            nav a {
-                display: block;
-                margin: 5px 0;
-            }
+
+        .social-icons { margin-bottom: 20px; }
+        .social-icons a { margin: 0 10px; font-size: 1.2rem; }
+
+        /* --- MOBILE --- */
+        @media (max-width: 768px) {
+            .hero-content h1 { font-size: 2.5rem; }
+            .about-grid { grid-template-columns: 1fr; }
+            .nav-links { display: none; } /* Simplified for MVP */
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>StylePlanIt Portfolio</h1>
-        <nav>
-            <a href="#newtocanada">New to Canada</a>
-            <a href="#elevationedit">The Elevation Edit</a>
-            <a href="#weddingwing">The Wedding Wing</a>
-            <a href="#corporatepageant">Corporate & Pageant</a>
-        </nav>
+
+    <nav>
+        <div class="container">
+            <div class="logo">StylePlanIt.</div>
+            <div class="nav-links">
+                <a href="#about">About</a>
+                <a href="#services">Services</a>
+                <a href="#private">Private Client</a>
+                <a href="#contact" class="cta-nav">Book Consultation</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="container hero-content">
+            <h1>Define Your New Life.<br>Design Your New Look.</h1>
+            <p>Personal styling for Canada’s ambitious newcomers and established professionals.</p>
+            <a href="https://calendly.com/" target="_blank" class="btn btn-gold">Book Your Discovery Call</a>
+        </div>
     </header>
-    <main>
-        <section id="newtocanada" class="service">
-            <h2>New to Canada</h2>
-            <div class="service-card">
-                <h3>Service Overview</h3>
-                <p>Description of the service...</p>
-                <p>Price: $XXX</p>
+
+    <section id="about" class="section-padding">
+        <div class="container">
+            <div class="about-grid">
+                <img src="https://images.unsplash.com/photo-1556910103-1c02745a30bf?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Ayushi and Deepesh" class="about-img">
+                <div>
+                    <span class="section-subtitle">Who We Are</span>
+                    <h2 class="section-title">The Immigrant Edge + <br>The Stylist's Eye</h2>
+                    <p style="margin-bottom: 20px;">We are Deepesh & Ayushi. We understand the duality of building a life in a new country. You need the technical logistics to settle, but you also need the visual confidence to rise.</p>
+                    <p>At <strong>StylePlanIt</strong>, we don't just dress you. We decode the cultural nuance of Canadian professional life and translate your ambition into an aesthetic that opens doors.</p>
+                </div>
             </div>
-        </section>
-        <section id="elevationedit" class="service">
-            <h2>The Elevation Edit</h2>
-            <div class="service-card">
-                <h3>Service Overview</h3>
-                <p>Description of the service...</p>
-                <p>Price: $XXX</p>
+        </div>
+    </section>
+
+    <section id="services" class="section-padding" style="background-color: #fafafa;">
+        <div class="container">
+            <div class="text-center">
+                <span class="section-subtitle">Our Expertise</span>
+                <h2 class="section-title">Curated Service Menus</h2>
             </div>
-        </section>
-        <section id="weddingwing" class="service">
-            <h2>The Wedding Wing</h2>
-            <div class="service-card">
-                <h3>Service Overview</h3>
-                <p>Description of the service...</p>
-                <p>Price: $XXX</p>
+
+            <div class="service-tabs">
+                <button class="tab-btn active" onclick="openTab('newcomers')">Just Landed?</button>
+                <button class="tab-btn" onclick="openTab('professionals')">Ready to Rise?</button>
             </div>
-        </section>
-        <section id="corporatepageant" class="service">
-            <h2>Corporate & Pageant</h2>
-            <div class="service-card">
-                <h3>Service Overview</h3>
-                <p>Description of the service...</p>
-                <p>Price: $XXX</p>
+
+            <div id="newcomers" class="services-grid active">
+                <div class="service-card">
+                    <h3>The Career Kickstart</h3>
+                    <p>Interview-focused styling to help you land your first Canadian role. Includes 'The Canadian Code' workshop.</p>
+                    <span class="price-tag">Starting at $250</span>
+                </div>
+                <div class="service-card">
+                    <h3>The Settlement Standard</h3>
+                    <p>A comprehensive capsule wardrobe for your first 30 days. Weather-appropriate and budget-conscious.</p>
+                    <span class="price-tag">Inquire for Pricing</span>
+                </div>
+                <div class="service-card">
+                    <h3>The First Class Arrival</h3>
+                    <p>Our premium "Done-For-You" service. We source everything before you land. Walk off the plane ready.</p>
+                    <span class="price-tag">Premium Bundle</span>
+                </div>
             </div>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2026 StylePlanIt. All rights reserved.</p>
+
+            <div id="professionals" class="services-grid">
+                <div class="service-card">
+                    <h3>The Tone Audit</h3>
+                    <p>For mid-career professionals. We align your wardrobe with the promotion you want, not the job you have.</p>
+                    <span class="price-tag">Consultation Based</span>
+                </div>
+                <div class="service-card">
+                    <h3>The Event Edit</h3>
+                    <p>Wedding guest? Gala? Keynote? We provide virtual shopping and styling to make you the best-dressed attendee.</p>
+                    <span class="price-tag">Starting at $400</span>
+                </div>
+                <div class="service-card">
+                    <h3>The Showstopper</h3>
+                    <p>For high-stakes roles (Emcee, Best Man, Bridesmaid). Bold styling when all eyes are on you.</p>
+                    <span class="price-tag">Starting at $600</span>
+                </div>
+                <div class="service-card">
+                    <h3>The OOO Edit</h3>
+                    <p>Vacation styling and packing strategy. Includes in-person shopping for that perfect travel capsule.</p>
+                    <span class="price-tag">Seasonal Pricing</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="private" class="section-padding hni-section">
+        <div class="container hni-content">
+            <span class="section-subtitle">Private Client Services</span>
+            <h2>The Icon Service</h2>
+            <p>Bespoke image management for executives and High-Net-Worth Individuals. Includes lifestyle analysis, luxury in-person shopping, and total wardrobe curation.</p>
+            <a href="https://calendly.com/" target="_blank" class="btn btn-gold">Request Private Access</a>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="container">
+            <div class="logo" style="margin-bottom: 20px;">StylePlanIt.</div>
+            <p style="margin-bottom: 30px;">Toronto, Canada</p>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="far fa-envelope"></i></a>
+            </div>
+            <p style="font-size: 0.8rem; color: #999;">&copy; 2026 StylePlanIt. All Rights Reserved.</p>
+        </div>
     </footer>
+
+    <script>
+        function openTab(tabName) {
+            // Hide all grids
+            var i, x;
+            x = document.getElementsByClassName("services-grid");
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            // Remove active class from buttons
+            var btns = document.getElementsByClassName("tab-btn");
+            for (i = 0; i < btns.length; i++) {
+                btns[i].className = btns[i].className.replace(" active", "");
+            }
+            // Show current grid and add active class to button
+            document.getElementById(tabName).style.display = "grid";
+            event.currentTarget.className += " active";
+        }
+    </script>
 </body>
 </html>
