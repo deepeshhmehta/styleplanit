@@ -3,104 +3,108 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StylePlanIt | Define Your New Life. Design Your New Look.</title>
+    <title>StylePlanIt | The Art of Arrival</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <style>
-        /* --- RESET & BASE STYLES --- */
+        /* --- 1. LUXURY RESET & VARIABLES --- */
         :root {
-            --gold: #D4AF37;
-            --black: #0a0a0a;
-            --charcoal: #1f1f1f;
+            --gold: #D4AF37;           /* Classic Gold */
+            --gold-dim: #b5952f;       /* Darker Gold for hover */
+            --black: #0F0F0F;          /* Rich Black */
+            --charcoal: #2A2A2A;       /* Soft Black */
+            --cream: #F9F8F4;          /* Paper White */
             --white: #ffffff;
-            --light-gray: #f8f8f8;
-            --text-gray: #555555;
+            --border-color: rgba(0,0,0,0.08);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
-            font-family: 'Lato', sans-serif;
-            color: var(--black);
-            line-height: 1.6;
-            background-color: var(--white);
+            font-family: 'Montserrat', sans-serif;
+            color: var(--charcoal);
+            background-color: var(--cream);
+            line-height: 1.8;
+            font-weight: 300;
             overflow-x: hidden;
         }
 
         h1, h2, h3, h4 {
-            font-family: 'Playfair Display', serif;
-            font-weight: 700;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 400;
+            color: var(--black);
+            line-height: 1.1;
         }
 
-        a { text-decoration: none; color: inherit; transition: 0.3s; }
-        ul { list-style: none; }
-
-        /* --- UTILITIES --- */
+        /* --- 2. TYPOGRAPHY UTILITIES --- */
         .container {
-            max-width: 1200px;
+            max-width: 1100px; /* Narrower container for editorial look */
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 40px;
         }
 
+        /* Buttons: Sharp, Thin, Uppercase */
         .btn {
             display: inline-block;
-            padding: 15px 35px;
-            background-color: var(--black);
-            color: var(--white);
+            padding: 18px 40px;
+            background-color: transparent;
+            color: var(--black);
             text-transform: uppercase;
-            font-size: 0.85rem;
-            letter-spacing: 2px;
+            font-size: 0.75rem;
+            letter-spacing: 3px;
             border: 1px solid var(--black);
-            cursor: pointer;
+            transition: all 0.4s ease;
+            text-decoration: none;
+            font-weight: 500;
         }
 
         .btn:hover {
-            background-color: transparent;
-            color: var(--black);
-        }
-
-        .btn-gold {
-            background-color: var(--gold);
-            border-color: var(--gold);
+            background-color: var(--black);
             color: var(--white);
         }
 
-        .btn-gold:hover {
-            background-color: transparent;
+        .btn-gold {
+            border-color: var(--gold);
             color: var(--gold);
         }
 
-        .section-padding { padding: 100px 0; }
+        .btn-gold:hover {
+            background-color: var(--gold);
+            color: var(--white);
+        }
+
+        .section-padding { padding: 140px 0; }
         .text-center { text-align: center; }
         
-        .section-title {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            position: relative;
-            display: inline-block;
-        }
-        
         .section-subtitle {
-            font-size: 1rem;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.7rem;
             color: var(--gold);
             text-transform: uppercase;
-            letter-spacing: 3px;
-            margin-bottom: 10px;
+            letter-spacing: 4px;
+            margin-bottom: 20px;
             display: block;
         }
+        
+        .section-title {
+            font-size: 3.5rem;
+            margin-bottom: 40px;
+        }
 
-        /* --- NAVIGATION --- */
+        /* --- 3. NAVIGATION (Minimalist) --- */
         nav {
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            padding: 20px 0;
+            background: rgba(249, 248, 244, 0.95); /* Matches cream bg */
+            padding: 25px 0;
             z-index: 1000;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
+            border-bottom: 1px solid rgba(0,0,0,0.03);
         }
 
         nav .container {
@@ -110,136 +114,247 @@
         }
 
         .logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            font-weight: 700;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 600;
             letter-spacing: 1px;
+            color: var(--black);
         }
 
-        .nav-links { display: flex; gap: 40px; }
-        .nav-links a { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
-        .nav-links a:hover { color: var(--gold); }
-        .cta-nav { border-bottom: 1px solid var(--black); padding-bottom: 2px; }
+        .nav-links { display: flex; gap: 50px; }
+        .nav-links a { 
+            font-size: 0.75rem; 
+            text-transform: uppercase; 
+            letter-spacing: 2px;
+            color: var(--charcoal);
+            position: relative;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--gold);
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover::after { width: 100%; }
 
-        /* --- HERO SECTION --- */
+        /* --- 4. HERO SECTION (Editorial) --- */
         .hero {
             height: 100vh;
-            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1496747611176-843222e1e57c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80'); /* Placeholder Luxury Image */
-            background-size: cover;
-            background-position: center;
+            position: relative;
+            background: url('https://images.unsplash.com/photo-1502716119720-b23a93e5fe1b?q=80&w=2070&auto=format&fit=crop') no-repeat center center/cover;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
+        }
+
+        /* Dark Overlay for text readability */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.3); 
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
             color: var(--white);
+            max-width: 800px;
         }
 
         .hero-content h1 {
-            font-size: 3.5rem;
+            font-size: 5rem;
+            color: var(--white);
             margin-bottom: 20px;
-            line-height: 1.2;
+            font-style: italic; /* Adds that fashion magazine feel */
         }
 
         .hero-content p {
-            font-size: 1.2rem;
-            max-width: 600px;
-            margin: 0 auto 40px;
+            font-size: 1.1rem;
+            margin-bottom: 50px;
+            letter-spacing: 1px;
             font-weight: 300;
         }
 
-        /* --- ABOUT SECTION --- */
+        .hero .btn {
+            border-color: var(--white);
+            color: var(--white);
+        }
+        .hero .btn:hover {
+            background-color: var(--white);
+            color: var(--black);
+        }
+
+        /* --- 5. ABOUT SECTION --- */
         .about-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 60px;
+            gap: 100px; /* Big luxury gap */
             align-items: center;
+        }
+
+        .about-img-wrapper {
+            position: relative;
         }
 
         .about-img {
             width: 100%;
-            height: 500px;
+            height: 600px;
             object-fit: cover;
-            background-color: #eee; /* Placeholder for Ayushi & Deepesh Photo */
+            filter: grayscale(100%); /* Black and white photo for class */
+            transition: filter 0.5s ease;
         }
 
-        /* --- SERVICES SPLIT --- */
+        .about-img:hover { filter: grayscale(0%); }
+
+        /* Gold Outline box behind image */
+        .about-img-wrapper::after {
+            content: '';
+            position: absolute;
+            top: 20px; left: 20px;
+            width: 100%; height: 100%;
+            border: 1px solid var(--gold);
+            z-index: -1;
+        }
+
+        /* --- 6. SERVICES TABS (Minimalist) --- */
         .service-tabs {
             display: flex;
             justify-content: center;
-            margin-bottom: 60px;
-            gap: 20px;
+            margin-bottom: 80px;
+            gap: 40px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 20px;
         }
 
         .tab-btn {
             background: none;
             border: none;
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
             cursor: pointer;
-            padding-bottom: 10px;
-            color: var(--text-gray);
-            border-bottom: 2px solid transparent;
+            color: #999;
+            transition: 0.3s;
         }
 
         .tab-btn.active {
             color: var(--black);
-            border-color: var(--gold);
+            font-weight: 600;
         }
 
         .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-            display: none; /* Hidden by default, JS toggles this */
+            display: none;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 60px; /* More space */
+            animation: fadeIn 0.8s ease;
         }
 
         .services-grid.active { display: grid; }
 
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
         .service-card {
-            background: var(--light-gray);
-            padding: 40px;
-            transition: 0.3s;
+            background: var(--white);
+            padding: 50px 30px;
             border: 1px solid transparent;
+            text-align: center;
+            transition: 0.4s;
         }
 
         .service-card:hover {
-            transform: translateY(-5px);
             border-color: var(--gold);
-            background: var(--white);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transform: translateY(-5px);
         }
 
-        .service-card h3 { font-size: 1.5rem; margin-bottom: 15px; }
-        .service-card p { color: var(--text-gray); font-size: 0.95rem; margin-bottom: 20px; }
-        .price-tag { display: block; font-weight: 700; margin-top: 15px; color: var(--gold); }
+        .service-card h3 { 
+            font-size: 1.8rem; 
+            margin-bottom: 20px; 
+            font-style: italic;
+        }
 
-        /* --- HNI SECTION (Velvet Rope) --- */
+        .service-card p {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .price-tag {
+            display: inline-block;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            color: var(--gold);
+            text-transform: uppercase;
+            border-bottom: 1px solid var(--gold);
+            padding-bottom: 2px;
+        }
+
+        /* --- 7. VELVET ROPE (HNI) --- */
         .hni-section {
             background-color: var(--black);
             color: var(--white);
             text-align: center;
+            padding: 160px 0;
         }
 
-        .hni-content { max-width: 800px; margin: 0 auto; }
-        .hni-section h2 { color: var(--gold); }
-        .hni-section p { color: #ccc; margin-bottom: 40px; }
+        .hni-section h2 { 
+            color: var(--gold); 
+            font-size: 4rem;
+            margin-bottom: 30px;
+        }
+        
+        .hni-section p { 
+            color: #aaa; 
+            margin-bottom: 50px; 
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .hni-section .btn {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+        
+        .hni-section .btn:hover {
+            background-color: var(--gold);
+            color: var(--white);
+        }
 
-        /* --- FOOTER --- */
+        /* --- 8. FOOTER --- */
         footer {
             background: var(--white);
-            padding: 50px 0;
-            border-top: 1px solid #eee;
+            padding: 80px 0;
+            border-top: 1px solid var(--border-color);
             text-align: center;
         }
 
-        .social-icons { margin-bottom: 20px; }
-        .social-icons a { margin: 0 10px; font-size: 1.2rem; }
+        .social-icons a {
+            color: var(--black);
+            margin: 0 15px;
+            font-size: 1.1rem;
+            transition: 0.3s;
+        }
+        
+        .social-icons a:hover { color: var(--gold); }
 
-        /* --- MOBILE --- */
+        /* --- MOBILE TWEAKS --- */
         @media (max-width: 768px) {
-            .hero-content h1 { font-size: 2.5rem; }
-            .about-grid { grid-template-columns: 1fr; }
-            .nav-links { display: none; } /* Simplified for MVP */
+            .hero-content h1 { font-size: 3rem; }
+            .about-grid { grid-template-columns: 1fr; gap: 40px; }
+            .about-img { height: 400px; }
+            .nav-links { display: none; } /* Use simple mobile menu later */
+            .service-tabs { flex-direction: column; gap: 15px; border: none; }
+            .container { padding: 0 25px; }
         }
     </style>
 </head>
@@ -249,62 +364,69 @@
         <div class="container">
             <div class="logo">StylePlanIt.</div>
             <div class="nav-links">
-                <a href="#about">About</a>
-                <a href="#services">Services</a>
-                <a href="#private">Private Client</a>
-                <a href="#contact" class="cta-nav">Book Consultation</a>
+                <a href="#about">Philosophy</a>
+                <a href="#services">Menu</a>
+                <a href="#private">Private</a>
+                <a href="https://calendly.com" target="_blank" style="color: var(--gold);">Book Consultation</a>
             </div>
         </div>
     </nav>
 
     <header class="hero">
-        <div class="container hero-content">
-            <h1>Define Your New Life.<br>Design Your New Look.</h1>
-            <p>Personal styling for Canada’s ambitious newcomers and established professionals.</p>
-            <a href="https://calendly.com/" target="_blank" class="btn btn-gold">Book Your Discovery Call</a>
+        <div class="hero-content">
+            <span class="section-subtitle" style="color: white; border-color: white;">Est. 2026 • Toronto</span>
+            <h1>The Art of Arrival.</h1>
+            <p>Strategic personal styling for those who command the room.</p>
+            <a href="https://calendly.com/" target="_blank" class="btn">Begin Your Journey</a>
         </div>
     </header>
 
     <section id="about" class="section-padding">
         <div class="container">
             <div class="about-grid">
-                <img src="https://images.unsplash.com/photo-1556910103-1c02745a30bf?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Ayushi and Deepesh" class="about-img">
+                <div class="about-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1600609842388-3e477c731993?q=80&w=2070&auto=format&fit=crop" alt="Ayushi & Deepesh" class="about-img">
+                </div>
                 <div>
-                    <span class="section-subtitle">Who We Are</span>
-                    <h2 class="section-title">The Immigrant Edge + <br>The Stylist's Eye</h2>
-                    <p style="margin-bottom: 20px;">We are Deepesh & Ayushi. We understand the duality of building a life in a new country. You need the technical logistics to settle, but you also need the visual confidence to rise.</p>
+                    <span class="section-subtitle">The Founders</span>
+                    <h2 class="section-title">The Immigrant Edge.</h2>
+                    <p style="margin-bottom: 30px;">We are Deepesh & Ayushi. We understand the duality of building a life in a new country. You need the logistics to settle, but you need the visual confidence to rise.</p>
                     <p>At <strong>StylePlanIt</strong>, we don't just dress you. We decode the cultural nuance of Canadian professional life and translate your ambition into an aesthetic that opens doors.</p>
+                    <br>
+                    <a href="#services" class="btn">Explore Services</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="services" class="section-padding" style="background-color: #fafafa;">
+    <section id="services" class="section-padding" style="background-color: var(--white);">
         <div class="container">
             <div class="text-center">
-                <span class="section-subtitle">Our Expertise</span>
-                <h2 class="section-title">Curated Service Menus</h2>
+                <span class="section-subtitle">Curated Experiences</span>
+                <h2 class="section-title">The Collection</h2>
             </div>
 
             <div class="service-tabs">
-                <button class="tab-btn active" onclick="openTab('newcomers')">Just Landed?</button>
-                <button class="tab-btn" onclick="openTab('professionals')">Ready to Rise?</button>
+                <button class="tab-btn active" onclick="openTab('newcomers')">Newcomers</button>
+                <button class="tab-btn" onclick="openTab('professionals')">Professionals</button>
+                <button class="tab-btn" onclick="openTab('wedding')">Weddings</button>
+                <button class="tab-btn" onclick="openTab('b2b')">Corporate & Pageant</button>
             </div>
 
             <div id="newcomers" class="services-grid active">
                 <div class="service-card">
                     <h3>The Career Kickstart</h3>
-                    <p>Interview-focused styling to help you land your first Canadian role. Includes 'The Canadian Code' workshop.</p>
-                    <span class="price-tag">Starting at $250</span>
+                    <p>Interview-focused styling to help you land the role. Includes 'The Canadian Code' workshop.</p>
+                    <span class="price-tag">From $250 CAD</span>
                 </div>
                 <div class="service-card">
                     <h3>The Settlement Standard</h3>
-                    <p>A comprehensive capsule wardrobe for your first 30 days. Weather-appropriate and budget-conscious.</p>
-                    <span class="price-tag">Inquire for Pricing</span>
+                    <p>A comprehensive capsule wardrobe for your first 30 days. Weather-smart and budget-conscious.</p>
+                    <span class="price-tag">Inquire</span>
                 </div>
                 <div class="service-card">
                     <h3>The First Class Arrival</h3>
-                    <p>Our premium "Done-For-You" service. We source everything before you land. Walk off the plane ready.</p>
+                    <p>Premium Done-For-You service. We source your wardrobe before you even land.</p>
                     <span class="price-tag">Premium Bundle</span>
                 </div>
             </div>
@@ -312,65 +434,103 @@
             <div id="professionals" class="services-grid">
                 <div class="service-card">
                     <h3>The Tone Audit</h3>
-                    <p>For mid-career professionals. We align your wardrobe with the promotion you want, not the job you have.</p>
+                    <p>Aligning your wardrobe with the promotion you want, not the job you have.</p>
                     <span class="price-tag">Consultation Based</span>
                 </div>
                 <div class="service-card">
                     <h3>The Event Edit</h3>
-                    <p>Wedding guest? Gala? Keynote? We provide virtual shopping and styling to make you the best-dressed attendee.</p>
-                    <span class="price-tag">Starting at $400</span>
+                    <p>Virtual shopping & styling for Galas and Keynotes.</p>
+                    <span class="price-tag">From $400 CAD</span>
                 </div>
                 <div class="service-card">
                     <h3>The Showstopper</h3>
-                    <p>For high-stakes roles (Emcee, Best Man, Bridesmaid). Bold styling when all eyes are on you.</p>
-                    <span class="price-tag">Starting at $600</span>
+                    <p>High-stakes styling for Emcees and VIP Guests.</p>
+                    <span class="price-tag">From $600 CAD</span>
                 </div>
-                <div class="service-card">
+                 <div class="service-card">
                     <h3>The OOO Edit</h3>
-                    <p>Vacation styling and packing strategy. Includes in-person shopping for that perfect travel capsule.</p>
-                    <span class="price-tag">Seasonal Pricing</span>
+                    <p>Vacation styling & packing strategy with in-person shopping.</p>
+                    <span class="price-tag">Seasonal</span>
                 </div>
             </div>
+
+            <div id="wedding" class="services-grid">
+                <div class="service-card">
+                    <h3>The Vision Blueprint</h3>
+                    <p>Strategy & Moodboard only. You handle the shopping.</p>
+                    <span class="price-tag">$250 CAD</span>
+                </div>
+                <div class="service-card">
+                    <h3>The Bridal Signature</h3>
+                    <p>Full sourcing and styling for the Bride. Budget guaranteed.</p>
+                    <span class="price-tag">$400 CAD</span>
+                </div>
+                <div class="service-card">
+                    <h3>The Power Couple</h3>
+                    <p>Complete styling for Bride & Groom to ensure visual harmony.</p>
+                    <span class="price-tag">$600 CAD</span>
+                </div>
+            </div>
+
+             <div id="b2b" class="services-grid">
+                <div class="service-card">
+                    <h3>The Foundation</h3>
+                    <p>Group Masterclass on Color Theory & Archetypes.</p>
+                    <span class="price-tag">Cohort Pricing</span>
+                </div>
+                <div class="service-card">
+                    <h3>The Runway Edit</h3>
+                    <p>Masterclass on Lingerie, Silhouettes, and Event Strategy.</p>
+                    <span class="price-tag">Cohort Pricing</span>
+                </div>
+                <div class="service-card">
+                    <h3>The Crown Circle</h3>
+                    <p>Exclusive 1:1 Mentorship for Top 10 participants.</p>
+                    <span class="price-tag">VIP Upgrade</span>
+                </div>
+            </div>
+
         </div>
     </section>
 
-    <section id="private" class="section-padding hni-section">
-        <div class="container hni-content">
-            <span class="section-subtitle">Private Client Services</span>
-            <h2>The Icon Service</h2>
-            <p>Bespoke image management for executives and High-Net-Worth Individuals. Includes lifestyle analysis, luxury in-person shopping, and total wardrobe curation.</p>
-            <a href="https://calendly.com/" target="_blank" class="btn btn-gold">Request Private Access</a>
+    <section id="private" class="hni-section">
+        <div class="container">
+            <span class="section-subtitle">By Invitation Only</span>
+            <h2>The Icon Service.</h2>
+            <p>Bespoke image management for Executives and High-Net-Worth Individuals. Lifestyle analysis, luxury in-person shopping, and total wardrobe curation.</p>
+            <a href="https://calendly.com/" target="_blank" class="btn btn-gold">Request Access</a>
         </div>
     </section>
 
     <footer id="contact">
         <div class="container">
             <div class="logo" style="margin-bottom: 20px;">StylePlanIt.</div>
-            <p style="margin-bottom: 30px;">Toronto, Canada</p>
             <div class="social-icons">
                 <a href="#"><i class="fab fa-instagram"></i></a>
                 <a href="#"><i class="fab fa-linkedin"></i></a>
                 <a href="#"><i class="far fa-envelope"></i></a>
             </div>
-            <p style="font-size: 0.8rem; color: #999;">&copy; 2026 StylePlanIt. All Rights Reserved.</p>
+            <p style="font-size: 0.7rem; color: #999; margin-top: 30px;">&copy; 2026 StylePlanIt. Toronto.</p>
         </div>
     </footer>
 
     <script>
         function openTab(tabName) {
-            // Hide all grids
-            var i, x;
-            x = document.getElementsByClassName("services-grid");
+            var i;
+            var x = document.getElementsByClassName("services-grid");
             for (i = 0; i < x.length; i++) {
                 x[i].style.display = "none";
+                x[i].classList.remove("active");
             }
-            // Remove active class from buttons
             var btns = document.getElementsByClassName("tab-btn");
             for (i = 0; i < btns.length; i++) {
                 btns[i].className = btns[i].className.replace(" active", "");
             }
-            // Show current grid and add active class to button
             document.getElementById(tabName).style.display = "grid";
+            // Small timeout to allow display:grid to apply before adding opacity class for animation
+            setTimeout(() => {
+                document.getElementById(tabName).classList.add("active");
+            }, 10);
             event.currentTarget.className += " active";
         }
     </script>
