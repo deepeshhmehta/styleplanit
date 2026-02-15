@@ -56,9 +56,8 @@ All HTML and CSS have been updated to reflect this new structure and the muted s
 
 Following the restructure, a round of CEO feedback (Feb 2026) was implemented:
 *   **Color Theme:** The website's color palette was updated to a "Eucalyptus Sage" theme, with a dark green accent and light green background.
-*   **Hero Section:** The hero banner was made smaller (70vh), and the image carousel was replaced with a static, three-image layout.
-*   **"How It Works" Section:** This section was retitled "1- Checkout our services," and the service cards were updated with a 200px border-radius.
-*   **Booking Section:** Updated to a single step: "2. Book a call with us," linked to a Calendly page.
+*   **Hero Section:** The hero banner was made smaller (70vh), the image carousel was replaced with a static, three-image layout, and the CTA button was updated to "Discover Yours," linking to the "How It Works" section.
+*   **"How It Works" Section:** This section was updated to a three-step process: "1- Checkout our services" (with service cards updated with a 200px border-radius), "2. Book a call with us" (linking to a Calendly page), and "3. Start the program you deserve."
 *   **"As Seen On" Banner:** The background color was made bolder.
 *   **Reviews Section:** The grid was made scrollable to accommodate more reviews.
 *   **Icon Service Section:** The design was updated to align with the new color theme.
