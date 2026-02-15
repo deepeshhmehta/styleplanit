@@ -1,0 +1,368 @@
+/* --- 1. LUXURY RESET & VARIABLES --- */
+:root {
+    --gold: #D4AF37;           /* Classic Gold */
+    --gold-dim: #b5952f;       /* Darker Gold for hover */
+    --black: #0F0F0F;          /* Rich Black */
+    --charcoal: #2A2A2A;       /* Soft Black */
+    --cream: #F9F8F4;          /* Paper White */
+    --white: #ffffff;
+    --border-color: rgba(0,0,0,0.08);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--charcoal);
+    background-color: var(--cream);
+    line-height: 1.8;
+    font-weight: 300;
+    overflow-x: hidden;
+}
+
+h1, h2, h3, h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    color: var(--black);
+    line-height: 1.1;
+}
+
+/* --- 2. TYPOGRAPHY UTILITIES --- */
+.container {
+    max-width: 1100px; /* Narrower container for editorial look */
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+/* Buttons: Sharp, Thin, Uppercase */
+.btn {
+    display: inline-block;
+    padding: 18px 40px;
+    background-color: transparent;
+    color: var(--black);
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    border: 1px solid var(--black);
+    transition: all 0.4s ease;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.btn:hover {
+    background-color: var(--black);
+    color: var(--white);
+}
+
+.btn-gold {
+    border-color: var(--gold);
+    color: var(--gold);
+}
+
+.btn-gold:hover {
+    background-color: var(--gold);
+    color: var(--white);
+}
+
+.section-padding { padding: 140px 0; }
+.text-center { text-align: center; }
+
+.section-subtitle {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.7rem;
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.section-title {
+    font-size: 3.5rem;
+    margin-bottom: 40px;
+}
+
+/* --- 3. NAVIGATION (Minimalist) --- */
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(249, 248, 244, 0.95); /* Matches cream bg */
+    padding: 25px 0;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(0,0,0,0.03);
+}
+
+nav .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: var(--black);
+}
+
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: var(--charcoal);
+}
+
+.nav-links { display: flex; gap: 50px; }
+.nav-links a { 
+    font-size: 0.75rem; 
+    text-transform: uppercase; 
+    letter-spacing: 2px;
+    color: var(--charcoal);
+    position: relative;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 1px;
+    bottom: -5px;
+    left: 0;
+    background-color: var(--gold);
+    transition: width 0.3s;
+}
+
+.nav-links a:hover::after { width: 100%; }
+
+/* Mobile nav styles when toggled */
+.nav-links.mobile {
+    display: none;
+}
+
+.nav-links.active {
+    display: flex;
+}
+
+/* Make the mobile menu a stacked panel */
+@media (max-width: 768px) {
+    .menu-toggle { display: block; }
+    .nav-links { display: none; position: absolute; top: 72px; right: 25px; background: var(--white); flex-direction: column; gap: 18px; padding: 18px; border: 1px solid var(--border-color); box-shadow: 0 10px 30px rgba(0,0,0,0.07); }
+    .nav-links a { color: var(--charcoal); }
+}
+
+/* --- 4. HERO SECTION (Editorial) --- */
+.hero {
+    height: 100vh;
+    position: relative;
+    background: url('https://images.unsplash.com/photo-1502716119720-b23a93e5fe1b?q=80&w=2070&auto=format&fit=crop') no-repeat center center/cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+/* Dark Overlay for text readability */
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.3); 
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    color: var(--white);
+    max-width: 800px;
+}
+
+.hero-content h1 {
+    font-size: 5rem;
+    color: var(--white);
+    margin-bottom: 20px;
+    font-style: italic; /* Adds that fashion magazine feel */
+}
+
+.hero-content p {
+    font-size: 1.1rem;
+    margin-bottom: 50px;
+    letter-spacing: 1px;
+    font-weight: 300;
+}
+
+.hero .btn {
+    border-color: var(--white);
+    color: var(--white);
+}
+.hero .btn:hover {
+    background-color: var(--white);
+    color: var(--black);
+}
+
+/* --- 5. ABOUT SECTION --- */
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 100px; /* Big luxury gap */
+    align-items: center;
+}
+
+.about-img-wrapper {
+    position: relative;
+}
+
+.about-img {
+    width: 100%;
+    height: 600px;
+    object-fit: cover;
+    filter: grayscale(100%); /* Black and white photo for class */
+    transition: filter 0.5s ease;
+}
+
+.about-img:hover { filter: grayscale(0%); }
+
+/* Gold Outline box behind image */
+.about-img-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 20px; left: 20px;
+    width: 100%; height: 100%;
+    border: 1px solid var(--gold);
+    z-index: -1;
+}
+
+/* --- 6. SERVICES TABS (Minimalist) --- */
+.service-tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 80px;
+    gap: 40px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 20px;
+}
+
+.tab-btn {
+    background: none;
+    border: none;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    cursor: pointer;
+    color: #999;
+    transition: 0.3s;
+}
+
+.tab-btn.active {
+    color: var(--black);
+    font-weight: 600;
+}
+
+.services-grid {
+    display: none;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 60px; /* More space */
+    animation: fadeIn 0.8s ease;
+}
+
+.services-grid.active { display: grid; }
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+.service-card {
+    background: var(--white);
+    padding: 50px 30px;
+    border: 1px solid transparent;
+    text-align: center;
+    transition: 0.4s;
+}
+
+.service-card:hover {
+    border-color: var(--gold);
+    transform: translateY(-5px);
+}
+
+.service-card h3 { 
+    font-size: 1.8rem; 
+    margin-bottom: 20px; 
+    font-style: italic;
+}
+
+.service-card p {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.price-tag {
+    display: inline-block;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    color: var(--gold);
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--gold);
+    padding-bottom: 2px;
+}
+
+/* --- 7. VELVET ROPE (HNI) --- */
+.hni-section {
+    background-color: var(--black);
+    color: var(--white);
+    text-align: center;
+    padding: 160px 0;
+}
+
+.hni-section h2 { 
+    color: var(--gold); 
+    font-size: 4rem;
+    margin-bottom: 30px;
+}
+
+.hni-section p { 
+    color: #aaa; 
+    margin-bottom: 50px; 
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hni-section .btn {
+    border-color: var(--gold);
+    color: var(--gold);
+}
+
+.hni-section .btn:hover {
+    background-color: var(--gold);
+    color: var(--white);
+}
+
+/* --- 8. FOOTER --- */
+footer {
+    background: var(--white);
+    padding: 80px 0;
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+}
+
+.social-icons a {
+    color: var(--black);
+    margin: 0 15px;
+    font-size: 1.1rem;
+    transition: 0.3s;
+}
+
+.social-icons a:hover { color: var(--gold); }
+
+/* --- MOBILE TWEAKS --- */
+@media (max-width: 768px) {
+    .hero-content h1 { font-size: 3rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 40px; }
+    .about-img { height: 400px; }
+    .service-tabs { flex-direction: column; gap: 15px; border: none; }
+    .container { padding: 0 25px; }
+}
