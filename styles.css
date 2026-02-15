@@ -1,10 +1,10 @@
 /* --- 1. LUXURY RESET & VARIABLES --- */
 :root {
-    --gold: #D4AF37;           /* Classic Gold */
-    --gold-dim: #b5952f;       /* Darker Gold for hover */
+    --gold: #5B6F62;           /* Muted Sage/Eucalyptus */
+    --gold-dim: #4A5950;       /* Darker Sage for hover */
     --black: #0F0F0F;          /* Rich Black */
-    --charcoal: #2A2A2A;       /* Soft Black */
-    --cream: #F9F8F4;          /* Paper White */
+    --charcoal: #2A2A2A;       /* Black for text */
+    --cream: #F5F1E9;          /* Warm Beige */
     --white: #ffffff;
     --border-color: rgba(0,0,0,0.08);
 }
@@ -87,7 +87,7 @@ nav {
     position: fixed;
     top: 0;
     width: 100%;
-    background: rgba(249, 248, 244, 0.95); /* Matches cream bg */
+    background: rgba(245, 241, 233, 0.95); /* Matches beige bg */
     padding: 25px 0;
     z-index: 1000;
     border-bottom: 1px solid rgba(0,0,0,0.03);
@@ -154,159 +154,167 @@ nav .container {
     .nav-links a { color: var(--charcoal); }
 }
 
-/* --- 4. HERO SECTION (Editorial) --- */
+/* --- 4. HERO SECTION (NEW) --- */
 .hero {
     height: 100vh;
     position: relative;
-    background: url('https://images.unsplash.com/photo-1502716119720-b23a93e5fe1b?q=80&w=2070&auto=format&fit=crop') no-repeat center center/cover;
+    overflow: hidden; /* Ensures the images don't bleed out */
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
 }
 
-/* Dark Overlay for text readability */
-.hero::before {
-    content: '';
+.hero-bg-container {
     position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.3); 
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background-color: var(--black); /* Fallback for slow-loading images */
 }
 
-.hero-content {
+.hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    animation: hero-slideshow 15s infinite;
+    filter: grayscale(50%) brightness(0.7);
+}
+
+.hero-bg:nth-child(2) {
+    animation-delay: 5s;
+}
+
+.hero-bg:nth-child(3) {
+    animation-delay: 10s;
+}
+
+@keyframes hero-slideshow {
+    0% { opacity: 0; transform: scale(1.05); }
+    10% { opacity: 1; }
+    33% { opacity: 1; }
+    43% { opacity: 0; transform: scale(1); }
+    100% { opacity: 0; }
+}
+
+.hero-content-box {
     position: relative;
     z-index: 2;
-    color: var(--white);
-    max-width: 800px;
+    background: rgba(245, 241, 233, 0.9); /* 90% opaque warm beige */
+    padding: 60px;
+    max-width: 700px;
+    border: 1px solid var(--black);
 }
 
-.hero-content h1 {
-    font-size: 5rem;
-    color: var(--white);
-    margin-bottom: 20px;
-    font-style: italic; /* Adds that fashion magazine feel */
-}
-
-.hero-content p {
-    font-size: 1.1rem;
-    margin-bottom: 50px;
-    letter-spacing: 1px;
-    font-weight: 300;
-}
-
-.hero .btn {
-    border-color: var(--white);
-    color: var(--white);
-}
-.hero .btn:hover {
-    background-color: var(--white);
+.hero-content-box h1 {
+    font-size: 3rem;
     color: var(--black);
+    font-style: italic;
+    margin-bottom: 30px;
 }
 
-/* --- 5. ABOUT SECTION --- */
-.about-grid {
+/* --- 5. HOW IT WORKS --- */
+.customer-layers {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 100px; /* Big luxury gap */
-    align-items: center;
-}
-
-.about-img-wrapper {
-    position: relative;
-}
-
-.about-img {
-    width: 100%;
-    height: 600px;
-    object-fit: cover;
-    filter: grayscale(100%); /* Black and white photo for class */
-    transition: filter 0.5s ease;
-}
-
-.about-img:hover { filter: grayscale(0%); }
-
-/* Gold Outline box behind image */
-.about-img-wrapper::after {
-    content: '';
-    position: absolute;
-    top: 20px; left: 20px;
-    width: 100%; height: 100%;
-    border: 1px solid var(--gold);
-    z-index: -1;
-}
-
-/* --- 6. SERVICES TABS (Minimalist) --- */
-.service-tabs {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 80px;
     gap: 40px;
-    border-bottom: 1px solid var(--border-color);
-    padding-bottom: 20px;
+    margin-top: 80px;
+    margin-bottom: 80px;
 }
 
-.tab-btn {
-    background: none;
-    border: none;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    cursor: pointer;
-    color: #999;
-    transition: 0.3s;
-}
-
-.tab-btn.active {
-    color: var(--black);
-    font-weight: 600;
-}
-
-.services-grid {
-    display: none;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 60px; /* More space */
-    animation: fadeIn 0.8s ease;
-}
-
-.services-grid.active { display: grid; }
-
-@keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-
-.service-card {
-    background: var(--white);
-    padding: 50px 30px;
-    border: 1px solid transparent;
+.layer-card {
+    border: 1px solid var(--border-color);
+    padding: 60px 40px;
     text-align: center;
-    transition: 0.4s;
+    transition: all 0.4s ease;
 }
 
-.service-card:hover {
+.layer-card:hover {
+    background: var(--white);
     border-color: var(--gold);
     transform: translateY(-5px);
 }
 
-.service-card h3 { 
-    font-size: 1.8rem; 
-    margin-bottom: 20px; 
-    font-style: italic;
+.layer-card h3 {
+    font-size: 2rem;
+    margin-bottom: 20px;
 }
 
-.service-card p {
-    font-size: 0.9rem;
-    color: #666;
+.layer-card p {
     margin-bottom: 30px;
 }
 
-.price-tag {
-    display: inline-block;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 0.7rem;
-    letter-spacing: 2px;
-    color: var(--gold);
+.logo-band {
+    text-align: center;
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    padding: 40px 0;
+    margin-bottom: 80px;
+}
+
+.logo-band p {
     text-transform: uppercase;
-    border-bottom: 1px solid var(--gold);
-    padding-bottom: 2px;
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+    margin-bottom: 30px;
+}
+
+.logo-band .logos {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 20px;
+    filter: grayscale(100%) opacity(0.6);
+}
+
+.booking-steps {
+    text-align: center;
+}
+
+.booking-steps .step {
+    margin-bottom: 20px;
+}
+
+.booking-steps h3 {
+    font-size: 2.5rem;
+    font-style: italic;
+}
+
+
+/* --- 6. REVIEWS SECTION --- */
+#reviews .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 40px;
+}
+
+#reviews .review-card {
+    background: var(--cream);
+    padding: 40px;
+    border: 1px solid var(--border-color);
+}
+
+#reviews .review-card p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-style: italic;
+    line-height: 1.4;
+    margin-bottom: 30px;
+}
+
+#reviews .review-card span {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
 }
 
 /* --- 7. VELVET ROPE (HNI) --- */
@@ -314,7 +322,6 @@ nav .container {
     background-color: var(--black);
     color: var(--white);
     text-align: center;
-    padding: 160px 0;
 }
 
 .hni-section h2 { 
@@ -341,12 +348,41 @@ nav .container {
     color: var(--white);
 }
 
-/* --- 8. FOOTER --- */
+/* --- 8. SUBSCRIBE SECTION --- */
+.subscribe-form {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.subscribe-form input {
+    width: 100%;
+    padding: 18px 25px;
+    border: 1px solid var(--black);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.8rem;
+    background: transparent;
+}
+
+.subscribe-form .btn {
+    border-left: none;
+}
+
+/* --- 9. FOOTER (NEW) --- */
 footer {
-    background: var(--white);
     padding: 80px 0;
     border-top: 1px solid var(--border-color);
-    text-align: center;
+    background: var(--white);
+}
+
+.footer-banner {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 4rem;
+    font-weight: 600;
+    margin-bottom: 40px;
 }
 
 .social-icons a {
@@ -358,11 +394,15 @@ footer {
 
 .social-icons a:hover { color: var(--gold); }
 
-/* --- MOBILE TWEAKS --- */
+
+/* --- 10. MOBILE TWEAKS --- */
 @media (max-width: 768px) {
-    .hero-content h1 { font-size: 3rem; }
-    .about-grid { grid-template-columns: 1fr; gap: 40px; }
-    .about-img { height: 400px; }
-    .service-tabs { flex-direction: column; gap: 15px; border: none; }
+    .hero-content-box { padding: 40px; max-width: 90%;}
+    .hero-content-box h1 { font-size: 2rem; }
+    .customer-layers { grid-template-columns: 1fr; gap: 20px; }
     .container { padding: 0 25px; }
+    #reviews .reviews-grid { grid-template-columns: 1fr; }
+    .subscribe-form { flex-direction: column; }
+    .subscribe-form .btn { border-left: 1px solid var(--black); border-top: none;}
+    .footer-banner { font-size: 2.5rem; }
 }
