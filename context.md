@@ -13,14 +13,14 @@ This document provides a summary of the StylePlanIt website project for context 
 
 ## 2. Aesthetic & Design System
 
-*   **Overall Aesthetic:** "Luxury Minimalist," "Old Money," "Editorial." The design emphasizes clean lines, sharp edges, and generous whitespace. No rounded corners.
+*   **Overall Aesthetic:** "Luxury Minimalist," "Old Money," "Editorial." The design emphasizes clean lines, sharp edges, and generous whitespace.
 *   **Fonts:**
     *   **Headings (Serif):** 'Cormorant Garamond'
     *   **Body (Sans-Serif):** 'Montserrat'
-*   **Color Palette (Current):**
-    *   **Primary Accent (Sage):** `#5B6F62` (Used for buttons, links, highlights)
-    *   **Sage (Darker Hover):** `#4A5950`
-    *   **Background (Warm Beige):** `#F5F1E9`
+*   **Color Palette (Updated Feb 2026):**
+    *   **Primary Accent (Eucalyptus Green):** `#0c4524` (Used for buttons, links, highlights)
+    *   **Accent Hover (Darker Green):** `#547c65`
+    *   **Background (Lightest Green):** `#e6f0e7`
     *   **Headings (Rich Black):** `#0F0F0F`
     *   **Body Text (Soft Black):** `#2A2A2A`
     *   **White:** `#ffffff`
@@ -53,3 +53,13 @@ The project recently underwent a significant restructuring based on new wirefram
 2.  A dedicated `services.html` page that reuses the tabbed interface from the original design to display the full "Collection" of services.
 
 All HTML and CSS have been updated to reflect this new structure and the muted sage color palette. The site is responsive.
+
+Following the restructure, a round of CEO feedback (Feb 2026) was implemented:
+*   **Color Theme:** The website's color palette was updated to a "Eucalyptus Sage" theme, with a dark green accent and light green background.
+*   **Hero Section:** The hero banner was made smaller (70vh), and the image carousel was replaced with a static, three-image layout.
+*   **"How It Works" Section:** This section was retitled "1- Checkout our services," and the service cards were updated with a 200px border-radius.
+*   **Booking Section:** Updated to a single step: "2. Book a call with us," linked to a Calendly page.
+*   **"As Seen On" Banner:** The background color was made bolder.
+*   **Reviews Section:** The grid was made scrollable to accommodate more reviews.
+*   **Icon Service Section:** The design was updated to align with the new color theme.
+*   **Footer:** The font size of the main footer banner text was increased to 9rem.
