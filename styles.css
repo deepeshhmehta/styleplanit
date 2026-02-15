@@ -64,7 +64,7 @@ h1, h2, h3, h4 {
     color: var(--white);
 }
 
-.section-padding { padding: 140px 0; }
+.section-padding { padding: 75px 0; }
 .text-center { text-align: center; }
 
 .section-subtitle {
