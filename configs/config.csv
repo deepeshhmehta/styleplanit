@@ -1,6 +1,7 @@
 key,value
 PAGE_TITLE,"Style Plan(it) | Discover Your Style"
 LOGO_TEXT,"Style Plan(it)"
+LOGO_HREF,"index.html"
 HERO_TITLE,"We only believe in one superpower, style"
 HERO_BUTTON_TEXT,"Discover Yours."
 HERO_BUTTON_HREF,"https://cal.com/styleplanit/15min"
@@ -51,3 +52,4 @@ FOOTER_INSTAGRAM_HREF,"https://www.instagram.com/ayushi.vyas_"
 FOOTER_PHONE_HREF,"tel:+1-647-967-8953"
 FOOTER_EMAIL_HREF,"mailto:styledbyayu@gmail.com"
 FOOTER_COPYRIGHT,"&copy; 2026 Style Plan(it). Toronto."
+SERVICES_PAGE_TITLE,"Our Services | Style Plan(it)"

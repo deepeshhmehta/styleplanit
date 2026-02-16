@@ -113,6 +113,7 @@ nav .container {
     font-weight: 400;
     letter-spacing: 1px;
     color: var(--white);
+    text-decoration: none;
 }
 
 nav > .container > .logo {
