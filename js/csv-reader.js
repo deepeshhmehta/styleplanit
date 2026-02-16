@@ -1,6 +1,6 @@
 window.onload = async () => {
     try {
-        const response = await fetch('config.csv');
+        const response = await fetch('configs/config.csv');
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
