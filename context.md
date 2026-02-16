@@ -24,6 +24,9 @@ This document provides a summary of the StylePlanIt website project for context 
     *   **Headings (Rich Black):** `#0F0F0F`
     *   **Body Text (Soft Black):** `#2A2A2A`
     *   **White:** `#ffffff`
+*   **Styling:**
+    *   **Buttons:** Generally have a 200px border-radius, giving them a pill shape. The subscribe button is an exception with a 0px border-radius.
+    *   **Section Padding:** Sections have a vertical padding of 75px.
 
 ## 3. Tech Stack & File Structure
 
@@ -46,19 +49,16 @@ The consultancy offers a range of services tailored to different audiences:
 *   **B2B/Corporate:** Masterclasses and VIP mentorship.
 *   **Private Client (HNI):** "The Icon Service," an exclusive, application-only lifestyle overhaul.
 
-## 5. Current Project Status
+## 5. Homepage Sections
 
-The project recently underwent a significant restructuring based on new wireframes. The initial single-page design was split into:
-1.  A new homepage (`index.html`) featuring a slideshow hero, a "How it Works" section, customer testimonials, and a subscription form.
-2.  A dedicated `services.html` page that reuses the tabbed interface from the original design to display the full "Collection" of services.
+The `index.html` page is structured into the following key sections:
 
-All HTML and CSS have been updated to reflect this new structure and the muted sage color palette. The site is responsive.
-
-Following the restructure, a round of CEO feedback (Feb 2026) was implemented:
-*   **Color Theme:** The website's color palette was updated to a "Eucalyptus Sage" theme, with a dark green accent and light green background.
-*   **Hero Section:** The hero banner was made smaller (70vh), the image carousel was replaced with a static, three-image layout, and the CTA button was updated to "Discover Yours," linking to the "How It Works" section.
-*   **"How It Works" Section:** This section was updated to a three-step process: "1- Checkout our services" (with service cards updated with a 200px border-radius), "2. Book a call with us" (linking to a Calendly page), and "3. Start the program you deserve."
-*   **"As Seen On" Banner:** The background color was made bolder.
-*   **Reviews Section:** The grid was made scrollable to accommodate more reviews.
-*   **Icon Service Section:** The design was updated to align with the new color theme.
-*   **Footer:** The font size of the main footer banner text was increased to 9rem.
+*   **Hero Section:** A full-width banner with a height of 70vh. It features a static three-image layout with a grayscale filter and a content box with the main heading. The primary call-to-action button ("Discover Yours.") links directly to a Calendly booking page.
+*   **"How It Works" Section:** A three-step guide for clients:
+    1.  **Checkout our services:** Displays cards for "Newcomers" and "Professionals & HNI," which link to the `services.html` page. The service cards have a 200px border-radius.
+    2.  **Book a call with us:** A direct link to a Calendly booking page.
+    3.  **Start the program you deserve:** The final step in the process.
+*   **Reviews Section:** A grid of client testimonials. The grid is scrollable to accommodate a large number of reviews.
+*   **"Be an ICON" (HNI) Section:** A section with a dark green background dedicated to the high-net-worth "Icon Service." It includes a brief description and a "Request Access" button linking to Calendly.
+*   **Subscribe Section:** A simple form for users to subscribe to a newsletter.
+*   **Footer:** Contains a large "Style Plan It." banner (9rem font size), social media icons, and copyright information.
