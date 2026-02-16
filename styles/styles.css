@@ -408,7 +408,7 @@ footer {
 
 /* --- 10. MOBILE TWEAKS --- */
 @media (max-width: 768px) {
-    .hero-content-box { padding: 40px; max-width: 90%;}
+    .hero-content-box { padding: 40px; max-width: 90%; z-index: 2;}
     .hero-content-box h1 { font-size: 2rem; }
     .customer-layers { grid-template-columns: 1fr; gap: 20px; }
     .container { padding: 0 25px; }
@@ -416,4 +416,11 @@ footer {
     .subscribe-form { flex-direction: column; }
     .subscribe-form .btn { border-left: 1px solid var(--black); border-top: none;}
     .footer-banner { font-size: 2.5rem; }
+
+    .hero-bg {
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
 }

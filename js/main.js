@@ -50,4 +50,32 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   }
+
+  // Hero slideshow for mobile
+  function heroSlideshow() {
+    const heroBgs = document.querySelectorAll('.hero-bg');
+    let current = 0;
+    if (heroBgs.length === 0) return;
+
+    // Initial state
+    heroBgs.forEach((bg, i) => {
+        bg.style.opacity = '0';
+        bg.style.transition = 'opacity 1s ease-in-out';
+    });
+    heroBgs[current].style.opacity = '1';
+    heroBgs[current].classList.add('active');
+
+
+    setInterval(() => {
+        heroBgs[current].style.opacity = '0';
+        heroBgs[current].classList.remove('active');
+        current = (current + 1) % heroBgs.length;
+        heroBgs[current].style.opacity = '1';
+        heroBgs[current].classList.add('active');
+    }, 2000);
+  }
+
+  if (window.innerWidth <= 768) {
+    heroSlideshow();
+  }
 });
