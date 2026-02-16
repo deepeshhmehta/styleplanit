@@ -36,10 +36,19 @@ This document provides a summary of the StylePlanIt website project for context 
     *   `styles.css`: All styles for the project.
     *   `main.js`: All JavaScript functionality (mobile menu, service tabs).
     *   `services.html`: A dedicated page for the detailed service menu.
+    *   `config.csv`: A CSV file to store all the configurable text and links.
+    *   `csv-reader.js`: A JavaScript file to read the CSV file and populate the content.
     *   `wireframes/`: Folder containing the design wireframes.
     *   `context.md`: This file.
 
-## 4. Content & Service Menu
+## 4. Configuration
+
+The website content is managed through a CSV file to allow for easy updates without modifying the HTML.
+
+*   `config.csv`: This file contains key-value pairs for all the text and links used in the website.
+*   `csv-reader.js`: This script reads the `config.csv` file and populates the content of the HTML elements that have `text-config-key`, `href-config-key`, or `placeholder-config-key` attributes.
+
+## 5. Content & Service Menu
 
 The consultancy offers a range of services tailored to different audiences:
 
@@ -49,7 +58,7 @@ The consultancy offers a range of services tailored to different audiences:
 *   **B2B/Corporate:** Masterclasses and VIP mentorship.
 *   **Private Client (HNI):** "The Icon Service," an exclusive, application-only lifestyle overhaul.
 
-## 5. Homepage Sections
+## 6. Homepage Sections
 
 The `index.html` page is structured into the following key sections:
 
@@ -58,7 +67,8 @@ The `index.html` page is structured into the following key sections:
     1.  **Checkout our services:** Displays cards for "Newcomers" and "Professionals & HNI," which link to the `services.html` page. The service cards have a 200px border-radius.
     2.  **Book a call with us:** A direct link to a Calendly booking page.
     3.  **Start the program you deserve:** The final step in the process.
-*   **Reviews Section:** A grid of client testimonials. The grid is scrollable to accommodate a large number of reviews.
+*   **Logo Band:** A section to display logos of companies worked with or featured in. The logos are populated from `config.csv`.
+*   **Reviews Section:** A grid of client testimonials. The grid is scrollable to accommodate a large number of reviews. The reviews are populated from `config.csv`.
 *   **"Be an ICON" (HNI) Section:** A section with a dark green background dedicated to the high-net-worth "Icon Service." It includes a brief description and a "Request Access" button linking to Calendly.
 *   **Subscribe Section:** A simple form for users to subscribe to a newsletter.
-*   **Footer:** Contains a large "Style Plan It." banner (9rem font size), social media icons, and copyright information.
+*   **Footer:** Contains a large "Style Plan It." banner (9rem font size), social media icons, and copyright information. All content is populated from `config.csv`.
