@@ -33,20 +33,20 @@ This document provides a summary of the StylePlanIt website project for context 
 *   **Frameworks:** None. The project is built with vanilla HTML5, CSS3, and JavaScript.
 *   **File Structure:**
     *   `index.html`: The main homepage.
-    *   `styles.css`: All styles for the project.
-    *   `main.js`: All JavaScript functionality (mobile menu, service tabs).
+    *   `styles/styles.css`: All styles for the project.
+    *   `js/main.js`: All JavaScript functionality (mobile menu, service tabs).
+    *   `js/csv-reader.js`: A JavaScript file to read the CSV file and populate the content.
     *   `services.html`: A dedicated page for the detailed service menu.
-    *   `config.csv`: A CSV file to store all the configurable text and links.
-    *   `csv-reader.js`: A JavaScript file to read the CSV file and populate the content.
+    *   `configs/config.csv`: A CSV file to store all the configurable text and links.
     *   `wireframes/`: Folder containing the design wireframes.
-    *   `context.md`: This file.
+    *   `ai-docs/context.md`: This file.
 
 ## 4. Configuration
 
 The website content is managed through a CSV file to allow for easy updates without modifying the HTML.
 
-*   `config.csv`: This file contains key-value pairs for all the text and links used in the website.
-*   `csv-reader.js`: This script reads the `config.csv` file and populates the content of the HTML elements that have `text-config-key`, `href-config-key`, or `placeholder-config-key` attributes.
+*   `configs/config.csv`: This file contains key-value pairs for all the text and links used in the website.
+*   `js/csv-reader.js`: This script reads the `configs/config.csv` file and populates the content of the HTML elements that have `text-config-key`, `href-config-key`, or `placeholder-config-key` attributes.
 
 ## 5. Content & Service Menu
 
