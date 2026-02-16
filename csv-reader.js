@@ -1,10 +1,15 @@
-window.onload = () => {
-    fetch('config.csv')
-        .then(response => response.text())
-        .then(data => {
-            const config = parseCSV(data);
-            applyConfig(config);
-        });
+window.onload = async () => {
+    try {
+        const response = await fetch('config.csv');
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.text();
+        const config = parseCSV(data);
+        applyConfig(config);
+    } catch (error) {
+        console.error('Error loading or applying config:', error);
+    }
 };
 
 function parseCSV(data) {
@@ -23,15 +28,40 @@ function parseCSV(data) {
 }
 
 function applyConfig(config) {
-    for (const key in config) {
-        const textElements = document.querySelectorAll(`[text-config-key="${key}"]`);
-        textElements.forEach(element => {
+    document.querySelectorAll('[text-config-key]').forEach(element => {
+        const key = element.getAttribute('text-config-key');
+        if (config[key] !== undefined) {
             element.textContent = config[key];
-        });
-        
-        const hrefElements = document.querySelectorAll(`[href-config-key="${key}"]`);
-        hrefElements.forEach(element => {
-            element.href = config[key];
-        });
-    }
+        } else {
+            console.error(`Config key "${key}" not found for element:`, element);
+        }
+    });
+
+    document.querySelectorAll('[href-config-key]').forEach(element => {
+        const key = element.getAttribute('href-config-key');
+        if (config[key] !== undefined) {
+            const url = config[key];
+            if (isValidUrl(url)) {
+                element.href = url;
+            } else {
+                console.error(`Invalid URL format for key "${key}": "${url}"`, element);
+            }
+        } else {
+            console.error(`Config key "${key}" not found for element:`, element);
+        }
+    });
+
+    document.querySelectorAll('[placeholder-config-key]').forEach(element => {
+        const key = element.getAttribute('placeholder-config-key');
+        if (config[key] !== undefined) {
+            element.placeholder = config[key];
+        } else {
+            console.error(`Config key "${key}" not found for element:`, element);
+        }
+    });
+}
+
+function isValidUrl(string) {
+    const pattern = new RegExp('^(https:|http:|mailto:|/|#)');
+    return pattern.test(string);
 }

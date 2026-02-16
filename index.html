@@ -17,13 +17,13 @@
 
     <nav>
         <div class="container">
-            <div class="logo">Style Plan(it)</div>
+            <div class="logo" text-config-key="LOGO_TEXT">Style Plan(it)</div>
             <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false"><i class="fas fa-bars"></i></button>
             <div class="nav-links">
-                <a href="#how-it-works">How It Works</a>
-                <a href="#reviews">Reviews</a>
-                <a href="services.html">Services</a>
-                <a href="#be-an-icon">Be an ICON</a>
+                <a href-config-key="NAV_LINK_1_HREF" href="#how-it-works" text-config-key="NAV_LINK_1_TEXT">How It Works</a>
+                <a href-config-key="NAV_LINK_2_HREF" href="#reviews" text-config-key="NAV_LINK_2_TEXT">Reviews</a>
+                <a href-config-key="NAV_LINK_3_HREF" href="services.html" text-config-key="NAV_LINK_3_TEXT">Services</a>
+                <a href-config-key="NAV_LINK_4_HREF" href="#be-an-icon" text-config-key="NAV_LINK_4_TEXT">Be an ICON</a>
             </div>
         </div>
     </nav>
@@ -37,7 +37,7 @@
         </div>
         <div class="hero-content-box">
             <h1 text-config-key="HERO_TITLE">We only believe in one superpower, style</h1>
-            <a href="https://cal.com/styleplanit/15min" target="_blank" class="btn" text-config-key="HERO_BUTTON">Discover Yours.</a>
+            <a href-config-key="HERO_BUTTON_HREF" href="https://cal.com/styleplanit/15min" target="_blank" class="btn" text-config-key="HERO_BUTTON_TEXT">Discover Yours.</a>
         </div>
     </header>
 
@@ -50,21 +50,21 @@
                 
                 <div class="booking-steps">
                     <div class="step">
-                        <h3>1- Checkout our services</h3>
+                        <h3 text-config-key="STEP_1_TEXT">1- Checkout our services</h3>
                     </div>
                 </div>
                 
                 <!-- Part 1: Customer Layers -->
                 <div class="customer-layers">
                     <div class="layer-card">
-                        <h3>Newcomers</h3>
-                        <p>Styling for your new chapter in Canada.</p>
-                        <a href="services.html#newcomers" class="btn">View Services</a>
+                        <h3 text-config-key="NEWCOMERS_CARD_TITLE">Newcomers</h3>
+                        <p text-config-key="NEWCOMERS_CARD_TEXT">Styling for your new chapter in Canada.</p>
+                        <a href-config-key="NEWCOMERS_CARD_BUTTON_HREF" href="services.html#newcomers" class="btn" text-config-key="NEWCOMERS_CARD_BUTTON_TEXT">View Services</a>
                     </div>
                     <div class="layer-card">
-                        <h3>Professionals & HNI</h3>
-                        <p>Elevate your image and influence.</p>
-                        <a href="services.html#professionals" class="btn">View Services</a>
+                        <h3 text-config-key="PROFESSIONALS_CARD_TITLE">Professionals & HNI</h3>
+                        <p text-config-key="PROFESSIONALS_CARD_TEXT">Elevate your image and influence.</p>
+                        <a href-config-key="PROFESSIONALS_CARD_BUTTON_HREF" href="services.html#professionals" class="btn" text-config-key="PROFESSIONALS_CARD_BUTTON_TEXT">View Services</a>
                     </div>
                 </div>
             </div>
@@ -73,7 +73,7 @@
         <!-- Logo Band -->
         <div class="logo-band">
             <!-- Placeholder for logos -->
-            <p>Worked with / As seen on:</p>
+            <p text-config-key="LOGO_BAND_TEXT">Worked with / As seen on:</p>
             <div class="logos">
                 <span>LOGO 1</span>
                 <span>LOGO 2</span>
@@ -86,10 +86,10 @@
                 <!-- Part 2: Booking -->
                 <div class="booking-steps">
                     <div class="step">
-                        <h3>2. Book a call with us</h3>
+                        <h3 text-config-key="STEP_2_TEXT">2. Book a call with us</h3>
                     </div>
                     <div class="step">
-                        <a class="btn" href="https://cal.com/styleplanit/15min" target="_blank">&#9742;  Book Now</a>
+                        <a class="btn" href-config-key="STEP_2_BUTTON_HREF" href="https://cal.com/styleplanit/15min" target="_blank" text-config-key="STEP_2_BUTTON_TEXT">&#9742;  Book Now</a>
                     </div>
                 </div>
             </div>
@@ -99,7 +99,7 @@
                 <!-- Part 2: Booking -->
                 <div class="booking-steps">
                     <div class="step">
-                        <h3>3. Start your journey</h3>
+                        <h3 text-config-key="STEP_3_TEXT">3. Start your journey</h3>
                     </div>
                 </div>
             </div>
@@ -108,20 +108,20 @@
         <section id="reviews" class="section-padding" style="background-color: var(--white);">
             <div class="container">
                 <div class="text-center">
-                    <h2 class="section-title">Reviews</h2>
+                    <h2 class="section-title" text-config-key="REVIEWS_TITLE">Reviews</h2>
                 </div>
                 <div class="reviews-grid">
                     <div class="review-card">
-                        <p>"The best investment I made in my career transition."</p>
-                        <span>- Client Name 1</span>
+                        <p text-config-key="REVIEW_1_TEXT">"The best investment I made in my career transition."</p>
+                        <span text-config-key="REVIEW_1_AUTHOR">- Client Name 1</span>
                     </div>
                     <div class="review-card">
-                        <p>"I finally feel like my outside matches my ambition."</p>
-                        <span>- Client Name 2</span>
+                        <p text-config-key="REVIEW_2_TEXT">"I finally feel like my outside matches my ambition."</p>
+                        <span text-config-key="REVIEW_2_AUTHOR">- Client Name 2</span>
                     </div>
                     <div class="review-card">
-                        <p>"Deepesh and Ayushi are masters of their craft."</p>
-                        <span>- Client Name 3</span>
+                        <p text-config-key="REVIEW_3_TEXT">"Deepesh and Ayushi are masters of their craft."</p>
+                        <span text-config-key="REVIEW_3_AUTHOR">- Client Name 3</span>
                     </div>
                     <div class="review-card">
                         <p>"The best investment I made in my career transition."</p>
@@ -153,20 +153,20 @@
 
         <section id="be-an-icon" class="hni-section section-padding">
              <div class="container">
-                <span class="section-subtitle">By Invitation Only</span>
-                <h2>The Icon Service.</h2>
-                <p>Bespoke image management for Executives and High-Net-Worth Individuals. Lifestyle analysis, luxury in-person shopping, and total wardrobe curation.</p>
-                <a href-config-key="ICON_SERVICE_LINK" href="https://cal.com/styleplanit/the-icon-service" target="_blank" class="btn btn-gold">Request Access</a>
+                <span class="section-subtitle" text-config-key="ICON_SUBTITLE">By Invitation Only</span>
+                <h2 text-config-key="ICON_TITLE">The Icon Service.</h2>
+                <p text-config-key="ICON_TEXT">Bespoke image management for Executives and High-Net-Worth Individuals. Lifestyle analysis, luxury in-person shopping, and total wardrobe curation.</p>
+                <a href-config-key="ICON_BUTTON_HREF" href="https://cal.com/styleplanit/the-icon-service" target="_blank" class="btn btn-gold" text-config-key="ICON_BUTTON_TEXT">Request Access</a>
             </div>
         </section>
 
         <section id="subscribe" class="section-padding">
             <div class="container text-center">
-                 <h2 class="section-title">Stay Inspired</h2>
-                <p>Subscribe for exclusive style insights and event invitations.</p>
+                 <h2 class="section-title" text-config-key="SUBSCRIBE_TITLE">Stay Inspired</h2>
+                <p text-config-key="SUBSCRIBE_TEXT">Subscribe for exclusive style insights and event invitations.</p>
                 <form class="subscribe-form">
-                    <input type="email" placeholder="Enter your email">
-                    <button type="submit" class="btn">Subscribe</button>
+                    <input type="email" placeholder-config-key="SUBSCRIBE_EMAIL_PLACEHOLDER" placeholder="Enter your email">
+                    <button type="submit" class="btn" text-config-key="SUBSCRIBE_BUTTON_TEXT">Subscribe</button>
                 </form>
             </div>
         </section>
@@ -178,11 +178,11 @@
                 <div class="logo" text-config-key="LOGO_TEXT">Style Plan(it)</div>
             </div>
             <div class="social-icons">
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-linkedin"></i></a>
-                <a href="#"><i class="far fa-envelope"></i></a>
+                <a href-config-key="FOOTER_INSTAGRAM_HREF" href="#"><i class="fab fa-instagram"></i></a>
+                <a href-config-key="FOOTER_LINKEDIN_HREF" href="#"><i class="fab fa-linkedin"></i></a>
+                <a href-config-key="FOOTER_EMAIL_HREF" href="#"><i class="far fa-envelope"></i></a>
             </div>
-             <p style="font-size: 0.7rem; color: #999; margin-top: 30px;">&copy; 2026 StylePlanIt. Toronto.</p>
+             <p style="font-size: 0.7rem; color: #999; margin-top: 30px;" text-config-key="FOOTER_COPYRIGHT">&copy; 2026 StylePlanIt. Toronto.</p>
         </div>
     </footer>
 
