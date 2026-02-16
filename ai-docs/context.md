@@ -27,14 +27,16 @@ This document provides a summary of the StylePlanIt website project for context 
 *   **Styling:**
     *   **Buttons:** Generally have a 200px border-radius, giving them a pill shape. The subscribe button is an exception with a 0px border-radius.
     *   **Section Padding:** Sections have a vertical padding of 75px.
+    *   **Services Page:** The services page features an elegant tab bar and interactive service cards that expand to show details.
 
 ## 3. Tech Stack & File Structure
 
-*   **Frameworks:** None. The project is built with vanilla HTML5, CSS3, and JavaScript.
+*   **Frameworks:** jQuery is used for DOM manipulation and event handling. The project is built with HTML5, CSS3, and JavaScript.
 *   **File Structure:**
     *   `index.html`: The main homepage.
     *   `styles/styles.css`: All styles for the project.
-    *   `js/main.js`: All JavaScript functionality (mobile menu, service tabs).
+    *   `js/main.js`: Contains JavaScript for the mobile menu and hero slideshow.
+    *   `js/services.js`: Handles the tab switching and card expansion functionality on the services page.
     *   `js/csv-reader.js`: A JavaScript file to read the CSV file and populate the content.
     *   `services.html`: A dedicated page for the detailed service menu.
     *   `configs/config.csv`: A CSV file to store all the configurable text and links.
