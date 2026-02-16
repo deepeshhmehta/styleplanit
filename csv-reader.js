@@ -24,9 +24,14 @@ function parseCSV(data) {
 
 function applyConfig(config) {
     for (const key in config) {
-        const elements = document.querySelectorAll(`[data-config-key="${key}"]`);
-        elements.forEach(element => {
+        const textElements = document.querySelectorAll(`[text-config-key="${key}"]`);
+        textElements.forEach(element => {
             element.textContent = config[key];
+        });
+        
+        const hrefElements = document.querySelectorAll(`[href-config-key="${key}"]`);
+        hrefElements.forEach(element => {
+            element.href = config[key];
         });
     }
 }
