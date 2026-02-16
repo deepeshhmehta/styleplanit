@@ -18,20 +18,26 @@ $(document).ready(function(){
 
     // Service card click event
     $('.service-card').on('click', function(){
-        // Get card content
-        var title = $(this).find('h3').text();
-        var description = $(this).find('p').text();
-        var price = $(this).find('.price-tag').text();
-
-        // Update the details container
-        var detailsContent = `
-            <h3>${title}</h3>
-            <p>${description}</p>
-            <span class="price-tag">${price}</span>
-        `;
-        $('#service-details').html(detailsContent);
-
+        $('.service-card').removeClass('active');
+        $(this).addClass('active');
         // Show the details container
-        $('#service-details').slideDown();
+        $('#service-details').slideUp();
+        setTimeout(() => {
+            // Get card content
+            var title = $(this).find('h3').text();
+            var description = $(this).find('p').text();
+            var price = $(this).find('.price-tag').text();
+
+            // Update the details container
+            var detailsContent = `
+                <h3>${title}</h3>
+                <p>${description}</p>
+                <span class="price-tag">${price}</span>
+            `;
+            $('#service-details').html(detailsContent);
+
+            // Show the details container
+            $('#service-details').slideDown();
+        }, 300);
     });
 });
