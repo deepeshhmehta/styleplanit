@@ -396,7 +396,7 @@ footer {
     transition: 0.3s;
 }
 
-.social-icons a:hover { color: var(--gold); }
+.social-icons a:hover { color: var(--black); }
 
 
 /* --- 10. MOBILE TWEAKS --- */
