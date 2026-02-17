@@ -2,6 +2,11 @@
  * loader.js - Handles dynamic loading of HTML components and app initialization
  */
 async function loadComponents() {
+    // 0. Check version immediately to decide if cache needs flushing
+    if (typeof Data !== 'undefined') {
+        await Data.checkVersion();
+    }
+
     const components = document.querySelectorAll('[data-component]');
     
     const loadPromises = Array.from(components).map(async (element) => {
@@ -35,6 +40,12 @@ async function loadComponents() {
 
     // 3. Signal that everything is ready
     document.dispatchEvent(new CustomEvent('appReady'));
+
+    // 4. Hide loader
+    const loader = document.getElementById('site-loader');
+    if (loader) {
+        loader.classList.add('fade-out');
+    }
 }
 
 document.addEventListener('DOMContentLoaded', loadComponents);

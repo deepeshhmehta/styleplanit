@@ -121,32 +121,35 @@ const Data = {
     },
 
     /**
-     * Fetch logic with version control and selective caching
+     * Check the version from the dedicated version sheet
      */
-    fetch: async function(type) {
-        const cacheKey = `cached_${type}`;
-        
-        // Strategy: Real-time for services, Cache for others
-        const shouldCache = (type !== 'services');
-
-        if (shouldCache) {
-            const cachedData = localStorage.getItem(cacheKey);
-            const cachedVersion = localStorage.getItem('app_version');
-            
-            // If we have cached data AND version is valid, return it
-            if (cachedData && cachedData !== '[]' && (!this.currentVersion || cachedVersion === this.currentVersion)) {
-                // Background refresh
-                this.refreshCache(type, cacheKey);
-                try {
-                    return JSON.parse(cachedData);
-                } catch (e) {
-                    console.error("Cache parse error", e);
+    checkVersion: async function() {
+        try {
+            const url = this.getPrimaryUrl('version');
+            const response = await this.fetchWithTimeout(url, 3000); // Quick 3s check
+            if (response.ok) {
+                const text = await response.text();
+                const data = Utils.parseCSV(text);
+                if (data && data.length > 0) {
+                    const versionObj = data.find(item => item.key === 'VERSION' || item.version);
+                    const newVersion = versionObj ? (versionObj.value || versionObj.version) : null;
+                    
+                    if (newVersion) {
+                        const oldVersion = localStorage.getItem('app_version');
+                        if (oldVersion && oldVersion !== newVersion) {
+                            console.log(`New version detected (${newVersion}). Flushing cache...`);
+                            Object.keys(CONFIG.GIDS).forEach(key => {
+                                if (key !== 'version') localStorage.removeItem(`cached_${key}`);
+                            });
+                        }
+                        localStorage.setItem('app_version', newVersion);
+                        this.currentVersion = newVersion;
+                    }
                 }
             }
+        } catch (e) {
+            // Fail silently, use existing cache
         }
-
-        // Otherwise load from network
-        return await this.loadFromNetwork(type, shouldCache ? cacheKey : null);
     },
 
     /**
@@ -166,6 +169,25 @@ const Data = {
     },
 
     /**
+     * Fetch logic with version control and selective caching
+     */
+    fetch: async function(type) {
+        const cacheKey = `cached_${type}`;
+        const shouldCache = (type !== 'services');
+
+        if (shouldCache) {
+            const cachedData = localStorage.getItem(cacheKey);
+            // If we have cached data, return it immediately
+            if (cachedData && cachedData !== '[]') {
+                return JSON.parse(cachedData);
+            }
+        }
+
+        // Otherwise load from network
+        return await this.loadFromNetwork(type, shouldCache ? cacheKey : null);
+    },
+
+    /**
      * Perform network loading
      */
     loadFromNetwork: async function(type, cacheKey) {
@@ -176,13 +198,8 @@ const Data = {
             const text = await response.text();
             const data = Utils.parseCSV(text);
             
-            // CRITICAL: Only save if data is valid and non-empty
             if (data && data.length > 0 && cacheKey) {
                 localStorage.setItem(cacheKey, JSON.stringify(data));
-                
-                if (type === 'config') {
-                    this.handleVersion(data);
-                }
             }
             return data;
         } catch (error) {
@@ -200,26 +217,7 @@ const Data = {
     },
 
     /**
-     * Handle versioning and cache flushing
-     */
-    handleVersion: function(configArray) {
-        const versionObj = configArray.find(item => item.key === 'VERSION');
-        if (versionObj && versionObj.value) {
-            const newVersion = versionObj.value;
-            const oldVersion = localStorage.getItem('app_version');
-            
-            if (oldVersion && oldVersion !== newVersion) {
-                console.log(`New version detected (${newVersion}). Flushing cache...`);
-                // Flush all cached data but keep the new version number
-                Object.keys(CONFIG.GIDS).forEach(key => localStorage.removeItem(`cached_${key}`));
-            }
-            localStorage.setItem('app_version', newVersion);
-            this.currentVersion = newVersion;
-        }
-    },
-
-    /**
-     * Silently update the cache in the background
+     * Silently update the cache in the background (No longer handles version)
      */
     refreshCache: async function(type, cacheKey) {
         try {
@@ -228,10 +226,8 @@ const Data = {
             if (response.ok) {
                 const text = await response.text();
                 const data = Utils.parseCSV(text);
-                // CRITICAL: Only save if data is non-empty
                 if (data && data.length > 0) {
                     localStorage.setItem(cacheKey, JSON.stringify(data));
-                    if (type === 'config') this.handleVersion(data);
                 }
             }
         } catch (e) {
