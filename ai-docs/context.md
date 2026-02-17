@@ -40,6 +40,7 @@ This document provides a summary of the StylePlanIt website project for context 
     *   `js/csv-reader.js`: A JavaScript file to read the CSV file and populate the content.
     *   `services.html`: A dedicated page for the detailed service menu.
     *   `configs/config.csv`: A CSV file to store all the configurable text and links.
+    *   `configs/services.csv`: A CSV file to store the data for the services.
     *   `wireframes/`: Folder containing the design wireframes.
     *   `ai-docs/context.md`: This file.
 
@@ -49,16 +50,11 @@ The website content is managed through a CSV file to allow for easy updates with
 
 *   `configs/config.csv`: This file contains key-value pairs for all the text and links used in the website.
 *   `js/csv-reader.js`: This script reads the `configs/config.csv` file and populates the content of the HTML elements that have `text-config-key`, `href-config-key`, or `placeholder-config-key` attributes.
+*   `configs/services.csv`: This file contains the data for the services offered.
 
 ## 5. Content & Service Menu
 
-The consultancy offers a range of services tailored to different audiences:
-
-*   **For Newcomers:** Career Kickstart, Settlement Standard, First Class Arrival.
-*   **For Professionals:** The Tone Audit, The Event Edit, The Showstopper.
-*   **For Weddings:** The Vision Blueprint, The Bridal Signature, The Power Couple.
-*   **B2B/Corporate:** Masterclasses and VIP mentorship.
-*   **Private Client (HNI):** "The Icon Service," an exclusive, application-only lifestyle overhaul.
+The consultancy offers a range of services tailored to different audiences. The services are dynamically loaded from `configs/services.csv`.
 
 ## 6. Homepage Sections
 
@@ -74,3 +70,4 @@ The `index.html` page is structured into the following key sections:
 *   **"Be an ICON" (HNI) Section:** A section with a dark green background dedicated to the high-net-worth "Icon Service." It includes a brief description and a "Request Access" button linking to Calendly.
 *   **Subscribe Section:** A simple form for users to subscribe to a newsletter.
 *   **Footer:** Contains a large "Style Plan It." banner (9rem font size), social media icons, and copyright information. All content is populated from `config.csv`.
+
