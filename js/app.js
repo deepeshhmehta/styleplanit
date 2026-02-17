@@ -2,9 +2,9 @@
  * app.js - Main application logic
  */
 const App = {
-  init: function () {
+  init: function (config) {
     this.initNavigation();
-    this.initHero();
+    this.initHero(config);
     if ($("#reviews-container").length > 0) {
       this.initReviews();
     }
@@ -29,23 +29,29 @@ const App = {
   },
 
   initHero: function () {
-    const heroSlideshow = () => {
-      const heroBgs = $(".hero-bg");
+    const heroBgs = $(".hero-bg");
+    if (heroBgs.length === 0) return;
+
+    // Detect screen size
+    const isMobile = window.innerWidth <= 768;
+
+    if (isMobile) {
+      if (heroBgs.length <= 1) return;
+
       let current = 0;
-      if (heroBgs.length === 0) return;
-
-      heroBgs.css("opacity", "0").css("transition", "opacity 1s ease-in-out");
-      heroBgs.eq(current).css("opacity", "1").addClass("active");
-
+      // Start the mobile-only slideshow
       setInterval(() => {
-        heroBgs.eq(current).css("opacity", "0").removeClass("active");
+        heroBgs.eq(current).removeClass("active").css("opacity", 0);
         current = (current + 1) % heroBgs.length;
-        heroBgs.eq(current).css("opacity", "1").addClass("active");
-      }, 2000);
-    };
-
-    if (window.innerWidth <= 768) {
-      heroSlideshow();
+        heroBgs.eq(current).addClass("active").css("opacity", 1);
+      }, 4000);
+    } else {
+      // On desktop, ensure all are visible and tiled (CSS handles the 33% width)
+      // We also stop any potential opacity transitions
+      heroBgs.css({
+        opacity: 1,
+        transition: "none",
+      }).addClass("active");
     }
   },
 

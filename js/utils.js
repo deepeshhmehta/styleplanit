@@ -50,6 +50,11 @@ const Utils = {
      * Applies configuration object to elements with specific data attributes
      */
     applyConfig: function(config) {
+        if (!config || Object.keys(config).length === 0) {
+            console.warn("Utils.applyConfig called with empty config");
+            return;
+        }
+
         // Text and Links
         document.querySelectorAll('[text-config-key]').forEach(element => {
             const key = element.getAttribute('text-config-key');
@@ -64,6 +69,20 @@ const Utils = {
         document.querySelectorAll('[placeholder-config-key]').forEach(element => {
             const key = element.getAttribute('placeholder-config-key');
             if (config[key] !== undefined) element.placeholder = config[key];
+        });
+
+        // Image Sources
+        document.querySelectorAll('[src-config-key]').forEach(element => {
+            const key = element.getAttribute('src-config-key');
+            if (config[key] !== undefined) element.src = config[key];
+        });
+
+        // Background Images
+        document.querySelectorAll('[style-bg-config-key]').forEach(element => {
+            const key = element.getAttribute('style-bg-config-key');
+            if (config[key] !== undefined) {
+                element.style.backgroundImage = 'url("' + config[key] + '")';
+            }
         });
 
         // Meta Tags Optimization
@@ -117,13 +136,19 @@ const Data = {
             const cachedData = localStorage.getItem(cacheKey);
             const cachedVersion = localStorage.getItem('app_version');
             
-            // Check if version in config (if already loaded) matches cached version
-            if (cachedData && (!this.currentVersion || cachedVersion === this.currentVersion)) {
+            // If we have cached data AND version is valid, return it
+            if (cachedData && cachedData !== '[]' && (!this.currentVersion || cachedVersion === this.currentVersion)) {
+                // Background refresh
                 this.refreshCache(type, cacheKey);
-                return JSON.parse(cachedData);
+                try {
+                    return JSON.parse(cachedData);
+                } catch (e) {
+                    console.error("Cache parse error", e);
+                }
             }
         }
 
+        // Otherwise load from network
         return await this.loadFromNetwork(type, shouldCache ? cacheKey : null);
     },
 
@@ -154,7 +179,8 @@ const Data = {
             const text = await response.text();
             const data = Utils.parseCSV(text);
             
-            if (data.length > 0 && cacheKey) {
+            // CRITICAL: Only save if data is valid and non-empty
+            if (data && data.length > 0 && cacheKey) {
                 localStorage.setItem(cacheKey, JSON.stringify(data));
                 
                 if (type === 'config') {
@@ -207,7 +233,8 @@ const Data = {
             if (response.ok) {
                 const text = await response.text();
                 const data = Utils.parseCSV(text);
-                if (data.length > 0) {
+                // CRITICAL: Only save if data is non-empty
+                if (data && data.length > 0) {
                     localStorage.setItem(cacheKey, JSON.stringify(data));
                     if (type === 'config') this.handleVersion(data);
                 }

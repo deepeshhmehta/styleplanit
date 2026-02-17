@@ -18,19 +18,19 @@ async function loadComponents() {
 
     await Promise.all(loadPromises);
     
-    // 1. Initialize UI interactions (Menu, Hero, etc.)
-    if (typeof App !== 'undefined') {
-        App.init();
-    }
-
     // 2. Load and apply site-wide configuration
     const configArray = await Data.fetch('config');
+    let config = {};
     if (configArray.length > 0) {
-        const config = {};
         configArray.forEach(item => {
             if (item.key) config[item.key] = item.value;
         });
         Utils.applyConfig(config);
+    }
+
+    // 1. Initialize UI interactions (Menu, Hero, etc.)
+    if (typeof App !== 'undefined') {
+        App.init(config);
     }
 
     // 3. Signal that everything is ready

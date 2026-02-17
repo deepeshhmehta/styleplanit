@@ -194,6 +194,22 @@ nav > .container > .logo {
     background-size: cover;
     background-position: center;
     filter: grayscale(50%) brightness(0.7);
+    opacity: 1; /* Always visible on desktop */
+}
+
+@media (max-width: 768px) {
+    .hero-bg {
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+    }
+
+    .hero-bg.active {
+        opacity: 1;
+    }
 }
 
 
