@@ -27,53 +27,45 @@ This document provides a summary of the StylePlanIt website project for context 
 *   **Styling:**
     *   **Buttons:** Generally have a 200px border-radius, giving them a pill shape. The subscribe button is an exception with a 0px border-radius.
     *   **Section Padding:** Sections have a vertical padding of 75px.
-    *   **Services Page:** The services page features an elegant tab bar and interactive service cards that expand to show details.
+    *   **Services Page:** Features an elegant tab bar and interactive service cards that expand to show details with a smooth-scroll "focus" mechanism.
 
 ## 3. Tech Stack & File Structure
 
 *   **Frameworks:** jQuery is used for DOM manipulation and event handling. The project is built with HTML5, CSS3, and JavaScript.
 *   **File Structure:**
     *   `index.html`: The main homepage.
-    *   `styles/styles.css`: All styles for the project.
-    *   `js/utils.js`: Central utility object (`Utils`) for shared logic like robust CSV parsing and configuration application.
-    *   `js/app.js`: Main application object (`App`) containing logic for navigation, hero slideshows, and dynamic service loading.
-    *   `js/loader.js`: Coordinates component loading, application initialization, and configuration application in the correct sequence.
-    *   `components/header.html`: The common navigation bar component.
-    *   `components/footer.html`: The common footer component.
     *   `services.html`: A dedicated page for the detailed service menu.
-    *   `configs/config.csv`: A CSV file to store all the configurable text and links.
-    *   `configs/services.csv`: A CSV file to store the data for the services.
-    *   `wireframes/`: Folder containing the design wireframes.
+    *   `styles/styles.css`: All styles for the project.
+    *   `js/config.js`: Centralized constants, Spreadsheet IDs, and GIDs.
+    *   `js/utils.js`: Shared utility object (`Utils`) for CSV parsing and meta-tag optimization, plus the `Data` provider logic.
+    *   `js/app.js`: Main application logic (`App`) for UI components (Navigation, Hero Slideshow, Services, Reviews).
+    *   `js/loader.js`: Coordinates the injection of HTML components and ensures the app initializes only after data is ready.
+    *   `components/header.html` & `footer.html`: Reusable HTML components.
+    *   `configs/`: Contains local CSV backups (`config.csv`, `services.csv`, `reviews.csv`).
     *   `ai-docs/context.md`: This file.
 
-## 4. Configuration
+## 4. Data & Configuration Layer
 
-The website content is managed through CSV files to allow for easy updates without modifying the HTML.
+The website utilizes a highly resilient data architecture to ensure performance and maintainability.
 
-*   `configs/config.csv`: This file contains key-value pairs for all the text and links used in the website.
-*   `js/csv-reader.js`: This script reads the `configs/config.csv` file and populates the content of the HTML elements that have `text-config-key`, `href-config-key`, or `placeholder-config-key` attributes.
-*   `configs/services.csv`: This file contains the data for the services offered, including category, title, description, image URL, and price.
-*   **CSV Parsing:** `js/services.js` uses a robust parser that correctly handles quoted fields containing commas, which is essential for descriptions in the service menu. `js/csv-reader.js` uses a simpler parser optimized for the 2-column key-value structure of `config.csv`.
+*   **Primary Source:** Google Sheets (Published to the Web as CSV). This allows for live updates to content, services, and reviews without code changes.
+*   **Backup Source:** Local CSV files in the `configs/` directory serve as an automatic fallback if the Google Sheets API is unreachable or times out (5s threshold).
+*   **Selective Caching:** 
+    *   `config` and `reviews` are cached in `localStorage` for instantaneous page loads.
+    *   `services` are always loaded in real-time to ensure clients see current offerings.
+*   **Version Control:** A `VERSION` key in the configuration allows for manual cache flushing across all clients whenever significant content updates are deployed.
 
-## 5. Content & Service Menu
+## 5. SEO & Meta Management
 
-The consultancy offers a range of services tailored to different audiences. The services are dynamically loaded from `configs/services.csv`. The `js/services.js` script handles:
-1.  **Dynamic Tab Generation:** Groups services by their `category` and creates navigation tabs.
-2.  **Service Grid Generation:** Creates a grid of service cards for each category.
-3.  **Interactive Cards:** Clicking a card expands it into a detailed view within the `#service-details` container.
+The site is optimized for production-grade SEO:
+*   **Dynamic Meta Tags:** `PAGE_TITLE`, `PAGE_DESCRIPTION`, and `OG_IMAGE` are managed via the Google Sheet.
+*   **Social Readiness:** Open Graph tags are automatically updated by `Utils.applyConfig` to ensure professional social media previews.
+*   **Static Defaults:** Critical SEO tags have sensible defaults in the HTML to support crawlers that do not execute JavaScript.
 
-## 6. Homepage Sections
+## 6. Component Features
 
-The `index.html` page is structured into the following key sections:
-
-*   **Hero Section:** A full-width banner with a height of 70vh. It features a static three-image layout with a grayscale filter and a content box with the main heading. The primary call-to-action button ("Discover Yours.") links directly to a Calendly booking page.
-*   **"How It Works" Section:** A three-step guide for clients:
-    1.  **Checkout our services:** Displays cards for "Newcomers" and "Professionals & HNI," which link to the `services.html` page. The service cards have a 200px border-radius.
-    2.  **Book a call with us:** A direct link to a Calendly booking page.
-    3.  **Start the program you deserve:** The final step in the process.
-*   **Logo Band:** A section to display logos of companies worked with or featured in. The logos are populated from `config.csv`.
-*   **Reviews Section:** A grid of client testimonials. The grid is scrollable to accommodate a large number of reviews. The reviews are populated from `config.csv`.
-*   **"Be an ICON" (HNI) Section:** A section with a dark green background dedicated to the high-net-worth "Icon Service." It includes a brief description and a "Request Access" button linking to Calendly.
-*   **Subscribe Section:** A simple form for users to subscribe to a newsletter.
-*   **Footer:** Contains a large "Style Plan It." banner (9rem font size), social media icons, and copyright information. All content is populated from `config.csv`.
+*   **Hero Section:** A three-image tiled layout on desktop for an editorial feel. On mobile, it automatically switches to a cross-fading slideshow for better use of vertical space.
+*   **Service Menu:** Dynamically generated tabs and grids. Cards are interactive, expanding to show long descriptions and prices with a dynamic scroll-to-focus feature.
+*   **Reviews:** Dynamically loaded from a dedicated sheet/CSV, supporting unlimited client testimonials in a scrollable grid.
+*   **Navigation:** Uses a shared `header.html` component with a responsive mobile toggle implemented via event delegation to support dynamic injection.
 
