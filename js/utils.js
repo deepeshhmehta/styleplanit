@@ -71,11 +71,11 @@ const Utils = {
  * Data - Centralized data provider with fallback mechanism
  */
 const Data = {
-    // Primary sources (will be Google Sheets URLs later)
+    // Primary sources (Google Sheets 'Published to Web' URLs)
     primary: {
-        config: 'configs/config.csv',
-        services: 'configs/services.csv',
-        reviews: 'configs/reviews.csv'
+        config: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSfDsGSiXAvQMmO32s5qWgQaH1GDeZXqEbnMr7bQmm-7gtdoHX-pz_jNq_y3Mb_ahS1LJ99azA84HVZ/pub?gid=1515187439&output=csv',
+        services: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSfDsGSiXAvQMmO32s5qWgQaH1GDeZXqEbnMr7bQmm-7gtdoHX-pz_jNq_y3Mb_ahS1LJ99azA84HVZ/pub?gid=439228131&output=csv',
+        reviews: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSfDsGSiXAvQMmO32s5qWgQaH1GDeZXqEbnMr7bQmm-7gtdoHX-pz_jNq_y3Mb_ahS1LJ99azA84HVZ/pub?gid=1697858749&output=csv'
     },
 
     // Local backup sources
