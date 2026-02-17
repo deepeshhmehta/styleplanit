@@ -540,6 +540,13 @@ footer {
     display: none; /* Initially hidden */
 }
 
+.service-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    margin-bottom: 20px;
+}
+
 /* --- 12. SITE LOADER --- */
 .loader-overlay {
     position: fixed;
