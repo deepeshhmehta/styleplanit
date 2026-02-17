@@ -24,20 +24,13 @@ async function loadComponents() {
     }
 
     // 2. Load and apply site-wide configuration
-    try {
-        const response = await fetch('configs/config.csv');
-        if (response.ok) {
-            const data = await response.text();
-            const configArray = Utils.parseCSV(data);
-            const config = {};
-            // Convert array of objects to key-value map for easier lookup
-            configArray.forEach(item => {
-                if (item.key) config[item.key] = item.value;
-            });
-            Utils.applyConfig(config);
-        }
-    } catch (error) {
-        console.error('Error loading config:', error);
+    const configArray = await Data.fetch('config');
+    if (configArray.length > 0) {
+        const config = {};
+        configArray.forEach(item => {
+            if (item.key) config[item.key] = item.value;
+        });
+        Utils.applyConfig(config);
     }
 
     // 3. Signal that everything is ready

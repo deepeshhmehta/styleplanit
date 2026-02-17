@@ -49,18 +49,15 @@ const App = {
         }
     },
 
-    initServices: function() {
-        $.ajax({
-            url: 'configs/services.csv',
-            dataType: 'text',
-        }).done((data) => {
-            const services = Utils.parseCSV(data);
-            const categories = [...new Set(services.map(s => s.category))];
+    initServices: async function() {
+        const services = await Data.fetch('services');
+        if (services.length === 0) return;
 
-            this.renderServiceTabs(categories);
-            this.renderServiceGrids(categories, services);
-            this.bindServiceEvents();
-        });
+        const categories = [...new Set(services.map(s => s.category))];
+
+        this.renderServiceTabs(categories);
+        this.renderServiceGrids(categories, services);
+        this.bindServiceEvents();
     },
 
     renderServiceTabs: function(categories) {
@@ -122,22 +119,18 @@ const App = {
         });
     },
 
-    initReviews: function() {
-        $.ajax({
-            url: 'configs/reviews.csv',
-            dataType: 'text',
-        }).done((data) => {
-            const reviews = Utils.parseCSV(data);
-            const container = $('#reviews-container');
-            
-            reviews.forEach(review => {
-                container.append(`
-                    <div class="review-card">
-                        <p>"${review.text.replace(/"/g, '')}"</p>
-                        <span>${review.author}</span>
-                    </div>
-                `);
-            });
+    initReviews: async function() {
+        const reviews = await Data.fetch('reviews');
+        if (reviews.length === 0) return;
+
+        const container = $('#reviews-container');
+        reviews.forEach(review => {
+            container.append(`
+                <div class="review-card">
+                    <p>"${review.text.replace(/"/g, '')}"</p>
+                    <span>${review.author}</span>
+                </div>
+            `);
         });
     }
 };

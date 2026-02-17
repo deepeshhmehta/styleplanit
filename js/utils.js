@@ -66,3 +66,45 @@ const Utils = {
         });
     }
 };
+
+/**
+ * Data - Centralized data provider with fallback mechanism
+ */
+const Data = {
+    // Primary sources (will be Google Sheets URLs later)
+    primary: {
+        config: 'configs/config.csv',
+        services: 'configs/services.csv',
+        reviews: 'configs/reviews.csv'
+    },
+
+    // Local backup sources
+    backup: {
+        config: 'configs/config.csv',
+        services: 'configs/services.csv',
+        reviews: 'configs/reviews.csv'
+    },
+
+    fetch: async function(type) {
+        // Try Primary Source
+        try {
+            const response = await fetch(this.primary[type], { signal: AbortSignal.timeout(5000) }); // 5s timeout
+            if (!response.ok) throw new Error(`Primary source failed`);
+            const text = await response.text();
+            return Utils.parseCSV(text);
+        } catch (error) {
+            console.warn(`Primary source for ${type} failed, trying backup...`, error);
+            
+            // Try Backup Source
+            try {
+                const response = await fetch(this.backup[type]);
+                if (!response.ok) throw new Error(`Backup source failed`);
+                const text = await response.text();
+                return Utils.parseCSV(text);
+            } catch (backupError) {
+                console.error(`Both sources for ${type} failed:`, backupError);
+                return [];
+            }
+        }
+    }
+};
