@@ -41,11 +41,7 @@ function applyConfig(config) {
         const key = element.getAttribute('href-config-key');
         if (config[key] !== undefined) {
             const url = config[key];
-            if (isValidUrl(url)) {
-                element.href = url;
-            } else {
-                console.error(`Invalid URL format for key "${key}": "${url}"`, element);
-            }
+            element.href = url;
         } else {
             console.error(`Config key "${key}" not found for element:`, element);
         }

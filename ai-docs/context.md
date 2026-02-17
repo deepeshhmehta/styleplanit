@@ -46,15 +46,19 @@ This document provides a summary of the StylePlanIt website project for context 
 
 ## 4. Configuration
 
-The website content is managed through a CSV file to allow for easy updates without modifying the HTML.
+The website content is managed through CSV files to allow for easy updates without modifying the HTML.
 
 *   `configs/config.csv`: This file contains key-value pairs for all the text and links used in the website.
 *   `js/csv-reader.js`: This script reads the `configs/config.csv` file and populates the content of the HTML elements that have `text-config-key`, `href-config-key`, or `placeholder-config-key` attributes.
-*   `configs/services.csv`: This file contains the data for the services offered.
+*   `configs/services.csv`: This file contains the data for the services offered, including category, title, description, image URL, and price.
+*   **CSV Parsing:** `js/services.js` uses a robust parser that correctly handles quoted fields containing commas, which is essential for descriptions in the service menu. `js/csv-reader.js` uses a simpler parser optimized for the 2-column key-value structure of `config.csv`.
 
 ## 5. Content & Service Menu
 
-The consultancy offers a range of services tailored to different audiences. The services are dynamically loaded from `configs/services.csv`.
+The consultancy offers a range of services tailored to different audiences. The services are dynamically loaded from `configs/services.csv`. The `js/services.js` script handles:
+1.  **Dynamic Tab Generation:** Groups services by their `category` and creates navigation tabs.
+2.  **Service Grid Generation:** Creates a grid of service cards for each category.
+3.  **Interactive Cards:** Clicking a card expands it into a detailed view within the `#service-details` container.
 
 ## 6. Homepage Sections
 

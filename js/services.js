@@ -1,16 +1,41 @@
 // js/services.js
 $(document).ready(function(){
-    // Function to parse CSV data
+    // Function to parse CSV data correctly handling quoted values
     function parseCSV(data) {
         const lines = data.split('\n').filter(line => line.trim() !== '');
         if (lines.length < 2) return [];
-        const header = lines[0].split(',').map(h => h.trim());
+
+        function parseCSVRow(line) {
+            const result = [];
+            let currentField = '';
+            let inQuotes = false;
+            for (let i = 0; i < line.length; i++) {
+                const char = line[i];
+                if (char === '"') {
+                    if (inQuotes && i + 1 < line.length && line[i + 1] === '"') {
+                        currentField += '"';
+                        i++;
+                    } else {
+                        inQuotes = !inQuotes;
+                    }
+                } else if (char === ',' && !inQuotes) {
+                    result.push(currentField.trim());
+                    currentField = '';
+                } else {
+                    currentField += char;
+                }
+            }
+            result.push(currentField.trim());
+            return result;
+        }
+
+        const header = parseCSVRow(lines[0]);
         const services = [];
         for (let i = 1; i < lines.length; i++) {
-            const values = lines[i].split(',');
+            const values = parseCSVRow(lines[i]);
             const service = {};
             for (let j = 0; j < header.length; j++) {
-                service[header[j]] = values[j] ? values[j].trim().replace(/"/g, '') : '';
+                service[header[j]] = values[j] !== undefined ? values[j] : '';
             }
             services.push(service);
         }
