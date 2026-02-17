@@ -50,6 +50,7 @@ const Utils = {
      * Applies configuration object to elements with specific data attributes
      */
     applyConfig: function(config) {
+        // Text and Links
         document.querySelectorAll('[text-config-key]').forEach(element => {
             const key = element.getAttribute('text-config-key');
             if (config[key] !== undefined) element.textContent = config[key];
@@ -64,47 +65,155 @@ const Utils = {
             const key = element.getAttribute('placeholder-config-key');
             if (config[key] !== undefined) element.placeholder = config[key];
         });
+
+        // Meta Tags Optimization
+        if (config['PAGE_DESCRIPTION']) {
+            this.updateMeta('description', config['PAGE_DESCRIPTION']);
+            this.updateMeta('og:description', config['PAGE_DESCRIPTION'], 'property');
+        }
+        if (config['PAGE_TITLE']) {
+            this.updateMeta('og:title', config['PAGE_TITLE'], 'property');
+        }
+        if (config['OG_IMAGE']) {
+            this.updateMeta('og:image', config['OG_IMAGE'], 'property');
+        }
+    },
+
+    /**
+     * Helper to update meta tags
+     */
+    updateMeta: function(name, content, attr = 'name') {
+        let el = document.querySelector(`meta[${attr}="${name}"]`);
+        if (!el) {
+            el = document.createElement('meta');
+            el.setAttribute(attr, name);
+            document.head.appendChild(el);
+        }
+        el.setAttribute('content', content);
     }
 };
 
 /**
- * Data - Centralized data provider with fallback mechanism
+ * Data - Centralized data provider with fallback mechanism and caching
  */
 const Data = {
-    // Primary sources (Google Sheets 'Published to Web' URLs)
-    primary: {
-        config: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSfDsGSiXAvQMmO32s5qWgQaH1GDeZXqEbnMr7bQmm-7gtdoHX-pz_jNq_y3Mb_ahS1LJ99azA84HVZ/pub?gid=1515187439&output=csv',
-        services: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSfDsGSiXAvQMmO32s5qWgQaH1GDeZXqEbnMr7bQmm-7gtdoHX-pz_jNq_y3Mb_ahS1LJ99azA84HVZ/pub?gid=439228131&output=csv',
-        reviews: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSfDsGSiXAvQMmO32s5qWgQaH1GDeZXqEbnMr7bQmm-7gtdoHX-pz_jNq_y3Mb_ahS1LJ99azA84HVZ/pub?gid=1697858749&output=csv'
+    /**
+     * Helper to build Google Sheets URL from CONFIG
+     */
+    getPrimaryUrl: function(type) {
+        return `https://docs.google.com/spreadsheets/d/${CONFIG.SPREADSHEET_ID}/pub?gid=${CONFIG.GIDS[type]}&output=csv`;
     },
 
-    // Local backup sources
-    backup: {
-        config: 'configs/config.csv',
-        services: 'configs/services.csv',
-        reviews: 'configs/reviews.csv'
-    },
-
+    /**
+     * Fetch logic with version control and selective caching
+     */
     fetch: async function(type) {
-        // Try Primary Source
+        const cacheKey = `cached_${type}`;
+        
+        // Strategy: Real-time for services, Cache for others
+        const shouldCache = (type !== 'services');
+
+        if (shouldCache) {
+            const cachedData = localStorage.getItem(cacheKey);
+            const cachedVersion = localStorage.getItem('app_version');
+            
+            // Check if version in config (if already loaded) matches cached version
+            if (cachedData && (!this.currentVersion || cachedVersion === this.currentVersion)) {
+                this.refreshCache(type, cacheKey);
+                return JSON.parse(cachedData);
+            }
+        }
+
+        return await this.loadFromNetwork(type, shouldCache ? cacheKey : null);
+    },
+
+    /**
+     * Perform network loading with manual timeout for better compatibility
+     */
+    fetchWithTimeout: async function(url, timeout) {
+        const controller = new AbortController();
+        const id = setTimeout(() => controller.abort(), timeout);
         try {
-            const response = await fetch(this.primary[type], { signal: AbortSignal.timeout(5000) }); // 5s timeout
+            const response = await fetch(url, { signal: controller.signal });
+            clearTimeout(id);
+            return response;
+        } catch (error) {
+            clearTimeout(id);
+            throw error;
+        }
+    },
+
+    /**
+     * Perform network loading
+     */
+    loadFromNetwork: async function(type, cacheKey) {
+        try {
+            const url = this.getPrimaryUrl(type);
+            const response = await this.fetchWithTimeout(url, CONFIG.SETTINGS.FETCH_TIMEOUT);
             if (!response.ok) throw new Error(`Primary source failed`);
             const text = await response.text();
-            return Utils.parseCSV(text);
+            const data = Utils.parseCSV(text);
+            
+            if (data.length > 0 && cacheKey) {
+                localStorage.setItem(cacheKey, JSON.stringify(data));
+                
+                if (type === 'config') {
+                    this.handleVersion(data);
+                }
+            }
+            return data;
         } catch (error) {
             console.warn(`Primary source for ${type} failed, trying backup...`, error);
             
-            // Try Backup Source
             try {
-                const response = await fetch(this.backup[type]);
+                const response = await fetch(CONFIG.BACKUP_PATHS[type]);
                 if (!response.ok) throw new Error(`Backup source failed`);
                 const text = await response.text();
-                return Utils.parseCSV(text);
+                const data = Utils.parseCSV(text);
+                return data;
             } catch (backupError) {
                 console.error(`Both sources for ${type} failed:`, backupError);
                 return [];
             }
+        }
+    },
+
+    /**
+     * Handle versioning and cache flushing
+     */
+    handleVersion: function(configArray) {
+        const versionObj = configArray.find(item => item.key === 'VERSION');
+        if (versionObj && versionObj.value) {
+            const newVersion = versionObj.value;
+            const oldVersion = localStorage.getItem('app_version');
+            
+            if (oldVersion && oldVersion !== newVersion) {
+                console.log(`New version detected (${newVersion}). Flushing cache...`);
+                // Flush all cached data but keep the new version number
+                Object.keys(CONFIG.GIDS).forEach(key => localStorage.removeItem(`cached_${key}`));
+            }
+            localStorage.setItem('app_version', newVersion);
+            this.currentVersion = newVersion;
+        }
+    },
+
+    /**
+     * Silently update the cache in the background
+     */
+    refreshCache: async function(type, cacheKey) {
+        try {
+            const url = this.getPrimaryUrl(type);
+            const response = await this.fetchWithTimeout(url, CONFIG.SETTINGS.BACKGROUND_REFRESH_TIMEOUT);
+            if (response.ok) {
+                const text = await response.text();
+                const data = Utils.parseCSV(text);
+                if (data.length > 0) {
+                    localStorage.setItem(cacheKey, JSON.stringify(data));
+                    if (type === 'config') this.handleVersion(data);
+                }
+            }
+        } catch (e) {
+            // Fail silently
         }
     }
 };

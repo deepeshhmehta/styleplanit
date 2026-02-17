@@ -51,7 +51,10 @@ const App = {
 
   initServices: async function () {
     const services = await Data.fetch("services");
-    if (services.length === 0) return;
+    if (services.length === 0) {
+      $(".service-content").html('<p class="text-center section-padding">Service menu is temporarily unavailable. Please check back later.</p>');
+      return;
+    }
 
     const categories = [...new Set(services.map((s) => s.category))];
 
@@ -117,21 +120,15 @@ const App = {
         $(this)
           .html(
             `
-
-                                            <h3>${title}</h3>
-
-                                            <p>${longDesc}</p>
-
-                                            <span class="price-tag">${price}</span>
-
-                                        `,
+                <h3>${title}</h3>
+                <p>${longDesc}</p>
+                <span class="price-tag">${price}</span>
+            `,
           )
           .slideDown(function () {
             // Calculate dynamic offset based on nav height
-
             const navHeight = $("nav").outerHeight() || 0;
-
-            const extraPadding = 40; // Small aesthetic gap
+            const extraPadding = CONFIG.SETTINGS.SCROLL_OFFSET;
 
             $("html, body").animate(
               {
@@ -146,7 +143,10 @@ const App = {
 
   initReviews: async function () {
     const reviews = await Data.fetch("reviews");
-    if (reviews.length === 0) return;
+    if (reviews.length === 0) {
+      $("#reviews-container").html('<p class="text-center">Reviews are currently being updated.</p>');
+      return;
+    }
 
     const container = $("#reviews-container");
     reviews.forEach((review) => {
