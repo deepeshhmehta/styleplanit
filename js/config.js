@@ -10,6 +10,7 @@ const CONFIG = {
         reviews: '1697858749'
     },
     BACKUP_PATHS: {
+        version: 'configs/version.csv',
         config: 'configs/config.csv',
         services: 'configs/services.csv',
         reviews: 'configs/reviews.csv'
