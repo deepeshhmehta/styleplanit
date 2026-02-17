@@ -50,10 +50,7 @@ const Utils = {
      * Applies configuration object to elements with specific data attributes
      */
     applyConfig: function(config) {
-        if (!config || Object.keys(config).length === 0) {
-            console.warn("Utils.applyConfig called with empty config");
-            return;
-        }
+        if (!config || Object.keys(config).length === 0) return;
 
         // Text and Links
         document.querySelectorAll('[text-config-key]').forEach(element => {
@@ -189,8 +186,6 @@ const Data = {
             }
             return data;
         } catch (error) {
-            console.warn(`Primary source for ${type} failed, trying backup...`, error);
-            
             try {
                 const response = await fetch(CONFIG.BACKUP_PATHS[type]);
                 if (!response.ok) throw new Error(`Backup source failed`);
