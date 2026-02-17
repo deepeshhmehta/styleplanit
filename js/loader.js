@@ -1,5 +1,5 @@
 /**
- * loader.js - Handles dynamic loading of HTML components
+ * loader.js - Handles dynamic loading of HTML components and app initialization
  */
 async function loadComponents() {
     const components = document.querySelectorAll('[data-component]');
@@ -16,12 +16,32 @@ async function loadComponents() {
         }
     });
 
-    // Wait for all components to be injected
     await Promise.all(loadPromises);
     
-    // Dispatch a custom event so other scripts (like csv-reader.js) know the DOM is ready
-    document.dispatchEvent(new CustomEvent('componentsLoaded'));
+    // 1. Initialize UI interactions (Menu, Hero, etc.)
+    if (typeof App !== 'undefined') {
+        App.init();
+    }
+
+    // 2. Load and apply site-wide configuration
+    try {
+        const response = await fetch('configs/config.csv');
+        if (response.ok) {
+            const data = await response.text();
+            const configArray = Utils.parseCSV(data);
+            const config = {};
+            // Convert array of objects to key-value map for easier lookup
+            configArray.forEach(item => {
+                if (item.key) config[item.key] = item.value;
+            });
+            Utils.applyConfig(config);
+        }
+    } catch (error) {
+        console.error('Error loading config:', error);
+    }
+
+    // 3. Signal that everything is ready
+    document.dispatchEvent(new CustomEvent('appReady'));
 }
 
-// Initial load
 document.addEventListener('DOMContentLoaded', loadComponents);
