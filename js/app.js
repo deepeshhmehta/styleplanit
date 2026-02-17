@@ -5,6 +5,9 @@ const App = {
     init: function() {
         this.initNavigation();
         this.initHero();
+        if ($('#reviews-container').length > 0) {
+            this.initReviews();
+        }
         if ($('#services').length > 0) {
             this.initServices();
         }
@@ -115,6 +118,25 @@ const App = {
                     <p>${longDesc}</p>
                     <span class="price-tag">${price}</span>
                 `).slideDown();
+            });
+        });
+    },
+
+    initReviews: function() {
+        $.ajax({
+            url: 'configs/reviews.csv',
+            dataType: 'text',
+        }).done((data) => {
+            const reviews = Utils.parseCSV(data);
+            const container = $('#reviews-container');
+            
+            reviews.forEach(review => {
+                container.append(`
+                    <div class="review-card">
+                        <p>"${review.text.replace(/"/g, '')}"</p>
+                        <span>${review.author}</span>
+                    </div>
+                `);
             });
         });
     }
