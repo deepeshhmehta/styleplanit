@@ -1,13 +1,13 @@
 $(document).ready(function(){
-    // Mobile menu toggle
-    $('.menu-toggle').on('click', function(){
+    // Mobile menu toggle using event delegation
+    $(document).on('click', '.menu-toggle', function(){
         var expanded = $(this).attr('aria-expanded') === 'true';
         $(this).attr('aria-expanded', String(!expanded));
         $('.nav-links').toggleClass('active');
     });
 
-    // close on nav click
-    $('.nav-links a').on('click', function(){
+    // close on nav click using event delegation
+    $(document).on('click', '.nav-links a', function(){
         $('.nav-links').removeClass('active');
         $('.menu-toggle').attr('aria-expanded', 'false');
     });

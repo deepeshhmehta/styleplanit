@@ -1,4 +1,5 @@
-window.onload = async () => {
+// Load config after components are injected
+document.addEventListener('componentsLoaded', async () => {
     try {
         const response = await fetch('configs/config.csv');
         if (!response.ok) {
@@ -10,7 +11,7 @@ window.onload = async () => {
     } catch (error) {
         console.error('Error loading or applying config:', error);
     }
-};
+});
 
 function parseCSV(data) {
     const lines = data.split('\n').filter(line => line.trim() !== '');

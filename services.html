@@ -15,17 +15,7 @@
 </head>
 <body>
 
-    <nav>
-        <div class="container">
-            <a href-config-key="LOGO_HREF" href="index.html" class="logo" text-config-key="LOGO_TEXT">Style Plan(it)</a>
-            <div class="nav-links">
-                <a href-config-key="NAV_LINK_1_HREF" href="#how-it-works" text-config-key="NAV_LINK_1_TEXT">How It Works</a>
-                <a href-config-key="NAV_LINK_2_HREF" href="#reviews" text-config-key="NAV_LINK_2_TEXT">Reviews</a>
-                <a href-config-key="NAV_LINK_3_HREF" href="services.html" text-config-key="NAV_LINK_3_TEXT">Services</a>
-                <a href-config-key="NAV_LINK_4_HREF" href="#be-an-icon" text-config-key="NAV_LINK_4_TEXT">Be an ICON</a>
-            </div>
-        </div>
-    </nav>
+    <nav data-component="header"></nav>
 
     <main>
         <section id="services" class="section-padding" style="padding-top: 140px;">
@@ -54,21 +44,10 @@
         </section>
     </main>
 
-    <footer>
-        <div class="container text-center">
-            <div class="footer-banner">
-                Style Plan It.
-            </div>
-            <div class="social-icons">
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-linkedin"></i></a>
-                <a href="#"><i class="far fa-envelope"></i></a>
-            </div>
-             <p style="font-size: 0.7rem; color: #999; margin-top: 30px;">&copy; 2026 StylePlanIt. Toronto.</p>
-        </div>
-    </footer>
+    <footer data-component="footer"></footer>
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@4.0.0/dist/jquery.min.js"></script>
+    <script src="js/loader.js"></script>
     <script src="js/main.js" defer></script>
     <script src="js/csv-reader.js" defer></script>
     <script src="js/services.js" defer></script>

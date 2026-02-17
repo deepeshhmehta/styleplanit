@@ -35,9 +35,12 @@ This document provides a summary of the StylePlanIt website project for context 
 *   **File Structure:**
     *   `index.html`: The main homepage.
     *   `styles/styles.css`: All styles for the project.
-    *   `js/main.js`: Contains JavaScript for the mobile menu and hero slideshow.
+    *   `js/main.js`: Contains JavaScript for the mobile menu (using event delegation) and hero slideshow.
     *   `js/services.js`: Handles the tab switching and card expansion functionality on the services page.
-    *   `js/csv-reader.js`: A JavaScript file to read the CSV file and populate the content.
+    *   `js/csv-reader.js`: A JavaScript file to read the CSV file and populate the content. It triggers after components are loaded.
+    *   `js/loader.js`: A specialized script that dynamically injects reusable HTML components into the page.
+    *   `components/header.html`: The common navigation bar component.
+    *   `components/footer.html`: The common footer component.
     *   `services.html`: A dedicated page for the detailed service menu.
     *   `configs/config.csv`: A CSV file to store all the configurable text and links.
     *   `configs/services.csv`: A CSV file to store the data for the services.
