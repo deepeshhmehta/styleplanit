@@ -66,5 +66,6 @@ The website utilizes a streamlined, atomic data architecture optimized for perfo
 ## 7. Development & Safety
 
 *   **Version Control:** Active development follows a `feature/branching` model (e.g., `feature/google-form-subscription`).
-*   **Local Security:** `.env.asana` and sensitive tokens are strictly ignored by `.gitignore`.
+*   **Local Security:** `.env.asana` and sensitive tokens are strictly ignored by `.gitignore`. 
+    *   **AI Protocol:** AI assistants must NEVER read or output the contents of `.env.asana`. To interact with the Asana API, use a subshell to source the token directly into the command (e.g., `(source .env.asana && curl -H "Authorization: Bearer $ASANA_PAT" ...)`). This ensures the token remains invisible to logs and outputs.
 *   **Data Integrity:** All fetch operations default to safe empty arrays `[]` upon dual-source failure to prevent application crashes.
