@@ -3,7 +3,7 @@
  */
 const Utils = {
     /**
-     * Robust CSV parser that handles quoted fields containing commas
+     * Robust CSV parser (kept for local processing by other tools if needed)
      */
     parseCSV: function(data) {
         const lines = data.split('\n').filter(line => line.trim() !== '');
@@ -52,7 +52,6 @@ const Utils = {
     applyConfig: function(config) {
         if (!config || Object.keys(config).length === 0) return;
 
-        // Text and Links
         document.querySelectorAll('[text-config-key]').forEach(element => {
             const key = element.getAttribute('text-config-key');
             if (config[key] !== undefined) element.textContent = config[key];
@@ -68,13 +67,11 @@ const Utils = {
             if (config[key] !== undefined) element.placeholder = config[key];
         });
 
-        // Image Sources
         document.querySelectorAll('[src-config-key]').forEach(element => {
             const key = element.getAttribute('src-config-key');
             if (config[key] !== undefined) element.src = config[key];
         });
 
-        // Background Images
         document.querySelectorAll('[style-bg-config-key]').forEach(element => {
             const key = element.getAttribute('style-bg-config-key');
             if (config[key] !== undefined) {
@@ -82,7 +79,6 @@ const Utils = {
             }
         });
 
-        // Meta Tags Optimization
         if (config['PAGE_DESCRIPTION']) {
             this.updateMeta('description', config['PAGE_DESCRIPTION']);
             this.updateMeta('og:description', config['PAGE_DESCRIPTION'], 'property');
@@ -95,9 +91,6 @@ const Utils = {
         }
     },
 
-    /**
-     * Helper to update meta tags
-     */
     updateMeta: function(name, content, attr = 'name') {
         let el = document.querySelector(`meta[${attr}="${name}"]`);
         if (!el) {
@@ -110,165 +103,71 @@ const Utils = {
 };
 
 /**
- * Data - Centralized data provider with atomic JSON loading and CSV fallbacks
+ * Data - Centralized data provider using atomic site-data.json
  */
 const Data = {
     masterData: null,
 
     /**
-     * Load the master JSON file once
+     * Load the master JSON file
      */
     loadMasterData: async function() {
         if (this.masterData) return this.masterData;
         
         try {
-            const response = await fetch('configs/site-data.json?v=' + new Date().getTime());
-            if (response.ok) {
-                this.masterData = await response.json();
+            // Check cache first
+            const cached = localStorage.getItem('site_data_cache');
+            if (cached) {
+                this.masterData = JSON.parse(cached);
+                // Background refresh
+                this.refreshMasterData();
                 return this.masterData;
             }
+            
+            return await this.refreshMasterData();
         } catch (e) {
-            console.warn("Could not load master JSON, falling back to individual CSVs", e);
-        }
-        return null;
-    },
-
-    /**
-     * Helper to build Google Sheets URL from CONFIG
-     */
-    getPrimaryUrl: function(type) {
-        return `https://docs.google.com/spreadsheets/d/${CONFIG.SPREADSHEET_ID}/pub?gid=${CONFIG.GIDS[type]}&output=csv`;
-    },
-
-    /**
-     * Check the version from the dedicated version sheet or master JSON
-     */
-    checkVersion: async function() {
-        const master = await this.loadMasterData();
-        let newVersion = null;
-
-        if (master && master.version && master.version.length > 0) {
-            newVersion = master.version[0].value || master.version[0].version;
-        } else {
-            try {
-                const data = await this.loadFromNetwork('version', null);
-                if (data && data.length > 0) {
-                    const versionObj = data.find(item => item.key === 'VERSION' || item.version);
-                    newVersion = versionObj ? (versionObj.value || versionObj.version) : null;
-                }
-            } catch (e) {
-                // Silently fail
-            }
-        }
-
-        if (newVersion) {
-            const oldVersion = localStorage.getItem('app_version');
-            if (oldVersion && oldVersion !== newVersion) {
-                Object.keys(CONFIG.GIDS).forEach(key => {
-                    if (key !== 'version') localStorage.removeItem(`cached_${key}`);
-                });
-            }
-            localStorage.setItem('app_version', newVersion);
-            this.currentVersion = newVersion;
+            console.error("Critical error loading site data", e);
+            return null;
         }
     },
 
     /**
-     * Perform network loading with manual timeout for better compatibility
+     * Fetch fresh JSON from repository
      */
-    fetchWithTimeout: async function(url, timeout) {
-        const controller = new AbortController();
-        const id = setTimeout(() => controller.abort(), timeout);
+    refreshMasterData: async function() {
         try {
-            const response = await fetch(url, { signal: controller.signal });
-            clearTimeout(id);
-            return response;
-        } catch (error) {
-            clearTimeout(id);
-            throw error;
+            const response = await fetch(`${CONFIG.DATA_PATH}?v=${new Date().getTime()}`);
+            if (response.ok) {
+                const freshData = await response.json();
+                
+                // Version check logic
+                if (freshData.version && freshData.version.length > 0) {
+                    const newVersion = freshData.version[0].value || freshData.version[0].version;
+                    localStorage.setItem('app_version', newVersion);
+                }
+
+                localStorage.setItem('site_data_cache', JSON.stringify(freshData));
+                this.masterData = freshData;
+                return freshData;
+            }
+        } catch (e) {
+            console.warn("Failed to refresh site data from server", e);
         }
+        return this.masterData;
     },
 
     /**
-     * Fetch logic with version control and selective caching
+     * Simplified fetch logic
      */
     fetch: async function(type) {
-        // 1. Try Master JSON first
         const master = await this.loadMasterData();
-        if (master && master[type]) {
-            return master[type];
-        }
-
-        // 2. Individual fallback
-        const cacheKey = `cached_${type}`;
-        const shouldCache = (type !== 'services');
-
-        // Check for ?nocache=true query parameter
-        const urlParams = new URLSearchParams(window.location.search);
-        const bypassCache = urlParams.get('nocache') === 'true';
-
-        if (shouldCache && !bypassCache) {
-            const cachedData = localStorage.getItem(cacheKey);
-            // If we have cached data, return it immediately
-            if (cachedData && cachedData !== '[]') {
-                return JSON.parse(cachedData);
-            }
-        }
-
-        // Otherwise load from network
-        return await this.loadFromNetwork(type, shouldCache ? cacheKey : null);
+        return (master && master[type]) ? master[type] : [];
     },
 
     /**
-     * Perform network loading
+     * Backward compatibility checkVersion (logic moved to refreshMasterData)
      */
-    loadFromNetwork: async function(type, cacheKey) {
-        try {
-            const url = this.getPrimaryUrl(type);
-            const response = await this.fetchWithTimeout(url, CONFIG.SETTINGS.FETCH_TIMEOUT);
-            if (!response.ok) throw new Error(`Primary source failed`);
-            const text = await response.text();
-            const data = Utils.parseCSV(text);
-            
-            // If primary source returned no data (likely an error page), trigger fallback
-            if (!data || data.length === 0) {
-                throw new Error(`Primary source returned empty data`);
-            }
-            
-            if (cacheKey) {
-                localStorage.setItem(cacheKey, JSON.stringify(data));
-            }
-            return data;
-        } catch (error) {
-            try {
-                const response = await fetch(CONFIG.BACKUP_PATHS[type]);
-                if (!response.ok) throw new Error(`Backup source failed`);
-                const text = await response.text();
-                const data = Utils.parseCSV(text);
-                return data;
-            } catch (backupError) {
-                console.error(`Both sources for ${type} failed:`, backupError);
-                return [];
-            }
-        }
-    },
-
-    /**
-     * Silently update the cache in the background (No longer handles version)
-     */
-    refreshCache: async function(type, cacheKey) {
-        try {
-            const url = this.getPrimaryUrl(type);
-            const response = await this.fetchWithTimeout(url, CONFIG.SETTINGS.BACKGROUND_REFRESH_TIMEOUT);
-            if (response.ok) {
-                const text = await response.text();
-                const data = Utils.parseCSV(text);
-                if (data && data.length > 0) {
-                    localStorage.setItem(cacheKey, JSON.stringify(data));
-                }
-            }
-        } catch (e) {
-            // Fail silently
-        }
+    checkVersion: async function() {
+        await this.loadMasterData();
     }
 };
