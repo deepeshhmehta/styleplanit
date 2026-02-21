@@ -5,6 +5,7 @@ const App = {
   init: function (config) {
     this.initNavigation();
     this.initHero(config);
+    this.bindReviewToggle();
     if ($("#team-container").length > 0) {
       this.initTeam();
     }
@@ -161,10 +162,37 @@ const App = {
     reviews.forEach((review) => {
       container.append(`
                 <div class="review-card">
+                    <span class="review-author">${review.author}</span>
                     <p>"${review.text.replace(/"/g, "")}"</p>
-                    <span>${review.author}</span>
                 </div>
             `);
+    });
+  },
+
+  // Added global review toggle (consistent with initNavigation pattern)
+  bindReviewToggle: function() {
+    $(document).on("click", ".review-card", function() {
+        const card = $(this);
+        const isExpanding = !card.hasClass("expanded");
+        card.toggleClass("expanded");
+        
+        const navHeight = $("nav").outerHeight() || 0;
+        const extraPadding = CONFIG.SETTINGS.SCROLL_OFFSET;
+
+        if (isExpanding) {
+            setTimeout(() => {
+                $("html, body").animate({
+                    scrollTop: card.offset().top - navHeight - extraPadding
+                }, 400);
+            }, 100);
+        } else {
+            // Reset internal scroll when collapsing
+            card.scrollTop(0);
+            // Smooth scroll window back to top of card if it was scrolled far down
+            $("html, body").animate({
+                scrollTop: card.offset().top - navHeight - extraPadding
+            }, 200);
+        }
     });
   },
 

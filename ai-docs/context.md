@@ -68,4 +68,13 @@ The website utilizes a streamlined, atomic data architecture optimized for perfo
 *   **Version Control:** Active development follows a `feature/branching` model (e.g., `feature/google-form-subscription`).
 *   **Local Security:** `.env.asana` and sensitive tokens are strictly ignored by `.gitignore`. 
     *   **AI Protocol:** AI assistants must NEVER read or output the contents of `.env.asana`. To interact with the Asana API, use a subshell to source the token directly into the command (e.g., `(source .env.asana && curl -H "Authorization: Bearer $ASANA_PAT" ...)`). This ensures the token remains invisible to logs and outputs.
+    *   **Asana Workflow:**
+        1.  **Project Identification:** Identify the "Style Plan-It Launch Plan" project (`gid: 1212636326772928`).
+        2.  **Secure Task Management:** Use `curl` to fetch tasks/subtasks and update their status (e.g., `setParent`, `PUT` status).
+        3.  **Mandatory User Confirmation:** An AI assistant must NEVER mark a task as complete without the user's explicit confirmation of the implementation.
+    *   **Development Lifecycle:**
+        1.  **Research & Strategy:** Map the codebase and propose a plan before implementation.
+        2.  **Surgical Execution:** Apply precise changes that follow "Luxury Minimalist" aesthetics.
+        3.  **User Verification:** Present changes to the user for live testing and feedback.
+        4.  **Finalization:** Commit with a meaningful message and push only after the user determines the feature is production-ready.
 *   **Data Integrity:** All fetch operations default to safe empty arrays `[]` upon dual-source failure to prevent application crashes.

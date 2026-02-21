@@ -312,19 +312,62 @@ nav > .container > .logo {
 
 
 /* --- 6. REVIEWS SECTION --- */
+#reviews {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 #reviews .reviews-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 40px;
-    max-height: 500px;
-    overflow-y: auto;
-    padding-right: 20px; /* Add some padding to avoid scrollbar overlap */
 }
 
 #reviews .review-card {
     background: var(--cream);
-    padding: 40px;
+    padding: 60px 40px;
     border: 1px solid var(--border-color);
+    position: relative;
+    max-height: 400px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: max-height 0.8s ease, box-shadow 0.3s ease;
+}
+
+#reviews .review-card.expanded {
+    max-height: 80vh;
+    overflow-y: auto;
+    background: var(--white);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+/* Luxury Fade-out for long collapsed reviews */
+#reviews .review-card:not(.expanded)::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 150px;
+    background: linear-gradient(transparent, var(--cream));
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+#reviews .review-card.expanded::after {
+    opacity: 0;
+}
+
+#reviews .review-card .review-author {
+    display: block;
+    font-family: var(--font-secondary);
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
 }
 
 #reviews .review-card p {
@@ -332,15 +375,10 @@ nav > .container > .logo {
     font-size: 1.5rem;
     font-style: italic;
     line-height: 1.4;
-    margin-bottom: 30px;
 }
 
-#reviews .review-card span {
-    font-family: var(--font-secondary);
-    font-weight: 500;
-    text-transform: uppercase;
-    font-size: 0.8rem;
-    letter-spacing: 2px;
+#reviews .review-card.expanded p {
+    margin-bottom: 30px;
 }
 
 /* --- 7. VELVET ROPE (HNI) --- */
@@ -429,7 +467,6 @@ footer {
     .hero-content-box h1 { font-size: 2rem; }
     .customer-layers { grid-template-columns: 1fr; gap: 20px; }
     .container { padding: 0 25px; }
-    #reviews .reviews-grid { grid-template-columns: 1fr; }
     .subscribe-form { flex-direction: column; }
     .subscribe-form .btn { border-left: 1px solid var(--black); border-top: none;}
     .footer-banner { font-size: 2.5rem; }
