@@ -5,6 +5,7 @@ const App = {
   init: function (config) {
     this.initNavigation();
     this.initHero(config);
+    this.initSubscribe(config);
     if ($("#reviews-container").length > 0) {
       this.initReviews();
     }
@@ -162,6 +163,35 @@ const App = {
                     <span>${review.author}</span>
                 </div>
             `);
+    });
+  },
+
+  initSubscribe: function (config) {
+    const form = $("#subscribe-form");
+    if (form.length === 0) return;
+
+    form.on("submit", function (e) {
+      const email = $("#subscriber-email").val();
+      const actionUrl = config.SUBSCRIBE_FORM_ACTION;
+      const entryId = config.SUBSCRIBE_FORM_ENTRY_ID;
+
+      if (!actionUrl || actionUrl.includes("YOUR_FORM_ID")) {
+        console.warn("Google Form Action URL not configured.");
+        return;
+      }
+
+      // Create temporary form for submission to iframe
+      const tempForm = $(`<form action="${actionUrl}" method="POST" target="hidden_iframe" style="display:none;"></form>`);
+      tempForm.append(`<input type="text" name="${entryId}" value="${email}">`);
+      $("body").append(tempForm);
+      
+      tempForm.submit();
+      tempForm.remove();
+
+      // UI Feedback
+      form.fadeOut(function() {
+        $("#subscribe-success").fadeIn();
+      });
     });
   },
 };

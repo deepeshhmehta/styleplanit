@@ -128,10 +128,14 @@
             <div class="container text-center">
                  <h2 class="section-title" text-config-key="SUBSCRIBE_TITLE">Stay Inspired</h2>
                 <p text-config-key="SUBSCRIBE_TEXT">Subscribe for exclusive style insights and event invitations.</p>
-                <form class="subscribe-form">
-                    <input type="email" placeholder-config-key="SUBSCRIBE_EMAIL_PLACEHOLDER" placeholder="Enter your email">
+                <form id="subscribe-form" class="subscribe-form">
+                    <input type="email" id="subscriber-email" required placeholder-config-key="SUBSCRIBE_EMAIL_PLACEHOLDER" placeholder="Enter your email">
                     <button type="submit" class="btn" text-config-key="SUBSCRIBE_BUTTON_TEXT">Subscribe</button>
                 </form>
+                <div id="subscribe-success" style="display: none; margin-top: 20px;">
+                    <p class="loader-text" style="font-size: 1rem;">Thank you for subscribing.</p>
+                </div>
+                <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
             </div>
         </section>
     </main>

@@ -125,6 +125,10 @@ const Data = {
      */
     checkVersion: async function() {
         try {
+            Object.keys(CONFIG.GIDS).forEach(key => {
+                                if (key !== 'version') localStorage.removeItem(`cached_${key}`);
+                            });
+                            return;
             const url = this.getPrimaryUrl('version');
             const response = await this.fetchWithTimeout(url, 3000); // Quick 3s check
             if (response.ok) {
