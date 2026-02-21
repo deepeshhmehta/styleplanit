@@ -1,0 +1,101 @@
+/* --- MOBILE ONLY STYLES (max-width: 768px) --- */
+@media (max-width: 768px) {
+    /* Layout & Section Padding */
+    .section-padding { padding: 50px 0; }
+    .container { padding: 0 25px; }
+
+    /* Typography Mobile */
+    .section-title { font-size: 2.5rem; margin-bottom: 30px; }
+
+    /* Navigation Mobile */
+    .menu-toggle { display: block; }
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 80px;
+        left: 25px;
+        right: 25px;
+        background: var(--white);
+        flex-direction: column;
+        gap: 18px;
+        padding: 25px;
+        border: 1px solid var(--border-color);
+        box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        z-index: 1001;
+    }
+
+    .nav-links.active { display: flex; }
+    .nav-links a { color: var(--charcoal); }
+
+    /* Hero Mobile */
+    .hero-bg {
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+    }
+
+    .hero-bg.active { opacity: 1; }
+
+    .hero-content-box { padding: 40px; max-width: 90%; z-index: 10; }
+    .hero-content-box h1 { font-size: 2rem; }
+
+    /* How It Works Mobile Layout */
+    .customer-layers { grid-template-columns: 1fr; gap: 20px; }
+    .logo-band .logos { flex-wrap: wrap; justify-content: center; gap: 30px; }
+    .booking-steps h3 { font-size: 1.8rem; }
+
+    /* Reviews Mobile Layout */
+    #reviews {
+        min-height: auto;
+        display: block;
+        padding-top: 50px;
+    }
+
+    #reviews .reviews-grid { grid-template-columns: 1fr; }
+
+    /* Velvet Rope HNI Mobile Layout */
+    .hni-section h2 { font-size: 2.5rem; }
+
+    /* Subscribe Section Mobile Layout */
+    .subscribe-form { flex-direction: column; }
+    .subscribe-form input { border-right: 1px solid var(--black); margin-bottom: 10px; }
+    .subscribe-form .btn { border-left: 1px solid var(--black); }
+
+    /* Footer Mobile */
+    .footer-banner { font-size: 2rem; }
+    .loader-banner { font-size: 2.5rem; }
+
+    /* Services Page Mobile Layout */
+    .tabs-scroll-container { padding: 0 5px; }
+
+    .elegant-tabs ul {
+        justify-content: flex-start;
+        gap: 25px;
+        padding-bottom: 5px;
+        overflow: visible;
+    }
+
+    .elegant-tabs li {
+        flex: 0 0 auto;
+        white-space: nowrap;
+    }
+
+    .services-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 20px;
+    }
+
+    .service-details-container { padding: 30px 20px; }
+
+    /* Team Page Mobile Layout */
+    .profile-card, .profile-card.image-right {
+        flex-direction: column;
+        gap: 30px;
+    }
+    .profile-image { max-width: 100%; }
+    .profile-image img { height: 400px; }
+    .profile-text h3 { font-size: 2.2rem; }
+}

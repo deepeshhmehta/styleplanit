@@ -39,6 +39,11 @@ This document provides a summary of the StylePlanIt website project for context 
     *   `js/app.js`: Application-specific UI logic (Services, Team, Hero, Reviews).
     *   `js/loader.js`: Manages component injection and the "Luxury Minimalist" fade-out loading screen.
     *   `components/`: Reusable HTML snippets (`header.html`, `footer.html`).
+    *   `styles/`: Modular CSS structure:
+        *   `common.css`: Reset, variables, typography, and shared components.
+        *   `desktop.css`: High-end editorial layouts and desktop-specific grids.
+        *   `mobile.css`: Responsive overrides and mobile navigation.
+        *   `styles.css`: (Deprecated) Entry point for backward compatibility.
     *   `configs/`: Local CSV backups for offline/failover resilience.
     *   `test.sh`: Automated health check script for endpoint verification.
 

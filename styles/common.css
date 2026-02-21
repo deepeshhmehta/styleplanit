@@ -1,0 +1,381 @@
+/* --- 1. LUXURY RESET & VARIABLES --- */
+:root {
+    --primary-accent: #0c4524;
+    --primary-accent-dark: #547c65;
+    --black: #0F0F0F;
+    --charcoal: #2A2A2A;
+    --cream: #e6f0e7;
+    --white: #ffffff;
+    --border-color: rgba(0,0,0,0.08);
+    --font-primary: 'Cormorant Garamond', serif;
+    --font-secondary: 'Montserrat', sans-serif;
+    --border-radius-pill: 200px;
+    --primary-accent-rgb: 12, 69, 36;
+    --cream-rgb: 230, 240, 231;
+    --grey: #aaa;
+    --logo-band-bg: #abc5ae;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+body {
+    font-family: var(--font-secondary);
+    color: var(--charcoal);
+    background-color: var(--cream);
+    line-height: 1.8;
+    font-weight: 300;
+    overflow-x: hidden;
+}
+
+h1, h2, h3, h4 {
+    font-family: var(--font-primary);
+    font-weight: 400;
+    color: var(--black);
+    line-height: 1.1;
+}
+
+/* --- 2. TYPOGRAPHY & LAYOUT UTILITIES --- */
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+.section-padding { padding: 75px 0; }
+.text-center { text-align: center; }
+
+.section-subtitle {
+    font-family: var(--font-secondary);
+    font-size: 0.7rem;
+    color: var(--primary-accent);
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.section-title {
+    font-size: 3.5rem;
+    margin-bottom: 40px;
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: 18px 40px;
+    background-color: transparent;
+    color: var(--black);
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    border: 1px solid var(--black);
+    transition: all 0.4s ease;
+    text-decoration: none;
+    font-weight: 500;
+    border-radius: var(--border-radius-pill);
+}
+
+.btn:hover {
+    background: var(--primary-accent-dark);
+    color: var(--white);
+}
+
+.btn-primary-accent {
+    border-color: var(--primary-accent);
+    color: var(--primary-accent);
+}
+
+.btn-primary-accent:hover {
+    background-color: var(--primary-accent);
+    color: var(--white);
+}
+
+/* --- 3. COMMON COMPONENTS --- */
+
+/* Navigation Base */
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(var(--primary-accent-rgb), 0.95);
+    color: var(--white);
+    padding: 25px 0;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(0,0,0,0.03);
+}
+
+nav .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-family: var(--font-primary);
+    font-weight: 400;
+    letter-spacing: 1px;
+    color: var(--white);
+    text-decoration: none;
+}
+
+nav > .container > .logo {
+    font-size: 1.5rem;
+}
+
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: var(--white);
+}
+
+.nav-links { display: flex; gap: 50px; }
+.nav-links a { 
+    font-size: 0.75rem; 
+    text-transform: uppercase; 
+    letter-spacing: 2px;
+    color: var(--white);
+    position: relative;
+    text-decoration: none;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 1px;
+    bottom: -5px;
+    left: 0;
+    background-color: var(--primary-accent);
+    transition: width 0.3s;
+}
+
+.nav-links a:hover::after { width: 100%; }
+
+/* Footer Base */
+footer {
+    padding: 80px 0;
+    border-top: 1px solid var(--border-color);
+    background: rgb(var(--primary-accent-rgb));
+    color: var(--white);
+}
+
+.footer-banner {
+    font-family: var(--font-primary);
+    font-size: 9rem;
+    font-weight: 600;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.social-icons { text-align: center; }
+.social-icons a {
+    color: var(--white);
+    margin: 0 15px;
+    font-size: 1.1rem;
+    transition: 0.3s;
+    text-decoration: none;
+}
+
+.social-icons a:hover { color: var(--black); }
+
+/* Site Loader Base */
+.loader-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--primary-accent);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.8s ease, visibility 0.8s;
+}
+
+.loader-overlay.fade-out {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.loader-content {
+    text-align: center;
+    width: 100%;
+}
+
+.loader-banner {
+    font-family: var(--font-primary);
+    font-size: 9rem;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 40px;
+    line-height: 1;
+}
+
+.loader-spinner {
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 1px solid var(--white);
+    border-radius: 50%;
+    animation: spin 1.2s linear infinite;
+    margin: 0 auto;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* --- 4. SHARED COMPONENTS --- */
+
+/* Reviews Component */
+#reviews .reviews-grid {
+    display: grid;
+    gap: 40px;
+}
+
+#reviews .review-card {
+    background: var(--cream);
+    padding: 60px 40px;
+    border: 1px solid var(--border-color);
+    position: relative;
+    max-height: 400px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: max-height 0.8s ease, box-shadow 0.3s ease;
+}
+
+#reviews .review-card.expanded {
+    max-height: 80vh;
+    overflow-y: auto;
+    background: var(--white);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+#reviews .review-card:not(.expanded)::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 150px;
+    background: linear-gradient(transparent, var(--cream));
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+#reviews .review-card.expanded::after { opacity: 0; }
+
+#reviews .review-card .review-author {
+    display: block;
+    font-family: var(--font-secondary);
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+}
+
+#reviews .review-card p {
+    font-family: var(--font-primary);
+    font-size: 1.5rem;
+    font-style: italic;
+    line-height: 1.4;
+}
+
+#reviews .review-card.expanded p { margin-bottom: 30px; }
+
+/* Service Card Component */
+.service-card {
+    border: 1px solid var(--border-color);
+    padding: 40px;
+    text-align: center;
+    transition: all 0.3s ease;
+    background: var(--white);
+}
+
+.service-card.active { background: var(--primary-accent); }
+.service-card.active > * { color: var(--white); }
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.07);
+}
+
+.service-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    margin-bottom: 20px;
+}
+
+.service-card h3 { font-size: 1.8rem; margin-bottom: 15px; }
+.service-card p { font-size: 0.9rem; margin-bottom: 20px; }
+.price-tag { font-weight: 500; color: var(--primary-accent); }
+
+.service-details-container {
+    margin-top: 40px;
+    padding: 40px;
+    border: 1px solid var(--border-color);
+    background: var(--white);
+    display: none;
+}
+
+/* Velvet Rope HNI Component */
+.hni-section {
+    background-color: var(--primary-accent);
+    color: var(--white);
+    text-align: center;
+}
+
+.hni-section h2 { color: var(--white); margin-bottom: 30px; }
+
+.hni-section p { 
+    color: var(--grey); 
+    margin-bottom: 50px; 
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hni-section .btn {
+    border-color: var(--white);
+    color: var(--white);
+}
+
+.hni-section .btn:hover {
+    background-color: var(--white);
+    color: var(--primary-accent);
+}
+
+/* Subscribe Section Component */
+.subscribe-form {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.subscribe-form input {
+    width: 100%;
+    padding: 18px 25px;
+    border: 1px solid var(--black);
+    font-family: var(--font-secondary);
+    font-size: 0.8rem;
+    background: transparent;
+}
+
+.subscribe-form .btn {
+    border-radius: 0px;
+    border-left: none;
+}
