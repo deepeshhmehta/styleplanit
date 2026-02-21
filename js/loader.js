@@ -2,7 +2,10 @@
  * loader.js - Handles dynamic loading of HTML components and app initialization
  */
 async function loadComponents() {
-    // 0. Check version immediately to decide if cache needs flushing
+    // 0. Prevent scrolling while loading
+    document.body.style.overflow = 'hidden';
+
+    // 1. Check version immediately to decide if cache needs flushing
     if (typeof Data !== 'undefined') {
         await Data.checkVersion();
     }
@@ -11,6 +14,9 @@ async function loadComponents() {
     
     const loadPromises = Array.from(components).map(async (element) => {
         const componentName = element.getAttribute('data-component');
+        // Skip the static loader if it was accidentally tagged
+        if (componentName === 'loader') return;
+
         try {
             const response = await fetch(`components/${componentName}.html`);
             if (!response.ok) throw new Error(`Failed to load ${componentName}`);
@@ -41,10 +47,13 @@ async function loadComponents() {
     // 3. Signal that everything is ready
     document.dispatchEvent(new CustomEvent('appReady'));
 
-    // 4. Hide loader
+    // 4. Hide loader and restore scrolling
     const loader = document.getElementById('site-loader');
     if (loader) {
         loader.classList.add('fade-out');
+        setTimeout(() => {
+            document.body.style.overflow = '';
+        }, 800); // Match transition duration in CSS
     }
 }
 
