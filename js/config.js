@@ -7,13 +7,15 @@ const CONFIG = {
         version: '2024034979',
         config: '1515187439',
         services: '439228131',
-        reviews: '1697858749'
+        reviews: '1697858749',
+        team: '1489131428' // Placeholder GID
     },
     BACKUP_PATHS: {
         version: 'configs/version.csv',
         config: 'configs/config.csv',
         services: 'configs/services.csv',
-        reviews: 'configs/reviews.csv'
+        reviews: 'configs/reviews.csv',
+        team: 'configs/team.csv'
     },
     SETTINGS: {
         FETCH_TIMEOUT: 5000,

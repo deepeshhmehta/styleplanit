@@ -125,30 +125,24 @@ const Data = {
      */
     checkVersion: async function() {
         try {
-            const url = this.getPrimaryUrl('version');
-            const response = await this.fetchWithTimeout(url, 3000); // Quick 3s check
-            if (response.ok) {
-                const text = await response.text();
-                const data = Utils.parseCSV(text);
-                if (data && data.length > 0) {
-                    const versionObj = data.find(item => item.key === 'VERSION' || item.version);
-                    const newVersion = versionObj ? (versionObj.value || versionObj.version) : null;
-                    
-                    if (newVersion) {
-                        const oldVersion = localStorage.getItem('app_version');
-                        if (oldVersion && oldVersion !== newVersion) {
-                            console.log(`New version detected (${newVersion}). Flushing cache...`);
-                            Object.keys(CONFIG.GIDS).forEach(key => {
-                                if (key !== 'version') localStorage.removeItem(`cached_${key}`);
-                            });
-                        }
-                        localStorage.setItem('app_version', newVersion);
-                        this.currentVersion = newVersion;
+            const data = await this.loadFromNetwork('version', null);
+            if (data && data.length > 0) {
+                const versionObj = data.find(item => item.key === 'VERSION' || item.version);
+                const newVersion = versionObj ? (versionObj.value || versionObj.version) : null;
+                
+                if (newVersion) {
+                    const oldVersion = localStorage.getItem('app_version');
+                    if (oldVersion && oldVersion !== newVersion) {
+                        Object.keys(CONFIG.GIDS).forEach(key => {
+                            if (key !== 'version') localStorage.removeItem(`cached_${key}`);
+                        });
                     }
+                    localStorage.setItem('app_version', newVersion);
+                    this.currentVersion = newVersion;
                 }
             }
         } catch (e) {
-            // Fail silently, use existing cache
+            // Silently fail, loadFromNetwork already handles basic errors
         }
     },
 
@@ -175,7 +169,11 @@ const Data = {
         const cacheKey = `cached_${type}`;
         const shouldCache = (type !== 'services');
 
-        if (shouldCache) {
+        // Check for ?nocache=true query parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const bypassCache = urlParams.get('nocache') === 'true';
+
+        if (shouldCache && !bypassCache) {
             const cachedData = localStorage.getItem(cacheKey);
             // If we have cached data, return it immediately
             if (cachedData && cachedData !== '[]') {
@@ -198,7 +196,12 @@ const Data = {
             const text = await response.text();
             const data = Utils.parseCSV(text);
             
-            if (data && data.length > 0 && cacheKey) {
+            // If primary source returned no data (likely an error page), trigger fallback
+            if (!data || data.length === 0) {
+                throw new Error(`Primary source returned empty data`);
+            }
+            
+            if (cacheKey) {
                 localStorage.setItem(cacheKey, JSON.stringify(data));
             }
             return data;

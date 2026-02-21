@@ -47,14 +47,16 @@ async function loadComponents() {
     // 3. Signal that everything is ready
     document.dispatchEvent(new CustomEvent('appReady'));
 
-    // 4. Hide loader and restore scrolling
-    const loader = document.getElementById('site-loader');
-    if (loader) {
-        loader.classList.add('fade-out');
-        setTimeout(() => {
-            document.body.style.overflow = '';
-        }, 800); // Match transition duration in CSS
-    }
+    // 4. Hide loader and restore scrolling (with 200ms delay to ensure rendering is stable)
+    setTimeout(() => {
+        const loader = document.getElementById('site-loader');
+        if (loader) {
+            loader.classList.add('fade-out');
+            setTimeout(() => {
+                document.body.style.overflow = '';
+            }, 800); // Match transition duration in CSS
+        }
+    }, 200);
 }
 
 document.addEventListener('DOMContentLoaded', loadComponents);
