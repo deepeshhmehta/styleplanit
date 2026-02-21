@@ -71,10 +71,26 @@ def main():
         else:
             print(f"  ❌ Skipping {key} due to fetch failure.")
 
-    # 5. Write to JSON
+    # 5. Write to JSON and Check for Changes
     json_path = "configs/site-data.json"
+    new_data_str = json.dumps(master_data, indent=2)
+    
+    existing_data_str = ""
+    if os.path.exists(json_path):
+        with open(json_path, 'r') as f:
+            existing_data_str = f.read()
+
+    if new_data_str == existing_data_str:
+        print("🙌 No changes detected in Google Sheets. Skipping commit.")
+        # Restore original state before exiting
+        if original_branch != "main":
+            run_command(f"git checkout {original_branch}")
+        if has_changes:
+            run_command("git stash pop")
+        return
+
     with open(json_path, 'w') as f:
-        json.dump(master_data, f, indent=2)
+        f.write(new_data_str)
     print(f"✅ Data consolidated into {json_path}")
 
     # 6. Commit
