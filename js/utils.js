@@ -110,9 +110,29 @@ const Utils = {
 };
 
 /**
- * Data - Centralized data provider with fallback mechanism and caching
+ * Data - Centralized data provider with atomic JSON loading and CSV fallbacks
  */
 const Data = {
+    masterData: null,
+
+    /**
+     * Load the master JSON file once
+     */
+    loadMasterData: async function() {
+        if (this.masterData) return this.masterData;
+        
+        try {
+            const response = await fetch('configs/site-data.json?v=' + new Date().getTime());
+            if (response.ok) {
+                this.masterData = await response.json();
+                return this.masterData;
+            }
+        } catch (e) {
+            console.warn("Could not load master JSON, falling back to individual CSVs", e);
+        }
+        return null;
+    },
+
     /**
      * Helper to build Google Sheets URL from CONFIG
      */
@@ -121,28 +141,35 @@ const Data = {
     },
 
     /**
-     * Check the version from the dedicated version sheet
+     * Check the version from the dedicated version sheet or master JSON
      */
     checkVersion: async function() {
-        try {
-            const data = await this.loadFromNetwork('version', null);
-            if (data && data.length > 0) {
-                const versionObj = data.find(item => item.key === 'VERSION' || item.version);
-                const newVersion = versionObj ? (versionObj.value || versionObj.version) : null;
-                
-                if (newVersion) {
-                    const oldVersion = localStorage.getItem('app_version');
-                    if (oldVersion && oldVersion !== newVersion) {
-                        Object.keys(CONFIG.GIDS).forEach(key => {
-                            if (key !== 'version') localStorage.removeItem(`cached_${key}`);
-                        });
-                    }
-                    localStorage.setItem('app_version', newVersion);
-                    this.currentVersion = newVersion;
+        const master = await this.loadMasterData();
+        let newVersion = null;
+
+        if (master && master.version && master.version.length > 0) {
+            newVersion = master.version[0].value || master.version[0].version;
+        } else {
+            try {
+                const data = await this.loadFromNetwork('version', null);
+                if (data && data.length > 0) {
+                    const versionObj = data.find(item => item.key === 'VERSION' || item.version);
+                    newVersion = versionObj ? (versionObj.value || versionObj.version) : null;
                 }
+            } catch (e) {
+                // Silently fail
             }
-        } catch (e) {
-            // Silently fail, loadFromNetwork already handles basic errors
+        }
+
+        if (newVersion) {
+            const oldVersion = localStorage.getItem('app_version');
+            if (oldVersion && oldVersion !== newVersion) {
+                Object.keys(CONFIG.GIDS).forEach(key => {
+                    if (key !== 'version') localStorage.removeItem(`cached_${key}`);
+                });
+            }
+            localStorage.setItem('app_version', newVersion);
+            this.currentVersion = newVersion;
         }
     },
 
@@ -166,6 +193,13 @@ const Data = {
      * Fetch logic with version control and selective caching
      */
     fetch: async function(type) {
+        // 1. Try Master JSON first
+        const master = await this.loadMasterData();
+        if (master && master[type]) {
+            return master[type];
+        }
+
+        // 2. Individual fallback
         const cacheKey = `cached_${type}`;
         const shouldCache = (type !== 'services');
 

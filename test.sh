@@ -40,6 +40,7 @@ test_endpoint "index.html"
 test_endpoint "services.html"
 test_endpoint "meet-the-team.html"
 test_endpoint "styles/styles.css"
+test_endpoint "sync.sh"
 
 echo "--- Verifying Modular JS ---"
 test_endpoint "js/config.js"
@@ -56,6 +57,7 @@ test_endpoint "configs/version.csv"
 test_endpoint "configs/config.csv"
 test_endpoint "configs/services.csv"
 test_endpoint "configs/reviews.csv"
+test_endpoint "configs/site-data.json"
 
 echo "✨ All basic endpoint tests passed!"
 
