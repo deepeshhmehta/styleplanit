@@ -44,10 +44,12 @@ This document provides a summary of the StylePlanIt website project for context 
 
 ## 4. Data & Configuration Layer
 
-*   **Primary Source:** Google Sheets (Published to Web).
-*   **Optimization:** A dedicated `version` sheet is checked first. If the version matches `localStorage`, the site loads `config` and `reviews` instantly from cache.
-*   **Real-time Data:** `services` and `team` profiles are always loaded live to ensure accuracy.
-*   **Bypass Mechanism:** Appending `?nocache=true` to any URL forces a full network refresh, bypassing all local storage.
+The website utilizes a streamlined, atomic data architecture optimized for performance and maintainability.
+
+*   **Atomic Source:** All site data (config, services, reviews, team, version) is consolidated into a single `configs/site-data.json` file.
+*   **Sync Workflow:** Data is updated from Google Sheets via the `./sync.sh` (or `sync_data.py`) script. This script stashes local work, pulls from main, fetches all GIDs from Google Sheets, regenerates the master JSON, and commits the update locally.
+*   **Performance:** The site implements a **Stale-While-Revalidate** pattern. It loads instantly from `site_data_cache` in `localStorage` and performs a silent background refresh from the server to ensure future visits are up to date.
+*   **Resilience:** The repository version of `site-data.json` serves as the ultimate fallback, ensuring the site remains functional even if the Google Sheets API is unreachable.
 
 ## 5. SEO & Social Optimization
 
