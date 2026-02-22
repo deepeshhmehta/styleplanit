@@ -54,7 +54,7 @@ The website utilizes a streamlined, atomic data architecture optimized for perfo
 *   **Atomic Source:** All site data (config, services, reviews, team, version) is consolidated into a single `configs/site-data.json` file.
 *   **Sync Workflow:** Data is updated from Google Sheets via the `sync-styleplanit.command` tool in the root directory. 
     *   **User-Friendly Design:** The tool is double-clickable and searchable via macOS Spotlight. It automatically installs any missing dependencies (Homebrew, Git, Python 3) to ensure a seamless experience for non-technical users.
-    *   **Architecture:** The core synchronization logic is isolated in `scripts/sync_engine.py`.
+    *   **Architecture:** The core synchronization logic is isolated in `scripts/sync_engine.py`. A comparison script, `scripts/diff_site_data.py`, helps identify discrepancies between local `site-data.json` and remote Google Sheets.
     *   **Process:** The script stashes local work, pulls from main, fetches all GIDs from Google Sheets, regenerates the master JSON, and commits the update locally. It provides a real-time "Go-Live" estimate based on GitHub Pages build times.
 *   **Performance:** The site implements a **Stale-While-Revalidate** pattern. It loads instantly from `site_data_cache` in `localStorage` and performs a silent background refresh from the server to ensure future visits are up to date.
 *   **Resilience:** The repository version of `site-data.json` serves as the ultimate fallback, ensuring the site remains functional even if the Google Sheets API is unreachable.

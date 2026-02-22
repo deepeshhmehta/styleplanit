@@ -67,7 +67,6 @@ async function loadComponents() {
     if (typeof App !== 'undefined') {
         App.init(config);
     }
-    Utils.applyConfig(config);
 
     // 3. Signal that everything is ready
     document.dispatchEvent(new CustomEvent('appReady'));

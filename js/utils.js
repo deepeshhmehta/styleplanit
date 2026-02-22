@@ -92,6 +92,7 @@ const Utils = {
     },
 
     updateMeta: function(name, content, attr = 'name') {
+        if (!document.head) return; // Ensure head is available
         let el = document.querySelector(`meta[${attr}="${name}"]`);
         if (!el) {
             el = document.createElement('meta');
