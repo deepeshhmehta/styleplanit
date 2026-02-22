@@ -461,6 +461,39 @@ footer {
     border-left: none;
 }
 
+/* Floating Book Now Button */
+.book-now-floating {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: var(--primary-accent);
+    color: var(--white);
+    padding: 15px 30px;
+    border-radius: var(--border-radius-pill);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-secondary);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 500;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+.book-now-floating:hover {
+    background-color: var(--primary-accent-dark);
+    transform: translateY(-5px) scale(1.05);
+    color: var(--white);
+}
+
+.book-now-floating i {
+    font-size: 1rem;
+}
+
 /* Services Page Base Layout */
 .elegant-tabs {
     margin-bottom: 40px;

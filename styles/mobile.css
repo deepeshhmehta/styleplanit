@@ -108,6 +108,13 @@
 
     .service-details-container { padding: 30px 20px; }
 
+    .book-now-floating {
+        bottom: 20px;
+        right: 20px;
+        padding: 12px 20px;
+        font-size: 0.7rem;
+    }
+
     /* Team Page Mobile Layout */
     .profile-card, .profile-card.image-right {
         flex-direction: column;
