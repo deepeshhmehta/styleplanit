@@ -110,7 +110,7 @@ const App = {
           grid.append(`
                     <div class="service-card">
                         <div class="service-card-image">
-                            <img src="${service.image_url}" alt="${service.title}">
+                            <img src="${service.image_url}" alt="${service.title}" loading="lazy">
                         </div>
                         <div class="service-card-content">
                             <h3>${service.title}</h3>
@@ -264,7 +264,7 @@ const App = {
       container.append(`
                 <div class="profile-card ${alignmentClass}">
                     <div class="profile-image">
-                        <img src="${person.imageUrl}" alt="${person.name}">
+                        <img src="${person.imageUrl}" alt="${person.name}" loading="lazy">
                     </div>
                     <div class="profile-text">
                         <h3>${person.name}</h3>
