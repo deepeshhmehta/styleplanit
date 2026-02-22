@@ -34,7 +34,31 @@ async function loadComponents() {
     let config = {};
     if (configArray.length > 0) {
         configArray.forEach(item => {
-            if (item.key) config[item.key] = item.value;
+            if (!item.key) return; // Skip if key is empty
+            
+            // Clean mapping for critical keys that might be malformed in source or are Mailchimp related
+            if (item.key.includes('SUBSCRIBE_FORM_ACTION')) {
+                config['SUBSCRIBE_FORM_ACTION'] = item.value.trim().replace(/│$/, '').trim();
+            } else if (item.key.includes('SUBSCRIBE_FORM_ENTRY_ID')) {
+                config['SUBSCRIBE_FORM_ENTRY_ID'] = item.value.trim();
+            } else if (item.key.includes('MAILCHIMP_FORM_ACTION')) {
+                config['MAILCHIMP_FORM_ACTION'] = item.value;
+            } else if (item.key.includes('MAILCHIMP_EMAIL_FIELD_NAME')) {
+                config['MAILCHIMP_EMAIL_FIELD_NAME'] = item.value;
+            } else if (item.key.includes('MAILCHIMP_HIDDEN_FIELD_NAME')) {
+                config['MAILCHIMP_HIDDEN_FIELD_NAME'] = item.value;
+            } else if (item.key.includes('MAILCHIMP_HIDDEN_FIELD_VALUE')) {
+                config['MAILCHIMP_HIDDEN_FIELD_VALUE'] = item.value;
+            } else if (item.key.includes('MAILCHIMP_NAME_FIELD_NAME')) {
+                config['MAILCHIMP_NAME_FIELD_NAME'] = item.value;
+            } else if (item.key.includes('MAILCHIMP_NAME_PLACEHOLDER')) {
+                config['MAILCHIMP_NAME_PLACEHOLDER'] = item.value;
+            } else if (item.key.includes('LEGAL_COMPLIANCE_TEXT')) {
+                config['LEGAL_COMPLIANCE_TEXT'] = item.value;
+            } else {
+                // Default handling for other keys
+                config[item.key] = item.value;
+            }
         });
         Utils.applyConfig(config);
     }
@@ -43,6 +67,7 @@ async function loadComponents() {
     if (typeof App !== 'undefined') {
         App.init(config);
     }
+    Utils.applyConfig(config);
 
     // 3. Signal that everything is ready
     document.dispatchEvent(new CustomEvent('appReady'));

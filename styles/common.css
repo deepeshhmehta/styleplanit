@@ -545,15 +545,18 @@ footer {
 /* Subscribe Section Component */
 .subscribe-form {
     display: flex;
+    flex-wrap: wrap; /* Allow items to wrap on smaller screens */
     justify-content: center;
+    gap: 15px; /* Spacing between form elements */
     margin-top: 40px;
-    max-width: 600px;
+    max-width: 700px; /* Allow wider layout for two columns */
     margin-left: auto;
     margin-right: auto;
 }
 
-.subscribe-form input {
-    width: 100%;
+.subscribe-form input[type="email"],
+.subscribe-form input[type="text"] {
+    flex: 1 1 250px; /* Allow inputs to grow but have a minimum width */
     padding: 18px 25px;
     border: 1px solid var(--black);
     font-family: var(--font-secondary);
@@ -562,8 +565,109 @@ footer {
 }
 
 .subscribe-form .btn {
-    border-radius: 0px;
-    border-left: none;
+    flex: 0 1 auto; /* Button doesn't grow much */
+    border-radius: var(--border-radius-pill); /* Restore pill shape */
+    border-left: 1px solid var(--black); /* Restore full border */
+}
+
+.legal-compliance {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    color: var(--charcoal);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+}
+
+.legal-compliance input[type="checkbox"] {
+    margin-right: 10px;
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    border: 1px solid var(--charcoal);
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+    position: relative;
+    top: 1px;
+}
+
+.legal-compliance input[type="checkbox"]:checked {
+    background-color: var(--primary-accent);
+    border-color: var(--primary-accent);
+}
+
+.legal-compliance input[type="checkbox"]:checked::before {
+    content: '\2713'; /* Checkmark */
+    display: block;
+    color: var(--white);
+    font-size: 12px;
+    line-height: 14px;
+    text-align: center;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.legal-compliance label {
+    cursor: pointer;
+    line-height: 1.5;
+}
+
+.legal-compliance {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    color: var(--charcoal);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+}
+
+.legal-compliance input[type="checkbox"] {
+    margin-right: 10px;
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    border: 1px solid var(--charcoal);
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+    position: relative;
+    top: 1px;
+}
+
+.legal-compliance input[type="checkbox"]:checked {
+    background-color: var(--primary-accent);
+    border-color: var(--primary-accent);
+}
+
+.legal-compliance input[type="checkbox"]:checked::before {
+    content: '\2713'; /* Checkmark */
+    display: block;
+    color: var(--white);
+    font-size: 12px;
+    line-height: 14px;
+    text-align: center;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.legal-compliance label {
+    cursor: pointer;
+    line-height: 1.5;
 }
 
 /* Floating Book Now Button */

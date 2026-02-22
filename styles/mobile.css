@@ -60,9 +60,16 @@
     .hni-section h2 { font-size: 2.5rem; }
 
     /* Subscribe Section Mobile Layout */
-    .subscribe-form { flex-direction: column; }
-    .subscribe-form input { border-right: 1px solid var(--black); margin-bottom: 10px; }
-    .subscribe-form .btn { border-left: 1px solid var(--black); }
+    .subscribe-form { flex-direction: column; gap: 15px; max-width: 90%; }
+    .subscribe-form input[type="email"],
+    .subscribe-form input[type="text"] {
+        width: 100%;
+        border-right: 1px solid var(--black);
+    }
+    .subscribe-form .btn {
+        width: 100%;
+        border-left: 1px solid var(--black);
+    }
 
     /* Footer Mobile */
     .footer-banner { font-size: 2rem; }

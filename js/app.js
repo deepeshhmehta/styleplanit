@@ -15,6 +15,7 @@ const App = {
     if ($("#services").length > 0) {
       this.initServices();
     }
+    this.initSubscribe(config);
   },
 
   initNavigation: function () {
@@ -161,7 +162,7 @@ const App = {
       $(this).addClass("active");
       $(".services-grid").removeClass("active");
       $("#" + tabId).addClass("active");
-      $("#service-details").slideUp();
+      // Original code removed: $("#service-details").slideUp();
     });
 
     $(".service-card").on("click", function () {
@@ -273,6 +274,53 @@ const App = {
                     </div>
                 </div>
             `);
+    });
+  },
+
+  initSubscribe: function (config) {
+    const form = $("#subscribe-form");
+    if (form.length === 0) return;
+
+    form.on("submit", function (e) {
+      e.preventDefault();
+
+      if (!$("#legal-checkbox").is(":checked")) {
+        alert("Please agree to the terms and conditions.");
+        return;
+      }
+
+      const email = $("#subscriber-email").val();
+      const name = $("#subscriber-name").val();
+      const actionUrl = config.MAILCHIMP_FORM_ACTION; // Use Mailchimp's action URL
+      const emailFieldName = config.MAILCHIMP_EMAIL_FIELD_NAME; // Mailchimp's email field name
+      const nameFieldName = config.MAILCHIMP_NAME_FIELD_NAME; // Mailchimp's name field name
+      const hiddenFieldName = config.MAILCHIMP_HIDDEN_FIELD_NAME; // Mailchimp's hidden bot-trap field
+      const hiddenFieldValue = config.MAILCHIMP_HIDDEN_FIELD_VALUE; // Mailchimp's hidden bot-trap value
+
+      if (!actionUrl || !emailFieldName || !nameFieldName) {
+        console.warn("Mailchimp configuration missing.");
+        return;
+      }
+
+      // Create a temporary form that targets the hidden iframe
+      const tempForm = $(`
+        <form action="${actionUrl}" method="POST" target="hidden_iframe" style="display:none;">
+            <input type="email" name="${emailFieldName}" value="${email}">
+            <input type="text" name="${nameFieldName}" value="${name}">
+            <input type="text" name="${hiddenFieldName}" value="${hiddenFieldValue}">
+        </form>
+      `);
+
+      $("body").append(tempForm);
+      tempForm.submit();
+      
+      // Clean up
+      setTimeout(() => tempForm.remove(), 500);
+
+      // UI Feedback
+      form.fadeOut(function() {
+        $("#subscribe-success").fadeIn();
+      });
     });
   },
 };
