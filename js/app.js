@@ -71,13 +71,24 @@ const App = {
     this.renderServiceTabs(categories);
     this.renderServiceGrids(categories, services);
     this.bindServiceEvents();
+    this.handleHashRouting();
+  },
+
+  handleHashRouting: function () {
+    const hash = decodeURIComponent(window.location.hash.substring(1)).toLowerCase();
+    if (!hash) return;
+
+    const targetTab = $(`.elegant-tabs li[data-tab="${hash}"]`);
+    if (targetTab.length > 0) {
+      targetTab.click();
+    }
   },
 
   renderServiceTabs: function (categories) {
     const tabsContainer = $(".elegant-tabs ul");
     categories.forEach((category, index) => {
       tabsContainer.append(`
-                <li class="${index === 0 ? "active" : ""}" data-tab="${category.replace(/\s+/g, "-").toLowerCase()}">
+                <li class="${index === 0 ? "active" : ""}" data-tab="${category.trim().replace(/\s+/g, "-").toLowerCase()}">
                     ${category}
                 </li>
             `);
@@ -87,7 +98,7 @@ const App = {
   renderServiceGrids: function (categories, services) {
     const serviceContent = $(".service-content");
     categories.forEach((category, index) => {
-      const categoryId = category.replace(/\s+/g, "-").toLowerCase();
+      const categoryId = category.trim().replace(/\s+/g, "-").toLowerCase();
       const grid = $(
         `<div id="${categoryId}" class="services-grid ${index === 0 ? "active" : ""}"></div>`,
       );
