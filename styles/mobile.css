@@ -88,6 +88,24 @@
         gap: 20px;
     }
 
+    .service-card.active {
+        min-height: 80vh;
+        display: flex;
+        flex-direction: column;
+        padding: 40px 25px;
+        justify-content: center;
+        background: var(--primary-accent);
+    }
+
+    .service-card.active * {
+        color: var(--white) !important;
+    }
+
+    .service-card.active .service-card-image img {
+        height: 300px;
+        margin-bottom: 20px;
+    }
+
     .service-details-container { padding: 30px 20px; }
 
     /* Team Page Mobile Layout */

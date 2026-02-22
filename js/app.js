@@ -106,17 +106,52 @@ const App = {
       services
         .filter((s) => s.category === category)
         .forEach((service) => {
+          const chipsHtml = this.renderServiceChips(service.footer);
           grid.append(`
-                    <div class="service-card" data-long-desc="${service.long_description}">
-                        <img src="${service.image_url}" alt="${service.title}">
-                        <h3>${service.title}</h3>
-                        <p>${service.short_description}</p>
-                        <span class="price-tag">${service.footer}</span>
+                    <div class="service-card">
+                        <div class="service-card-image">
+                            <img src="${service.image_url}" alt="${service.title}">
+                        </div>
+                        <div class="service-card-content">
+                            <h3>${service.title}</h3>
+                            <p class="short-desc">${service.short_description}</p>
+                            <p class="long-desc">${service.long_description}</p>
+                            <div class="service-chips">${chipsHtml}</div>
+                        </div>
                     </div>
                 `);
         });
       serviceContent.append(grid);
     });
+  },
+
+  renderServiceChips: function (footerText) {
+    if (!footerText) return "";
+    const items = footerText.split(",").map((s) => s.trim());
+    return items
+      .map((item) => {
+        const icon = this.getServiceIcon(item);
+        return `<i class="fas ${icon}" data-title="${item}"></i>`;
+      })
+      .join("");
+  },
+
+  getServiceIcon: function (item) {
+    const map = {
+      "Color Analysis": "fa-palette",
+      "Personal Style Analysis": "fa-user-tie",
+      "Body Shape Analysis": "fa-bezier-curve",
+      "Wardrobing": "fa-tags",
+      "Lifestyle Analysis": "fa-mug-hot",
+      "Virtual Shopping": "fa-laptop",
+      "Lookbook Curation": "fa-book-open",
+      "Shopping List": "fa-list-ul",
+      "In-Person Shopping": "fa-shopping-bag",
+      "Event Styling": "fa-magic",
+      "Moodboard curation": "fa-images",
+      "Luxury charge": "fa-gem",
+    };
+    return map[item] || "fa-check-circle";
   },
 
   bindServiceEvents: function () {
@@ -130,35 +165,40 @@ const App = {
     });
 
     $(".service-card").on("click", function () {
-      $(".service-card").removeClass("active");
-      $(this).addClass("active");
+      const card = $(this);
+      const isAlreadyActive = card.hasClass("active");
+      
+      if (isAlreadyActive) {
+        card.removeClass("active");
+        return;
+      }
 
-      const title = $(this).find("h3").text();
-      const longDesc = $(this).data("long-desc");
-      const price = $(this).find(".price-tag").text();
+      // 1. Fade out current view briefly to mask layout jump
+      card.addClass("card-shifting");
+      
+      setTimeout(() => {
+        $(".service-card").not(card).removeClass("active card-shifting");
+        card.addClass("active");
+        
+        // 2. Scroll to the active card
+        const navHeight = $("nav").outerHeight() || 0;
+        const extraPadding = CONFIG.SETTINGS.SCROLL_OFFSET;
+        const isMobile = window.innerWidth <= 768;
+        
+        // On mobile, card stays in place. On desktop, it moves to top of grid.
+        const scrollTarget = isMobile ? (card.offset().top - (extraPadding * 2)) : card.closest('.services-grid').offset().top;
 
-      $("#service-details").slideUp(function () {
-        $(this)
-          .html(
-            `
-                <h3>${title}</h3>
-                <p>${longDesc}</p>
-                <span class="price-tag">${price}</span>
-            `,
-          )
-          .slideDown(function () {
-            // Calculate dynamic offset based on nav height
-            const navHeight = $("nav").outerHeight() || 0;
-            const extraPadding = CONFIG.SETTINGS.SCROLL_OFFSET;
+        setTimeout(() => {
+            $("html, body").animate({
+                scrollTop: scrollTarget - navHeight
+            }, 600);
+        }, 200);
 
-            $("html, body").animate(
-              {
-                scrollTop: $(this).offset().top - navHeight - extraPadding,
-              },
-              500,
-            );
-          });
-      });
+        // 3. Fade back in
+        setTimeout(() => {
+            card.removeClass("card-shifting");
+        }, 100);
+      }, 300);
     });
   },
 

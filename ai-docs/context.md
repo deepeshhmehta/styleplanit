@@ -63,10 +63,15 @@ The website utilizes a streamlined, atomic data architecture optimized for perfo
 
 ## 6. Component Features
 
+*   **Integrated Featured Services:**
+    *   **Desktop:** Active cards expand to full-width and move to the top row (`order: -1`) using a flex-row editorial layout.
+    *   **Mobile:** Active cards expand in-place to `80vh` with a vertically stacked layout to maintain grid stability.
+    *   **Content Swapping:** Uses a dual-description model (`short-desc` vs `long-desc`) to provide a precis in grid view and detail in featured view.
+*   **Service Chips:** Footer keywords are rendered as FontAwesome icons with a custom CSS-based "Luxury Minimalist" tooltip system.
 *   **Hero Section:** Editorial tiled layout on desktop; auto-fading slideshow on mobile.
 *   **Team Collective:** Alternating "Profile Cards" with grayscale-to-color hover effects.
-*   **Service Menu:** Dynamic tab grouping with interactive cards and "Scroll-to-Focus" details.
-*   **Site Loader:** A full-screen branded overlay that ensures a seamless, "no-flash" experience by waiting for all dynamic content to render.
+*   **Review Cards:** Expandable cards with a luxury fade-out for long content and internal scroll-reset logic.
+*   **Site Loader:** A full-screen branded overlay ensuring a seamless transition by waiting for dynamic data.
 
 ## 7. Development & Safety
 
