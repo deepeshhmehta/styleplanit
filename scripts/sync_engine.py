@@ -15,9 +15,10 @@ GIDS = {
     "team": "1489131428"
 }
 
-def run_command(cmd):
+def run_command(cmd, silent=False):
+    stderr_target = subprocess.DEVNULL if silent else subprocess.PIPE
     result = subprocess.run(cmd, shell=True, capture_output=True, text=True)
-    if result.returncode != 0:
+    if result.returncode != 0 and not silent:
         print(f"Error: {result.stderr}")
         return None
     return result.stdout.strip()
@@ -45,8 +46,8 @@ def main():
     print("🔄 Starting Data Sync Workflow...")
     
     # 1. Capture current state
-    original_branch = run_command("git rev-parse --abbrev-ref HEAD")
-    has_changes = run_command("git status --porcelain") != ""
+    original_branch = run_command("git rev-parse --abbrev-ref HEAD", silent=True)
+    has_changes = run_command("git status --porcelain", silent=True) != ""
     
     if not original_branch:
         return
@@ -54,7 +55,7 @@ def main():
     # 2. Stash changes if any
     if has_changes:
         print("📥 Stashing current changes...")
-        run_command("git stash")
+        run_command("git stash", silent=True)
 
     # 3. Switch to main and pull
     print("🔀 Switching to main...")
