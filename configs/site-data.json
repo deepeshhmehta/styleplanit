@@ -7,112 +7,72 @@
   ],
   "config": [
     {
-      "key": "PAGE_TITLE",
-      "value": "Style Plan(it) | Discover Your Style"
+      "key": "FOOTER_COPYRIGHT",
+      "value": "&copy; 2026 Style Plan(it). Toronto."
     },
     {
-      "key": "PAGE_DESCRIPTION",
-      "value": "At Style Planit, we provide strategic styling to empower men and women to define their brand and command their next chapter."
+      "key": "FOOTER_EMAIL_HREF",
+      "value": "mailto:styledbyayu@gmail.com"
     },
     {
-      "key": "OG_IMAGE",
-      "value": "https://images.unsplash.com/photo-1502716119720-b23a93e5fe1b?q=80&w=2070&auto=format&fit=crop"
+      "key": "FOOTER_INSTAGRAM_HREF",
+      "value": "https://www.instagram.com/ayushi.vyas_"
     },
     {
-      "key": "LOGO_TEXT",
-      "value": "Style Plan(it)"
-    },
-    {
-      "key": "LOGO_HREF",
-      "value": "index.html"
-    },
-    {
-      "key": "NAV_LINK_1_TEXT",
-      "value": "How It Works"
-    },
-    {
-      "key": "NAV_LINK_1_HREF",
-      "value": "index.html#how-it-works"
-    },
-    {
-      "key": "NAV_LINK_2_TEXT",
-      "value": "Reviews"
-    },
-    {
-      "key": "NAV_LINK_2_HREF",
-      "value": "index.html#reviews"
-    },
-    {
-      "key": "NAV_LINK_3_TEXT",
-      "value": "Services"
-    },
-    {
-      "key": "NAV_LINK_3_HREF",
-      "value": "services.html"
-    },
-    {
-      "key": "NAV_LINK_4_TEXT",
-      "value": "Be an ICON"
-    },
-    {
-      "key": "NAV_LINK_4_HREF",
-      "value": "index.html#be-an-icon"
-    },
-    {
-      "key": "HERO_TITLE",
-      "value": "We only believe in one superpower, style"
-    },
-    {
-      "key": "HERO_BUTTON_TEXT",
-      "value": "Discover Yours."
+      "key": "FOOTER_PHONE_HREF",
+      "value": "tel:+1-647-967-8953"
     },
     {
       "key": "HERO_BUTTON_HREF",
       "value": "https://cal.com/styleplanit/15min"
     },
     {
+      "key": "HERO_BUTTON_TEXT",
+      "value": "Discover Yours."
+    },
+    {
+      "key": "HERO_IMAGE_1",
+      "value": "https://images.unsplash.com/photo-1502716119720-b23a93e5fe1b?q=80&w=2070&auto=format&fit=crop"
+    },
+    {
+      "key": "HERO_IMAGE_2",
+      "value": "https://spinnaker-watches.com/cdn/shop/articles/15d488f366cfe064f6b3bcc3c93de85e_69f4aa5d-8762-4bf0-86cc-d0ff9fa7bc19_1280x1100_crop_center.png?v=1758009079"
+    },
+    {
+      "key": "HERO_IMAGE_3",
+      "value": "https://images.unsplash.com/photo-1594495894542-a46cc73e081a?q=80&w=2070&auto=format&fit=crop"
+    },
+    {
+      "key": "HERO_TITLE",
+      "value": "We only believe in one superpower, STYLE"
+    },
+    {
       "key": "HOW_IT_WORKS_TITLE",
       "value": "How It Works"
     },
     {
-      "key": "STEP_1_TEXT",
-      "value": "1- Checkout our Programs"
+      "key": "ICON_BUTTON_HREF",
+      "value": "https://cal.com/styleplanit/the-icon-service"
     },
     {
-      "key": "NEWCOMERS_CARD_TITLE",
-      "value": "Establish"
+      "key": "ICON_BUTTON_TEXT",
+      "value": "Request Access"
     },
     {
-      "key": "NEWCOMERS_CARD_TEXT",
-      "value": "Styling for those ready to establish thier presence"
+      "key": "ICON_SUBTITLE",
+      "value": "By Invitation Only"
     },
     {
-      "key": "NEWCOMERS_CARD_BUTTON_TEXT",
-      "value": "View Services"
+      "key": "ICON_TEXT",
+      "value": "A comprehensive, white-glove styling experience designed for those who require a flawless executive presence. This is not just shopping\u2014it is a strategic overhaul of your non-verbal communication."
     },
     {
-      "key": "NEWCOMERS_CARD_BUTTON_HREF",
-      "value": "services.html#establish"
+      "key": "ICON_TITLE",
+      "value": "The Icon Service."
     },
     {
-      "key": "PROFESSIONALS_CARD_TITLE",
-      "value": "Elevate "
-    },
-    {
-      "key": "PROFESSIONALS_CARD_TEXT",
-      "value": "Styling for those who are ready to elevate thier image and influence."
-    },
-    {
-      "key": "PROFESSIONALS_CARD_BUTTON_TEXT",
-      "value": "View Services"
-    },
-    {
-      "key": "PROFESSIONALS_CARD_BUTTON_HREF",
-      "value": "services.html#elevate"
-    },
-    {
-      "key": "LOGO_BAND_TEXT",
-      "value": "In Good Company"
+      "key": "LEGAL_COMPLIANCE_TEXT",
+      "value": "I agree to receive marketing emails from Style Plan(it)."
     },
     {
       "key": "LOGO_1_TEXT",
@@ -131,84 +91,24 @@
       "value": "Elle"
     },
     {
-      "key": "STEP_2_TEXT",
-      "value": "2. Book a call with us"
+      "key": "LOGO_BAND_TEXT",
+      "value": "In Good Company"
     },
     {
-      "key": "STEP_2_BUTTON_TEXT",
-      "value": "Book Now"
+      "key": "LOGO_HREF",
+      "value": "index.html"
     },
     {
-      "key": "STEP_2_BUTTON_HREF",
-      "value": "https://cal.com/styleplanit/15min"
-    },
-    {
-      "key": "STEP_3_TEXT",
-      "value": "3. Start your journey"
-    },
-    {
-      "key": "REVIEWS_TITLE",
-      "value": "Reviews"
-    },
-    {
-      "key": "ICON_SUBTITLE",
-      "value": "By Invitation Only"
-    },
-    {
-      "key": "ICON_TITLE",
-      "value": "The Icon Service."
-    },
-    {
-      "key": "ICON_TEXT",
-      "value": "Bespoke image management for Executives and High-Net-Worth Individuals. Lifestyle analysis, luxury in-person shopping, and total wardrobe curation."
-    },
-    {
-      "key": "ICON_BUTTON_TEXT",
-      "value": "Request Access"
-    },
-    {
-      "key": "ICON_BUTTON_HREF",
-      "value": "https://cal.com/styleplanit/the-icon-service"
-    },
-    {
-      "key": "SUBSCRIBE_TITLE",
-      "value": "Stay Inspired"
-    },
-    {
-      "key": "SUBSCRIBE_TEXT",
-      "value": "Subscribe for exclusive style insights and event invitations."
-    },
-    {
-      "key": "SUBSCRIBE_EMAIL_PLACEHOLDER",
-      "value": "Enter your email"
-    },
-    {
-      "key": "SUBSCRIBE_BUTTON_TEXT",
-      "value": "Subscribe"
-    },
-    {
-      "key": "FOOTER_INSTAGRAM_HREF",
-      "value": "https://www.instagram.com/ayushi.vyas_"
-    },
-    {
-      "key": "FOOTER_PHONE_HREF",
-      "value": "tel:+1-647-967-8953"
-    },
-    {
-      "key": "FOOTER_EMAIL_HREF",
-      "value": "mailto:styledbyayu@gmail.com"
-    },
-    {
-      "key": "FOOTER_COPYRIGHT",
-      "value": "&copy; 2026 Style Plan(it). Toronto."
-    },
-    {
-      "key": "MAILCHIMP_FORM_ACTION",
-      "value": "https://gmail.us5.list-manage.com/subscribe/post?u=d3996d16165f3bbbc8e8ae321&id=62ce8ea2f1&f_id=005abcedf0"
+      "key": "LOGO_TEXT",
+      "value": "Style Plan(it)"
     },
     {
       "key": "MAILCHIMP_EMAIL_FIELD_NAME",
       "value": "EMAIL"
+    },
+    {
+      "key": "MAILCHIMP_FORM_ACTION",
+      "value": "https://gmail.us5.list-manage.com/subscribe/post?u=d3996d16165f3bbbc8e8ae321&id=62ce8ea2f1&f_id=005abcedf0"
     },
     {
       "key": "MAILCHIMP_HIDDEN_FIELD_NAME",
@@ -218,154 +118,281 @@
       "key": "MAILCHIMP_HIDDEN_FIELD_VALUE",
       "value": ""
     },
-        {
-          "key": "MAILCHIMP_NAME_FIELD_NAME",
-          "value": "NAME"
-        },
-        {
-          "key": "MAILCHIMP_NAME_PLACEHOLDER",
-          "value": "What should we call you?"
-        },
-        {
-          "key": "LEGAL_COMPLIANCE_TEXT",
-          "value": "I agree to receive marketing emails from Style Plan(it)."
-        }
-    ,
     {
-      "key": "HERO_IMAGE_1",
+      "key": "MAILCHIMP_NAME_FIELD_NAME",
+      "value": "NAME"
+    },
+    {
+      "key": "MAILCHIMP_NAME_PLACEHOLDER",
+      "value": "What should we call you?"
+    },
+    {
+      "key": "NAV_LINK_1_HREF",
+      "value": "index.html#how-it-works"
+    },
+    {
+      "key": "NAV_LINK_1_TEXT",
+      "value": "How It Works"
+    },
+    {
+      "key": "NAV_LINK_2_HREF",
+      "value": "index.html#reviews"
+    },
+    {
+      "key": "NAV_LINK_2_TEXT",
+      "value": "Reviews"
+    },
+    {
+      "key": "NAV_LINK_3_HREF",
+      "value": "services.html"
+    },
+    {
+      "key": "NAV_LINK_3_TEXT",
+      "value": "Services"
+    },
+    {
+      "key": "NAV_LINK_4_HREF",
+      "value": "index.html#be-an-icon"
+    },
+    {
+      "key": "NAV_LINK_4_TEXT",
+      "value": "Be an ICON"
+    },
+    {
+      "key": "NEWCOMERS_CARD_BUTTON_HREF",
+      "value": "services.html#establish"
+    },
+    {
+      "key": "NEWCOMERS_CARD_BUTTON_TEXT",
+      "value": "View Services"
+    },
+    {
+      "key": "NEWCOMERS_CARD_TEXT",
+      "value": "Styling for those ready to establish thier presence"
+    },
+    {
+      "key": "NEWCOMERS_CARD_TITLE",
+      "value": "Establish"
+    },
+    {
+      "key": "OG_IMAGE",
       "value": "https://images.unsplash.com/photo-1502716119720-b23a93e5fe1b?q=80&w=2070&auto=format&fit=crop"
     },
     {
-      "key": "HERO_IMAGE_2",
-      "value": "https://images.unsplash.com/photo-1600609842388-3e477c731993?q=80&w=2070&auto=format&fit=crop"
+      "key": "PAGE_DESCRIPTION",
+      "value": "At Style Planit, we provide strategic styling to empower men and women to define their brand and command their next chapter."
     },
     {
-      "key": "HERO_IMAGE_3",
-      "value": "https://images.unsplash.com/photo-1594495894542-a46cc73e081a?q=80&w=2070&auto=format&fit=crop"
+      "key": "PAGE_TITLE",
+      "value": "Style Plan(it) | Discover Your Style"
+    },
+    {
+      "key": "PROFESSIONALS_CARD_BUTTON_HREF",
+      "value": "services.html#elevate"
+    },
+    {
+      "key": "PROFESSIONALS_CARD_BUTTON_TEXT",
+      "value": "View Services"
+    },
+    {
+      "key": "PROFESSIONALS_CARD_TEXT",
+      "value": "Styling for those who are ready to elevate thier image and influence."
+    },
+    {
+      "key": "PROFESSIONALS_CARD_TITLE",
+      "value": "Elevate "
+    },
+    {
+      "key": "REVIEWS_TITLE",
+      "value": "Reviews"
+    },
+    {
+      "key": "SERVICES_PAGE_TITLE",
+      "value": "Our Services | Style Plan(it)"
+    },
+    {
+      "key": "STEP_1_TEXT",
+      "value": "1- Checkout our Programs"
+    },
+    {
+      "key": "STEP_2_BUTTON_HREF",
+      "value": "https://cal.com/styleplanit/15min"
+    },
+    {
+      "key": "STEP_2_BUTTON_TEXT",
+      "value": "Book Now"
+    },
+    {
+      "key": "STEP_2_TEXT",
+      "value": "2. Book a call with us"
+    },
+    {
+      "key": "STEP_3_TEXT",
+      "value": "3. Start your journey"
+    },
+    {
+      "key": "SUBSCRIBE_BUTTON_TEXT",
+      "value": "Subscribe"
+    },
+    {
+      "key": "SUBSCRIBE_EMAIL_PLACEHOLDER",
+      "value": "Enter your email"
+    },
+    {
+      "key": "SUBSCRIBE_TEXT",
+      "value": "Subscribe for styling tips, hacks, challenges and more"
+    },
+    {
+      "key": "SUBSCRIBE_TITLE",
+      "value": "Stay Inspired"
     }
   ],
   "services": [
     {
-      "title": "The Arrival Edit",
-      "short_description": "Curated capsule wardrobe for a seamless transition into Canadian life and style.",
-      "footer": "Body Shape Analysis, Lifestyle Analysis, Wardrobing, Shopping List, In-Person Shopping",
-      "image_url": "https://spinnaker-watches.com/cdn/shop/articles/15d488f366cfe064f6b3bcc3c93de85e_69f4aa5d-8762-4bf0-86cc-d0ff9fa7bc19_1280x1100_crop_center.png?v=1758009079",
-      "long_description": "Land with confidence using a personal styling service designed specifically for newcomers to Canada. We build your foundational arrival capsule wardrobe—a curated set of versatile, high-quality essentials tailored to the local climate and lifestyle. From navigating public transit to exploring your new city, we ensure you have a functional, stylish rotation that helps you look and feel like a local from day one.",
-      "category": "Establish"
-    },
-    {
-      "title": "Four Season Styling",
-      "short_description": "A comprehensive wardrobe plan that evolves with the Canadian seasons, ensuring year-round style.",
-      "footer": "Body Shape Analysis, Lifestyle Analysis, Wardrobing, Shopping List, In-Person Shopping",
-      "image_url": "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=2070&auto=format&fit=crop",
-      "long_description": "Complete your full-year style transition. Designed as the strategic follow-up to our Four Season Styling, this session addresses the remaining seasons of your first year. We review how your initial wardrobe performed, then pivot your strategy—transitioning you from Winter layers to Summer breathable fabrics (or vice versa). It’s a crucial wardrobe update that fills the gaps, ensuring you have a complete, functional rotation for the entire annual cycle.",
-      "category": "Establish"
-    },
-    {
-      "title": "The Interview Edge",
-      "short_description": "Crafting a powerful first impression for job seekers with strategic, confidence-boosting interview attire.",
-      "footer": "Body Shape Analysis, Wardrobing, Personal Style Analysis, Shopping List",
-      "image_url": "https://images.unsplash.com/photo-1556740772-1a741367b93e?q=80&w=2070&auto=format&fit=crop",
-      "long_description": "Secure your place in the Canadian job market with a strategy-led interview look. We decode the nuances of local office attire—from corporate formal to modern business casual—to ensure you fit the company culture before you even speak. This service curates a polished professional image that boosts your confidence, helping you make a powerful first impression on potential employers and land that role.",
-      "category": "Establish"
-    },
-    {
-      "title": "The Tone Audit",
-      "short_description": "Discover the colors that truly make you shine. Our virtual color analysis identifies your unique seasonal color palette.",
-      "footer": "Color Analysis",
-      "image_url": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2070&auto=format&fit=crop",
-      "long_description": "Discover the colors that truly make you shine. Our virtual color analysis identifies your unique seasonal color palette, scientifically matched to your skin tone, eye color, and features. Stop guessing in the fitting room; this service gives you the definitive rulebook for your wardrobe, ensuring every piece you buy enhances your natural complexion and elevates your presence without you ever leaving home.",
-      "category": "Elevate"
-    },
-    {
-      "title": "30 Min Style Revamp",
-      "short_description": "Experience the impact of professional guidance in just half an hour. Target a specific style dilemma or occasion.",
+      "category": "Elevate",
       "footer": "Color Analysis, Personal Style Analysis, Body Shape Analysis, Wardrobing",
       "image_url": "https://images.unsplash.com/photo-1505691938895-1758d7FEB5a1?q=80&w=2070&auto=format&fit=crop",
       "long_description": "Experience the impact of professional guidance in just half an hour. This express styling session is the perfect entry point into personal styling. We combine a targeted body shape analysis with focused wardrobing advice to solve a specific style dilemma or dress you for a single occasion. Whether you need a quick confidence boost or a standout look for an event, this 30-minute consultation delivers immediate, actionable results.",
-      "category": "Elevate"
+      "short_description": "Experience the impact of professional guidance in just half an hour. This express styling session is the perfect entry point into personal styling. We combine a targeted body shape analysis with focused wardrobing advice to solve a specific style dilemma or dress you for a single occasion. Whether you need a quick confidence boost or a standout look for an event, this 30-minute consultation delivers immediate, actionable results.",
+      "title": "30 Min Style Revamp"
     },
     {
-      "title": "Signature Foundations",
-      "short_description": "Rebuild your image from the ground up with a custom shoppable lookbook and virtual personal shopping.",
+      "category": "Elevate",
+      "footer": "Body Shape Analysis, Lifestyle Analysis, Personal Style Analysis, Color Analysis, Lookbook Curation, Shopping List, In-Person Shopping, Wardrobing",
+      "image_url": "https://images.unsplash.com/photo-1503220317375-903a94a5b7e8?q=80&w=2070&auto=format&fit=crop",
+      "long_description": "This is the definitive personal styling experience. If you are ready for a total image reinvention, this all-inclusive package covers every angle. We combine advanced Color Analysis and Body Shape strategy with a luxury in-person shopping session. We don\u2019t just plan your look; we build it with you, side-by-side. From defining your perfect palette to curating the final wardrobe, this is your blueprint for a signature style that commands attention and skyrockets your confidence",
+      "short_description": "This is the definitive personal styling experience. If you are ready for a total image reinvention, this all-inclusive package covers every angle. We combine advanced Color Analysis and Body Shape strategy with a luxury in-person shopping session. We don\u2019t just plan your look; we build it with you, side-by-side. From defining your perfect palette to curating the final wardrobe, this is your blueprint for a signature style that commands attention and skyrockets your confidence",
+      "title": "Build Your Signature Self"
+    },
+    {
+      "category": "Establish",
+      "footer": "Body Shape Analysis, Lifestyle Analysis, Wardrobing, Shopping List, In-Person Shopping",
+      "image_url": "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=2070&auto=format&fit=crop",
+      "long_description": "Complete your full-year style transition. Designed as the strategic follow-up to our Four Season Styling, this session addresses the remaining seasons of your first year. We review how your initial wardrobe performed, then pivot your strategy\u2014transitioning you from Winter layers to Summer breathable fabrics (or vice versa). It\u2019s a crucial wardrobe update that fills the gaps, ensuring you have a complete, functional rotation for the entire annual cycle.",
+      "short_description": "A comprehensive wardrobe plan that evolves with the Canadian seasons, ensuring year-round style.",
+      "title": "Four Season Styling"
+    },
+    {
+      "category": "Establish",
+      "footer": "Body Shape Analysis, Personal Style Analysis, Color Analysis, Lookbook Curation, Shopping List, Virtual Shopping",
+      "image_url": "https://spinnaker-watches.com/cdn/shop/articles/15d488f366cfe064f6b3bcc3c93de85e_69f4aa5d-8762-4bf0-86cc-d0ff9fa7bc19_1280x1100_crop_center.png?v=1758009079",
+      "long_description": "Land with confidence using a personal styling service designed specifically for newcomers to Canada. We build your foundational arrival capsule wardrobe\u2014a curated set of versatile, high-quality essentials tailored to the local climate and lifestyle. From navigating public transit to exploring your new city, we ensure you have a functional, stylish rotation that helps you look and feel like a local from day one.",
+      "short_description": "Land with confidence using a personal styling service designed specifically for newcomers to Canada. We build your foundational arrival capsule wardrobe\u2014a curated set of versatile, high-quality essentials tailored to the local climate and lifestyle. From navigating public transit to exploring your new city, we ensure you have a functional, stylish rotation that helps you look and feel like a local from day one.",
+      "title": "Newcomer Essentials"
+    },
+    {
+      "category": "Establish",
+      "footer": "Lookbook Curation, Shopping List, Virtual Shopping",
+      "image_url": "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=2070&auto=format&fit=crop",
+      "long_description": "Complete your full-year style transition. Designed as the strategic follow-up to our Four Season Styling, this session addresses the remaining seasons of your first year. We review how your initial wardrobe performed, then pivot your strategy\u2014transitioning you from Winter layers to Summer breathable fabrics (or vice versa). It\u2019s a crucial wardrobe update that fills the gaps, ensuring you have a complete, functional rotation for the entire annual cycle.",
+      "short_description": "Complete your full-year style transition. Designed as the strategic follow-up to our Four Season Styling, this session addresses the remaining seasons of your first year. We review how your initial wardrobe performed, then pivot your strategy\u2014transitioning you from Winter layers to Summer breathable fabrics (or vice versa). It\u2019s a crucial wardrobe update that fills the gaps, ensuring you have a complete, functional rotation for the entire annual cycle.",
+      "title": "Refine & Align"
+    },
+    {
+      "category": "Elevate",
       "footer": "Body Shape Analysis, Lifestyle Analysis, Virtual Shopping, Lookbook Curation, Wardrobing",
       "image_url": "https://images.unsplash.com/photo-1560439546-17b7b124a3a6?q=80&w=2070&auto=format&fit=crop",
       "long_description": "Stop staring at a full closet with 'nothing to wear.' This virtual styling package rebuilds your image from the ground up. We analyze your body shape and lifestyle to define a look that is uniquely yours, then execute it with a custom shoppable lookbook. We act as your virtual personal shopper, doing all the browsing for you and delivering a curated, click-to-buy wardrobe that saves you time and guarantees you look effortless every single day.",
-      "category": "Elevate"
+      "short_description": "Rebuild your image from the ground up with a custom shoppable lookbook and virtual personal shopping.",
+      "title": "Signature Foundations"
     },
     {
-      "title": "Build Your Signature Self",
-      "short_description": "The definitive personal styling experience: advanced color analysis, body shape strategy, and luxury in-person shopping.",
-      "footer": "Body Shape Analysis, Lifestyle Analysis, Personal Style Analysis, Color Analysis, Lookbook Curation, Shopping List, In-Person Shopping, Wardrobing",
-      "image_url": "https://images.unsplash.com/photo-1503220317375-903a94a5b7e8?q=80&w=2070&auto=format&fit=crop",
-      "long_description": "This is the definitive personal styling experience. If you are ready for a total image reinvention, this all-inclusive package covers every angle. We combine advanced Color Analysis and Body Shape strategy with a luxury in-person shopping session. We don’t just plan your look; we build it with you, side-by-side. From defining your perfect palette to curating the final wardrobe, this is your blueprint for a signature style that commands attention and skyrockets your confidence",
-      "category": "Elevate"
+      "category": "Establish",
+      "footer": "Body Shape Analysis, Lifestyle Analysis, Wardrobing, Shopping List, In-Person Shopping",
+      "image_url": "https://spinnaker-watches.com/cdn/shop/articles/15d488f366cfe064f6b3bcc3c93de85e_69f4aa5d-8762-4bf0-86cc-d0ff9fa7bc19_1280x1100_crop_center.png?v=1758009079",
+      "long_description": "Land with confidence using a personal styling service designed specifically for newcomers to Canada. We build your foundational arrival capsule wardrobe\u2014a curated set of versatile, high-quality essentials tailored to the local climate and lifestyle. From navigating public transit to exploring your new city, we ensure you have a functional, stylish rotation that helps you look and feel like a local from day one.",
+      "short_description": "Curated capsule wardrobe for a seamless transition into Canadian life and style.",
+      "title": "The Arrival Edit"
     },
     {
-      "title": "The Single Occasion",
-      "short_description": "Be the best-dressed guest, effortlessly. Curated looks for any event with virtual shopping and dedicated styling sessions.",
-      "footer": "Event Styling, Personal Style Analysis, Body Shape Analysis, Virtual Shopping",
-      "image_url": "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14aa?q=80&w=2070&auto=format&fit=crop",
-      "long_description": "Be the best-dressed guest, effortlessly. We don’t just find you an outfit; we curate the complete look. This service begins with virtual shopping, where we provide purchase-ready links for pieces that perfectly fit the event’s dress code. But we don't stop at the purchase. We follow up with a dedicated styling session to demonstrate exactly how to wear your new pieces—from the right accessories to the perfect tuck—ensuring you walk out the door feeling polished and picture-perfect.",
-      "category": "Weddings"
+      "category": "Establish",
+      "footer": "Body Shape Analysis, Personal Style Analysis, Color Analysis, Lookbook Curation, Shopping List, Virtual Shopping",
+      "image_url": "https://images.unsplash.com/photo-1556740772-1a741367b93e?q=80&w=2070&auto=format&fit=crop",
+      "long_description": "Secure your place in the Canadian job market with a strategy-led interview look. We decode the nuances of local office attire\u2014from corporate formal to modern business casual\u2014to ensure you fit the company culture before you even speak. This service curates a polished professional image that boosts your confidence, helping you make a powerful first impression on potential employers and land that role.",
+      "short_description": "Secure your place in the Canadian job market with a strategy-led interview look. We decode the nuances of local office attire\u2014from corporate formal to modern business casual\u2014to ensure you fit the company culture before you even speak. This service curates a polished professional image that boosts your confidence, helping you make a powerful first impression on potential employers and land that role.",
+      "title": "The Hired Look"
     },
     {
-      "title": "The Showstopper",
-      "short_description": "For high-stakes roles where all eyes are on you. Strategic virtual shopping and styling for bold, statement pieces.",
-      "footer": "Event Styling, Personal Style Analysis, Body Shape Analysis, Virtual Shopping, Luxury charge",
-      "image_url": "https://images.unsplash.com/photo-1587318634139-bbc10a314c33?q=80&w=2070&auto=format&fit=crop",
-      "long_description": "For moments when blending in is not an option. This service is designed for high-stakes roles where all eyes—and cameras—are on you. Whether you are the Emcee, a Best Man, a Bridesmaid, or attending a high-profile fashion gala, we curate a look that commands attention. We combine strategic virtual shopping for bold, statement pieces with a detailed styling session to ensure you own the spotlight and leave a lasting impression.",
-      "category": "Weddings"
-    },
-    {
-      "title": "The OOO (Out of Office) Edit",
-      "short_description": "Effortless style for your travels. A chic, destination-ready travel capsule tailored to your itinerary.",
-      "footer": "Shopping List, Wardrobing, Moodboard curation, In-Person Shopping",
-      "image_url": "https://images.unsplash.com/photo-1551893261-29497e883870?q=80&w=2070&auto=format&fit=crop",
-      "long_description": "Your vacation starts the moment we begin shopping. Forget the pre-trip packing panic. We design a chic, destination-ready travel capsule tailored to your itinerary—from European city walks to tropical beach dinners. This premium service features an exclusive in-person shopping session to secure the perfect pieces, followed by a wardrobe strategy that maximizes your outfits while minimizing your luggage. We ensure you travel light, look luxurious, and are photo-ready for every moment",
-      "category": "Weddings"
-    },
-    {
-      "title": "The Icon Service",
-      "short_description": "The ultimate investment in your personal brand. Comprehensive 360-degree overhaul of your visual identity.",
+      "category": "Corporate & Pageant",
       "footer": "Body Shape Analysis, Lifestyle Analysis, Personal Style Analysis, Color Analysis, Lookbook Curation, Shopping List, In-Person Shopping, Wardrobing, Moodboard curation",
       "image_url": "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop",
       "long_description": "The ultimate investment in your personal brand. Designed for High-Net-Worth Individuals and executives, this is a comprehensive 360-degree overhaul of your visual identity. We go beyond simple styling to align your wardrobe with your public stature and lifestyle demands. This white-glove service includes a deep-dive lifestyle analysis, a luxury in-person shopping experience, and total wardrobe curation. We manage every detail, ensuring your image commands respect in the boardroom and beyond.",
-      "category": "Corporate & Pageant"
+      "short_description": "The ultimate investment in your personal brand. Designed for High-Net-Worth Individuals and executives, this is a comprehensive 360-degree overhaul of your visual identity. We go beyond simple styling to align your wardrobe with your public stature and lifestyle demands. This white-glove service includes a deep-dive lifestyle analysis, a luxury in-person shopping experience, and total wardrobe curation. We manage every detail, ensuring your image commands respect in the boardroom and beyond.",
+      "title": "The Icon Service"
     },
     {
-      "title": "The Style Concierge (Virtual)",
-      "short_description": "Expert style, delivered digitally. A fully personalized, shoppable lookbook tailored to your needs, budget, and taste.",
-      "footer": "Lookbook Curation, Shopping List, Virtual Shopping",
-      "image_url": "https://images.unsplash.com/photo-1543269865-cbf427effbad?q=80&w=2070&auto=format&fit=crop",
-      "long_description": "Expert style, delivered digitally. We scour the global market to curate a fully personalized, shoppable lookbook tailored to your specific needs, budget, and taste. You receive a seamless digital experience featuring direct purchase links, mood boards, and detailed styling notes on how to pair every item. Enjoy the luxury of a personal stylist without the appointments—just click, order, and elevate your wardrobe from the comfort of your home.",
-      "category": "Corporate & Pageant"
+      "category": "Establish",
+      "footer": "Body Shape Analysis, Wardrobing, Personal Style Analysis, Shopping List",
+      "image_url": "https://images.unsplash.com/photo-1556740772-1a741367b93e?q=80&w=2070&auto=format&fit=crop",
+      "long_description": "Secure your place in the Canadian job market with a strategy-led interview look. We decode the nuances of local office attire\u2014from corporate formal to modern business casual\u2014to ensure you fit the company culture before you even speak. This service curates a polished professional image that boosts your confidence, helping you make a powerful first impression on potential employers and land that role.",
+      "short_description": "Crafting a powerful first impression for job seekers with strategic, confidence-boosting interview attire.",
+      "title": "The Interview Edge"
     },
     {
-      "title": "The Style Concierge (In-Person)",
-      "short_description": "Experience the ultimate luxury: effortless style without the legwork. We manage every detail of your wardrobe acquisition.",
+      "category": "Weddings",
+      "footer": "Shopping List, Wardrobing, Moodboard curation, In-Person Shopping",
+      "image_url": "https://images.unsplash.com/photo-1551893261-29497e883870?q=80&w=2070&auto=format&fit=crop",
+      "long_description": "Your vacation starts the moment we begin shopping. Forget the pre-trip packing panic. We design a chic, destination-ready travel capsule tailored to your itinerary\u2014from European city walks to tropical beach dinners. This premium service features an exclusive in-person shopping session to secure the perfect pieces, followed by a wardrobe strategy that maximizes your outfits while minimizing your luggage. We ensure you travel light, look luxurious, and are photo-ready for every moment",
+      "short_description": "Effortless style for your travels. A chic, destination-ready travel capsule tailored to your itinerary.",
+      "title": "The OOO (Out of Office) Edit"
+    },
+    {
+      "category": "Weddings",
+      "footer": "Event Styling, Personal Style Analysis, Body Shape Analysis, Virtual Shopping, Luxury charge",
+      "image_url": "https://images.unsplash.com/photo-1587318634139-bbc10a314c33?q=80&w=2070&auto=format&fit=crop",
+      "long_description": "For moments when blending in is not an option. This service is designed for high-stakes roles where all eyes\u2014and cameras\u2014are on you. Whether you are the Emcee, a Best Man, a Bridesmaid, or attending a high-profile fashion gala, we curate a look that commands attention. We combine strategic virtual shopping for bold, statement pieces with a detailed styling session to ensure you own the spotlight and leave a lasting impression.",
+      "short_description": "For high-stakes roles where all eyes are on you. Strategic virtual shopping and styling for bold, statement pieces.",
+      "title": "The Showstopper"
+    },
+    {
+      "category": "Weddings",
+      "footer": "Event Styling, Personal Style Analysis, Body Shape Analysis, Virtual Shopping",
+      "image_url": "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14aa?q=80&w=2070&auto=format&fit=crop",
+      "long_description": "Be the best-dressed guest, effortlessly. We don\u2019t just find you an outfit; we curate the complete look. This service begins with virtual shopping, where we provide purchase-ready links for pieces that perfectly fit the event\u2019s dress code. But we don't stop at the purchase. We follow up with a dedicated styling session to demonstrate exactly how to wear your new pieces\u2014from the right accessories to the perfect tuck\u2014ensuring you walk out the door feeling polished and picture-perfect.",
+      "short_description": "Be the best-dressed guest, effortlessly. Curated looks for any event with virtual shopping and dedicated styling sessions.",
+      "title": "The Single Occasion"
+    },
+    {
+      "category": "Corporate & Pageant",
       "footer": "Lookbook Curation,Shopping List, In-Person Shopping",
       "image_url": "https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80&w=2070&auto=format&fit=crop",
       "long_description": "Experience the ultimate luxury: effortless style without the legwork. This white-glove service handles every single detail of your wardrobe acquisition. We scour the market to curate a selection specifically for you, managing everything from sourcing hard-to-find pieces to handling all purchases, returns, and alterations. Whether you prefer a private fitting in a luxury suite or the comfort of your own home, we bring the best of the boutiques directly to you. You simply show up and look your best; we handle the rest.",
-      "category": "Corporate & Pageant"
+      "short_description": "Experience the ultimate luxury: effortless style without the legwork. This white-glove service handles every single detail of your wardrobe acquisition. We scour the market to curate a selection specifically for you, managing everything from sourcing hard-to-find pieces to handling all purchases, returns, and alterations. Whether you prefer a private fitting in a luxury suite or the comfort of your own home, we bring the best of the boutiques directly to you. You simply show up and look your best; we handle the rest.",
+      "title": "The Style Concierge (In-Person)"
     },
     {
-      "title": "The Tone Audit (in – person)",
-      "short_description": "Discover your unique seasonal color palette with an in-person color analysis, scientifically matched to your features.",
+      "category": "Corporate & Pageant",
+      "footer": "Lookbook Curation, Shopping List, Virtual Shopping",
+      "image_url": "https://images.unsplash.com/photo-1543269865-cbf427effbad?q=80&w=2070&auto=format&fit=crop",
+      "long_description": "Expert style, delivered digitally. We scour the global market to curate a fully personalized, shoppable lookbook tailored to your specific needs, budget, and taste. You receive a seamless digital experience featuring direct purchase links, mood boards, and detailed styling notes on how to pair every item. Enjoy the luxury of a personal stylist without the appointments\u2014just click, order, and elevate your wardrobe from the comfort of your home.",
+      "short_description": "Expert style, delivered digitally. We scour the global market to curate a fully personalized, shoppable lookbook tailored to your specific needs, budget, and taste. You receive a seamless digital experience featuring direct purchase links, mood boards, and detailed styling notes on how to pair every item. Enjoy the luxury of a personal stylist without the appointments\u2014just click, order, and elevate your wardrobe from the comfort of your home.",
+      "title": "The Style Concierge (Virtual)"
+    },
+    {
+      "category": "Elevate",
+      "footer": "Color Analysis",
+      "image_url": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2070&auto=format&fit=crop",
+      "long_description": "Discover the colors that truly make you shine. Our virtual color analysis identifies your unique seasonal color palette, scientifically matched to your skin tone, eye color, and features. Stop guessing in the fitting room; this service gives you the definitive rulebook for your wardrobe, ensuring every piece you buy enhances your natural complexion and elevates your presence without you ever leaving home.",
+      "short_description": "Discover the colors that truly make you shine. Our virtual color analysis identifies your unique seasonal color palette.",
+      "title": "The Tone Audit"
+    },
+    {
+      "category": "Event Styling",
       "footer": "Lookbook Curation, Shopping List, In-Person Shopping, Body Shape Analysis, Lifestyle Analysis, Personal Style Analysis, Color Analysis, Wardrobing,Moodboard curation, Event Styling",
       "image_url": "",
       "long_description": "Discover the colors that truly make you shine. Our in-person color analysis identifies your unique seasonal color palette, scientifically matched to your skin tone, eye color, and features. Stop guessing in the fitting room; this service gives you the definitive rulebook for your wardrobe, ensuring every piece you buy enhances your natural complexion and elevates your presence without you ever leaving home.",
-      "category": "Event Styling"
+      "short_description": "Discover the colors that truly make you shine. Our in-person color analysis identifies your unique seasonal color palette, scientifically matched to your skin tone, eye color, and features. Stop guessing in the fitting room; this service gives you the definitive rulebook for your wardrobe, ensuring every piece you buy enhances your natural complexion and elevates your presence without you ever leaving home.",
+      "title": "The Tone Audit (in \u2013 person)"
     }
   ],
   "reviews": [
     {
-      "text": "I sought out a personal stylist because I felt like my wardrobe needed a refresh—I had a lot of pieces I liked individually, but they didn’t always come together in a way that felt cohesive or flattering. Working with Ayushi completely changed that.\n\nBefore our sessions, my style was a bit all over the place. I had clothes I loved but didn’t always know how to wear or pair them. Ayushi helped me understand what flatters my body and how to create outfits that feel more *me*. I now have clarity on how to dress in a way that’s both comfortable and expressive of who I am.\n\nMy favorite part of the styling experience was seeing everything come together in the end. It was amazing to realize that I didn’t need to overhaul my entire closet—just learn how to use what I already had in smarter ways. One of the biggest surprises was how some simple changes in outfit combinations made a noticeable difference in how put-together and confident I looked.\nThroughout the process, I felt completely seen and supported. Ayushi really listened to what I liked and disliked, and found ways to incorporate pieces outside my usual style without pushing me to give up things I loved. It felt collaborative, not prescriptive.\nThe outfits we put together made me feel confident, comfortable, and like a more intentional version of myself. Friends and family noticed subtle but impactful changes, often complimenting how I carried myself or how certain outfits flattered me more.\n\nI’d absolutely recommend this experience—especially to anyone whose wardrobe feels stuck or disconnected from who they are now. Whether you're unsure of what suits you or just need a fresh perspective, working with Ayushi can be incredibly grounding and enlightening.\n\nThree words to describe this journey: *comfortable, insightful, and supportive.*\n\nThis experience didn’t just change how I dress—it changed how I approach getting dressed every day. I feel... ",
-      "author": "- Arushi Pandya"
+      "author": "Arushi Pandya",
+      "text": " sought out a personal stylist because I felt like my wardrobe needed a refresh\u2014I had a lot of pieces I liked individually, but they didn\u2019t always come together in a way that felt cohesive or flattering. Working with Ayushi completely changed that.\n\nBefore our sessions, my style was a bit all over the place. I had clothes I loved but didn\u2019t always know how to wear or pair them. Ayushi helped me understand what flatters my body and how to create outfits that feel more *me*. I now have clarity on how to dress in a way that\u2019s both comfortable and expressive of who I am.\n\nMy favorite part of the styling experience was seeing everything come together in the end. It was amazing to realize that I didn\u2019t need to overhaul my entire closet\u2014just learn how to use what I already had in smarter ways. One of the biggest surprises was how some simple changes in outfit combinations made a noticeable difference in how put-together and confident I looked.\nThroughout the process, I felt completely seen and supported. Ayushi really listened to what I liked and disliked, and found ways to incorporate pieces outside my usual style without pushing me to give up things I loved. It felt collaborative, not prescriptive.\nThe outfits we put together made me feel confident, comfortable, and like a more intentional version of myself. Friends and family noticed subtle but impactful changes, often complimenting how I carried myself or how certain outfits flattered me more.\n\nI\u2019d absolutely recommend this experience\u2014especially to anyone whose wardrobe feels stuck or disconnected from who they are now. Whether you're unsure of what suits you or just need a fresh perspective, working with Ayushi can be incredibly grounding and enlightening.\n\nThree words to describe this journey: *comfortable, insightful, and supportive.*\n\nThis experience didn\u2019t just change how I dress\u2014it changed how I approach getting dressed every day. I feel more confident, more aligned with my personal style, and most importantly, more at ease with the way I show up in the world."
     },
     {
-      "text": "Hello Hello! \nI had a great colour analysis session with Ayushi and I can’t recommend her enough. She was very supportive throughout out the process, right from making sure the picture is right to ensuring I had my PDF in my email. I loved how detailed the analysis was - especially the mention of something as minute as a lipshade that would go with my complexion as well. There was an entire moodboard of clothes to help me understand, the kind of colours I should opt for! I am glad I was able to get this done with her and am super happy with her report.",
-      "author": "- Avani Sangani"
+      "author": "Avani Sangani",
+      "text": "Hello Hello! \nI had a great colour analysis session with Ayushi and I can\u2019t recommend her enough. She was very supportive throughout out the process, right from making sure the picture is right to ensuring I had my PDF in my email. I loved how detailed the analysis was - especially the mention of something as minute as a lipshade that would go with my complexion as well. There was an entire moodboard of clothes to help me understand, the kind of colours I should opt for! I am glad I was able to get this done with her and am super happy with her report."
     }
   ],
   "team": [
