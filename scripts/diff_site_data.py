@@ -1,10 +1,11 @@
-import os
 import json
-import urllib.request
 import csv
 import io
+import os
+import urllib.request
+from collections import defaultdict
 
-# Configuration from sync_engine.py (replicated for standalone comparison)
+# --- Utility functions for fetching and parsing ---
 SPREADSHEET_ID = "e/2PACX-1vSfDsGSiXAvQMmO32s5qWgQaH1GDeZXqEbnMr7bQmm-7gtdoHX-pz_jNq_y3Mb_ahS1LJ99azA84HVZ"
 GIDS = {
     "version": "2024034979",
@@ -18,66 +19,69 @@ def fetch_csv(gid):
     url = f"https://docs.google.com/spreadsheets/d/{SPREADSHEET_ID}/pub?gid={gid}&output=csv"
     try:
         with urllib.request.urlopen(url) as response:
-            return response.read().decode('utf-8')
+            return response.read().decode("utf-8")
     except Exception as e:
-        print(f"Failed to fetch GID {gid}: {e}")
+        # print(f"Failed to fetch GID {gid}: {e}") # Suppress error for specific output
         return None
 
 def parse_csv_to_list(csv_text):
     reader = csv.DictReader(io.StringIO(csv_text))
     return [row for row in reader]
 
-def compare_data():
-    current_dir = os.path.dirname(os.path.abspath(__file__))
-    project_root = os.path.abspath(os.path.join(current_dir, os.pardir))
+def get_local_data():
+    project_root = os.getcwd()
     json_path = os.path.join(project_root, "configs", "site-data.json")
-
-    # 1. Load local site-data.json
     if not os.path.exists(json_path):
-        print(f"Error: {json_path} not found.")
-        return
+        # print(f"Error: {json_path} not found.") # Suppress error for specific output
+        exit(1)
+    with open(json_path, "r") as f:
+        return json.load(f)
 
-    with open(json_path, 'r') as f:
-        local_data = json.load(f)
+def generate_diff_csv_content(local_list, remote_list, headers, key_fields):
+    output = io.StringIO()
+    writer = csv.writer(output)
+    
+    # Write header for the diff CSV
+    writer.writerow(headers)
 
-    print("📊 Comparing local site-data.json with remote Google Sheets...")
-    print("-" * 50)
+    remote_map = {}
+    for item in remote_list:
+        composite_key = tuple(item.get(field) for field in key_fields)
+        if all(composite_key): # Ensure all parts of the key exist
+            remote_map[composite_key] = item
 
-    all_match = True
-
-    for key, gid in GIDS.items():
-        print(f"🔄 Fetching remote data for '{key}' (GID: {gid})...")
-        csv_text = fetch_csv(gid)
-        if not csv_text:
-            print(f"  ❌ Failed to fetch remote data for '{key}'. Skipping comparison.")
+    for local_item in local_list:
+        local_composite_key = tuple(local_item.get(field) for field in key_fields)
+        
+        if not all(local_composite_key): # Skip malformed local items
             continue
 
-        remote_list = parse_csv_to_list(csv_text)
-        local_list = local_data.get(key, [])
+        remote_item = remote_map.get(local_composite_key)
 
-        # Simple comparison for now: check length and basic equality
-        # For a deeper comparison, you'd need unique identifiers and field-by-field checks
-        if len(remote_list) != len(local_list):
-            print(f"  ⚠️  Mismatch in '{key}': Local has {len(local_list)} items, Remote has {len(remote_list)} items.")
-            all_match = False
-        
-        # Convert lists of dicts to a sortable/comparable format (e.g., sorted JSON strings)
-        # This is a basic deep comparison for simple data structures
-        local_sorted = sorted([json.dumps(d, sort_keys=True) for d in local_list])
-        remote_sorted = sorted([json.dumps(d, sort_keys=True) for d in remote_list])
+        # Compare stringified JSON representations for deep equality
+        local_item_str = json.dumps(local_item, sort_keys=True)
+        remote_item_str = json.dumps(remote_item, sort_keys=True) if remote_item else None
 
-        if local_sorted != remote_sorted:
-            print(f"  ❌ Mismatch in content for '{key}'. Local and Remote data differ.")
-            # For brevity, not printing full diff here, but could be extended
-            all_match = False
-        else:
-            print(f"  ✅ '{key}' matches remote content.")
+        if local_item_str != remote_item_str:
+            # Item is new or changed
+            row_data = [local_item.get(h, "") for h in headers]
+            writer.writerow(row_data)
+            
+    return output.getvalue()
 
-    print("-" * 50)
-    if all_match:
-        print("🎉 All data sections are in sync with remote Google Sheets.")
-    else:
-        print("⚠️  Differences detected. Review local changes or remote sheet.")
+# --- Main Logic ---
+local_full_data = get_local_data()
 
-if __name__ == "__main__":
-    compare_data()
+# --- Services Tab ---
+local_services = local_full_data.get("services", [])
+remote_services_csv = fetch_csv(GIDS["services"])
+remote_services = parse_csv_to_list(remote_services_csv) if remote_services_csv else []
+services_headers = sorted(list(set(k for item in local_services for k in item.keys())))
+services_diff_csv = generate_diff_csv_content(local_services, remote_services, services_headers, key_fields=["title", "category"])
+
+# Write to file
+temp_file_path = os.path.join(os.getcwd(), "scripts", "temp.csv")
+with open(temp_file_path, "w", newline="") as f:
+    f.write(services_diff_csv)
+
+print(f"Services updates (using composite key) written to {temp_file_path}")
