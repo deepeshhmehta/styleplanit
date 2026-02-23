@@ -38,17 +38,18 @@ async function loadComponents() {
     if ($("#subscribe-container").length > 0 || $(".subscribe-form").length > 0) features.push('subscribe');
     if ($("#icon-service-container").length > 0) features.push('auth');
 
-    const featurePromises = features.map(async (feature) => {
-        try {
-            const response = await fetch(`/js/features/${feature}.js`);
-            if (!response.ok) throw new Error(`Failed to load feature: ${feature}`);
-            const scriptContent = await response.text();
+    const featurePromises = features.map((feature) => {
+        return new Promise((resolve) => {
             const script = document.createElement('script');
-            script.textContent = scriptContent;
+            script.src = `js/features/${feature}.js`;
+            script.async = false; // Maintain execution order relative to App.init
+            script.onload = () => resolve();
+            script.onerror = () => {
+                console.error(`Error loading feature module ${feature}`);
+                resolve();
+            };
             document.body.appendChild(script);
-        } catch (error) {
-            console.error(`Error loading feature module ${feature}:`, error);
-        }
+        });
     });
 
     await Promise.all(featurePromises);
