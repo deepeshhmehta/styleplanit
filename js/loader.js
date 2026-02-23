@@ -28,8 +28,32 @@ async function loadComponents() {
     });
 
     await Promise.all(loadPromises);
+
+    // 2. Dynamic Feature Loading
+    const features = [];
+    if ($(".hero-bg").length > 0) features.push('hero');
+    if ($("#services").length > 0 || $("#icon-service-container").length > 0) features.push('services');
+    if ($("#reviews-container").length > 0) features.push('reviews');
+    if ($("#team-container").length > 0) features.push('team');
+    if ($("#subscribe-container").length > 0 || $(".subscribe-form").length > 0) features.push('subscribe');
+    if ($("#icon-service-container").length > 0) features.push('auth');
+
+    const featurePromises = features.map(async (feature) => {
+        try {
+            const response = await fetch(`/js/features/${feature}.js`);
+            if (!response.ok) throw new Error(`Failed to load feature: ${feature}`);
+            const scriptContent = await response.text();
+            const script = document.createElement('script');
+            script.textContent = scriptContent;
+            document.body.appendChild(script);
+        } catch (error) {
+            console.error(`Error loading feature module ${feature}:`, error);
+        }
+    });
+
+    await Promise.all(featurePromises);
     
-    // 2. Load and apply site-wide configuration
+    // 3. Load and apply site-wide configuration
     const configArray = await Data.fetch('config');
     let config = {};
     if (configArray.length > 0) {
@@ -63,15 +87,15 @@ async function loadComponents() {
         Utils.applyConfig(config);
     }
 
-    // 1. Initialize UI interactions (Menu, Hero, etc.)
+    // 4. Initialize UI interactions (Menu, Hero, etc.)
     if (typeof App !== 'undefined') {
         App.init(config);
     }
 
-    // 3. Signal that everything is ready
+    // 5. Signal that everything is ready
     document.dispatchEvent(new CustomEvent('appReady'));
 
-    // 4. Hide loader and restore scrolling (with 200ms delay to ensure rendering is stable)
+    // 6. Hide loader and restore scrolling (with 200ms delay to ensure rendering is stable)
     setTimeout(() => {
         const loader = document.getElementById('site-loader');
         if (loader) {
