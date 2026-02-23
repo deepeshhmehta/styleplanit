@@ -64,10 +64,16 @@
     .subscribe-form input[type="email"],
     .subscribe-form input[type="text"] {
         width: 100%;
+        flex: 0 1 auto; /* Reset flex-basis so it doesn't act as height in column layout */
+        padding: 12px 15px;
+        height: auto;
         border-right: 1px solid var(--black);
     }
     .subscribe-form .btn {
         width: 100%;
+        flex: 0 1 auto;
+        padding: 12px 15px;
+        height: auto;
         border-left: 1px solid var(--black);
     }
 

@@ -520,6 +520,10 @@ footer {
     background-color: var(--primary-accent);
     color: var(--white);
     text-align: center;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .hni-section h2 { color: var(--white); margin-bottom: 30px; }
