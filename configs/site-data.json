@@ -200,7 +200,7 @@
     },
     {
       "key": "PROFESSIONALS_CARD_TITLE",
-      "value": "Elevate "
+      "value": "Elevate"
     },
     {
       "key": "REVIEWS_TITLE",
@@ -388,7 +388,7 @@
   "reviews": [
     {
       "author": "Arushi Pandya",
-      "text": " sought out a personal stylist because I felt like my wardrobe needed a refresh\u2014I had a lot of pieces I liked individually, but they didn\u2019t always come together in a way that felt cohesive or flattering. Working with Ayushi completely changed that.\n\nBefore our sessions, my style was a bit all over the place. I had clothes I loved but didn\u2019t always know how to wear or pair them. Ayushi helped me understand what flatters my body and how to create outfits that feel more *me*. I now have clarity on how to dress in a way that\u2019s both comfortable and expressive of who I am.\n\nMy favorite part of the styling experience was seeing everything come together in the end. It was amazing to realize that I didn\u2019t need to overhaul my entire closet\u2014just learn how to use what I already had in smarter ways. One of the biggest surprises was how some simple changes in outfit combinations made a noticeable difference in how put-together and confident I looked.\nThroughout the process, I felt completely seen and supported. Ayushi really listened to what I liked and disliked, and found ways to incorporate pieces outside my usual style without pushing me to give up things I loved. It felt collaborative, not prescriptive.\nThe outfits we put together made me feel confident, comfortable, and like a more intentional version of myself. Friends and family noticed subtle but impactful changes, often complimenting how I carried myself or how certain outfits flattered me more.\n\nI\u2019d absolutely recommend this experience\u2014especially to anyone whose wardrobe feels stuck or disconnected from who they are now. Whether you're unsure of what suits you or just need a fresh perspective, working with Ayushi can be incredibly grounding and enlightening.\n\nThree words to describe this journey: *comfortable, insightful, and supportive.*\n\nThis experience didn\u2019t just change how I dress\u2014it changed how I approach getting dressed every day. I feel more confident, more aligned with my personal style, and most importantly, more at ease with the way I show up in the world."
+      "text": "sought out a personal stylist because I felt like my wardrobe needed a refresh\u2014I had a lot of pieces I liked individually, but they didn\u2019t always come together in a way that felt cohesive or flattering. Working with Ayushi completely changed that.\n\nBefore our sessions, my style was a bit all over the place. I had clothes I loved but didn\u2019t always know how to wear or pair them. Ayushi helped me understand what flatters my body and how to create outfits that feel more *me*. I now have clarity on how to dress in a way that\u2019s both comfortable and expressive of who I am.\n\nMy favorite part of the styling experience was seeing everything come together in the end. It was amazing to realize that I didn\u2019t need to overhaul my entire closet\u2014just learn how to use what I already had in smarter ways. One of the biggest surprises was how some simple changes in outfit combinations made a noticeable difference in how put-together and confident I looked.\nThroughout the process, I felt completely seen and supported. Ayushi really listened to what I liked and disliked, and found ways to incorporate pieces outside my usual style without pushing me to give up things I loved. It felt collaborative, not prescriptive.\nThe outfits we put together made me feel confident, comfortable, and like a more intentional version of myself. Friends and family noticed subtle but impactful changes, often complimenting how I carried myself or how certain outfits flattered me more.\n\nI\u2019d absolutely recommend this experience\u2014especially to anyone whose wardrobe feels stuck or disconnected from who they are now. Whether you're unsure of what suits you or just need a fresh perspective, working with Ayushi can be incredibly grounding and enlightening.\n\nThree words to describe this journey: *comfortable, insightful, and supportive.*\n\nThis experience didn\u2019t just change how I dress\u2014it changed how I approach getting dressed every day. I feel more confident, more aligned with my personal style, and most importantly, more at ease with the way I show up in the world."
     },
     {
       "author": "Avani Sangani",
@@ -407,6 +407,12 @@
       "role": "Founder & Strategy Director",
       "bio": "Deepesh combines strategic image management with the immigrant experience to help newcomers and executives navigate their style journey in Canada.",
       "imageUrl": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=2000&auto=format&fit=crop"
+    }
+  ],
+  "access": [
+    {
+      "email": "deepeshhmehta@gmail.com",
+      "otp": "141414"
     }
   ]
 }
