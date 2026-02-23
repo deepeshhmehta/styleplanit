@@ -60,7 +60,6 @@ const AuthFeature = {
         const otp = $("#auth-otp").val().trim();
         
         try {
-            // Retrieve from config keys added to site-data.json
             const spreadsheetId = config.ACCESS_SPREADSHEET_ID;
             const gid = config.ACCESS_GID;
 
