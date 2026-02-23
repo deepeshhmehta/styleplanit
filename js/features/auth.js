@@ -8,7 +8,10 @@ const AuthFeature = {
 
     const isAuthenticated = sessionStorage.getItem("icon_service_auth") === "true";
     if (!isAuthenticated) {
-        this.renderAuthGate(container);
+        const configArray = await Data.fetch('config');
+        const config = {};
+        configArray.forEach(item => config[item.key] = item.value);
+        this.renderAuthGate(container, config);
         return;
     }
 
@@ -34,7 +37,7 @@ const AuthFeature = {
     }
   },
 
-  renderAuthGate: function (container) {
+  renderAuthGate: function (container, config) {
     container.html(`
         <section class="section-padding hni-section" style="min-height: 80vh; display: flex; align-items: center;">
             <div class="container text-center">
@@ -57,8 +60,15 @@ const AuthFeature = {
         const otp = $("#auth-otp").val().trim();
         
         try {
-            const spreadsheetId = "e/2PACX-1vSfDsGSiXAvQMmO32s5qWgQaH1GDeZXqEbnMr7bQmm-7gtdoHX-pz_jNq_y3Mb_ahS1LJ99azA84HVZ";
-            const gid = "819294434";
+            // Retrieve from config keys added to site-data.json
+            const spreadsheetId = config.ACCESS_SPREADSHEET_ID;
+            const gid = config.ACCESS_GID;
+
+            if (!spreadsheetId || !gid) {
+                console.error("Access config missing", config);
+                throw new Error("Access configuration missing");
+            }
+
             const url = `https://docs.google.com/spreadsheets/d/${spreadsheetId}/pub?gid=${gid}&output=csv&t=${new Date().getTime()}`;
             
             const response = await fetch(url);
