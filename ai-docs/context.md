@@ -53,9 +53,12 @@ The website utilizes a streamlined, atomic data architecture optimized for perfo
 
 *   **Atomic Source:** All site data (config, services, reviews, team, version) is consolidated into a single `configs/site-data.json` file.
 *   **Sync Workflow:** Data is updated from Google Sheets via the `sync-styleplanit.command` tool in the root directory. 
+    *   **Architecture:** The core synchronization logic resides in `scripts/sync_engine.py` with shared utilities in `scripts/data_utils.py`.
+    *   **Key Parameters:**
+        *   `--no-push`: Commits updates locally without pushing to remote.
+        *   `--no-branch-switch`: Allows synchronization directly on the active feature branch (bypassing the default `main` checkout).
+    *   **Audit Tool:** `scripts/diff_site_data.py` helps identify discrepancies between local `site-data.json` and remote Google Sheets before merging.
     *   **User-Friendly Design:** The tool is double-clickable and searchable via macOS Spotlight. It automatically installs any missing dependencies (Homebrew, Git, Python 3) to ensure a seamless experience for non-technical users.
-    *   **Architecture:** The core synchronization logic is isolated in `scripts/sync_engine.py`. A comparison script, `scripts/diff_site_data.py`, helps identify discrepancies between local `site-data.json` and remote Google Sheets.
-    *   **Process:** The script stashes local work, pulls from main, fetches all GIDs from Google Sheets, regenerates the master JSON, and commits the update locally. It provides a real-time "Go-Live" estimate based on GitHub Pages build times.
 *   **Performance:** The site implements a **Stale-While-Revalidate** pattern. It loads instantly from `site_data_cache` in `localStorage` and performs a silent background refresh from the server to ensure future visits are up to date.
 *   **Resilience:** The repository version of `site-data.json` serves as the ultimate fallback, ensuring the site remains functional even if the Google Sheets API is unreachable.
 
@@ -67,6 +70,10 @@ The website utilizes a streamlined, atomic data architecture optimized for perfo
 ## 6. Component Features
 
 *   **Integrated Featured Services:**
+    *   **Filtering Logic:** The rendering engine supports `exclude` or `include` filters. Regular service pages hide the "Icon Service" category, which is reserved for the private collection.
+    *   **Exclusive Access (Icon Service):** A gated, invitation-only collection (`icon-service.html`) utilizing a "Luxury Minimalist" authentication overlay.
+        *   **Verification:** Email/OTP lookup against the `access` data source.
+        *   **Session Management:** Uses `sessionStorage` to maintain access during the browser session.
     *   **Desktop:** Active cards expand to full-width and move to the top row (`order: -1`) using a flex-row editorial layout.
     *   **Mobile:** Active cards expand in-place to `80vh` with a vertically stacked layout to maintain grid stability.
     *   **Content Swapping:** Uses a dual-description model (`short-desc` vs `long-desc`) to provide a precis in grid view and detail in featured view.

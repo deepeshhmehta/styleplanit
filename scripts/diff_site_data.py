@@ -11,7 +11,8 @@ GIDS = {
     "config": "1515187439",
     "services": "439228131",
     "reviews": "1697858749",
-    "team": "1489131428"
+    "team": "1489131428",
+    "access": "819294434"
 }
 
 def get_local_data():
@@ -74,6 +75,7 @@ def main():
         "config": {"key_fields": ["key"]},
         "services": {"key_fields": ["title", "category"]},
         "reviews": {"key_fields": ["author", "text"]}, 
+        "access": {"key_fields": ["email", "otp"]}, 
     }
 
     for category, settings in categories_to_check.items():
