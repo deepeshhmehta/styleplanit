@@ -118,14 +118,29 @@ const App = {
         const email = $("#auth-email").val().toLowerCase().trim();
         const otp = $("#auth-otp").val().trim();
         
-        const accessList = await Data.fetch("access");
-        const user = accessList.find(u => u.email.toLowerCase().trim() === email && u.otp === otp);
+        try {
+            // Live Fetch from Google Sheets
+            const spreadsheetId = "e/2PACX-1vSfDsGSiXAvQMmO32s5qWgQaH1GDeZXqEbnMr7bQmm-7gtdoHX-pz_jNq_y3Mb_ahS1LJ99azA84HVZ";
+            const gid = "819294434";
+            const url = `https://docs.google.com/spreadsheets/d/${spreadsheetId}/pub?gid=${gid}&output=csv&t=${new Date().getTime()}`;
+            
+            const response = await fetch(url);
+            if (!response.ok) throw new Error("Failed to fetch live access list");
+            
+            const csvText = await response.text();
+            const accessList = Utils.parseCSV(csvText);
+            
+            const user = accessList.find(u => u.email.toLowerCase().trim() === email && u.otp === otp);
 
-        if (user) {
-            sessionStorage.setItem("icon_service_auth", "true");
-            this.initIconService();
-        } else {
-            $("#auth-error").fadeIn();
+            if (user) {
+                sessionStorage.setItem("icon_service_auth", "true");
+                this.initIconService();
+            } else {
+                $("#auth-error").text("Invalid email or access code.").fadeIn();
+            }
+        } catch (error) {
+            console.error("Auth error:", error);
+            $("#auth-error").text("System error. Please try again later.").fadeIn();
         }
     });
   },

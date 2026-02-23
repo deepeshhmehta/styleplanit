@@ -12,8 +12,7 @@ GIDS = {
     "config": "1515187439",
     "services": "439228131",
     "reviews": "1697858749",
-    "team": "1489131428",
-    "access": "819294434"
+    "team": "1489131428"
 }
 
 def run_command(cmd, silent=False):
