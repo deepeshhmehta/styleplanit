@@ -31,16 +31,18 @@ def generate_diff_csv_content(local_list, remote_list, headers, key_fields):
 
     remote_map = {}
     for item in remote_list:
-        composite_key = tuple(item.get(field) for field in key_fields)
+        # Normalize the item before creating the key
+        normalized_remote_item = {k: data_utils.normalize_value(v) for k, v in item.items()}
+        composite_key = tuple(normalized_remote_item.get(field) for field in key_fields)
         if all(composite_key):
-            remote_map[composite_key] = item
+            remote_map[composite_key] = normalized_remote_item
 
     for local_item in local_list:
-        local_composite_key = tuple(local_item.get(field) for field in key_fields)
+        normalized_local_item = {k: data_utils.normalize_value(v) for k, v in local_item.items()}
+        local_composite_key = tuple(normalized_local_item.get(field) for field in key_fields)
         if not all(local_composite_key): continue
 
         remote_item = remote_map.get(local_composite_key)
-        normalized_local_item = {k: data_utils.normalize_value(v) for k, v in local_item.items()}
         
         for h in headers:
             if h not in normalized_local_item: normalized_local_item[h] = ""
