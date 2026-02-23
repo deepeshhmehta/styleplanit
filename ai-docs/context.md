@@ -89,5 +89,8 @@ The website utilizes a streamlined, atomic data architecture optimized for perfo
         1.  **Research & Strategy:** Map the codebase and propose a plan before implementation.
         2.  **Surgical Execution:** Apply precise changes that follow "Luxury Minimalist" aesthetics.
         3.  **User Verification:** Present changes to the user for live testing and feedback.
-        4.  **Finalization:** Commit with a meaningful message and push only after the user determines the feature is production-ready.
+        4.  **Data Audit (Mandatory Wrap-Up):** Before pushing, use `scripts/diff_site_data.py` to compare local `site-data.json` with remote Google Sheets. 
+            *   If differences are detected, present them to the user and offer a sync via `scripts/sync_engine.py --no-push`.
+            *   Run `test.sh` to ensure site health.
+        5.  **Finalization:** Commit with a meaningful message and push only after the user determines the feature is production-ready.
 *   **Data Integrity:** All fetch operations default to safe empty arrays `[]` upon dual-source failure to prevent application crashes.

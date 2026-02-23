@@ -40,7 +40,7 @@ test_endpoint "js/config.js"
 test_endpoint "js/utils.js"
 test_endpoint "js/app.js"
 test_endpoint "configs/site-data.json"
-test_endpoint "sync.sh"
+test_endpoint "sync-styleplanit.command"
 
 echo "✨ All production-grade endpoint tests passed!"
 cleanup
