@@ -41,6 +41,7 @@ def get_version_value(data_list):
 def main():
     parser = argparse.ArgumentParser(description="Sync Google Sheets to local JSON.")
     parser.add_argument("--no-push", action="store_true", help="Commit changes locally but do not push to remote.")
+    parser.add_argument("--no-branch-switch", action="store_true", help="Do not switch to main or pull; sync on the current branch.")
     args = parser.parse_args()
 
     print("🔄 Starting Data Sync Workflow...")
@@ -58,10 +59,13 @@ def main():
         print("📥 Stashing current changes...")
         run_command("git stash", silent=True)
 
-    # 3. Switch to main and pull
-    print("🔀 Switching to main...")
-    run_command("git checkout main")
-    run_command("git pull origin main")
+    # 3. Branch Management
+    if not args.no_branch_switch:
+        print("🔀 Switching to main...")
+        run_command("git checkout main")
+        run_command("git pull origin main")
+    else:
+        print(f"📍 Syncing on current branch: {original_branch}")
 
     # 4. Fetch and Consolidate Data
     remote_master_data = {}

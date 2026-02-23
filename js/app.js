@@ -13,7 +13,10 @@ const App = {
       this.initReviews();
     }
     if ($("#services").length > 0) {
-      this.initServices();
+      this.initServices({ filter: "Icon Service", mode: "exclude" });
+    }
+    if ($("#icon-service-container").length > 0) {
+      this.initIconService();
     }
     this.initSubscribe(config);
   },
@@ -60,11 +63,102 @@ const App = {
     }
   },
 
-  initServices: async function () {
-    const services = await Data.fetch("services");
+  initIconService: async function () {
+    const container = $("#icon-service-container");
+    if (container.length === 0) return;
+
+    // 1. Check if authenticated
+    const isAuthenticated = sessionStorage.getItem("icon_service_auth") === "true";
+    
+    if (!isAuthenticated) {
+        this.renderAuthGate(container);
+        return;
+    }
+
+    // 2. Load and render services
+    container.html(`
+        <section class="section-padding" style="padding-top: 140px;">
+            <div class="container text-center">
+                <span class="section-subtitle" text-config-key="ICON_SUBTITLE"></span>
+                <h2 class="section-title" text-config-key="ICON_TITLE" style="margin-bottom: 20px;"></h2>
+                <p text-config-key="ICON_TEXT" style="max-width: 800px; margin: 0 auto 60px;"></p>
+                <div class="service-content"></div>
+            </div>
+        </section>
+    `);
+    
+    // Apply config specifically for the newly injected keys
+    const configArray = await Data.fetch('config');
+    const config = {};
+    configArray.forEach(item => config[item.key] = item.value);
+    Utils.applyConfig(config);
+
+    await this.initServices({ filter: "Icon Service", mode: "include" });
+  },
+
+  renderAuthGate: function (container) {
+    container.html(`
+        <section class="section-padding hni-section" style="min-height: 80vh; display: flex; align-items: center;">
+            <div class="container text-center">
+                <span class="section-subtitle">Invitation Only</span>
+                <h2 class="section-title">Exclusive Access</h2>
+                <p>Please enter your credentials to view the Icon Collection.</p>
+                <form id="auth-gate-form" class="subscribe-form" style="max-width: 400px; margin: 40px auto;">
+                    <input type="email" id="auth-email" placeholder="Email Address" required style="border-color: var(--white); color: var(--white);">
+                    <input type="text" id="auth-otp" placeholder="Access Code" required style="border-color: var(--white); color: var(--white);">
+                    <button type="submit" class="btn" style="border-color: var(--white); color: var(--white); width: 100%;">Unlock Collection</button>
+                    <p id="auth-error" style="color: #ff6b6b; margin-top: 20px; display: none;">Invalid email or access code.</p>
+                </form>
+            </div>
+        </section>
+    `);
+
+    $("#auth-gate-form").on("submit", async (e) => {
+        e.preventDefault();
+        const email = $("#auth-email").val().toLowerCase().trim();
+        const otp = $("#auth-otp").val().trim();
+        
+        try {
+            // Live Fetch from Google Sheets
+            const spreadsheetId = "e/2PACX-1vSfDsGSiXAvQMmO32s5qWgQaH1GDeZXqEbnMr7bQmm-7gtdoHX-pz_jNq_y3Mb_ahS1LJ99azA84HVZ";
+            const gid = "819294434";
+            const url = `https://docs.google.com/spreadsheets/d/${spreadsheetId}/pub?gid=${gid}&output=csv&t=${new Date().getTime()}`;
+            
+            const response = await fetch(url);
+            if (!response.ok) throw new Error("Failed to fetch live access list");
+            
+            const csvText = await response.text();
+            const accessList = Utils.parseCSV(csvText);
+            
+            const user = accessList.find(u => u.email.toLowerCase().trim() === email && u.otp === otp);
+
+            if (user) {
+                sessionStorage.setItem("icon_service_auth", "true");
+                this.initIconService();
+            } else {
+                $("#auth-error").text("Invalid email or access code.").fadeIn();
+            }
+        } catch (error) {
+            console.error("Auth error:", error);
+            $("#auth-error").text("System error. Please try again later.").fadeIn();
+        }
+    });
+  },
+
+  initServices: async function (options = {}) {
+    let services = await Data.fetch("services");
     if (services.length === 0) {
       $(".service-content").html('<p class="text-center section-padding">Service menu is temporarily unavailable. Please check back later.</p>');
       return;
+    }
+
+    // Apply filtering if options provided
+    if (options.filter) {
+      if (options.mode === "exclude") {
+        services = services.filter(s => s.category !== options.filter);
+      } else {
+        services = services.filter(s => s.category === options.filter);
+      }
     }
 
     const categories = [...new Set(services.map((s) => s.category))];
@@ -292,11 +386,13 @@ const App = {
 
     // 2. Load Mailchimp validation script dynamically
     if (!$('script[src*="mc-validate.js"]').length) {
-      const script = document.createElement("script");
-      script.src = "//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js";
-      script.type = "text/javascript";
-      script.async = true;
-      document.body.appendChild(script);
+      $(document).on('appReady', function() {
+        const script = document.createElement("script");
+        script.src = "//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js";
+        script.type = "text/javascript";
+        script.async = true;
+        document.body.appendChild(script);
+      });
     }
 
     // 3. Handle submission, animations, and reset

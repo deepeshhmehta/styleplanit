@@ -541,9 +541,14 @@ footer {
     color: var(--white);
 }
 
-.hni-section .btn:hover {
-    background-color: var(--white);
-    color: var(--primary-accent);
+.hni-section .subscribe-form input {
+    border-color: var(--white) !important;
+    color: var(--white) !important;
+    placeholder-color: rgba(255, 255, 255, 0.7);
+}
+
+.hni-section .subscribe-form input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
 }
 
 /* Subscribe Section Component */
