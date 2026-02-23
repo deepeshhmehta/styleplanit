@@ -40,7 +40,7 @@ async function loadComponents() {
 
     const featurePromises = features.map(async (feature) => {
         try {
-            const response = await fetch(`/js/features/${feature}.js`);
+            const response = await fetch(`js/features/${feature}.js`);
             if (!response.ok) throw new Error(`Failed to load feature: ${feature}`);
             const scriptContent = await response.text();
             const script = document.createElement('script');
