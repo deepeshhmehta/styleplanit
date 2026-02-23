@@ -11,3 +11,6 @@ yarn-error.log*
 .DS_Store
 Thumbs.db
 scripts/temp.csv
+scripts/diff_outputs/config_updates.csv
+scripts/diff_outputs/reviews_updates.csv
+scripts/diff_outputs/services_updates.csv

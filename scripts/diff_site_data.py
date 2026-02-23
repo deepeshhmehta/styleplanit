@@ -21,18 +21,30 @@ def fetch_csv(gid):
         with urllib.request.urlopen(url) as response:
             return response.read().decode("utf-8")
     except Exception as e:
-        # print(f"Failed to fetch GID {gid}: {e}") # Suppress error for specific output
+        print(f"  ❌ Failed to fetch GID {gid}: {e}")
         return None
 
 def parse_csv_to_list(csv_text):
+    # Ensure all values are strings, strip whitespace, and normalize newlines
     reader = csv.DictReader(io.StringIO(csv_text))
-    return [row for row in reader]
+    processed_list = []
+    for row in reader:
+        processed_row = {}
+        for k, v in row.items():
+            if v is not None:
+                # Normalize newlines and strip extra spaces
+                processed_row[k.strip()] = v.strip().replace('\r\n', '\n').replace('\r', '\n')
+            else:
+                processed_row[k.strip()] = ""
+        processed_list.append(processed_row)
+    return processed_list
 
 def get_local_data():
-    project_root = os.getcwd()
+    project_root = os.path.dirname(os.path.abspath(__file__)) # Get script's dir
+    project_root = os.path.abspath(os.path.join(project_root, os.pardir)) # Go up to project root
     json_path = os.path.join(project_root, "configs", "site-data.json")
     if not os.path.exists(json_path):
-        # print(f"Error: {json_path} not found.") # Suppress error for specific output
+        print(f"Error: {json_path} not found.")
         exit(1)
     with open(json_path, "r") as f:
         return json.load(f)
@@ -58,30 +70,93 @@ def generate_diff_csv_content(local_list, remote_list, headers, key_fields):
 
         remote_item = remote_map.get(local_composite_key)
 
-        # Compare stringified JSON representations for deep equality
-        local_item_str = json.dumps(local_item, sort_keys=True)
-        remote_item_str = json.dumps(remote_item, sort_keys=True) if remote_item else None
+        # Normalize local item values to string for consistent comparison with CSV-parsed remote items
+        normalized_local_item = {k: str(v).strip().replace('\r\n', '\n').replace('\r', '\n') for k, v in local_item.items() if v is not None}
+        # Ensure all headers are present for normalized_local_item
+        for h in headers:
+            if h not in normalized_local_item:
+                normalized_local_item[h] = ""
 
-        if local_item_str != remote_item_str:
-            # Item is new or changed
-            row_data = [local_item.get(h, "") for h in headers]
+
+        if not remote_item:
+            # Item exists locally but not remotely (new item)
+            row_data = [normalized_local_item.get(h, "") for h in headers]
             writer.writerow(row_data)
+        else:
+            # Item exists in both, check for differences field by field
+            diff_found = False
+            for header in headers:
+                local_val = normalized_local_item.get(header, "")
+                remote_val = remote_item.get(header, "") # remote_item values are already strings
+
+                if local_val != remote_val:
+                    diff_found = True
+                    break
+            
+            if diff_found:
+                # Item has changed
+                row_data = [normalized_local_item.get(h, "") for h in headers]
+                writer.writerow(row_data)
             
     return output.getvalue()
 
-# --- Main Logic ---
-local_full_data = get_local_data()
+def main():
+    local_full_data = get_local_data()
+    all_match = True
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    output_dir = os.path.join(script_dir, "diff_outputs")
+    os.makedirs(output_dir, exist_ok=True)
 
-# --- Services Tab ---
-local_services = local_full_data.get("services", [])
-remote_services_csv = fetch_csv(GIDS["services"])
-remote_services = parse_csv_to_list(remote_services_csv) if remote_services_csv else []
-services_headers = sorted(list(set(k for item in local_services for k in item.keys())))
-services_diff_csv = generate_diff_csv_content(local_services, remote_services, services_headers, key_fields=["title", "category"])
+    print("📊 Comparing local site-data.json with remote Google Sheets...")
+    print("-" * 50)
 
-# Write to file
-temp_file_path = os.path.join(os.getcwd(), "scripts", "temp.csv")
-with open(temp_file_path, "w", newline="") as f:
-    f.write(services_diff_csv)
+    categories_to_check = {
+        "config": {"key_fields": ["key"]},
+        "services": {"key_fields": ["title", "category"]},
+        "reviews": {"key_fields": ["author", "text"]}, # Assuming author + text is unique
+    }
 
-print(f"Services updates (using composite key) written to {temp_file_path}")
+    for category, settings in categories_to_check.items():
+        print(f"🔄 Fetching remote data for '{category}' (GID: {GIDS[category]})...")
+        csv_text = fetch_csv(GIDS[category])
+        
+        if not csv_text:
+            print(f"  ❌ Failed to fetch remote data for '{category}'. Skipping comparison.")
+            all_match = False
+            continue
+
+        local_list = local_full_data.get(category, [])
+        remote_list = parse_csv_to_list(csv_text)
+        
+        # Determine headers: use all keys found in local and remote for comprehensive comparison
+        all_keys = set()
+        for item in local_list:
+            all_keys.update(item.keys())
+        for item in remote_list:
+            all_keys.update(item.keys())
+        headers = sorted(list(all_keys))
+
+        if not headers and (local_list or remote_list):
+            print(f"  ⚠️  Could not determine headers for '{category}' despite data presence. Skipping comparison.")
+            all_match = False
+            continue
+
+        diff_csv_content = generate_diff_csv_content(local_list, remote_list, headers, key_fields=settings["key_fields"])
+        
+        if diff_csv_content:
+            all_match = False
+            output_file = os.path.join(output_dir, f"{category}_updates.csv")
+            with open(output_file, "w", newline="") as f:
+                f.write(diff_csv_content)
+            print(f"  ⚠️  Differences detected for '{category}'. Updates written to {output_file}")
+        else:
+            print(f"  ✅ '{category}' matches remote content.")
+
+    print("-" * 50)
+    if all_match:
+        print("🎉 All configured data sections are in sync with remote Google Sheets.")
+    else:
+        print("⚠️  Differences detected. Review generated CSVs in 'scripts/diff_outputs/' folder.")
+
+if __name__ == "__main__":
+    main()
