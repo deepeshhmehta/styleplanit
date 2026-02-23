@@ -7,6 +7,14 @@
   ],
   "config": [
     {
+      "key": "ACCESS_GID",
+      "value": "819294434"
+    },
+    {
+      "key": "ACCESS_SPREADSHEET_ID",
+      "value": "e/2PACX-1vSfDsGSiXAvQMmO32s5qWgQaH1GDeZXqEbnMr7bQmm-7gtdoHX-pz_jNq_y3Mb_ahS1LJ99azA84HVZ"
+    },
+    {
       "key": "FOOTER_COPYRIGHT",
       "value": "&copy; 2026 Style Plan(it). Toronto."
     },
