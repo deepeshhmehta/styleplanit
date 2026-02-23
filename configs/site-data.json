@@ -7,6 +7,14 @@
   ],
   "config": [
     {
+      "key": "ACCESS_GID",
+      "value": "819294434"
+    },
+    {
+      "key": "ACCESS_SPREADSHEET_ID",
+      "value": "e/2PACX-1vSfDsGSiXAvQMmO32s5qWgQaH1GDeZXqEbnMr7bQmm-7gtdoHX-pz_jNq_y3Mb_ahS1LJ99azA84HVZ"
+    },
+    {
       "key": "FOOTER_COPYRIGHT",
       "value": "&copy; 2026 Style Plan(it). Toronto."
     },
@@ -415,12 +423,6 @@
       "role": "Founder & Strategy Director",
       "bio": "Deepesh combines strategic image management with the immigrant experience to help newcomers and executives navigate their style journey in Canada.",
       "imageUrl": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=2000&auto=format&fit=crop"
-    }
-  ],
-  "access": [
-    {
-      "email": "deepeshhmehta@gmail.com",
-      "otp": "141414"
     }
   ]
 }

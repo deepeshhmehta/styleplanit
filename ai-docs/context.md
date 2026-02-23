@@ -33,11 +33,18 @@ This document provides a summary of the StylePlanIt website project for context 
 
 *   **Frameworks:** jQuery (for event delegation and DOM manipulation).
 *   **Core Files:**
-    *   `index.html`, `services.html`, `meet-the-team.html`: Main page structures.
-    *   `js/config.js`: Centralized constants and Google Sheets IDs.
-    *   `js/utils.js`: Shared `Utils` (CSV parsing, Meta management) and `Data` (Primary/Backup fetching logic).
-    *   `js/app.js`: Application-specific UI logic (Services, Team, Hero, Reviews).
-    *   `js/loader.js`: Manages component injection and the "Luxury Minimalist" fade-out loading screen.
+    *   `index.html`, `services.html`, `meet-the-team.html`, `icon-service.html`: Page structures.
+    *   `js/config.js`: Centralized constants and configuration keys.
+    *   `js/utils.js`: Core shared utilities (`parseCSV`, `applyConfig`, `Data` provider).
+    *   `js/loader.js`: The system orchestrator. Injects HTML components and dynamically loads required feature modules based on page content.
+    *   `js/app.js`: Lightweight global logic (Navigation) and feature initialization coordinator.
+    *   **`js/features/` (Feature-Based Plugin Architecture):**
+        *   `hero.js`: Hero section slideshow logic.
+        *   `services.js`: Universal service grid rendering and category filtering.
+        *   `reviews.js`: Testimonial expansion and rendering logic.
+        *   `team.js`: Team profile rendering.
+        *   `subscribe.js`: Mailchimp integration and success animations.
+        *   `auth.js`: "Icon Service" gated access gate and real-time Google Sheets fetching.
     *   `components/`: Reusable HTML snippets (`header.html`, `footer.html`).
     *   `styles/`: Modular CSS structure:
         *   `common.css`: Reset, variables, typography, and shared components.
@@ -94,10 +101,11 @@ The website utilizes a streamlined, atomic data architecture optimized for perfo
         3.  **Mandatory User Confirmation:** An AI assistant must NEVER mark a task as complete without the user's explicit confirmation of the implementation.
     *   **Development Lifecycle:**
         1.  **Research & Strategy:** Map the codebase and propose a plan before implementation.
-        2.  **Surgical Execution:** Apply precise changes that follow "Luxury Minimalist" aesthetics.
-        3.  **User Verification:** Present changes to the user for live testing and feedback.
-        4.  **Data Audit (Mandatory Wrap-Up):** Before pushing, use `scripts/diff_site_data.py` to compare local `site-data.json` with remote Google Sheets. 
+        2.  **Feature Branching:** All non-trivial changes must be developed on a dedicated `feature/` branch.
+        3.  **Surgical Execution:** Apply precise changes that follow "Luxury Minimalist" aesthetics.
+        4.  **User Verification:** Present changes to the user for live testing and feedback.
+        5.  **Data Audit (Mandatory Wrap-Up):** Before finalizing, use `scripts/diff_site_data.py` to compare local `site-data.json` with remote Google Sheets. 
             *   If differences are detected, present them to the user and offer a sync via `scripts/sync_engine.py --no-push`.
             *   Run `test.sh` to ensure site health.
-        5.  **Finalization:** Commit with a meaningful message and push only after the user determines the feature is production-ready.
+        6.  **Pull Request & Merge:** Once verified, push the feature branch and merge into `main` via a Pull Request. Commit with a meaningful message.
 *   **Data Integrity:** All fetch operations default to safe empty arrays `[]` upon dual-source failure to prevent application crashes.
