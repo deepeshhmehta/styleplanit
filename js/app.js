@@ -278,49 +278,52 @@ const App = {
   },
 
   initSubscribe: function (config) {
-    const form = $("#subscribe-form");
+    const container = $("#subscribe-container");
+    const form = $("#mc-embedded-subscribe-form, .subscribe-form");
+    const success = $("#subscribe-success");
+
     if (form.length === 0) return;
 
+    // 1. Mailchimp validation configuration
+    window.fnames = new Array();
+    window.ftypes = new Array();
+    fnames[0] = "EMAIL"; ftypes[0] = "email";
+    fnames[2] = "NAME"; ftypes[2] = "text";
+
+    // 2. Load Mailchimp validation script dynamically
+    if (!$('script[src*="mc-validate.js"]').length) {
+      const script = document.createElement("script");
+      script.src = "//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js";
+      script.type = "text/javascript";
+      script.async = true;
+      document.body.appendChild(script);
+    }
+
+    // 3. Handle submission, animations, and reset
     form.on("submit", function (e) {
-      e.preventDefault();
-
+      // Enforce the legal checkbox
       if (!$("#legal-checkbox").is(":checked")) {
-        alert("Please agree to the terms and conditions.");
-        return;
+        e.preventDefault();
+        e.stopPropagation();
+        alert("Please agree to the terms and conditions to subscribe.");
+        return false;
       }
 
-      const email = $("#subscriber-email").val();
-      const name = $("#subscriber-name").val();
-      const actionUrl = config.MAILCHIMP_FORM_ACTION; // Use Mailchimp's action URL
-      const emailFieldName = config.MAILCHIMP_EMAIL_FIELD_NAME; // Mailchimp's email field name
-      const nameFieldName = config.MAILCHIMP_NAME_FIELD_NAME; // Mailchimp's name field name
-      const hiddenFieldName = config.MAILCHIMP_HIDDEN_FIELD_NAME; // Mailchimp's hidden bot-trap field
-      const hiddenFieldValue = config.MAILCHIMP_HIDDEN_FIELD_VALUE; // Mailchimp's hidden bot-trap value
-
-      if (!actionUrl || !emailFieldName || !nameFieldName) {
-        console.warn("Mailchimp configuration missing.");
-        return;
-      }
-
-      // Create a temporary form that targets the hidden iframe
-      const tempForm = $(`
-        <form action="${actionUrl}" method="POST" target="hidden_iframe" style="display:none;">
-            <input type="email" name="${emailFieldName}" value="${email}">
-            <input type="text" name="${nameFieldName}" value="${name}">
-            <input type="text" name="${hiddenFieldName}" value="${hiddenFieldValue}">
-        </form>
-      `);
-
-      $("body").append(tempForm);
-      tempForm.submit();
-      
-      // Clean up
-      setTimeout(() => tempForm.remove(), 500);
-
-      // UI Feedback
-      form.fadeOut(function() {
-        $("#subscribe-success").fadeIn();
-      });
+      // If validation passes, we perform the UI transition
+      // We use a small delay to ensure the form actually submits (since it's target="_blank")
+      setTimeout(() => {
+        container.fadeOut(600, function() {
+          success.fadeIn(600);
+          
+          // 4. After 20 seconds, reset and fade back in
+          setTimeout(() => {
+            success.fadeOut(600, function() {
+              form[0].reset(); // Clear the form
+              container.fadeIn(600);
+            });
+          }, 20000);
+        });
+      }, 500);
     });
   },
 };
