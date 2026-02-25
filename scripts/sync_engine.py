@@ -81,8 +81,26 @@ def main():
     json_path = "configs/site-data.json"
     existing_local_full_data = load_local_json(json_path)
     
+    # 5b. Scan local assets
+    assets_manifest = {}
+    assets_root = "assets/images"
+    if os.path.exists(assets_root):
+        for root, dirs, files in os.walk(assets_root):
+            # Get relative path from assets_root
+            rel_path = os.path.relpath(root, assets_root)
+            if rel_path == ".":
+                folder_key = "root"
+            else:
+                folder_key = rel_path.replace(os.sep, "/")
+            
+            # Filter for common image extensions
+            image_files = [f for f in files if f.lower().endswith(('.png', '.jpg', '.jpeg', '.webp', '.gif'))]
+            if image_files:
+                assets_manifest[folder_key] = sorted(image_files)
+    
     changes_detected = False
     new_local_full_data_to_write = existing_local_full_data.copy() 
+    new_local_full_data_to_write["assets_manifest"] = assets_manifest
 
     for category in GIDS.keys():
         local_list = existing_local_full_data.get(category, [])
@@ -96,6 +114,10 @@ def main():
             changes_detected = True
         
         new_local_full_data_to_write[category] = remote_list
+
+    # Force change if manifest differs
+    if existing_local_full_data.get("assets_manifest") != assets_manifest:
+        changes_detected = True
 
     if not changes_detected:
         print("🙌 No meaningful changes detected in Google Sheets compared to local. Skipping commit.")

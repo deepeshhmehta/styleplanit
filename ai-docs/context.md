@@ -11,10 +11,10 @@ This document provides a summary of the StylePlanIt website project for context 
     2.  High-Net-Worth Individuals (HNIs) looking to manage their image.
 *   **Hosting:** GitHub Pages.
 
-## 2. Aesthetic & Design System
-
-*   **Overall Aesthetic:** "Luxury Minimalist," "Old Money," "Editorial." The design emphasizes clean lines, sharp edges, and generous whitespace.
-*   **Fonts:**
+*   **Aesthetic & Design System:**
+    *   **Images:** Managed via local filenames in Google Sheets. The frontend automatically prepends `assets/images/` to filenames provided in the data source.
+    *   **Overall Aesthetic:** "Luxury Minimalist," "Old Money," "Editorial." The design emphasizes clean lines, sharp edges, and generous whitespace.
+    *   **Fonts:**
     *   **Headings (Serif):** 'Cormorant Garamond'
     *   **Body (Sans-Serif):** 'Montserrat'
 *   **Color Palette:**
@@ -52,6 +52,7 @@ This document provides a summary of the StylePlanIt website project for context 
         *   `mobile.css`: Responsive overrides and mobile navigation.
         *   `styles.css`: (Deprecated) Entry point for backward compatibility.
     *   `configs/`: Local CSV backups for offline/failover resilience.
+    *   `assets/images/`: Local directory for optimized site images.
     *   `test.sh`: Automated health check script for endpoint verification.
 
 ## 4. Data & Configuration Layer

@@ -1,16 +1,17 @@
 # Local environment variables
 .env.asana
 .env
+.env.drive.json
 
 # Logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+scripts/sync_assets.log
 
 # OS files
 .DS_Store
 Thumbs.db
 scripts/temp.csv
-scripts/diff_outputs/config_updates.csv
-scripts/diff_outputs/reviews_updates.csv
-scripts/diff_outputs/services_updates.csv
+scripts/diff_outputs/*.csv
+assets/images/tmp_*

@@ -20,7 +20,7 @@ const TeamFeature = {
       container.append(`
                 <div class="profile-card ${alignmentClass}">
                     <div class="profile-image">
-                        <img src="${person.imageUrl}" alt="${person.name}" loading="lazy">
+                        <img src="${person.imageUrl}" alt="${person.name}">
                     </div>
                     <div class="profile-text">
                         <h3>${person.name}</h3>

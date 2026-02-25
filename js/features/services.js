@@ -68,7 +68,7 @@ const ServicesFeature = {
           grid.append(`
                     <div class="service-card">
                         <div class="service-card-image">
-                            <img src="${service.image_url}" alt="${service.title}" loading="lazy">
+                            <img src="${service.image_url}" alt="${service.title}">
                         </div>
                         <div class="service-card-content">
                             <h3>${service.title}</h3>

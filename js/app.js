@@ -20,10 +20,15 @@ const App = {
     });
   },
 
-  initGlobalFeatures: function (config) {
+  initGlobalFeatures: async function (config) {
     // 1. Hero Slideshow
     if (typeof HeroFeature !== 'undefined') {
-        HeroFeature.init();
+        await HeroFeature.init();
+    }
+
+    // 1b. Logo Band
+    if (typeof LogosFeature !== 'undefined') {
+        LogosFeature.init();
     }
 
     // 2. Reviews
