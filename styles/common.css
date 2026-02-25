@@ -206,7 +206,7 @@ nav {
     position: fixed;
     top: 0;
     width: 100%;
-    background: rgba(var(--primary-accent-rgb), 0.95);
+    background: rgba(var(--anchor-color-rgb), 0.95);
     color: var(--white);
     padding: 25px 0;
     z-index: 1000;
@@ -267,7 +267,7 @@ nav > .container > .logo {
 footer {
     padding: 80px 0;
     border-top: 1px solid var(--border-color);
-    background: rgb(var(--primary-accent-rgb));
+    background: var(--anchor-color);
     color: var(--white);
 }
 

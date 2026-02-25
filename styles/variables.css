@@ -14,4 +14,8 @@
     --cream-rgb: 230, 240, 231;
     --grey: #aaa;
     --logo-band-bg: #abc5ae;
+    
+    /* Anchors */
+    --anchor-color: #24301B;
+    --anchor-color-rgb: 36, 48, 27;
 }
