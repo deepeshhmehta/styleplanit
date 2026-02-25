@@ -54,6 +54,9 @@ const ServicesFeature = {
     const serviceContent = $(".service-content");
     if (serviceContent.length === 0) return;
 
+    // Load manifest for image resolution
+    const assets = Data.masterData.assets_manifest || {};
+
     serviceContent.empty();
     categories.forEach((category, index) => {
       const categoryId = category.trim().replace(/\s+/g, "-").toLowerCase();

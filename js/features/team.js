@@ -3,9 +3,12 @@
  */
 const TeamFeature = {
   init: async function () {
-    const team = await Data.fetch("team");
     const container = $("#team-container");
     if (container.length === 0) return;
+    
+    const masterData = await Data.loadMasterData();
+    const team = masterData.team || [];
+    const images = masterData.assets_manifest["meet-team-page"] || [];
     
     if (!team || team.length === 0) {
       container.html('<p class="text-center">Team details coming soon.</p>');
@@ -17,10 +20,15 @@ const TeamFeature = {
       const isEven = index % 2 === 0;
       const alignmentClass = isEven ? "image-left" : "image-right";
       
+      // Try to find image matching name (e.g. "Ayushi Vyas" -> "ayushi")
+      const firstName = person.name.split(' ')[0].toLowerCase();
+      const matchedImage = images.find(img => img.toLowerCase().includes(firstName)) || images[0];
+      const imageUrl = `assets/images/meet-team-page/${matchedImage}`;
+
       container.append(`
                 <div class="profile-card ${alignmentClass}">
                     <div class="profile-image">
-                        <img src="${person.imageUrl}" alt="${person.name}">
+                        <img src="${imageUrl}" alt="${person.name}">
                     </div>
                     <div class="profile-text">
                         <h3>${person.name}</h3>

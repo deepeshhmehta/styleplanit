@@ -132,8 +132,10 @@
     .profile-card, .profile-card.image-right {
         flex-direction: column;
         gap: 30px;
+        align-items: center;
+        text-align: center;
     }
     .profile-image { max-width: 100%; }
-    .profile-image img { height: 400px; }
+    .profile-image img { height: 400px; width: auto; }
     .profile-text h3 { font-size: 2.2rem; }
 }

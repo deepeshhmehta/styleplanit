@@ -12,7 +12,7 @@ This document provides a summary of the StylePlanIt website project for context 
 *   **Hosting:** GitHub Pages.
 
 *   **Aesthetic & Design System:**
-    *   **Images:** Managed via local filenames in Google Sheets. The frontend automatically prepends `assets/images/` to filenames provided in the data source.
+    *   **Images:** Managed via a hybrid model. Static assets like heroes and logos are discovered automatically via the `assets_manifest` (folder-based). Page-specific content (Services, Team) uses relative paths provided in Google Sheets.
     *   **Overall Aesthetic:** "Luxury Minimalist," "Old Money," "Editorial." The design emphasizes clean lines, sharp edges, and generous whitespace.
     *   **Fonts:**
     *   **Headings (Serif):** 'Cormorant Garamond'
@@ -62,11 +62,11 @@ The website utilizes a streamlined, atomic data architecture optimized for perfo
 *   **Atomic Source:** All site data (config, services, reviews, team, version) is consolidated into a single `configs/site-data.json` file.
 *   **Sync Workflow:** Data is updated from Google Sheets via the `sync-styleplanit.command` tool in the root directory. 
     *   **Architecture:** The core synchronization logic resides in `scripts/sync_engine.py` with shared utilities in `scripts/data_utils.py`.
+    *   **All-in-One Integration:** The script automatically scans the `assets/images/` directory tree and generates an `assets_manifest` within `site-data.json`. This allows the frontend to dynamically discover local images without manual entry in Google Sheets.
     *   **Key Parameters:**
         *   `--no-push`: Commits updates locally without pushing to remote.
         *   `--no-branch-switch`: Allows synchronization directly on the active feature branch (bypassing the default `main` checkout).
     *   **Audit Tool:** `scripts/diff_site_data.py` helps identify discrepancies between local `site-data.json` and remote Google Sheets before merging.
-    *   **User-Friendly Design:** The tool is double-clickable and searchable via macOS Spotlight. It automatically installs any missing dependencies (Homebrew, Git, Python 3) to ensure a seamless experience for non-technical users.
 *   **Performance:** The site implements a **Stale-While-Revalidate** pattern. It loads instantly from `site_data_cache` in `localStorage` and performs a silent background refresh from the server to ensure future visits are up to date.
 *   **Resilience:** The repository version of `site-data.json` serves as the ultimate fallback, ensuring the site remains functional even if the Google Sheets API is unreachable.
 
