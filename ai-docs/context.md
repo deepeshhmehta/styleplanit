@@ -48,7 +48,8 @@ This document provides a summary of the StylePlanIt website project for context 
         *   `auth.js`: "Icon Service" gated access gate and real-time Google Sheets fetching.
     *   `components/`: Reusable HTML snippets (`header.html`, `footer.html`).
     *   `styles/`: Modular CSS structure:
-        *   `common.css`: Reset, variables, typography, and shared components.
+        *   `variables.css`: Design system tokens and luxury theme variables.
+        *   `common.css`: Reset, shared components, and core layout.
         *   `desktop.css`: High-end editorial layouts and desktop-specific grids.
         *   `mobile.css`: Responsive overrides and mobile navigation.
         *   `styles.css`: (Deprecated) Entry point for backward compatibility.

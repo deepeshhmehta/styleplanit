@@ -1,20 +1,5 @@
-/* --- 1. LUXURY RESET & VARIABLES --- */
-:root {
-    --primary-accent: #0c4524;
-    --primary-accent-dark: #547c65;
-    --black: #0F0F0F;
-    --charcoal: #2A2A2A;
-    --cream: #e6f0e7;
-    --white: #ffffff;
-    --border-color: rgba(0,0,0,0.08);
-    --font-primary: 'Cormorant Garamond', serif;
-    --font-secondary: 'Montserrat', sans-serif;
-    --border-radius-pill: 200px;
-    --primary-accent-rgb: 12, 69, 36;
-    --cream-rgb: 230, 240, 231;
-    --grey: #aaa;
-    --logo-band-bg: #abc5ae;
-}
+/* --- 1. LUXURY RESET & THEME --- */
+@import url('variables.css');
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
