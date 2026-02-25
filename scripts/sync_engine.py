@@ -102,6 +102,7 @@ def main():
     new_local_full_data_to_write = existing_local_full_data.copy() 
     new_local_full_data_to_write["assets_manifest"] = assets_manifest
 
+    # Compare category by category using robust logic
     for category in GIDS.keys():
         local_list = existing_local_full_data.get(category, [])
         remote_list = remote_master_data.get(category, [])
@@ -113,6 +114,7 @@ def main():
         if normalized_local != normalized_remote:
             changes_detected = True
         
+        # Strictly use remote data for managed categories (purges removed keys)
         new_local_full_data_to_write[category] = remote_list
 
     # Force change if manifest differs
