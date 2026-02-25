@@ -400,5 +400,38 @@
       "bio": "Hi, I\u2019m Deepesh. I believe that the best technology is the kind you don\u2019t even have to think about\u2014it just works.\nCurrently a Principal Engineer at Zynga, I am a self-driven developer and technical leader with a deep-rooted passion for building seamless digital experiences. My career has been defined by key roles at global leaders like Amazon and DraftKings, where I\u2019ve focused on elite-level systems, from CI/CD automation to multi-stack frameworks. At StylePlanIt, I bring that same architectural innovation to the world of fashion, ensuring that our clients have a reliable, high-performance platform to manage their personal style. My goal is to solve the complex problems behind the scenes so that your journey to a better wardrobe is effortless.",
       "imageUrl": "https://drive.google.com/file/d/1NLr-WJODNcng9Uz8L5pv_KWpEiWYACwP/view?usp=sharing"
     }
-  ]
+  ],
+  "assets_manifest": {
+    "home-page/logos": [
+      "NYFW_SHOWS_LOCKUP_HORIZONTAL_black (1).png",
+      "ahemdabad-mirror.png",
+      "harlem-fashion-week.png",
+      "miss_universe-logo_brandlogos.net_rl7b5-512x512.png"
+    ],
+    "home-page/hero-images": [
+      "Hero-Image-1.JPG",
+      "Hero-image-2.png",
+      "Hero-image-3.JPG"
+    ],
+    "services-page/Establish": [
+      "Hired look.png",
+      "Newcomers essential.png",
+      "Refine & align.png"
+    ],
+    "services-page/Elevate": [
+      "30-min-style-revamo.png",
+      "Icon service.png",
+      "OOO.png",
+      "Showstopper.png",
+      "Signature-foundation.png",
+      "Style-conciege.png",
+      "The-tone-audit.png",
+      "Virtual-tone-audit.png",
+      "occasion .png"
+    ],
+    "meet-team-page": [
+      "ayushi-intro.JPG",
+      "deepesh-intro.jpg"
+    ]
+  }
 }
