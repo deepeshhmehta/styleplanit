@@ -121,6 +121,13 @@ const ServicesFeature = {
       $("#" + tabId).addClass("active");
     });
 
+    // Prevent chip clicks from triggering card expansion
+    $(document).on("click", ".service-chips i", function (e) {
+        e.stopPropagation();
+        // On mobile, the click triggers the CSS :hover state, showing the tooltip.
+        // We stop propagation so the card doesn't expand/collapse.
+    });
+
     $(".service-card").on("click", function () {
       const card = $(this);
       const isAlreadyActive = card.hasClass("active");
