@@ -13,6 +13,7 @@ This document provides a summary of the StylePlanIt website project for context 
 
 *   **Aesthetic & Design System:**
     *   **Images:** Managed via a hybrid model. Static assets like heroes and logos are discovered automatically via the `assets_manifest` (folder-based). Page-specific content (Services, Team) uses relative paths provided in Google Sheets.
+    *   **Standardized Assets:** Brand logos are controlled via the `.brand-logo-item` CSS class (fixed `180x80px` container, `object-fit: contain`) ensuring a clean, uniform look across all assets.
     *   **Overall Aesthetic:** "Luxury Minimalist," "Old Money," "Editorial." The design emphasizes clean lines, sharp edges, and generous whitespace.
     *   **Fonts:**
     *   **Headings (Serif):** 'Cormorant Garamond'
@@ -78,10 +79,10 @@ The website utilizes a streamlined, atomic data architecture optimized for perfo
 ## 6. Component Features
 
 *   **Integrated Featured Services:**
-    *   **Filtering Logic:** The rendering engine supports `exclude` or `include` filters. Regular service pages hide the "Icon Service" category, which is reserved for the private collection.
-    *   **Exclusive Access (Icon Service):** A gated, invitation-only collection (`icon-service.html`) utilizing a "Luxury Minimalist" authentication overlay.
-        *   **Verification:** Email/OTP lookup against the `access` data source.
-        *   **Session Management:** Uses `sessionStorage` to maintain access during the browser session.
+    *   **Filtering Logic:** The rendering engine supports `exclude` or `include` filters. It also supports `autoExpand` (to force a card open) and `noScroll` (to prevent layout jumps).
+    *   **Exclusive Access (Icon Service):** A simplified, invitation-only collection (`icon-service.html`).
+        *   **UI:** Renders only the "By Invitation Only" subtitle and a single, non-collapsible, auto-expanded service card.
+        *   **Verification:** Real-time Email/OTP lookup directly against Google Sheets.
     *   **Desktop:** Active cards expand to full-width and move to the top row (`order: -1`) using a flex-row editorial layout.
     *   **Mobile:** Active cards expand in-place to `80vh` with a vertically stacked layout to maintain grid stability.
     *   **Content Swapping:** Uses a dual-description model (`short-desc` vs `long-desc`) to provide a precis in grid view and detail in featured view.

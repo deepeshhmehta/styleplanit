@@ -19,9 +19,7 @@ const AuthFeature = {
         <section class="section-padding" style="padding-top: 140px;">
             <div class="container text-center">
                 <span class="section-subtitle" text-config-key="ICON_SUBTITLE"></span>
-                <h2 class="section-title" text-config-key="ICON_TITLE" style="margin-bottom: 20px;"></h2>
-                <p text-config-key="ICON_TEXT" style="max-width: 800px; margin: 0 auto 60px;"></p>
-                <div class="service-content"></div>
+                <div class="service-content" style="margin-top: 40px;"></div>
             </div>
         </section>
     `);
@@ -33,7 +31,7 @@ const AuthFeature = {
     Utils.applyConfig(config);
 
     if (typeof ServicesFeature !== 'undefined') {
-        await ServicesFeature.init({ filter: "Icon Service", mode: "include" });
+        await ServicesFeature.init({ filter: "Icon Service", mode: "include", autoExpand: true, noScroll: true });
     }
   },
 

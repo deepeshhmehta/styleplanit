@@ -2,7 +2,10 @@
  * services.js - Service grid rendering and filtering
  */
 const ServicesFeature = {
+  options: {},
+
   init: async function (options = {}) {
+    this.options = options;
     let services = await Data.fetch("services");
     if (services.length === 0) {
       $(".service-content").html('<p class="text-center section-padding">Service menu is temporarily unavailable. Please check back later.</p>');
@@ -24,6 +27,13 @@ const ServicesFeature = {
     this.renderServiceGrids(categories, services);
     this.bindServiceEvents();
     this.handleHashRouting();
+
+    // Auto-expand if requested (used for Icon Service collection)
+    if (this.options.autoExpand) {
+        setTimeout(() => {
+            $(".service-card").first().click();
+        }, 100);
+    }
   },
 
   handleHashRouting: function () {
@@ -134,6 +144,9 @@ const ServicesFeature = {
       const isAlreadyActive = card.hasClass("active");
       
       if (isAlreadyActive) {
+        // Disable deactivation if autoExpand is on (keep the card open)
+        if (ServicesFeature.options.autoExpand) return;
+
         card.removeClass("active");
         return;
       }
@@ -150,11 +163,13 @@ const ServicesFeature = {
         
         const scrollTarget = isMobile ? (card.offset().top - (extraPadding * 2)) : card.closest('.services-grid').offset().top;
 
-        setTimeout(() => {
-            $("html, body").animate({
-                scrollTop: scrollTarget - navHeight
-            }, 600);
-        }, 200);
+        if (!ServicesFeature.options.noScroll) {
+            setTimeout(() => {
+                $("html, body").animate({
+                    scrollTop: scrollTarget - navHeight
+                }, 600);
+            }, 200);
+        }
 
         setTimeout(() => {
             card.removeClass("card-shifting");
