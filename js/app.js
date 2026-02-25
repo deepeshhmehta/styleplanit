@@ -55,5 +55,10 @@ const App = {
     if (typeof SubscribeFeature !== 'undefined') {
         SubscribeFeature.init(config);
     }
+
+    // 7. Dialog Popups
+    if (typeof DialogsFeature !== 'undefined') {
+        DialogsFeature.init();
+    }
   }
 };

@@ -46,6 +46,7 @@ This document provides a summary of the StylePlanIt website project for context 
         *   `team.js`: Team profile rendering.
         *   `subscribe.js`: Mailchimp integration and success animations.
         *   `auth.js`: "Icon Service" gated access gate and real-time Google Sheets fetching.
+        *   `dialogs.js`: Dynamic popup notification system with scheduling and session-based persistence.
     *   `components/`: Reusable HTML snippets (`header.html`, `footer.html`).
     *   `styles/`: Modular CSS structure:
         *   `variables.css`: Design system tokens and luxury theme variables.

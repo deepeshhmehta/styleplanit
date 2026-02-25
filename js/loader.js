@@ -38,6 +38,7 @@ async function loadComponents() {
     if ($("#team-container").length > 0) features.push('team');
     if ($("#subscribe-container").length > 0 || $(".subscribe-form").length > 0) features.push('subscribe');
     if ($("#icon-service-container").length > 0) features.push('auth');
+    features.push('dialogs'); // Always load dialog system if possible
 
     const featurePromises = features.map((feature) => {
         return new Promise((resolve) => {

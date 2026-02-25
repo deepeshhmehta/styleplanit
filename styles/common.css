@@ -628,6 +628,67 @@ footer {
     line-height: 1.5;
 }
 
+/* Luxury Popup Dialog Component */
+.luxury-dialog {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    width: 350px;
+    background: var(--white);
+    border: 1px solid var(--border-color);
+    padding: 40px 30px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+    z-index: 2000;
+    transform: translateY(100px);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.luxury-dialog.visible {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+}
+
+.luxury-dialog h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.luxury-dialog p {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: var(--charcoal);
+    margin-bottom: 25px;
+}
+
+.dialog-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--divider);
+    line-height: 1;
+    transition: color 0.3s ease;
+}
+
+.dialog-close:hover {
+    color: var(--primary-accent);
+}
+
+@media (max-width: 768px) {
+    .luxury-dialog {
+        width: calc(100% - 40px);
+        left: 20px;
+        bottom: 20px;
+        padding: 30px 20px;
+    }
+}
+
 /* Floating Book Now Button */
 .book-now-floating {
     position: fixed;

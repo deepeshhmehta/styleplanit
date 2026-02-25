@@ -11,7 +11,8 @@ GIDS = {
     "config": "1515187439",
     "services": "439228131",
     "reviews": "1697858749",
-    "team": "1489131428"
+    "team": "1489131428",
+    "dialogs": "49430965"
 }
 
 def get_local_data():
@@ -31,7 +32,6 @@ def generate_diff_csv_content(local_list, remote_list, headers, key_fields):
 
     remote_map = {}
     for item in remote_list:
-        # Normalize the item before creating the key
         normalized_remote_item = {k: data_utils.normalize_value(v) for k, v in item.items()}
         composite_key = tuple(normalized_remote_item.get(field) for field in key_fields)
         if all(composite_key):
@@ -74,27 +74,32 @@ def main():
         "config": {"key_fields": ["key"]},
         "services": {"key_fields": ["title", "category"]},
         "reviews": {"key_fields": ["author", "text"]}, 
+        "dialogs": {"key_fields": ["title"]}, 
     }
 
     for category, settings in categories_to_check.items():
         print(f"🔄 Fetching remote data for '{category}'...")
         csv_text = data_utils.fetch_csv(SPREADSHEET_ID, GIDS[category])
         
-        if not csv_text:
+        if csv_text is None: # Fetch failed
             all_match = False
             continue
 
         local_list = local_full_data.get(category, [])
         remote_list = data_utils.parse_csv_to_list(csv_text)
+        
+        # Ensure headers are found even if remote is empty
         headers = data_utils.get_all_headers(local_list, remote_list)
 
-        if not headers and (local_list or remote_list):
-            all_match = False
+        if not headers:
+            print(f"  ✅ '{category}' matches remote content.")
             continue
 
         diff_csv_content = generate_diff_csv_content(local_list, remote_list, headers, key_fields=settings["key_fields"])
         
-        if diff_csv_content and len(diff_csv_content.strip().split('\n')) > 1:
+        # Write CSV if there's actual data (beyond just the header line)
+        lines = diff_csv_content.strip().split('\n')
+        if len(lines) > 1:
             all_match = False
             output_file = os.path.join(output_dir, f"{category}_updates.csv")
             with open(output_file, "w", newline="") as f:

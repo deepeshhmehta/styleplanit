@@ -373,6 +373,15 @@
       "imageUrl": "https://drive.google.com/file/d/1NLr-WJODNcng9Uz8L5pv_KWpEiWYACwP/view?usp=sharing"
     }
   ],
+  "dialogs": [
+    {
+      "title": "Got a style emergency?",
+      "description": "WhatsApp us on 64796(style). Our experts are standing by.",
+      "cta": "WhatsApp Us",
+      "action": "https://wa.me/16479678953",
+      "timeInSeconds": 5
+    }
+  ],
   "assets_manifest": {
     "home-page/logos": [
       "NYFW_SHOWS_LOCKUP_HORIZONTAL_black (1).png",
