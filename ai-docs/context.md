@@ -22,6 +22,9 @@ This document provides a summary of the StylePlanIt website project for context 
 *   **Typography Standards:**
     *   **Em-dashes:** Use actual em-dashes (`—`) instead of unicode escapes (`\u2014`) or multiple hyphens (`--`) to maintain a high-end editorial look.
     *   **Line Breaks:** Use literal `\n` in JSON for intentional multi-line content (e.g., reviews, bios).
+*   **Media Standards:**
+    *   **Profile Images:** Always use `object-fit: cover` and `object-position: top center` for team/profile images to ensure faces are prioritized and not cut off by fixed-height containers.
+    *   **Metadata Assets:** `OG_IMAGE` and other social metadata values must use **absolute URLs** (e.g., `https://styleplanit.com/assets/...`) to ensure cross-platform compatibility.
 *   **Color Palette:**
     *   **Primary Accent (Eucalyptus Green):** `#0c4524` (Used for buttons, links, highlights, and site loader)
     *   **Accent Hover (Darker Green):** `#547c65`
@@ -113,8 +116,15 @@ The website utilizes a streamlined, atomic data architecture optimized for perfo
     *   **AI Protocol:** AI assistants must NEVER read or output the contents of `.env.asana`. To interact with the Asana API, use a subshell to source the token directly into the command (e.g., `(source .env.asana && curl -H "Authorization: Bearer $ASANA_PAT" ...)`). This ensures the token remains invisible to logs and outputs.
     *   **Asana Workflow:**
         1.  **Project Identification:** Identify the "Style Plan-It Launch Plan" project (`gid: 1212636326772928`).
-        2.  **Secure Task Management:** Use `curl` to fetch tasks/subtasks and update their status (e.g., `setParent`, `PUT` status).
-        3.  **Mandatory User Confirmation:** An AI assistant must NEVER mark a task as complete without the user's explicit confirmation of the implementation.
+        2.  **Section Mapping:**
+            *   **To do:** `1212636326772929`
+            *   **Doing:** `1212623270704079`
+            *   **Waiting:** `1212702244216478`
+            *   **Done:** `1212623270704080`
+        3.  **Secure Task Management:** Use `curl` to fetch tasks/subtasks and update their status (e.g., `setParent`, `PUT` status).
+        4.  **Mandatory User Confirmation:** An AI assistant must NEVER mark a task as complete without the user's explicit confirmation of the implementation.
+    *   **Google Analytics:**
+        *   **Dynamic Injection:** Tracking is NOT hardcoded in HTML. `js/loader.js` dynamically injects the `gtag.js` engine if a `GOOGLE_ANALYTICS_ID` is present in the `config` section of `site-data.json`.
     *   **Development Lifecycle:**
         1.  **Research & Strategy:** Map the codebase and propose a plan before implementation.
         2.  **Feature Branching:** All non-trivial changes must be developed on a dedicated `feature/` branch.
@@ -125,3 +135,14 @@ The website utilizes a streamlined, atomic data architecture optimized for perfo
             *   Run `test.sh` to ensure site health.
         6.  **Pull Request & Merge:** Once verified, push the feature branch and merge into `main` via a Pull Request. Commit with a meaningful message.
 *   **Data Integrity:** All fetch operations default to safe empty arrays `[]` upon dual-source failure to prevent application crashes.
+
+## 8. Current Project State (February 2026)
+
+*   **Infrastructure:** Production domain `https://styleplanit.com` is live via Cloudflare and GitHub Pages. HTTPS is enforced.
+*   **Analytics:** Google Analytics (`G-19XDQLSNT7`) is active and managed dynamically via `site-data.json`.
+*   **Data Sync:** The Interactive Diff Engine is fully rewired for 3-way resolution.
+*   **Recent Wins:** Standardized typography (em-dashes), improved cache invalidation (Active Versioning + 24h TTL), and fixed profile image positioning.
+*   **Next Priorities:**
+    1.  **Refactor:** Centralize shared HTML boilerplate (Master Layout Pattern) to reduce redundancy across the 4 main pages.
+    2.  **Feedback:** Review and implement "Discuss Client Feedback" task in Asana (includes stylist introduction on the home page).
+    3.  **Testing:** Develop a more comprehensive testing suite beyond `test.sh`.
