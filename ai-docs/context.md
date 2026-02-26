@@ -18,6 +18,9 @@ This document provides a summary of the StylePlanIt website project for context 
     *   **Fonts:**
     *   **Headings (Serif):** 'Cormorant Garamond'
     *   **Body (Sans-Serif):** 'Montserrat'
+*   **Typography Standards:**
+    *   **Em-dashes:** Use actual em-dashes (`—`) instead of unicode escapes (`\u2014`) or multiple hyphens (`--`) to maintain a high-end editorial look.
+    *   **Line Breaks:** Use literal `\n` in JSON for intentional multi-line content (e.g., reviews, bios).
 *   **Color Palette:**
     *   **Primary Accent (Eucalyptus Green):** `#0c4524` (Used for buttons, links, highlights, and site loader)
     *   **Accent Hover (Darker Green):** `#547c65`
@@ -69,7 +72,12 @@ The website utilizes a streamlined, atomic data architecture optimized for perfo
     *   **Key Parameters:**
         *   `--no-push`: Commits updates locally without pushing to remote.
         *   `--no-branch-switch`: Allows synchronization directly on the active feature branch (bypassing the default `main` checkout).
-    *   **Audit Tool:** `scripts/diff_site_data.py` helps identify discrepancies between local `site-data.json` and remote Google Sheets before merging.
+    *   **Audit Tool:** `scripts/diff_site_data.py` is an interactive 3-way resolution engine (Local vs. Sheets vs. Manual) used to identify and resolve discrepancies.
+        *   **Resolution Matrix:**
+            1.  **Mismatch:** Choose between Local (keeps local, updates Sheets via CSV), Sheets (updates local), or Manual (updates both).
+            2.  **Sheets Only:** Choose Local (adds to a manual deletion list for Sheets) or Sheets (adds to local site-data.json).
+            3.  **Local Only:** Choose Local (keeps local, adds to Sheets update CSV) or Sheets (deletes from local site-data.json).
+        *   **Efficiency:** Only prompts for local saves or generates update CSVs if actionable changes are made during the session.
 *   **Performance:** The site implements a **Stale-While-Revalidate** pattern. It loads instantly from `site_data_cache` in `localStorage` and performs a silent background refresh from the server to ensure future visits are up to date.
 *   **Resilience:** The repository version of `site-data.json` serves as the ultimate fallback, ensuring the site remains functional even if the Google Sheets API is unreachable.
 

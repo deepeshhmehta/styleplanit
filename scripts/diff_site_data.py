@@ -2,7 +2,14 @@ import json
 import csv
 import io
 import os
+import sys
 import data_utils
+from collections import OrderedDict
+
+"""
+📊 STYLEPLANIT INTERACTIVE DIFF ENGINE
+Optimized: Only prompts for action when data actually diverges.
+"""
 
 # Configuration
 SPREADSHEET_ID = "e/2PACX-1vSfDsGSiXAvQMmO32s5qWgQaH1GDeZXqEbnMr7bQmm-7gtdoHX-pz_jNq_y3Mb_ahS1LJ99azA84HVZ"
@@ -15,104 +22,178 @@ GIDS = {
     "dialogs": "49430965"
 }
 
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+PROJECT_ROOT = os.path.abspath(os.path.join(SCRIPT_DIR, os.pardir))
+JSON_PATH = os.path.join(PROJECT_ROOT, "configs", "site-data.json")
+OUTPUT_DIR = os.path.join(SCRIPT_DIR, "diff_outputs")
+
 def get_local_data():
-    project_root = os.path.dirname(os.path.abspath(__file__)) 
-    project_root = os.path.abspath(os.path.join(project_root, os.pardir)) 
-    json_path = os.path.join(project_root, "configs", "site-data.json")
-    if not os.path.exists(json_path):
-        print(f"Error: {json_path} not found.")
-        exit(1)
-    with open(json_path, "r") as f:
-        return json.load(f)
+    if not os.path.exists(JSON_PATH):
+        print(f"Error: {JSON_PATH} not found.")
+        sys.exit(1)
+    with open(JSON_PATH, "r") as f:
+        return json.load(f, object_pairs_hook=OrderedDict)
 
-def generate_diff_csv_content(local_list, remote_list, headers, key_fields):
-    output = io.StringIO()
-    writer = csv.writer(output)
-    writer.writerow(headers)
+def get_key_string(item, key_fields):
+    if not item: return "None"
+    return " | ".join(str(item.get(f, "N/A")) for f in key_fields)
 
-    remote_map = {}
-    for item in remote_list:
-        normalized_remote_item = {k: data_utils.normalize_value(v) for k, v in item.items()}
-        composite_key = tuple(normalized_remote_item.get(field) for field in key_fields)
-        if all(composite_key):
-            remote_map[composite_key] = normalized_remote_item
-
-    for local_item in local_list:
-        normalized_local_item = {k: data_utils.normalize_value(v) for k, v in local_item.items()}
-        local_composite_key = tuple(normalized_local_item.get(field) for field in key_fields)
-        if not all(local_composite_key): continue
-
-        remote_item = remote_map.get(local_composite_key)
-        
-        for h in headers:
-            if h not in normalized_local_item: normalized_local_item[h] = ""
-
-        if not remote_item:
-            writer.writerow([normalized_local_item.get(h, "") for h in headers])
-        else:
-            diff_found = False
-            for header in headers:
-                if normalized_local_item.get(header, "") != remote_item.get(header, ""):
-                    diff_found = True
-                    break
-            if diff_found:
-                writer.writerow([normalized_local_item.get(h, "") for h in headers])
-            
-    return output.getvalue()
+def manual_input_entry(headers, current_item):
+    new_item = {}
+    print("\n📝 MANUAL ENTRY (Leave blank to keep current value):")
+    for h in headers:
+        val = input(f"   {h} [{current_item.get(h, 'N/A')}]: ").strip()
+        new_item[h] = val if val != "" else current_item.get(h, '')
+    return new_item
 
 def main():
     local_full_data = get_local_data()
-    all_match = True
-    script_dir = os.path.dirname(os.path.abspath(__file__))
-    output_dir = os.path.join(script_dir, "diff_outputs")
-    os.makedirs(output_dir, exist_ok=True)
+    updated_local_data = local_full_data.copy()
+    
+    os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-    print("📊 Comparing local site-data.json with remote Google Sheets...")
-    print("-" * 50)
+    print("\n" + "="*60)
+    print("📊 STYLEPLANIT INTERACTIVE DIFF ENGINE")
+    print("="*60)
 
     categories_to_check = {
+        "version": {"key_fields": ["key"]},
         "config": {"key_fields": ["key"]},
         "services": {"key_fields": ["title", "category"]},
         "reviews": {"key_fields": ["author", "text"]}, 
         "dialogs": {"key_fields": ["title"]}, 
+        "team": {"key_fields": ["name"]}
     }
 
+    final_csv_data = {}
+    to_delete_from_sheets = []
+    changes_to_local = False
+
     for category, settings in categories_to_check.items():
-        print(f"🔄 Fetching remote data for '{category}'...")
-        csv_text = data_utils.fetch_csv(SPREADSHEET_ID, GIDS[category])
+        print(f"📂 CATEGORY: {category.upper()}")
         
-        if csv_text is None: # Fetch failed
-            all_match = False
+        csv_text = data_utils.fetch_csv(SPREADSHEET_ID, GIDS[category])
+        if csv_text is None:
+            print(f"  ❌ Failed to fetch remote data for '{category}'. Skipping.")
             continue
 
         local_list = local_full_data.get(category, [])
         remote_list = data_utils.parse_csv_to_list(csv_text)
-        
-        # Ensure headers are found even if remote is empty
         headers = data_utils.get_all_headers(local_list, remote_list)
+        key_fields = settings["key_fields"]
 
-        if not headers:
-            print(f"  ✅ '{category}' matches remote content.")
-            continue
+        # Build Maps
+        local_map = OrderedDict()
+        for item in local_list:
+            norm_item = {h: data_utils.normalize_value(item.get(h, "")) for h in headers}
+            ckey = tuple(norm_item.get(f) for f in key_fields)
+            if all(ckey): local_map[ckey] = norm_item
 
-        diff_csv_content = generate_diff_csv_content(local_list, remote_list, headers, key_fields=settings["key_fields"])
+        remote_map = OrderedDict()
+        for item in remote_list:
+            norm_item = {h: data_utils.normalize_value(item.get(h, "")) for h in headers}
+            ckey = tuple(norm_item.get(f) for f in key_fields)
+            if all(ckey): remote_map[ckey] = norm_item
+
+        all_keys = list(local_map.keys())
+        for k in remote_map.keys():
+            if k not in all_keys: all_keys.append(k)
+
+        local_category_updated = []
+        category_needs_sheets_update = False
+
+        for ckey in all_keys:
+            local_item = local_map.get(ckey)
+            remote_item = remote_map.get(ckey)
+            
+            if local_item and remote_item:
+                diffs = {h: (local_item[h], remote_item[h]) for h in headers if local_item[h] != remote_item[h]}
+                if not diffs:
+                    local_category_updated.append(local_item)
+                    continue
+                state = "MISMATCH"
+            elif local_item:
+                state = "LOCAL_ONLY"
+            else:
+                state = "SHEETS_ONLY"
+
+            print(f"\n🔍 ENTRY: {get_key_string(local_item or remote_item, key_fields)}")
+            print(f"   Status: {state}")
+            if state == "MISMATCH":
+                for field, (lv, rv) in diffs.items():
+                    print(f"     [{field}]: Local: '{lv}' | Sheets: '{rv}'")
+
+            print("\n   1. [Winner: Local]  2. [Winner: Sheets]  3. [Manual]  s. [Skip]")
+            choice = input("   Select: ").strip().lower()
+
+            if choice == "1": # Local Wins
+                if state == "SHEETS_ONLY":
+                    print("   ✅ Mark for Sheets deletion.")
+                    to_delete_from_sheets.append(f"{category} | {get_key_string(remote_item, key_fields)}")
+                else:
+                    print("   ✅ Local kept. Queuing Sheets update.")
+                    local_category_updated.append(local_item)
+                    category_needs_sheets_update = True
+            
+            elif choice == "2": # Sheets Wins
+                if state == "LOCAL_ONLY":
+                    print("   ✅ Deleted from Local.")
+                    changes_to_local = True
+                else:
+                    print("   ✅ Sheets value taken.")
+                    local_category_updated.append(remote_item)
+                    changes_to_local = True
+            
+            elif choice == "3": # Manual
+                manual_item = manual_input_entry(headers, local_item or remote_item)
+                local_category_updated.append(manual_item)
+                changes_to_local = True
+                category_needs_sheets_update = True
+                print("   ✅ Manual entry saved.")
+            
+            else:
+                print("   ⏭️ Skipped.")
+                if local_item: local_category_updated.append(local_item)
+
+        updated_local_data[category] = local_category_updated
         
-        # Write CSV if there's actual data (beyond just the header line)
-        lines = diff_csv_content.strip().split('\n')
-        if len(lines) > 1:
-            all_match = False
-            output_file = os.path.join(output_dir, f"{category}_updates.csv")
-            with open(output_file, "w", newline="") as f:
-                f.write(diff_csv_content)
-            print(f"  ⚠️  Differences detected for '{category}'. Updates written to {output_file}")
-        else:
-            print(f"  ✅ '{category}' matches remote content.")
+        if category_needs_sheets_update:
+            output = io.StringIO()
+            writer = csv.DictWriter(output, fieldnames=headers)
+            writer.writeheader()
+            for row in local_category_updated:
+                writer.writerow(row)
+            final_csv_data[category] = output.getvalue()
 
-    print("-" * 50)
-    if all_match:
-        print("🎉 All configured data sections are in sync with remote Google Sheets.")
+    print("\n" + "="*60)
+    print("🏁 SYNC SUMMARY")
+    print("="*60)
+
+    if not changes_to_local and not final_csv_data and not to_delete_from_sheets:
+        print("🙌 EVERYTHING IN SYNC. No actions required.")
     else:
-        print("⚠️  Differences detected. Review generated CSVs in 'scripts/diff_outputs/' folder.")
+        if to_delete_from_sheets:
+            print("\n🗑️  KEYS TO MANUALLY DELETE FROM SHEETS:")
+            for item in to_delete_from_sheets:
+                print(f"   ❌ {item}")
+
+        if final_csv_data:
+            print("\n📁 UPDATED CSVS GENERATED (in scripts/diff_outputs/):")
+            for cat, content in final_csv_data.items():
+                out_file = os.path.join(OUTPUT_DIR, f"{cat}_to_paste_in_sheets.csv")
+                with open(out_file, "w") as f:
+                    f.write(content)
+                print(f"  ✅ {os.path.basename(out_file)}")
+        
+        if changes_to_local:
+            if input("\n💾 Save updates to site-data.json? (y/n): ").strip().lower() == 'y':
+                with open(JSON_PATH, "w") as f:
+                    json.dump(updated_local_data, f, indent=2, ensure_ascii=False)
+                print("✅ Local site-data.json updated.")
+        else:
+            print("\nℹ️ No local site-data.json changes to save.")
+
+    print("\n✨ Sync Complete!")
 
 if __name__ == "__main__":
     main()
