@@ -91,6 +91,25 @@ async function loadComponents() {
             }
         });
         Utils.applyConfig(config);
+
+        // 3b. Inject Google Analytics if ID is provided
+        if (config['GOOGLE_ANALYTICS_ID']) {
+            const gaId = config['GOOGLE_ANALYTICS_ID'];
+            const gaScript = document.createElement('script');
+            gaScript.async = true;
+            gaScript.src = `https://www.googletagmanager.com/gtag/js?id=${gaId}`;
+            document.head.appendChild(gaScript);
+
+            const gaInitScript = document.createElement('script');
+            gaInitScript.innerHTML = `
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '${gaId}');
+            `;
+            document.head.appendChild(gaInitScript);
+            console.log('Google Analytics initialized.');
+        }
     }
 
     // 4. Initialize UI interactions (Menu, Hero, etc.)

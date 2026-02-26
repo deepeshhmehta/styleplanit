@@ -31,6 +31,10 @@
       "value": "tel:+1-647-967-8953"
     },
     {
+      "key": "GOOGLE_ANALYTICS_ID",
+      "value": "G-19XDQLSNT7"
+    },
+    {
       "key": "HERO_BUTTON_HREF",
       "value": "https://cal.com/styleplanit/15min"
     },
