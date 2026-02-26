@@ -116,7 +116,7 @@ The website utilizes a streamlined, atomic data architecture optimized for perfo
         1.  **Research & Strategy:** Map the codebase and propose a plan before implementation.
         2.  **Feature Branching:** All non-trivial changes must be developed on a dedicated `feature/` branch.
         3.  **Surgical Execution:** Apply precise changes that follow "Luxury Minimalist" aesthetics.
-        4.  **User Verification:** Present changes to the user for live testing and feedback.
+        4.  **User Verification (Mandatory):** AI assistants must NEVER commit changes without presenting the specific code diff to the user and receiving explicit confirmation to proceed with the commit.
         5.  **Data Audit (Mandatory Wrap-Up):** Before finalizing, use `scripts/diff_site_data.py` to compare local `site-data.json` with remote Google Sheets. 
             *   If differences are detected, present them to the user and offer a sync via `scripts/sync_engine.py --no-push`.
             *   Run `test.sh` to ensure site health.
