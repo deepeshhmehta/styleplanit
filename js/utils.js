@@ -116,15 +116,20 @@ const Data = {
         if (this.masterData) return this.masterData;
         
         try {
-            // Check cache first
+            // Check cache and TTL (24 hours)
             const cached = localStorage.getItem('site_data_cache');
-            if (cached) {
+            const cacheTime = localStorage.getItem('cache_timestamp');
+            const now = new Date().getTime();
+            const dayInMs = 24 * 60 * 60 * 1000;
+
+            if (cached && cacheTime && (now - cacheTime < dayInMs)) {
                 this.masterData = JSON.parse(cached);
-                // Background refresh
+                // Background refresh for next visit
                 this.refreshMasterData();
                 return this.masterData;
             }
             
+            // If expired or missing, fetch immediately
             return await this.refreshMasterData();
         } catch (e) {
             console.error("Critical error loading site data", e);
@@ -140,14 +145,29 @@ const Data = {
             const response = await fetch(`${CONFIG.DATA_PATH}?v=${new Date().getTime()}`);
             if (response.ok) {
                 const freshData = await response.json();
+                const now = new Date().getTime();
                 
                 // Version check logic
+                let newVersion = "0.0.0";
                 if (freshData.version && freshData.version.length > 0) {
-                    const newVersion = freshData.version[0].value || freshData.version[0].version;
-                    localStorage.setItem('app_version', newVersion);
+                    newVersion = freshData.version[0].value || freshData.version[0].version;
                 }
 
+                const cachedVersion = localStorage.getItem('app_version');
+                
+                // If versions mismatch, clear cache and reload to force fresh state
+                if (cachedVersion && cachedVersion !== newVersion) {
+                    console.log(`New version detected: ${newVersion}. Purging cache and reloading...`);
+                    localStorage.removeItem('site_data_cache');
+                    localStorage.setItem('app_version', newVersion);
+                    localStorage.setItem('cache_timestamp', now);
+                    window.location.reload(); 
+                    return freshData;
+                }
+
+                localStorage.setItem('app_version', newVersion);
                 localStorage.setItem('site_data_cache', JSON.stringify(freshData));
+                localStorage.setItem('cache_timestamp', now);
                 this.masterData = freshData;
                 return freshData;
             }
