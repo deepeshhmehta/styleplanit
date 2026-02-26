@@ -79,7 +79,10 @@ The website utilizes a streamlined, atomic data architecture optimized for perfo
             2.  **Sheets Only:** Choose Local (adds to a manual deletion list for Sheets) or Sheets (adds to local site-data.json).
             3.  **Local Only:** Choose Local (keeps local, adds to Sheets update CSV) or Sheets (deletes from local site-data.json).
         *   **Efficiency:** Only prompts for local saves or generates update CSVs if actionable changes are made during the session.
-*   **Performance:** The site implements a **Stale-While-Revalidate** pattern. It loads instantly from `site_data_cache` in `localStorage` and performs a silent background refresh from the server to ensure future visits are up to date.
+*   **Performance & Caching:** The site implements a robust **Stale-While-Revalidate** pattern with active enforcement:
+    *   **Instant Load:** Content is served immediately from `site_data_cache` in `localStorage`.
+    *   **Active Versioning:** On every load, the system fetches fresh data in the background. If the server version differs from the local `app_version`, the cache is purged and the page is hard-reloaded.
+    *   **24-Hour TTL:** The cache is automatically invalidated and refreshed if the `cache_timestamp` is older than 24 hours, ensuring data doesn't grow stale.
 *   **Resilience:** The repository version of `site-data.json` serves as the ultimate fallback, ensuring the site remains functional even if the Google Sheets API is unreachable.
 
 ## 5. SEO & Social Optimization
