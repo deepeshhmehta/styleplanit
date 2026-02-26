@@ -9,6 +9,7 @@ This document provides a summary of the StylePlanIt website project for context 
 *   **Mission:** To combine the immigrant experience with professional styling. The consultancy targets two main audiences:
     1.  Ambitious newcomers needing help to land jobs.
     2.  High-Net-Worth Individuals (HNIs) looking to manage their image.
+*   **Production Domain:** `https://styleplanit.com` (Managed via Cloudflare).
 *   **Hosting:** GitHub Pages.
 
 *   **Aesthetic & Design System:**
