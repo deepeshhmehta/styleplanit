@@ -7,7 +7,10 @@ const HomeServicesFeature = {
         if (container.length === 0) return;
 
         const categories = await Data.fetch("categories");
-        const homeCategories = categories.filter(c => c.showOnHomePage);
+        const homeCategories = categories.filter(c => {
+            const val = String(c.showOnHomePage).toUpperCase();
+            return val === 'TRUE';
+        });
 
         this.renderCategories(container, homeCategories);
     },
