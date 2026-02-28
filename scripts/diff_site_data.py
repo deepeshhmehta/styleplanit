@@ -165,10 +165,12 @@ def main():
         
         if category_needs_sheets_update:
             output = io.StringIO()
-            writer = csv.DictWriter(output, fieldnames=headers)
-            writer.writeheader()
+            # Manual join with ~~ to handle commas in text
+            output.write("~~".join(headers) + "\n")
             for row in local_category_updated:
-                writer.writerow(row)
+                # Use string conversion and replace newlines with literal \n to maintain sheet structure
+                line = "~~".join(str(row.get(h, "")).replace("\n", "\\n") for h in headers)
+                output.write(line + "\n")
             final_csv_data[category] = output.getvalue()
 
     print("\n" + "="*60)
