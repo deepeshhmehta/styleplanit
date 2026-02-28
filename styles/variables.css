@@ -4,7 +4,7 @@
     --primary-accent-dark: #547c65;
     --black: #0F0F0F;
     --charcoal: #2A2A2A;
-    --cream: #e6f0e7;
+    --cream: rgb(240 238 230 / 90%);
     --white: #ffffff;
     --border-color: rgba(0,0,0,0.08);
     --font-primary: 'Cormorant Garamond', serif;

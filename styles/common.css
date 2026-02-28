@@ -115,7 +115,7 @@ h1, h2, h3, h4 {
 .hero-content-box {
     position: relative;
     z-index: 2;
-    background: rgba(var(--cream-rgb), 0.9);
+    background: var(--cream);
     padding: 60px;
     max-width: 700px;
     border: 1px solid var(--black);
@@ -601,10 +601,48 @@ footer {
 
 .portfolio-item {
     height: 100%;
-    min-width: 500px; /* Adjusted for padding */
+    min-width: 400px; 
     flex: 0 0 auto;
     padding: 30px;
+    background: var(--black); /* Standard background for singles */
+    position: relative;
+}
+
+.portfolio-item.transformation-pair {
+    display: flex;
+    flex-direction: row; /* Force side-by-side */
+    gap: 10px; 
+    min-width: auto; /* Let content dictate width */
+    background: var(--black); /* All black now */
+    padding: 15px; 
+}
+
+.transformation-side {
+    position: relative;
+    height: 100%;
+    overflow: hidden;
     background: var(--black);
+}
+
+.transformation-side img {
+    height: 100%;
+    width: auto; /* Natural width */
+    max-width: none;
+    object-fit: contain; 
+}
+
+.transformation-side .label {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: rgba(var(--primary-accent-rgb), 0.8);
+    color: var(--white);
+    padding: 4px 12px;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    z-index: 5;
+    border-radius: 2px;
 }
 
 .portfolio-item img {

@@ -1,35 +1,74 @@
 /**
- * portfolio.js - Portfolio image band
+ * portfolio.js - Portfolio image band with transformation support
  */
 const PortfolioFeature = {
     init: async function() {
         const container = $("#portfolio-carousel");
         if (container.length === 0) return;
 
-        // Try to get images from manifest
-        const assets = Data.masterData.assets_manifest || {};
-        let images = assets['portfolio'] || [];
+        const masterData = typeof Data !== 'undefined' ? Data.masterData : {};
+        const assets = masterData.assets_manifest || {};
+        const images = assets['portfolio'] || [];
 
-        // For now, if empty, use placeholders to demonstrate
         if (images.length === 0) {
-            images = [
-                "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=2070",
-                "https://images.unsplash.com/photo-1488161628813-04466f872be2?q=80&w=2070",
-                "https://images.unsplash.com/photo-1539109132314-347f08b526d0?q=80&w=2070",
-                "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=2070"
-            ];
-            this.renderImages(container, images);
-        } else {
-            this.renderImages(container, images.map(img => `assets/images/portfolio/${img}`));
+            console.warn("Portfolio manifest empty. Run sync_engine.py to update.");
+            return;
         }
+
+        this.renderPortfolio(container, images);
     },
 
-    renderImages: function(container, images) {
+    renderPortfolio: function(container, images) {
         container.empty();
+        
+        const processed = new Set();
+        
+        // 1. Identify pairs first to avoid duplication
+        const pairs = [];
+        const singles = [];
+        const usedInPair = new Set();
+
         images.forEach(img => {
+            const name = img.toLowerCase();
+            if (name.includes('_before')) {
+                const baseName = name.split('_before')[0];
+                const afterImage = images.find(i => i.toLowerCase().startsWith(baseName + '_after'));
+                if (afterImage) {
+                    pairs.push({ before: img, after: afterImage });
+                    usedInPair.add(img);
+                    usedInPair.add(afterImage);
+                }
+            }
+        });
+
+        // 2. Anything not in a pair is a single
+        images.forEach(img => {
+            if (!usedInPair.has(img)) {
+                singles.push(img);
+            }
+        });
+
+        // 3. Render pairs
+        pairs.forEach(pair => {
+            container.append(`
+                <div class="portfolio-item transformation-pair">
+                    <div class="transformation-side before">
+                        <img src="assets/images/portfolio/${pair.before}" alt="Before">
+                        <span class="label">Before</span>
+                    </div>
+                    <div class="transformation-side after">
+                        <img src="assets/images/portfolio/${pair.after}" alt="After">
+                        <span class="label">After</span>
+                    </div>
+                </div>
+            `);
+        });
+
+        // 4. Render singles
+        singles.forEach(img => {
             container.append(`
                 <div class="portfolio-item">
-                    <img src="${img}" alt="Portfolio Work">
+                    <img src="assets/images/portfolio/${img}" alt="Portfolio Work">
                 </div>
             `);
         });
