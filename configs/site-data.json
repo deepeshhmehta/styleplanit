@@ -418,10 +418,6 @@
     }
   ],
   "assets_manifest": {
-    "root": [
-      "Elevate.jpg",
-      "Establish.jpg"
-    ],
     "home-page/logos": [
       "NYFW_SHOWS_LOCKUP_HORIZONTAL_black (1).png",
       "ahemdabad-mirror.png",
@@ -464,6 +460,25 @@
       "sam_before.jpg",
       "sanjeev_after.jpg",
       "sanjeev_before.jpg"
+    ],
+    "services-by-category/Establish": [
+      "Hired look.png",
+      "Newcomers essential.png",
+      "Refine & align.png",
+      "homepage_hero.jpg"
+    ],
+    "services-by-category/Elevate": [
+      "30-min-style-revamo.png",
+      "Build-your-signature-self.png",
+      "Icon service.png",
+      "OOO.png",
+      "Showstopper.png",
+      "Signature-foundation.png",
+      "Style-conciege.png",
+      "The-tone-audit.png",
+      "Virtual-tone-audit.png",
+      "homepage_hero.jpg",
+      "occasion .png"
     ],
     "meet-team-page": [
       "ayushi-intro.JPG",
