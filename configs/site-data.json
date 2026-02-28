@@ -241,25 +241,25 @@
   ],
   "categories": [
     {
-      "name": "Establish",
       "description": "Foundational styling for newcomers and those ready to define their presence in a new environment.",
-      "showOnHomePage": true,
+      "href": "services.html#establish",
       "image_url": "assets/images/services-page/Establish/Newcomers essential.png",
-      "href": "services.html#establish"
+      "name": "Establish",
+      "showOnHomePage": "TRUE"
     },
     {
-      "name": "Elevate",
       "description": "Strategic image enhancement for professionals and individuals ready to amplify their influence.",
-      "showOnHomePage": true,
+      "href": "services.html#elevate",
       "image_url": "assets/images/services-page/Elevate/Build-your-signature-self.png",
-      "href": "services.html#elevate"
+      "name": "Elevate",
+      "showOnHomePage": "TRUE"
     },
     {
-      "name": "Icon Service",
       "description": "Bespoke, white-glove image management for high-profile executives and individuals.",
-      "showOnHomePage": false,
+      "href": "icon-service.html",
       "image_url": "assets/images/services-page/Elevate/Icon service.png",
-      "href": "icon-service.html"
+      "name": "Icon Service",
+      "showOnHomePage": "FALSE"
     }
   ],
   "services": [
