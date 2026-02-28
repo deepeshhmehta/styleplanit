@@ -10,6 +10,7 @@ SPREADSHEET_ID = "e/2PACX-1vSfDsGSiXAvQMmO32s5qWgQaH1GDeZXqEbnMr7bQmm-7gtdoHX-pz
 GIDS = {
     "version": "2024034979",
     "config": "1515187439",
+    "categories": "420875592",
     "services": "439228131",
     "reviews": "1697858749",
     "team": "1489131428",

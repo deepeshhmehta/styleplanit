@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title text-config-key="REVIEWS_PAGE_TITLE">Client Reviews | Style Plan(it)</title>
+    <meta name="description" content="Read what our clients have to say about their transformation journeys with Style Plan(it). Professional styling reviews from Toronto.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles/common.css">
+    <link rel="stylesheet" href="styles/desktop.css">
+    <link rel="stylesheet" href="styles/mobile.css">
+</head>
+<body>
+    <div id="site-loader" class="loader-overlay">
+        <div class="loader-content">
+            <div class="loader-banner">Style Plan(it)</div>
+            <div class="loader-spinner"></div>
+        </div>
+    </div>
+
+    <nav data-component="header"></nav>
+
+    <main>
+        <section id="reviews" class="section-padding" style="background-color: var(--white); padding-top: 140px;">
+            <div class="container">
+                <div class="text-center">
+                    <span class="section-subtitle">Kind Words</span>
+                    <h2 class="section-title" text-config-key="REVIEWS_TITLE">Reviews</h2>
+                </div>
+
+                <div class="reviews-grid" id="reviews-container">
+                    <!-- Reviews will be dynamically inserted here -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer data-component="footer"></footer>
+    <div data-component="book-now-floating"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@4.0.0/dist/jquery.min.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/loader.js"></script>
+</body>
+</html>

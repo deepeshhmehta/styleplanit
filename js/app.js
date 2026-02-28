@@ -31,9 +31,22 @@ const App = {
         LogosFeature.init();
     }
 
+    // 1c. Home Page Features
+    if (typeof HomeServicesFeature !== 'undefined') {
+        HomeServicesFeature.init();
+    }
+    if (typeof PortfolioFeature !== 'undefined') {
+        PortfolioFeature.init();
+    }
+
     // 2. Reviews
     if (typeof ReviewsFeature !== 'undefined') {
-        ReviewsFeature.init();
+        const isReviewsPage = window.location.pathname.includes('reviews');
+        if (isReviewsPage) {
+            ReviewsFeature.init();
+        } else {
+            ReviewsFeature.init({ shuffle: true, limit: 3 });
+        }
     }
 
     // 3. Team

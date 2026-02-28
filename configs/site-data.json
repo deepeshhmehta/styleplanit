@@ -48,7 +48,7 @@
     },
     {
       "key": "HOW_IT_WORKS_TITLE",
-      "value": "How It Works"
+      "value": "PICK A JOURNEY"
     },
     {
       "key": "ICON_BUTTON_HREF",
@@ -112,15 +112,15 @@
     },
     {
       "key": "NAV_LINK_1_HREF",
-      "value": "index.html#how-it-works"
+      "value": "index.html#programs"
     },
     {
       "key": "NAV_LINK_1_TEXT",
-      "value": "How It Works"
+      "value": "Our Programs"
     },
     {
       "key": "NAV_LINK_2_HREF",
-      "value": "index.html#reviews"
+      "value": "reviews.html"
     },
     {
       "key": "NAV_LINK_2_TEXT",
@@ -187,6 +187,14 @@
       "value": "Elevate"
     },
     {
+      "key": "REVIEWS_PAGE_DESCRIPTION",
+      "value": "Read what our clients have to say about their transformation journeys with Style Plan(it). Professional styling reviews from Toronto."
+    },
+    {
+      "key": "REVIEWS_PAGE_TITLE",
+      "value": "Client Reviews | Style Plan(it)"
+    },
+    {
       "key": "REVIEWS_TITLE",
       "value": "Reviews"
     },
@@ -229,6 +237,29 @@
     {
       "key": "SUBSCRIBE_TITLE",
       "value": "Stay Inspired"
+    }
+  ],
+  "categories": [
+    {
+      "name": "Establish",
+      "description": "Foundational styling for newcomers and those ready to define their presence in a new environment.",
+      "showOnHomePage": true,
+      "image_url": "assets/images/services-page/Establish/Newcomers essential.png",
+      "href": "services.html#establish"
+    },
+    {
+      "name": "Elevate",
+      "description": "Strategic image enhancement for professionals and individuals ready to amplify their influence.",
+      "showOnHomePage": true,
+      "image_url": "assets/images/services-page/Elevate/Build-your-signature-self.png",
+      "href": "services.html#elevate"
+    },
+    {
+      "name": "Icon Service",
+      "description": "Bespoke, white-glove image management for high-profile executives and individuals.",
+      "showOnHomePage": false,
+      "image_url": "assets/images/services-page/Elevate/Icon service.png",
+      "href": "icon-service.html"
     }
   ],
   "services": [

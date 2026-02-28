@@ -49,31 +49,21 @@
     </header>
 
     <main>
-        <section id="how-it-works" class="section-padding">
+        <section id="programs" class="section-padding">
             <div class="container">
                 <div class="text-center">
-                    <h2 class="section-title" text-config-key="HOW_IT_WORKS_TITLE">How It Works</h2>
+                    <h2 class="section-title" text-config-key="HOW_IT_WORKS_TITLE">Our Programs</h2>
                 </div>
-                
-                <div class="booking-steps">
-                    <div class="step">
-                        <h3 text-config-key="STEP_1_TEXT">1- Checkout our services</h3>
-                    </div>
+                <div class="services-category-grid" id="home-categories-container">
+                    <!-- Category cards will be dynamically inserted here -->
                 </div>
-                
-                <!-- Part 1: Customer Layers -->
-                <div class="customer-layers">
-                    <div class="layer-card">
-                        <h3 text-config-key="NEWCOMERS_CARD_TITLE">Newcomers</h3>
-                        <p text-config-key="NEWCOMERS_CARD_TEXT">Styling for your new chapter in Canada.</p>
-                        <a href-config-key="NEWCOMERS_CARD_BUTTON_HREF" href="services.html#newcomers" class="btn" text-config-key="NEWCOMERS_CARD_BUTTON_TEXT">View Services</a>
-                    </div>
-                    <div class="layer-card">
-                        <h3 text-config-key="PROFESSIONALS_CARD_TITLE">Professionals & HNI</h3>
-                        <p text-config-key="PROFESSIONALS_CARD_TEXT">Elevate your image and influence.</p>
-                        <a href-config-key="PROFESSIONALS_CARD_BUTTON_HREF" href="services.html#professionals" class="btn" text-config-key="PROFESSIONALS_CARD_BUTTON_TEXT">View Services</a>
-                    </div>
-                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio Image Band -->
+        <section id="portfolio" class="portfolio-band">
+            <div class="portfolio-container" id="portfolio-carousel">
+                <!-- Portfolio images will be dynamically inserted here -->
             </div>
         </section>
         
@@ -84,40 +74,6 @@
                 <!-- Logos will be dynamically inserted here -->
             </div>
         </div>
-        <section class="section-padding">
-            <div class="container">
-                <!-- Part 2: Booking -->
-                <div class="booking-steps">
-                    <div class="step">
-                        <h3 text-config-key="STEP_2_TEXT">2. Book a call with us</h3>
-                    </div>
-                    <div class="step">
-                        <a class="btn" href-config-key="STEP_2_BUTTON_HREF" href="https://cal.com/styleplanit/15min" target="_blank" rel="noopener noreferrer" text-config-key="STEP_2_BUTTON_TEXT">&#9742;  Book Now</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <section class="section-padding">
-            <div class="container">
-                <!-- Part 2: Booking -->
-                <div class="booking-steps">
-                    <div class="step">
-                        <h3 text-config-key="STEP_3_TEXT">3. Start your journey</h3>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="reviews" class="section-padding" style="background-color: var(--white);">
-            <div class="container">
-                <div class="text-center">
-                    <h2 class="section-title" text-config-key="REVIEWS_TITLE">Reviews</h2>
-                </div>
-                <div class="reviews-grid" id="reviews-container">
-                    <!-- Reviews will be dynamically inserted here -->
-                </div>
-            </div>
-        </section>
 
         <section id="be-an-icon" class="hni-section section-padding">
              <div class="container">
@@ -125,6 +81,17 @@
                 <h2 text-config-key="ICON_TITLE">The Icon Service.</h2>
                 <p text-config-key="ICON_TEXT">Bespoke image management for Executives and High-Net-Worth Individuals. Lifestyle analysis, luxury in-person shopping, and total wardrobe curation.</p>
                 <a href="icon-service.html" class="btn btn-primary-accent" text-config-key="ICON_BUTTON_TEXT">Request Access</a>
+            </div>
+        </section>
+
+        <section id="reviews" class="section-padding" style="background-color: var(--white);">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="section-title"><a href-config-key="NAV_LINK_2_HREF" href="reviews.html" text-config-key="REVIEWS_TITLE" style="text-decoration: none; color: inherit;">Reviews</a></h2>
+                </div>
+                <div class="reviews-grid" id="reviews-container">
+                    <!-- Reviews will be dynamically inserted here -->
+                </div>
             </div>
         </section>
 

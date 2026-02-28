@@ -16,6 +16,7 @@ SPREADSHEET_ID = "e/2PACX-1vSfDsGSiXAvQMmO32s5qWgQaH1GDeZXqEbnMr7bQmm-7gtdoHX-pz
 GIDS = {
     "version": "2024034979",
     "config": "1515187439",
+    "categories": "420875592",
     "services": "439228131",
     "reviews": "1697858749",
     "team": "1489131428",
@@ -51,6 +52,10 @@ def main():
     updated_local_data = local_full_data.copy()
     
     os.makedirs(OUTPUT_DIR, exist_ok=True)
+    # Clear previous reports
+    for f in os.listdir(OUTPUT_DIR):
+        if f.endswith(".csv"):
+            os.remove(os.path.join(OUTPUT_DIR, f))
 
     print("\n" + "="*60)
     print("📊 STYLEPLANIT INTERACTIVE DIFF ENGINE")
@@ -59,6 +64,7 @@ def main():
     categories_to_check = {
         "version": {"key_fields": ["key"]},
         "config": {"key_fields": ["key"]},
+        "categories": {"key_fields": ["name"]},
         "services": {"key_fields": ["title", "category"]},
         "reviews": {"key_fields": ["author", "text"]}, 
         "dialogs": {"key_fields": ["title"]}, 

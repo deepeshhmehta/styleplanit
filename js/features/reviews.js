@@ -2,11 +2,19 @@
  * reviews.js - Review expansion and rendering logic
  */
 const ReviewsFeature = {
-  init: async function () {
-    const reviews = await Data.fetch("reviews");
+  init: async function (options = {}) {
+    let reviews = await Data.fetch("reviews");
     if (reviews.length === 0) {
       $("#reviews-container").html('<p class="text-center">Reviews are currently being updated.</p>');
       return;
+    }
+
+    // Handle shuffle and limit
+    if (options.shuffle) {
+      reviews = reviews.sort(() => 0.5 - Math.random());
+    }
+    if (options.limit) {
+      reviews = reviews.slice(0, options.limit);
     }
 
     const container = $("#reviews-container");
