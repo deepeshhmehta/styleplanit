@@ -76,6 +76,9 @@ This document provides a summary of the StylePlanIt website project for context 
     *   **Token Protection:** AI assistants must NEVER output the contents of `.env.asana`.
     *   **Token Extraction:** Use `grep` and `cut` in a subshell to extract the token: `TOKEN=$(grep "ASANA_PAT" .env.asana | cut -d'=' -f2 | tr -d '\"' | tr -d "'" | tr -d '[:space:]')`.
     *   **API Usage:** Always use this `$TOKEN` in the `Authorization: Bearer` header for Asana API calls.
+*   **Source Control (Strict):**
+    *   **No Auto-Push:** AI assistants must NEVER execute `git push` autonomously or as part of a commit proposal. 
+    *   **Explicit Instruction Only:** `git push` can ONLY be executed if the user provides a direct, standalone "push" instruction after a commit.
 *   **Feature Branching:** Develop all changes on `feature/` branches.
 *   **User Verification (Mandatory):** AI assistants must NEVER commit changes without presenting a specific code diff to the user and receiving explicit confirmation.
 *   **Data Integrity:** All fetch operations default to safe empty arrays `[]` to prevent crashes.
