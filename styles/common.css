@@ -654,7 +654,7 @@ footer {
 /* Velvet Rope HNI Component */
 .hni-section {
     position: relative;
-    background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('../assets/images/services-page/Elevate/Icon service.png');
+    background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('../assets/images/services-by-category/Elevate/Icon\ service.png');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
