@@ -37,21 +37,23 @@ This document provides a summary of the StylePlanIt website project for context 
 
 *   **Frameworks:** jQuery.
 *   **Core Logic:**
-    *   `js/loader.js`: Component injector and feature orchestrator.
-    *   `js/app.js`: Global feature initialization and navigation.
+    *   **`js/loader.js` (System Orchestrator):** 
+        *   **Recursive Loading:** Automatically fetches and injects HTML components from the `components/` directory. Supports deep nesting.
+        *   **Professional Fallback:** Missing components are hidden (`display: none`) to maintain UI integrity.
+        *   **Visual Stability:** Preloads all critical images (detected via `style-bg-config-key`) before fading out the site loader.
+    *   **`js/app.js`:** Global feature initialization and navigation coordinate.
 *   **Plugin Features (`js/features/`):**
     *   `home-services.js`: Renders category-based program cards.
-    *   `portfolio.js`: Handles side-by-side "Before/After" transformation pairing.
+    *   `portfolio.js`: Handles side-by-side "Before/After" transformation pairing with `object-position: top center` prioritization.
     *   `reviews.js`: Smart rendering with shuffle/limit support.
-    *   `auth.js`: "Icon Service" gated access via real-time sheet lookup.
 *   **Tooling:**
-    *   `scripts/dev_server.py`: Custom local server with clean URL support.
-    *   `scripts/diff_site_data.py`: Interactive 3-way sync engine with upfront summary and bulk resolution.
-    *   `scripts/sync_engine.py`: Assets manifest generator and Sheets-to-JSON aggregator.
+    *   **`scripts/dev_server.py`:** Custom local server with clean URL support.
+    *   **`scripts/diff_site_data.py`:** Interactive 3-way sync engine with upfront summary and bulk resolution (`All Local`, `All Sheets`, `Individual`).
+    *   **`scripts/sync_engine.py`:** Assets manifest generator and Sheets-to-JSON aggregator.
 
 ## 4. Data & Configuration Layer
 
-*   **Atomic Source:** `configs/site-data.json` is the single source of truth for the frontend.
+*   **Atomic Source:** `configs/site-data.json` is the single source of truth.
 *   **Data Audit Workflow:**
     1.  Run `scripts/diff_site_data.py` to compare local vs. remote.
     2.  Use the `~~` delimiter CSVs in `scripts/diff_outputs/` to update Google Sheets (avoids comma-splitting errors).
@@ -60,22 +62,27 @@ This document provides a summary of the StylePlanIt website project for context 
 
 ## 5. Component Features
 
+*   **Site Loader:** Branded overlay featuring a luxury progress bar and shuffling "Style Phrases" (driven by the `LOADER_PHRASES` pipe-separated config key).
 *   **Portfolio Band:** Editorial-style slider featuring "Before/After" transformation pairs (black background, discreet labels).
 *   **Smart Reviews:** Randomized 3-review preview on the homepage; full list on the dedicated `/reviews` page.
 *   **Icon Service:** Premium, invitation-only section with a fixed background image and dark overlay for high visual impact.
 
 ## 6. Development & Safety
 
+*   **Asana Integration (Mandatory Habit):** 
+    *   Every feature, bug fix, or documentation update must have a corresponding Asana task.
+    *   AI assistants must move tasks to `Doing` at the start of a task and `Done` upon successful verification/push.
+    *   Project: "Style Plan-It Launch Plan" (`1212636326772928`).
 *   **Feature Branching:** Develop all changes on `feature/` branches.
-*   **User Verification (Mandatory):** AI assistants must NEVER commit changes without presenting a specific code diff to the user and receiving explicit confirmation to proceed.
+*   **User Verification (Mandatory):** AI assistants must NEVER commit changes without presenting a specific code diff to the user and receiving explicit confirmation.
 *   **Data Integrity:** All fetch operations default to safe empty arrays `[]` to prevent crashes.
-*   **Asana Integration:** AI assistants must source `.env.asana` in subshells to keep tokens invisible from logs.
+*   **Security:** AI assistants must source `.env.asana` in subshells to keep tokens invisible from logs.
 
 ## 7. Current Project State (March 2026)
 
-*   **Status:** Production-ready with version 4.0.0 and clean URL infrastructure.
-*   **Recent Wins:** Homepage redesign, Before/After portfolio pairing, optimized sync tools, and transition to extensionless routing.
+*   **Status:** Production-ready with version 4.0.0 and modular component architecture.
+*   **Recent Wins:** Recursive component loader, luxury progress bar with critical image preloading, and Before/After portfolio pairing.
 *   **Next Priorities:**
-    1.  **Refactor:** Centralize shared HTML boilerplate.
-    2.  **Automation:** Implement script-based write-back to Google Sheets to replace manual CSV pasting.
+    1.  **Automation:** Implement script-based write-back to Google Sheets to replace manual CSV pasting.
+    2.  **Refactor:** Centralize shared HTML boilerplate.
     3.  **Performance:** Audit image sizes in the portfolio band.
