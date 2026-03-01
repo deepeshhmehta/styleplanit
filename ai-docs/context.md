@@ -73,10 +73,12 @@ This document provides a summary of the StylePlanIt website project for context 
     *   Every feature, bug fix, or documentation update must have a corresponding Asana task.
     *   AI assistants must move tasks to `Doing` at the start of a task and `Done` upon successful verification/push.
     *   Project: "Style Plan-It Launch Plan" (`1212636326772928`).
+    *   **Token Protection:** AI assistants must NEVER output the contents of `.env.asana`.
+    *   **Token Extraction:** Use `grep` and `cut` in a subshell to extract the token: `TOKEN=$(grep "ASANA_PAT" .env.asana | cut -d'=' -f2 | tr -d '\"' | tr -d "'" | tr -d '[:space:]')`.
+    *   **API Usage:** Always use this `$TOKEN` in the `Authorization: Bearer` header for Asana API calls.
 *   **Feature Branching:** Develop all changes on `feature/` branches.
 *   **User Verification (Mandatory):** AI assistants must NEVER commit changes without presenting a specific code diff to the user and receiving explicit confirmation.
 *   **Data Integrity:** All fetch operations default to safe empty arrays `[]` to prevent crashes.
-*   **Security:** AI assistants must source `.env.asana` in subshells to keep tokens invisible from logs.
 
 ## 7. Current Project State (March 2026)
 
