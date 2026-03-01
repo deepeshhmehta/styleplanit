@@ -143,6 +143,14 @@
       "value": "Be an ICON"
     },
     {
+      "key": "NAV_LINK_TEAM_HREF",
+      "value": "meet-the-team"
+    },
+    {
+      "key": "NAV_LINK_TEAM_TEXT",
+      "value": "Meet the Team"
+    },
+    {
       "key": "NEWCOMERS_CARD_BUTTON_HREF",
       "value": "services#establish"
     },
@@ -257,41 +265,6 @@
     {
       "description": "Bespoke, white-glove image management for high-profile executives and individuals.",
       "href": "icon-service",
-      "image_url": "assets/images/services-by-category/Elevate/Icon service.png",
-      "name": "Icon Service",
-      "showOnHomePage": "FALSE"
-    },
-    {
-      "description": "",
-      "href": "",
-      "image_url": "",
-      "name": "",
-      "showOnHomePage": ""
-    },
-    {
-      "description": "",
-      "href": "",
-      "image_url": "image_url",
-      "name": "name",
-      "showOnHomePage": "showOnHomePage"
-    },
-    {
-      "description": "",
-      "href": "",
-      "image_url": "assets/images/services-by-category/Establish/homepage_hero.jpg",
-      "name": "Establish",
-      "showOnHomePage": "TRUE"
-    },
-    {
-      "description": "",
-      "href": "",
-      "image_url": "assets/images/services-by-category/Elevate/homepage_hero.jpg",
-      "name": "Elevate",
-      "showOnHomePage": "TRUE"
-    },
-    {
-      "description": "",
-      "href": "",
       "image_url": "assets/images/services-by-category/Elevate/Icon service.png",
       "name": "Icon Service",
       "showOnHomePage": "FALSE"
