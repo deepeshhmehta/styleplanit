@@ -626,6 +626,7 @@ footer {
     scrollbar-width: none; /* Firefox */
     -ms-overflow-style: none;  /* IE and Edge */
     background: var(--black);
+    -webkit-overflow-scrolling: touch; /* Smooth momentum scrolling on iOS */
 }
 
 .portfolio-band::-webkit-scrollbar {
@@ -635,15 +636,20 @@ footer {
 .portfolio-container {
     display: inline-flex;
     height: 60vh;
+    width: auto;
 }
 
 .portfolio-item {
     height: 100%;
-    min-width: 400px; 
+    width: auto;
+    min-width: 350px; 
     flex: 0 0 auto;
     padding: 30px;
     background: var(--black); /* Standard background for singles */
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .portfolio-item.transformation-pair {
@@ -658,6 +664,7 @@ footer {
 .transformation-side {
     position: relative;
     height: 100%;
+    width: auto;
     overflow: hidden;
     background: var(--black);
 }
@@ -667,6 +674,7 @@ footer {
     width: auto; /* Natural width */
     max-width: none;
     object-fit: contain;
+    display: block;
 }
 
 .transformation-side .label {
@@ -685,24 +693,50 @@ footer {
 
 .portfolio-item img {
     height: 100%;
-    width: 100%;
-    object-fit: cover;
+    width: auto;
+    max-width: 100%;
+    object-fit: contain; /* Changed from cover to prevent zoom issues on iOS */
     object-position: top center;
 }
 
 /* Velvet Rope HNI Component */
 .hni-section {
     position: relative;
-    background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('../assets/images/services-by-category/Elevate/Icon\ service.png');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
     color: var(--white);
     text-align: center;
     min-height: 80vh;
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
+    background: var(--black); /* Fallback */
+}
+
+/* iOS-safe parallax-style background */
+.hni-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('../assets/images/services-by-category/Elevate/Icon\ service.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: scroll;
+    z-index: 0;
+}
+
+/* Desktop-only fixed attachment for better performance */
+@media (min-width: 1024px) {
+    .hni-section::before {
+        background-attachment: fixed;
+    }
+}
+
+.hni-section .container {
+    position: relative;
+    z-index: 1;
 }
 
 .hni-section .section-subtitle {
