@@ -293,6 +293,13 @@ footer {
 }
 
 .social-icons { text-align: center; }
+
+/* Tablet Overrides */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .footer-banner { font-size: 6rem; }
+    .loader-banner { font-size: 7rem; }
+}
+
 .social-icons a {
     color: var(--white);
     margin: 0 15px;
