@@ -59,6 +59,10 @@
       "value": "PICK A JOURNEY"
     },
     {
+      "key": "ICON_AUTH_TEXT",
+      "value": "Please enter your registered email to unlock."
+    },
+    {
       "key": "ICON_BUTTON_HREF",
       "value": "icon-service"
     },

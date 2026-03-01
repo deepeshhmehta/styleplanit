@@ -41,7 +41,7 @@ const AuthFeature = {
             <div class="container text-center">
                 <span class="section-subtitle">Invitation Only</span>
                 <h2 class="section-title">Exclusive Access</h2>
-                <p>Please enter your registered email to unlock.</p>
+                <p>${config.ICON_AUTH_TEXT || "Please enter your registered email to unlock."}</p>
                 <form id="auth-gate-form" class="subscribe-form" style="max-width: 400px; margin: 40px auto;">
                     <input type="email" id="auth-email" placeholder="Email Address" required style="border-color: var(--white); color: var(--white);">
                     <button type="submit" class="btn" style="border-color: var(--white); color: var(--white); width: 100%;">Unlock Collection</button>
