@@ -83,9 +83,10 @@ const AuthFeature = {
                 this.init();
             } else {
                 // If user is not in list, show message and redirect to cal.com
-                errorEl.text("Access denied. Redirecting to request access...").fadeIn();
+                errorEl.text("Access denied. Opening request access form...").fadeIn();
                 setTimeout(() => {
-                    window.location.href = config.ICON_CAL_HREF || "https://cal.com/styleplanit/the-icon-service";
+                    window.open(config.ICON_CAL_HREF || "https://cal.com/styleplanit/the-icon-service", "_blank");
+                    errorEl.text("Request form opened in new tab. Please register to continue.");
                 }, 2000);
             }
         } catch (error) {
