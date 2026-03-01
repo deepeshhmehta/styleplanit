@@ -104,6 +104,24 @@ async function loadComponents() {
     // 5. Signal ready
     document.dispatchEvent(new CustomEvent('appReady'));
 
+    // 5b. Wait for critical hero images to ensure visual stability
+    const criticalImages = [];
+    const firstHero = document.querySelector('[style-bg-config-key="HERO_IMAGE_1"]');
+    if (firstHero) {
+        const bgUrl = window.getComputedStyle(firstHero).backgroundImage.slice(5, -2);
+        if (bgUrl && bgUrl !== 'ne' && bgUrl !== 'non') {
+            criticalImages.push(new Promise(resolve => {
+                const img = new Image();
+                img.src = bgUrl;
+                img.onload = resolve;
+                img.onerror = resolve;
+                // Timeout after 2 seconds to not keep user waiting forever if image is slow
+                setTimeout(resolve, 2000);
+            }));
+        }
+    }
+    await Promise.all(criticalImages);
+
     // 6. Hide loader
     setTimeout(() => {
         const loader = document.getElementById('site-loader');
