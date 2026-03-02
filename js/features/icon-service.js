@@ -63,7 +63,7 @@ const IconServiceFeature = {
                 <p>${config.ICON_AUTH_TEXT || "Please enter your registered email to unlock."}</p>
                 <form id="icon-gate-form" class="subscribe-form" style="max-width: 400px; margin: 40px auto;">
                     <input type="email" id="icon-gate-email" placeholder="Email Address" required style="border-color: var(--white); color: var(--white);">
-                    <button type="submit" class="btn" style="border-color: var(--white); color: var(--white); width: 100%;">Unlock Collection</button>
+                    <button type="submit" class="btn" style="border-color: var(--white); color: var(--white); width: 100%;">Unlock</button>
                     <p id="icon-gate-error" style="color: #ff6b6b; margin-top: 20px; display: none;"></p>
                 </form>
             </div>
