@@ -145,6 +145,7 @@ const ServicesFeature = {
     // Highlight active category card
     $(".category-card").removeClass("active");
     $(`.category-card[data-category="${categoryName}"]`).addClass("active");
+    $("#services-category-selector").addClass("active-selection");
     
     // Reset details box when switching categories
     $("#service-details-container").hide().empty();
