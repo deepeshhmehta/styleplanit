@@ -158,6 +158,9 @@ const ServicesFeature = {
 
     const detailsContainer = $("#service-details-container");
     const chipsHtml = this.renderServiceChips(service.footer);
+    
+    // Get inclusions title from config
+    const inclusionsTitle = (Data.masterData.config.find(c => c.key === 'SERVICE_INCLUSIONS_TITLE') || {value: "What's Included?"}).value;
 
     detailsContainer.html(`
         <div class="active-service-details">
@@ -169,6 +172,8 @@ const ServicesFeature = {
                     <span class="section-subtitle">${service.category}</span>
                     <h3>${service.title}</h3>
                     <p class="long-desc">${service.long_description}</p>
+                    
+                    <span class="inclusions-title">${inclusionsTitle}</span>
                     <div class="service-chips">${chipsHtml}</div>
                     <div class="details-footer">
                         <button class="btn btn-close-details">Close & Return to List</button>

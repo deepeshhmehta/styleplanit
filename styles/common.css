@@ -480,6 +480,21 @@ footer {
 
 .price-tag { font-weight: 500; color: var(--primary-accent); }
 
+.inclusions-title {
+    display: none; /* Hidden in cards */
+    font-family: var(--font-secondary);
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--primary-accent);
+    margin-bottom: 15px;
+    font-weight: 500;
+}
+
+.active-service-details .inclusions-title {
+    display: block; /* Visible in details box */
+}
+
 .service-chips {
     display: flex;
     justify-content: center;
