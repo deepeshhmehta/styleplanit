@@ -34,15 +34,19 @@ def kill_process_on_port(port):
         pass
     return False
 
+class ThreadingHTTPServer(socketserver.ThreadingMixIn, socketserver.TCPServer):
+    """Handle requests in a separate thread."""
+    daemon_threads = True
+
 def start_server(port):
     # Ensure we run from project root
     os.chdir(os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir)))
 
     while True:
         try:
-            with socketserver.TCPServer(("", port), CleanURLHandler) as httpd:
+            with ThreadingHTTPServer(("", port), CleanURLHandler) as httpd:
                 print("\n" + "="*50)
-                print(f"🚀 Style Plan(it) Dev Server")
+                print(f"🚀 Style Plan(it) Threaded Dev Server")
                 print(f"🔗 http://localhost:{port}")
                 print("Mode: Clean URLs (GitHub Pages Parity)")
                 print("="*50 + "\n")
