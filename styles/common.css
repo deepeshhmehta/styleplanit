@@ -572,7 +572,7 @@ footer {
 }
 
 #experience-intro .category-card {
-    height: 85vh;
+    height: 60vh;
 }
 
 #experience-intro .category-card h3 {
@@ -581,6 +581,27 @@ footer {
 
 #experience-intro .category-card p {
     font-size: 1.1rem;
+}
+
+@media (max-width: 768px) {
+    #experience-intro .services-category-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        margin-top: 20px;
+    }
+    
+    #experience-intro .category-card {
+        height: 40vh; /* Both cards fitting roughly one mobile screen height + padding */
+        padding: 25px;
+    }
+    
+    #experience-intro .category-card h3 {
+        font-size: 2.2rem;
+    }
+    
+    #experience-intro .category-card p {
+        font-size: 0.85rem;
+    }
 }
 
 .category-card {
