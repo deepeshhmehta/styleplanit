@@ -205,7 +205,7 @@ const ServicesFeature = {
                         <div class="cta-row">
                             <a href="${(Data.masterData.config.find(c => c.key === 'STEP_2_BUTTON_HREF') || {}).value || 'https://cal.com/styleplanit/15min'}" target="_blank" class="btn btn-primary-accent">${inquireText}</a>
                         </div>
-                        <button class="btn btn-close-details">${closeBtnText}</button>
+                        <button class="btn-secondary btn-close-details">${closeBtnText}</button>
                     </div>
                 </div>
             </div>

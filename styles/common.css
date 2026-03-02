@@ -1214,20 +1214,7 @@ footer {
 }
 
 .btn-close-details {
-    background: transparent;
-    border: 1px solid var(--black);
-    color: var(--black);
-    padding: 12px 30px;
-    font-size: 0.7rem;
-    letter-spacing: 2px;
-    cursor: pointer;
-    transition: 0.3s;
     margin-top: 20px;
-}
-
-.btn-close-details:hover {
-    background: var(--black);
-    color: var(--white);
 }
 
 @media (max-width: 768px) {
