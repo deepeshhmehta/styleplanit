@@ -89,8 +89,8 @@ async function loadComponents() {
     if ($("#reviews-container").length > 0) features.push('reviews');
     if ($("#team-container").length > 0) features.push('team');
     if ($("#subscribe-container").length > 0 || $(".subscribe-form").length > 0) features.push('subscribe');
+    if ($("#services").length > 0 || $("#experience-intro").length > 0 || $("#icon-service-container").length > 0) features.push('services');
     if ($("#icon-service-container").length > 0) features.push('icon-service');
-    if ($("#services").length > 0 || $("#experience-intro").length > 0) features.push('services');
     features.push('dialogs'); 
 
     const featurePromises = features.map((feature) => {
