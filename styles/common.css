@@ -1150,6 +1150,25 @@ footer {
     color: var(--white);
 }
 
+.btn-close-grid {
+    background: transparent;
+    border: 1px solid var(--divider);
+    color: var(--grey);
+    padding: 8px 20px;
+    font-size: 0.6rem;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-bottom: 40px;
+    margin-top: -10px; /* Pull it closer to title */
+    display: inline-block;
+}
+
+.btn-close-grid:hover {
+    border-color: var(--black);
+    color: var(--black);
+}
+
 @media (max-width: 768px) {
     .active-service-details { padding: 30px; }
     .active-service-details .details-grid {

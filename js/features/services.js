@@ -38,9 +38,15 @@ const ServicesFeature = {
     // 4. Bind events
     this.bindEvents();
 
-    // 5. Initial State
-    if (activeCategoryNames.length > 0) {
-        this.switchCategory(activeCategoryNames[0], true);
+    // 5. Initial State & Hash Routing
+    const hash = window.location.hash.substring(1).toLowerCase();
+    if (hash && activeCategoryNames.map(n => this.slugify(n)).includes(hash)) {
+        const targetCategory = displayCategories.find(c => this.slugify(c.name) === hash);
+        if (targetCategory) {
+            this.switchCategory(targetCategory.name, false); // Scroll to it
+        }
+    } else if (activeCategoryNames.length > 0) {
+        this.switchCategory(activeCategoryNames[0], true); // Silent load
     }
 
     // 6. Auto-expand (for Icon Service specific page)
@@ -197,6 +203,14 @@ const ServicesFeature = {
     $(document).on("click", "#services-category-selector .category-card", function() {
         const category = $(this).data("category");
         self.switchCategory(category);
+    });
+
+    // Return to Categories Button
+    $(document).on("click", "#btn-return-to-categories", function() {
+        const navHeight = $("nav").outerHeight() || 0;
+        $("html, body").animate({
+            scrollTop: $("#experience-intro").offset().top - navHeight
+        }, 600);
     });
 
     // Service Card Selection
