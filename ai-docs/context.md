@@ -82,6 +82,7 @@ This document provides a summary of the StylePlanIt website project for context 
 *   **Feature Branching & Merging (Strict):** 
     *   **Always Branch Out:** AI assistants must NEVER commit directly to `main`. Every task, feature, or bug fix must occur on a dedicated `feature/` or `fix/` branch.
     *   **Incremental Commits:** Commit often on the feature branch as progress is made.
+    *   **Branch-Specific Docs:** Detailed implementation plans for a feature (e.g., `ai-docs/feature-plan.md`) must live ONLY on that feature's branch. Keep `main` clean of future-dated or in-progress design docs.
     *   **Stability First:** Only merge to `main` once the feature is stable, fully verified on a local server, and all health checks (`test.sh`) pass.
     *   **Clean Up:** Delete the feature branch locally and on remote after a successful merge to `main`.
 *   **User Verification (Mandatory):** AI assistants must NEVER commit changes without presenting a specific code diff to the user and receiving explicit confirmation.
