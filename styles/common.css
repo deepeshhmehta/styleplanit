@@ -607,10 +607,6 @@ footer {
     transform: scale(1.2);
 }
 
-.service-card.active .service-chips i {
-    color: var(--white);
-}
-
 .service-details-container {
     margin-top: 40px;
     padding: 40px;
