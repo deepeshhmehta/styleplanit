@@ -3,11 +3,18 @@
  */
 const IconServiceFeature = {
   init: async function () {
+    console.log("🔍 [IconService] Init started...");
     const container = $("#icon-service-container");
-    if (container.length === 0) return;
+    if (container.length === 0) {
+        console.warn("⚠️ [IconService] Container #icon-service-container not found.");
+        return;
+    }
 
     const isAuthenticated = sessionStorage.getItem("icon_service_auth") === "true";
+    console.log("🔍 [IconService] Authenticated:", isAuthenticated);
+    
     if (!isAuthenticated) {
+        console.log("🔍 [IconService] Rendering Gate...");
         const configArray = await Data.fetch('config');
         const config = {};
         configArray.forEach(item => config[item.key] = item.value);
@@ -15,6 +22,7 @@ const IconServiceFeature = {
         return;
     }
 
+    console.log("🔍 [IconService] User authorized, setting up template...");
     container.html(`
         <section class="section-padding" style="padding-top: 140px;">
             <div class="container text-center">
@@ -35,7 +43,10 @@ const IconServiceFeature = {
     Utils.applyConfig(config);
 
     if (typeof ServicesFeature !== 'undefined') {
+        console.log("🔍 [IconService] Calling ServicesFeature.init with filter 'Icon Service'...");
         await ServicesFeature.init({ filter: "Icon Service", mode: "include", autoExpand: true, noScroll: true });
+    } else {
+        console.error("❌ [IconService] ServicesFeature is undefined!");
     }
   },
 

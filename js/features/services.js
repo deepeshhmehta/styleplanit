@@ -7,6 +7,7 @@ const ServicesFeature = {
   categories: [],
 
   init: async function (options = {}) {
+    console.log("🔍 [Services] Init started with options:", options);
     this.options = options;
     
     // Fetch both in parallel for speed
@@ -17,8 +18,10 @@ const ServicesFeature = {
 
     this.allServices = services;
     this.categories = categories;
+    console.log("🔍 [Services] Data fetched. Total services:", services.length, "Total categories:", categories.length);
 
     if (this.allServices.length === 0) {
+      console.warn("⚠️ [Services] No services found in data.");
       $(".service-content").html('<p class="text-center section-padding">Service menu is temporarily unavailable. Please check back later.</p>');
       return;
     }
@@ -26,24 +29,29 @@ const ServicesFeature = {
     // 1. Filter services if needed
     let displayServices = [...this.allServices];
     if (options.filter) {
+      console.log("🔍 [Services] Applying filter:", options.filter, "Mode:", options.mode);
       if (options.mode === "exclude") {
         displayServices = displayServices.filter(s => s.category !== options.filter);
       } else {
         displayServices = displayServices.filter(s => s.category === options.filter);
       }
     }
+    console.log("🔍 [Services] Services to display:", displayServices.length);
 
     // Filter categories to only those that have services in the current view
     const activeCategoryNames = [...new Set(displayServices.map(s => s.category))];
     const displayCategories = this.categories.filter(c => activeCategoryNames.includes(c.name));
+    console.log("🔍 [Services] Active categories in view:", activeCategoryNames);
 
     // 2. Render Category Selector (Cards) - Only if container exists
     const categorySelector = $("#services-category-selector");
     if (categorySelector.length > 0) {
+        console.log("🔍 [Services] Rendering category selector...");
         this.renderCategorySelector(displayCategories);
     }
 
-    // 3. Render all grids (hidden by default except first)
+    // 3. Render all grids
+    console.log("🔍 [Services] Rendering grids...");
     this.renderServiceGrids(activeCategoryNames, displayServices);
 
     // 4. Bind events
@@ -52,17 +60,18 @@ const ServicesFeature = {
     // 5. Initial State & Hash Routing
     const hash = window.location.hash.substring(1).toLowerCase();
     if (hash && activeCategoryNames.map(n => this.slugify(n)).includes(hash)) {
+        console.log("🔍 [Services] Hash detected:", hash);
         const targetCategory = displayCategories.find(c => this.slugify(c.name) === hash);
         if (targetCategory) {
-            this.switchCategory(targetCategory.name, false); // Scroll to it
+            this.switchCategory(targetCategory.name, false); 
         }
     } else if (this.options.autoExpand || this.options.mode === "include") {
-        // Special case for Icon Service or filtered views: show grid immediately
+        console.log("🔍 [Services] Auto-display mode active.");
         if (activeCategoryNames.length > 0) {
             this.switchCategory(activeCategoryNames[0], true);
         }
     } else if (categorySelector.length > 0) {
-        // Standard experience landing: No hash, show nothing active, hide the services section
+        console.log("🔍 [Services] Landing reset state.");
         $("#services").hide();
         $(".category-card").removeClass("active");
         $("#services-category-selector").removeClass("active-selection");
