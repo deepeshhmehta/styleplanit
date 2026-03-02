@@ -37,8 +37,11 @@ const ServicesFeature = {
     const activeCategoryNames = [...new Set(displayServices.map(s => s.category))];
     const displayCategories = this.categories.filter(c => activeCategoryNames.includes(c.name));
 
-    // 2. Render Category Selector (Cards)
-    this.renderCategorySelector(displayCategories);
+    // 2. Render Category Selector (Cards) - Only if container exists
+    const categorySelector = $("#services-category-selector");
+    if (categorySelector.length > 0) {
+        this.renderCategorySelector(displayCategories);
+    }
 
     // 3. Render all grids (hidden by default except first)
     this.renderServiceGrids(activeCategoryNames, displayServices);
@@ -53,8 +56,13 @@ const ServicesFeature = {
         if (targetCategory) {
             this.switchCategory(targetCategory.name, false); // Scroll to it
         }
-    } else {
-        // No hash, show nothing active, hide the services section
+    } else if (this.options.autoExpand || this.options.mode === "include") {
+        // Special case for Icon Service or filtered views: show grid immediately
+        if (activeCategoryNames.length > 0) {
+            this.switchCategory(activeCategoryNames[0], true);
+        }
+    } else if (categorySelector.length > 0) {
+        // Standard experience landing: No hash, show nothing active, hide the services section
         $("#services").hide();
         $(".category-card").removeClass("active");
         $("#services-category-selector").removeClass("active-selection");
