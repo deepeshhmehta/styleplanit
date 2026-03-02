@@ -1181,6 +1181,29 @@ footer {
 /* Hide old tabs on the new experience page */
 #services .elegant-tabs { display: none; }
 
+/* Icon Service Page Full Background */
+.icon-service-page {
+    position: relative;
+    clip-path: inset(0);
+}
+
+.icon-service-page::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('../assets/images/services-by-category/Elevate/Icon\ service.png');
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+}
+
+#icon-service-container .btn-secondary {
+    display: none; /* No 'return to list' on the dedicated icon page */
+}
+
 .service-details-container {
     margin-top: 60px;
     margin-bottom: 60px;

@@ -23,15 +23,19 @@ const IconServiceFeature = {
     }
 
     console.log("🔍 [IconService] User authorized, setting up template...");
+    document.body.classList.add("icon-service-page");
+    
     container.html(`
         <section class="section-padding" style="padding-top: 140px;">
             <div class="container text-center">
                 <span class="section-subtitle" text-config-key="ICON_SUBTITLE"></span>
                 <h2 class="section-title" id="active-category-title" style="display: none;"></h2>
-                <div class="service-content" style="margin-top: 40px;"></div>
                 
-                <!-- Supporting the new detached details box -->
-                <div id="service-details-container" class="service-details-container" style="display: none;"></div>
+                <!-- Hidden grid for Icon Service (we only want the expanded card) -->
+                <div class="service-content" style="display: none;"></div>
+                
+                <!-- The main content -->
+                <div id="service-details-container" class="service-details-container" style="display: block;"></div>
             </div>
         </section>
     `);
