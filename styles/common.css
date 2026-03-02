@@ -85,6 +85,29 @@ h1, h2, h3, h4 {
     color: var(--white);
 }
 
+/* Secondary Button (Minimalist Text Link) */
+.btn-secondary {
+    font-size: 0.65rem;
+    color: var(--grey);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-decoration: none;
+    border: none;
+    border-bottom: 1px solid transparent;
+    padding: 5px 0;
+    transition: all 0.3s ease;
+    opacity: 0.8;
+    background: transparent;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.btn-secondary:hover {
+    color: var(--black);
+    border-bottom-color: var(--black);
+    opacity: 1;
+}
+
 /* --- 3. COMMON COMPONENTS --- */
 
 /* Hero Section Base */
@@ -514,36 +537,10 @@ footer {
 /* Home Page Categories Grid */
 /* Removed duplicate block here */
 
-/* More Reviews Button */
+/* Reviews Footer Base */
 .reviews-footer {
     text-align: right;
     margin-top: 40px;
-}
-
-/* More Reviews Button */
-.reviews-footer {
-    text-align: right;
-    margin-top: 40px;
-}
-
-.btn-more-reviews {
-    font-size: 0.65rem;
-    color: var(--grey);
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    text-decoration: none;
-    border: none;
-    border-bottom: 1px solid transparent;
-    padding: 5px 0;
-    transition: all 0.3s ease;
-    opacity: 0.8;
-}
-
-.btn-more-reviews:hover {
-    color: var(--black);
-    border-bottom-color: var(--black);
-    opacity: 1;
-    background: transparent;
 }
 
 /* Custom Tooltip System */
@@ -1189,25 +1186,6 @@ footer {
 .btn-close-details:hover {
     background: var(--black);
     color: var(--white);
-}
-
-.btn-close-grid {
-    background: transparent;
-    border: 1px solid var(--divider);
-    color: var(--grey);
-    padding: 8px 20px;
-    font-size: 0.6rem;
-    letter-spacing: 2px;
-    cursor: pointer;
-    transition: 0.3s;
-    margin-bottom: 40px;
-    margin-top: -10px; /* Pull it closer to title */
-    display: inline-block;
-}
-
-.btn-close-grid:hover {
-    border-color: var(--black);
-    color: var(--black);
 }
 
 @media (max-width: 768px) {
