@@ -1173,20 +1173,6 @@ footer {
     align-items: center;
 }
 
-/* Tablet & Mobile: Stack Pillar on Top */
-@media (max-width: 1366px) {
-    .active-service-details .details-grid {
-        grid-template-columns: 1fr;
-        gap: 30px;
-    }
-    .active-service-details .details-brand-pillar {
-        height: 200px; /* Tablet Height */
-    }
-    .active-service-details .brand-mark {
-        font-size: 8rem;
-    }
-}
-
 .active-service-details .details-brand-pillar {
     background: var(--primary-accent);
     display: flex;
@@ -1196,6 +1182,30 @@ footer {
     width: 100%;
     position: relative;
     overflow: hidden;
+}
+
+/* Tablet & Mobile: Stack Pillar on Top */
+@media (max-width: 1366px) {
+    .active-service-details .details-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    .active-service-details .details-brand-pillar {
+        height: 200px !important; /* Forces rectangular on iPad/Phone */
+    }
+    .active-service-details .brand-mark {
+        font-size: 8rem;
+    }
+}
+
+/* Phone-specific overrides */
+@media (max-width: 768px) {
+    .active-service-details .details-brand-pillar {
+        height: 100px !important;
+    }
+    .active-service-details .brand-mark {
+        font-size: 4rem !important;
+    }
 }
 
 .active-service-details .brand-mark {
