@@ -1,34 +1,49 @@
 /**
- * services.js - Service grid rendering and filtering
+ * services.js - Service grid rendering and filtering with "Experience" flow
  */
 const ServicesFeature = {
   options: {},
+  allServices: [],
+  categories: [],
 
   init: async function (options = {}) {
     this.options = options;
-    let services = await Data.fetch("services");
-    if (services.length === 0) {
+    this.allServices = await Data.fetch("services");
+    if (this.allServices.length === 0) {
       $(".service-content").html('<p class="text-center section-padding">Service menu is temporarily unavailable. Please check back later.</p>');
       return;
     }
 
-    // Apply filtering if options provided
+    // 1. Filter services if needed
+    let displayServices = [...this.allServices];
     if (options.filter) {
       if (options.mode === "exclude") {
-        services = services.filter(s => s.category !== options.filter);
+        displayServices = displayServices.filter(s => s.category !== options.filter);
       } else {
-        services = services.filter(s => s.category === options.filter);
+        displayServices = displayServices.filter(s => s.category === options.filter);
       }
     }
 
-    const categories = [...new Set(services.map((s) => s.category))];
+    this.categories = await Data.fetch("categories");
+    // Filter categories to only those that have services in the current view
+    const activeCategoryNames = [...new Set(displayServices.map(s => s.category))];
+    const displayCategories = this.categories.filter(c => activeCategoryNames.includes(c.name));
 
-    this.renderServiceTabs(categories);
-    this.renderServiceGrids(categories, services);
-    this.bindServiceEvents();
-    this.handleHashRouting();
+    // 2. Render Category Selector (Cards)
+    this.renderCategorySelector(displayCategories);
 
-    // Auto-expand if requested (used for Icon Service collection)
+    // 3. Render all grids (hidden by default except first)
+    this.renderServiceGrids(activeCategoryNames, displayServices);
+
+    // 4. Bind events
+    this.bindEvents();
+
+    // 5. Initial State
+    if (activeCategoryNames.length > 0) {
+        this.switchCategory(activeCategoryNames[0], true);
+    }
+
+    // 6. Auto-expand (for Icon Service specific page)
     if (this.options.autoExpand) {
         setTimeout(() => {
             $(".service-card").first().click();
@@ -36,42 +51,33 @@ const ServicesFeature = {
     }
   },
 
-  handleHashRouting: function () {
-    const hash = decodeURIComponent(window.location.hash.substring(1)).toLowerCase();
-    if (!hash) return;
+  renderCategorySelector: function (categories) {
+    const container = $("#services-category-selector");
+    if (container.length === 0) return;
 
-    const targetTab = $(`.elegant-tabs li[data-tab="${hash}"]`);
-    if (targetTab.length > 0) {
-      targetTab.click();
-    }
-  },
-
-  renderServiceTabs: function (categories) {
-    const tabsContainer = $(".elegant-tabs ul");
-    if (tabsContainer.length === 0) return;
-    
-    tabsContainer.empty();
-    categories.forEach((category, index) => {
-      tabsContainer.append(`
-                <li class="${index === 0 ? "active" : ""}" data-tab="${category.trim().replace(/\s+/g, "-").toLowerCase()}">
-                    ${category}
-                </li>
-            `);
+    container.empty();
+    categories.forEach(category => {
+        container.append(`
+            <div class="category-card" data-category="${category.name}">
+                <div class="category-card-bg" style="background-image: url('${category.image_url}')"></div>
+                <div class="category-card-content">
+                    <h3>${category.name}</h3>
+                    <p>${category.description}</p>
+                </div>
+            </div>
+        `);
     });
   },
 
-  renderServiceGrids: function (categories, services) {
+  renderServiceGrids: function (categoryNames, services) {
     const serviceContent = $(".service-content");
     if (serviceContent.length === 0) return;
 
-    // Load manifest for image resolution
-    const assets = Data.masterData.assets_manifest || {};
-
     serviceContent.empty();
-    categories.forEach((category, index) => {
-      const categoryId = category.trim().replace(/\s+/g, "-").toLowerCase();
+    categoryNames.forEach((category) => {
+      const categoryId = this.slugify(category);
       const grid = $(
-        `<div id="${categoryId}" class="services-grid ${index === 0 ? "active" : ""}"></div>`,
+        `<div id="grid-${categoryId}" class="services-grid"></div>`,
       );
 
       services
@@ -79,14 +85,13 @@ const ServicesFeature = {
         .forEach((service) => {
           const chipsHtml = this.renderServiceChips(service.footer);
           grid.append(`
-                    <div class="service-card">
+                    <div class="service-card" data-title="${service.title}">
                         <div class="service-card-image">
                             <img src="${service.image_url}" alt="${service.title}">
                         </div>
                         <div class="service-card-content">
                             <h3>${service.title}</h3>
                             <p class="short-desc">${service.short_description}</p>
-                            <p class="long-desc">${service.long_description}</p>
                             <div class="service-chips">${chipsHtml}</div>
                         </div>
                     </div>
@@ -125,56 +130,97 @@ const ServicesFeature = {
     return map[item] || "fa-check-circle";
   },
 
-  bindServiceEvents: function () {
-    $(".elegant-tabs li").on("click", function () {
-      const tabId = $(this).data("tab");
-      $(".elegant-tabs li").removeClass("active");
-      $(this).addClass("active");
-      $(".services-grid").removeClass("active");
-      $("#" + tabId).addClass("active");
-    });
+  switchCategory: function(categoryName, noScroll = false) {
+    const slug = this.slugify(categoryName);
+    $(".services-grid").removeClass("active");
+    $(`#grid-${slug}`).addClass("active");
+    $("#active-category-title").text(categoryName);
+    
+    // Highlight active category card
+    $(".category-card").removeClass("active");
+    $(`.category-card[data-category="${categoryName}"]`).addClass("active");
+    
+    // Reset details box when switching categories
+    $("#service-details-container").hide().empty();
+    $(".service-card").removeClass("active");
 
-    $(".service-card").on("click", function (e) {
-      // Ignore click if it originated from the chips container (prevents expansion on mobile icon tap)
-      if ($(e.target).closest('.service-chips').length > 0) {
-        return;
-      }
-
-      const card = $(this);
-      const isAlreadyActive = card.hasClass("active");
-      
-      if (isAlreadyActive) {
-        // Disable deactivation if autoExpand is on (keep the card open)
-        if (ServicesFeature.options.autoExpand) return;
-
-        card.removeClass("active");
-        return;
-      }
-
-      card.addClass("card-shifting");
-      
-      setTimeout(() => {
-        $(".service-card").not(card).removeClass("active card-shifting");
-        card.addClass("active");
-        
+    if (!noScroll) {
         const navHeight = $("nav").outerHeight() || 0;
-        const extraPadding = CONFIG.SETTINGS.SCROLL_OFFSET;
-        const isMobile = window.innerWidth <= 768;
-        
-        const scrollTarget = isMobile ? (card.offset().top - (extraPadding * 2)) : card.closest('.services-grid').offset().top;
+        $("html, body").animate({
+            scrollTop: $("#services").offset().top - navHeight
+        }, 600);
+    }
+  },
 
-        if (!ServicesFeature.options.noScroll) {
-            setTimeout(() => {
-                $("html, body").animate({
-                    scrollTop: scrollTarget - navHeight
-                }, 600);
-            }, 200);
-        }
+  showServiceDetails: function(serviceTitle) {
+    const service = this.allServices.find(s => s.title === serviceTitle);
+    if (!service) return;
 
-        setTimeout(() => {
-            card.removeClass("card-shifting");
-        }, 100);
-      }, 300);
+    const detailsContainer = $("#service-details-container");
+    const chipsHtml = this.renderServiceChips(service.footer);
+
+    detailsContainer.html(`
+        <div class="active-service-details">
+            <div class="details-grid">
+                <div class="details-image">
+                    <img src="${service.image_url}" alt="${service.title}">
+                </div>
+                <div class="details-text">
+                    <span class="section-subtitle">${service.category}</span>
+                    <h3>${service.title}</h3>
+                    <p class="long-desc">${service.long_description}</p>
+                    <div class="service-chips">${chipsHtml}</div>
+                    <div class="details-footer">
+                        <button class="btn btn-close-details">Close & Return to List</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `).fadeIn(400);
+
+    // Scroll to details
+    const navHeight = $("nav").outerHeight() || 0;
+    $("html, body").animate({
+        scrollTop: detailsContainer.offset().top - navHeight - 40
+    }, 600);
+  },
+
+  bindEvents: function () {
+    const self = this;
+
+    // Category Selector
+    $(document).on("click", "#services-category-selector .category-card", function() {
+        const category = $(this).data("category");
+        self.switchCategory(category);
     });
+
+    // Service Card Selection
+    $(document).on("click", ".service-card", function(e) {
+        if ($(e.target).closest('.service-chips').length > 0) return;
+        
+        $(".service-card").removeClass("active");
+        $(this).addClass("active");
+        
+        const title = $(this).data("title");
+        self.showServiceDetails(title);
+    });
+
+    // Close Details
+    $(document).on("click", ".btn-close-details", function() {
+        $("#service-details-container").fadeOut(300, function() {
+            $(this).empty();
+            $(".service-card").removeClass("active");
+            
+            // Scroll back to active grid
+            const navHeight = $("nav").outerHeight() || 0;
+            $("html, body").animate({
+                scrollTop: $(".services-grid.active").offset().top - navHeight - 100
+            }, 500);
+        });
+    });
+  },
+
+  slugify: function(text) {
+    return text.trim().replace(/\s+/g, "-").toLowerCase();
   }
 };
