@@ -190,8 +190,8 @@ const ServicesFeature = {
     detailsContainer.html(`
         <div class="active-service-details">
             <div class="details-grid">
-                <div class="details-image">
-                    <img src="${service.image_url}" alt="${service.title}">
+                <div class="details-brand-pillar">
+                    <span class="brand-mark">SP</span>
                 </div>
                 <div class="details-text">
                     <span class="section-subtitle">${service.category}</span>
