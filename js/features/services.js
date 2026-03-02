@@ -8,7 +8,16 @@ const ServicesFeature = {
 
   init: async function (options = {}) {
     this.options = options;
-    this.allServices = await Data.fetch("services");
+    
+    // Fetch both in parallel for speed
+    const [services, categories] = await Promise.all([
+        Data.fetch("services"),
+        Data.fetch("categories")
+    ]);
+
+    this.allServices = services;
+    this.categories = categories;
+
     if (this.allServices.length === 0) {
       $(".service-content").html('<p class="text-center section-padding">Service menu is temporarily unavailable. Please check back later.</p>');
       return;
@@ -24,7 +33,6 @@ const ServicesFeature = {
       }
     }
 
-    this.categories = await Data.fetch("categories");
     // Filter categories to only those that have services in the current view
     const activeCategoryNames = [...new Set(displayServices.map(s => s.category))];
     const displayCategories = this.categories.filter(c => activeCategoryNames.includes(c.name));
