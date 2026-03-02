@@ -409,11 +409,20 @@ footer {
 
 /* Reviews Component */
 #reviews .reviews-grid {
-    display: grid;
-    gap: 40px;
+    display: flex;
+    gap: 30px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 20px;
+}
+
+#reviews .reviews-grid::-webkit-scrollbar {
+    display: none;
 }
 
 #reviews .review-card {
+    flex: 0 0 85vw; /* Default mobile card width */
     background: var(--cream);
     padding: 60px 40px;
     border: 1px solid var(--border-color);
@@ -422,6 +431,25 @@ footer {
     overflow: hidden;
     cursor: pointer;
     transition: max-height 0.8s ease, box-shadow 0.3s ease;
+}
+
+/* Tablet sizing for review cards */
+@media (min-width: 769px) and (max-width: 1024px) {
+    #reviews .review-card {
+        flex: 0 0 400px;
+    }
+}
+
+/* Reset to grid for large desktops if desired, or keep flex */
+@media (min-width: 1400px) {
+    #reviews .reviews-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        overflow-x: visible;
+    }
+    #reviews .review-card {
+        flex: none;
+    }
 }
 
 #reviews .review-card.expanded {
