@@ -182,8 +182,10 @@ const ServicesFeature = {
     const detailsContainer = $("#service-details-container");
     const chipsHtml = this.renderServiceChips(service.footer);
     
-    // Get inclusions title from config
+    // Get inclusions title and CTA text from config
     const inclusionsTitle = (Data.masterData.config.find(c => c.key === 'SERVICE_INCLUSIONS_TITLE') || {value: "What's Included?"}).value;
+    const inquireText = (Data.masterData.config.find(c => c.key === 'STEP_2_BUTTON_TEXT') || {value: "Inquire Now"}).value;
+    const closeBtnText = (Data.masterData.config.find(c => c.key === 'EXPERIENCE_CLOSE_BTN') || {value: "Close & Return to List"}).value;
 
     detailsContainer.html(`
         <div class="active-service-details">
@@ -201,9 +203,9 @@ const ServicesFeature = {
                     
                     <div class="details-footer">
                         <div class="cta-row">
-                            <a href="${(Data.masterData.config.find(c => c.key === 'STEP_2_BUTTON_HREF') || {}).value || 'https://cal.com/styleplanit/15min'}" target="_blank" class="btn btn-primary-accent">Inquire Now</a>
+                            <a href="${(Data.masterData.config.find(c => c.key === 'STEP_2_BUTTON_HREF') || {}).value || 'https://cal.com/styleplanit/15min'}" target="_blank" class="btn btn-primary-accent">${inquireText}</a>
                         </div>
-                        <button class="btn btn-close-details">Close & Return to List</button>
+                        <button class="btn btn-close-details">${closeBtnText}</button>
                     </div>
                 </div>
             </div>

@@ -215,6 +215,30 @@
       "value": "Elevate"
     },
     {
+      "key": "EXPERIENCE_CHANGE_BTN",
+      "value": "Change Journey"
+    },
+    {
+      "key": "EXPERIENCE_CLOSE_BTN",
+      "value": "Close & Return to List"
+    },
+    {
+      "key": "EXPERIENCE_JOURNEY_TITLE",
+      "value": "Pick a Journey"
+    },
+    {
+      "key": "EXPERIENCE_MENUS_SUBTITLE",
+      "value": "Our Menus"
+    },
+    {
+      "key": "EXPERIENCE_SUBTITLE",
+      "value": "The StylePlan(it) Experience"
+    },
+    {
+      "key": "REVIEWS_CTA",
+      "value": "Read More Reviews"
+    },
+    {
       "key": "REVIEWS_PAGE_DESCRIPTION",
       "value": "Read what our clients have to say about their transformation journeys with Style Plan(it). Professional styling reviews from Toronto."
     },
@@ -253,6 +277,14 @@
     {
       "key": "STEP_3_TEXT",
       "value": "3. Start your journey"
+    },
+    {
+      "key": "WHATSAPP_NUMBER",
+      "value": "16479678953"
+    },
+    {
+      "key": "WHATSAPP_TEXT",
+      "value": "WhatsApp Now"
     },
     {
       "key": "SUBSCRIBE_BUTTON_TEXT",
