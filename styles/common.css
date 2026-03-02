@@ -1058,12 +1058,6 @@ footer {
 /* Hide old tabs on the new experience page */
 #services .elegant-tabs { display: none; }
 
-.service-card.active {
-    border: 2px solid var(--primary-accent);
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(var(--primary-accent-rgb), 0.1);
-}
-
 .service-details-container {
     margin-top: 60px;
     background: var(--white);
