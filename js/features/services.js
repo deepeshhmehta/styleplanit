@@ -45,8 +45,11 @@ const ServicesFeature = {
         if (targetCategory) {
             this.switchCategory(targetCategory.name, false); // Scroll to it
         }
-    } else if (activeCategoryNames.length > 0) {
-        this.switchCategory(activeCategoryNames[0], true); // Silent load
+    } else {
+        // No hash, show nothing active, hide the services section
+        $("#services").hide();
+        $(".category-card").removeClass("active");
+        $("#services-category-selector").removeClass("active-selection");
     }
 
     // 6. Auto-expand (for Icon Service specific page)
@@ -138,6 +141,11 @@ const ServicesFeature = {
 
   switchCategory: function(categoryName, noScroll = false) {
     const slug = this.slugify(categoryName);
+    
+    if ($("#services").is(":hidden")) {
+        $("#services").fadeIn(400);
+    }
+    
     $(".services-grid").removeClass("active");
     $(`#grid-${slug}`).addClass("active");
     $("#active-category-title").text(categoryName);
@@ -211,7 +219,12 @@ const ServicesFeature = {
         const navHeight = $("nav").outerHeight() || 0;
         $("html, body").animate({
             scrollTop: $("#experience-intro").offset().top - navHeight
-        }, 600);
+        }, 600, function() {
+            // After scroll, reset state
+            $("#services").fadeOut(300);
+            $(".category-card").removeClass("active");
+            $("#services-category-selector").removeClass("active-selection");
+        });
     });
 
     // Service Card Selection
@@ -233,9 +246,12 @@ const ServicesFeature = {
             
             // Scroll back to active grid
             const navHeight = $("nav").outerHeight() || 0;
-            $("html, body").animate({
-                scrollTop: $(".services-grid.active").offset().top - navHeight - 100
-            }, 500);
+            const target = $(".services-grid.active");
+            if (target.length > 0) {
+                $("html, body").animate({
+                    scrollTop: target.offset().top - navHeight - 100
+                }, 500);
+            }
         });
     });
   },
