@@ -1174,7 +1174,7 @@ footer {
 }
 
 /* Tablet & Mobile: Stack Pillar on Top */
-@media (max-width: 1024px) {
+@media (max-width: 1366px) {
     .active-service-details .details-grid {
         grid-template-columns: 1fr;
         gap: 30px;
