@@ -421,6 +421,28 @@ footer {
     display: none;
 }
 
+.scroll-hint {
+    display: none;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 20px;
+}
+
+.scroll-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--grey);
+    opacity: 0.3;
+    transition: all 0.3s ease;
+}
+
+.scroll-dot.active {
+    opacity: 1;
+    background: var(--primary-accent);
+    transform: scale(1.2);
+}
+
 #reviews .review-card {
     flex: 0 0 85vw; /* Default mobile card width */
     background: var(--cream);
@@ -434,6 +456,10 @@ footer {
 }
 
 /* Tablet sizing for review cards */
+@media (max-width: 1024px) {
+    .scroll-hint { display: flex; }
+}
+
 @media (min-width: 769px) and (max-width: 1024px) {
     #reviews .review-card {
         flex: 0 0 400px;
