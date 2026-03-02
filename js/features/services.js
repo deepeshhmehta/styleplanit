@@ -194,7 +194,6 @@ const ServicesFeature = {
                     <div class="details-footer">
                         <div class="cta-row">
                             <a href="${(Data.masterData.config.find(c => c.key === 'STEP_2_BUTTON_HREF') || {}).value || 'https://cal.com/styleplanit/15min'}" target="_blank" class="btn btn-primary-accent">Inquire Now</a>
-                            <a href="https://wa.me/16479678953" target="_blank" class="btn btn-whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp Now</a>
                         </div>
                         <button class="btn btn-close-details">Close & Return to List</button>
                     </div>
