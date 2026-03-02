@@ -496,17 +496,8 @@ footer {
     position: relative;
 }
 
-/* Home Page Categories Grid - Experience Page Size */
-#experience-intro .category-card {
-    height: 70vh;
-}
-
-.services-category-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    gap: 30px;
-    margin-top: 50px;
-}
+/* Home Page Categories Grid */
+/* Removed duplicate block here */
 
 /* More Reviews Button */
 .reviews-footer {
@@ -581,7 +572,15 @@ footer {
 }
 
 #experience-intro .category-card {
-    height: 75vh;
+    height: 85vh;
+}
+
+#experience-intro .category-card h3 {
+    font-size: 4rem;
+}
+
+#experience-intro .category-card p {
+    font-size: 1.1rem;
 }
 
 .category-card {
