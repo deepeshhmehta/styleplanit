@@ -119,10 +119,6 @@
       "value": "b_d3996d16165f3bbbc8e8ae321_62ce8ea2f1"
     },
     {
-      "key": "MAILCHIMP_HIDDEN_FIELD_VALUE",
-      "value": ""
-    },
-    {
       "key": "MAILCHIMP_NAME_FIELD_NAME",
       "value": "NAME"
     },
@@ -131,20 +127,8 @@
       "value": "What should we call you?"
     },
     {
-      "key": "NAV_LINK_1_HREF",
-      "value": "/#programs"
-    },
-    {
-      "key": "NAV_LINK_1_TEXT",
-      "value": "Our Programs"
-    },
-    {
       "key": "NAV_LINK_2_HREF",
       "value": "reviews"
-    },
-    {
-      "key": "NAV_LINK_2_TEXT",
-      "value": "Reviews"
     },
     {
       "key": "NAV_LINK_3_HREF",
@@ -171,18 +155,6 @@
       "value": "The Team"
     },
     {
-      "key": "NEWCOMERS_CARD_BUTTON_HREF",
-      "value": "services#establish"
-    },
-    {
-      "key": "NEWCOMERS_CARD_BUTTON_TEXT",
-      "value": "View Services"
-    },
-    {
-      "key": "NEWCOMERS_CARD_TEXT",
-      "value": "Styling for those ready to establish thier presence"
-    },
-    {
       "key": "NEWCOMERS_CARD_TITLE",
       "value": "Establish"
     },
@@ -197,14 +169,6 @@
     {
       "key": "PAGE_TITLE",
       "value": "Style Plan(it) | Discover Your Style"
-    },
-    {
-      "key": "PROFESSIONALS_CARD_BUTTON_HREF",
-      "value": "services#elevate"
-    },
-    {
-      "key": "PROFESSIONALS_CARD_BUTTON_TEXT",
-      "value": "View Services"
     },
     {
       "key": "PROFESSIONALS_CARD_TEXT",
@@ -259,24 +223,12 @@
       "value": "What's Included?"
     },
     {
-      "key": "STEP_1_TEXT",
-      "value": "1- Checkout our Programs"
-    },
-    {
       "key": "STEP_2_BUTTON_HREF",
       "value": "https://cal.com/styleplanit/15min"
     },
     {
       "key": "STEP_2_BUTTON_TEXT",
       "value": "Book Now"
-    },
-    {
-      "key": "STEP_2_TEXT",
-      "value": "2. Book a call with us"
-    },
-    {
-      "key": "STEP_3_TEXT",
-      "value": "3. Start your journey"
     },
     {
       "key": "WHATSAPP_NUMBER",
