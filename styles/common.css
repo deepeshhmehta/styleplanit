@@ -1180,10 +1180,10 @@ footer {
         gap: 30px;
     }
     .active-service-details .details-brand-pillar {
-        height: 30vh;
+        height: 200px; /* Tablet Height */
     }
     .active-service-details .brand-mark {
-        font-size: 10rem;
+        font-size: 8rem;
     }
 }
 
@@ -1260,10 +1260,10 @@ footer {
         gap: 30px;
     }
     .active-service-details .details-brand-pillar {
-        height: 150px;
+        height: 100px;
     }
     .active-service-details .brand-mark {
-        font-size: 6rem;
+        font-size: 4rem;
     }
     .active-service-details .details-text h3 {
         font-size: 1.8rem;
