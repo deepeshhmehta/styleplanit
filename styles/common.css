@@ -1280,4 +1280,32 @@ footer {
         align-items: center;
         justify-content: center;
     }
+
+    /* Logo Band Mobile Compact & Scroll */
+    .logo-band {
+        padding: 20px 0;
+    }
+    
+    .logo-band p {
+        margin-bottom: 15px;
+        font-size: 0.6rem;
+    }
+
+    .logo-band .logos {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        justify-content: flex-start;
+        padding: 0 20px;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+
+    .logo-band .logos::-webkit-scrollbar {
+        display: none;
+    }
+
+    .brand-logo-item {
+        flex: 0 0 120px;
+        height: 50px;
+    }
 }

@@ -45,7 +45,6 @@
 
     /* How It Works Mobile Layout */
     .customer-layers { grid-template-columns: 1fr; gap: 20px; }
-    .logo-band .logos { flex-wrap: wrap; justify-content: center; gap: 30px; }
     .booking-steps h3 { font-size: 1.8rem; }
 
     /* Reviews Mobile Layout */
