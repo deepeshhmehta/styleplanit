@@ -581,7 +581,7 @@ footer {
 /* Home Page Categories Grid */
 .services-category-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Reduced from 400px to prevent mobile overflow */
     gap: 30px;
     margin-top: 50px;
 }
@@ -596,27 +596,6 @@ footer {
 
 #experience-intro .category-card p {
     font-size: 1.1rem;
-}
-
-@media (max-width: 768px) {
-    #experience-intro .services-category-grid {
-        grid-template-columns: 1fr;
-        gap: 15px;
-        margin-top: 20px;
-    }
-    
-    #experience-intro .category-card {
-        height: 40vh; /* Both cards fitting roughly one mobile screen height + padding */
-        padding: 25px;
-    }
-    
-    #experience-intro .category-card h3 {
-        font-size: 2.2rem;
-    }
-    
-    #experience-intro .category-card p {
-        font-size: 0.85rem;
-    }
 }
 
 .category-card {
@@ -1241,7 +1220,28 @@ footer {
 }
 
 @media (max-width: 768px) {
-    .active-service-details { padding: 30px; }
+    /* Experience Intro Overrides */
+    #experience-intro .services-category-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        margin-top: 20px;
+    }
+    
+    #experience-intro .category-card {
+        height: 40vh;
+        padding: 25px;
+    }
+    
+    #experience-intro .category-card h3 {
+        font-size: 2.2rem;
+    }
+    
+    #experience-intro .category-card p {
+        font-size: 0.85rem;
+    }
+
+    /* Service Details Overrides */
+    .active-service-details { padding: 30px 20px; }
     .active-service-details .details-grid {
         grid-template-columns: 1fr;
         gap: 30px;
@@ -1251,5 +1251,26 @@ footer {
     }
     .active-service-details .details-text h3 {
         font-size: 1.8rem;
+    }
+
+    /* Floating CTA Overrides */
+    .floating-ctas {
+        bottom: 20px;
+        right: 20px;
+        gap: 10px;
+    }
+    
+    /* Disable expansion on touch devices to prevent layout jumps */
+    .whatsapp-floating:hover, .book-now-floating:hover {
+        width: 50px;
+        padding-right: 0;
+    }
+    .whatsapp-floating:hover .cta-text, .book-now-floating:hover .cta-text {
+        display: none;
+    }
+
+    /* Footer & Loader scaling to prevent overflow */
+    .footer-banner, .loader-banner {
+        font-size: 2.5rem !important;
     }
 }
