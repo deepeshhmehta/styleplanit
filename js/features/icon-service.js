@@ -19,7 +19,11 @@ const IconServiceFeature = {
         <section class="section-padding" style="padding-top: 140px;">
             <div class="container text-center">
                 <span class="section-subtitle" text-config-key="ICON_SUBTITLE"></span>
+                <h2 class="section-title" id="active-category-title" style="display: none;"></h2>
                 <div class="service-content" style="margin-top: 40px;"></div>
+                
+                <!-- Supporting the new detached details box -->
+                <div id="service-details-container" class="service-details-container" style="display: none;"></div>
             </div>
         </section>
     `);
