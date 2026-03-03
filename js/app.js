@@ -80,7 +80,7 @@ const App = {
     });
 
     $(document).on("click", ".btn-ga-book", function() {
-        Analytics.trackLead('book_now_floating', 'appointment_booking');
+        Analytics.trackLead('schedule_consultation_floating', 'appointment_booking');
     });
   }
 };
