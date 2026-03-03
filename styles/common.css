@@ -1079,6 +1079,7 @@ footer {
     opacity: 0;
     transition: all 0.3s ease;
     margin-right: 0;
+    padding-right: 15px; /* Add spacing from the right edge */
 }
 
 /* Hover States - Expand to fit text */
