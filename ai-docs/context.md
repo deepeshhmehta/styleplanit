@@ -85,6 +85,7 @@ This document provides a summary of the StylePlanIt website project for context 
 *   **Recent Wins:**
     *   **Image Optimization:** Transitioned from `.png` to `.jpg`/`.jpeg` formats for service imagery to improve load performance.
     *   **Automation:** Enhanced `diff_site_data.py` to automatically scan `assets/images` and generate the `assets_manifest` in `site-data.json`.
+    *   **SEO Optimization:** Implemented intent-based keyword strategy targeting visionaries, newcomers, and professionals in Toronto. Optimized all meta tags and sitemap.
     *   **Data Integrity:** Synchronized local `site-data.json` with Google Sheets source of truth for config and dialogs.
     *   **Typography Overhaul:** Transitioned to 'Bebas Neue' and 'DM Sans' for a more modern, bold aesthetic.
     *   **Experience Refactor:** Staged services journey with detached details box.
