@@ -58,11 +58,7 @@ const ReviewsFeature = {
         // Track when user reaches the end of reviews
         if (progress > 0.95 && !hasTrackedEnd) {
             hasTrackedEnd = true;
-            if (window.gtag) {
-                gtag('event', 'scroll_to_end', {
-                    content_type: 'reviews_carousel'
-                });
-            }
+            Analytics.trackScrollEnd('reviews_carousel');
         }
     });
   },
@@ -73,11 +69,8 @@ const ReviewsFeature = {
         const isExpanding = !card.hasClass("expanded");
         card.toggleClass("expanded");
         
-        if (isExpanding && window.gtag) {
-            gtag('event', 'select_content', {
-                content_type: 'review_expansion',
-                item_id: card.find('.review-author').text()
-            });
+        if (isExpanding) {
+            Analytics.trackInteraction('review_expansion', card.find('.review-author').text());
         }
         
         const navHeight = $("nav").outerHeight() || 0;

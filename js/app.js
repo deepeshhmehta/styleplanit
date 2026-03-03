@@ -76,21 +76,11 @@ const App = {
 
     // 8. Global Lead Tracking
     $(document).on("click", ".btn-ga-whatsapp", function() {
-        if (window.gtag) {
-            gtag('event', 'generate_lead', {
-                method: 'whatsapp_floating',
-                content_type: 'social_inquiry'
-            });
-        }
+        Analytics.trackLead('whatsapp_floating', 'social_inquiry');
     });
 
     $(document).on("click", ".btn-ga-book", function() {
-        if (window.gtag) {
-            gtag('event', 'generate_lead', {
-                method: 'book_now_floating',
-                content_type: 'appointment_booking'
-            });
-        }
+        Analytics.trackLead('book_now_floating', 'appointment_booking');
     });
   }
 };

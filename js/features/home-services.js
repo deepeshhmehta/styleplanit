@@ -33,12 +33,7 @@ const HomeServicesFeature = {
         // Bind tracking
         $(document).on("click", "#home-categories-container .category-card", function() {
             const slug = $(this).data("ga-category");
-            if (window.gtag) {
-                gtag('event', 'select_content', {
-                    content_type: 'home_category',
-                    item_id: slug
-                });
-            }
+            Analytics.trackInteraction('home_category', slug);
         });
     }
 };

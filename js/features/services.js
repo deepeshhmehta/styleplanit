@@ -169,13 +169,7 @@ const ServicesFeature = {
   switchCategory: function(categoryName, noScroll = false) {
     const slug = this.slugify(categoryName);
     
-    if (window.gtag) {
-        gtag('event', 'select_content', {
-            content_type: 'service_category',
-            item_id: slug,
-            category_name: categoryName
-        });
-    }
+    Analytics.trackCategorySwitch(categoryName, slug);
 
     if ($("#services").is(":hidden")) {
         $("#services").fadeIn(400);
@@ -209,13 +203,7 @@ const ServicesFeature = {
     const serviceSlug = this.slugify(service.title);
     const categorySlug = this.slugify(service.category);
 
-    if (window.gtag) {
-        gtag('event', 'view_item', {
-            item_id: serviceSlug,
-            item_name: service.title,
-            item_category: service.category
-        });
-    }
+    Analytics.trackServiceView(service.title, serviceSlug, service.category);
 
     const detailsContainer = $("#service-details-container");
     const chipsHtml = this.renderServiceChips(service.footer);
@@ -272,9 +260,7 @@ const ServicesFeature = {
 
     // Return to Categories Button
     $(document).on("click", "#btn-return-to-categories", function() {
-        if (window.gtag) {
-            gtag('event', 'return_to_categories');
-        }
+        Analytics.trackInteraction('navigation', 'return_to_categories');
         const navHeight = $("nav").outerHeight() || 0;
         $("html, body").animate({
             scrollTop: $("#experience-intro").offset().top - navHeight
@@ -301,13 +287,10 @@ const ServicesFeature = {
     $(document).on("click", ".btn-ga-inquiry", function() {
         const service = $(this).data("ga-service");
         const category = $(this).data("ga-category");
-        if (window.gtag) {
-            gtag('event', 'generate_lead', {
-                service_id: service,
-                category_id: category,
-                method: 'inquiry_button'
-            });
-        }
+        Analytics.trackLead('inquiry_button', 'service_details', {
+            service_id: service,
+            category_id: category
+        });
     });
 
     // Close Details

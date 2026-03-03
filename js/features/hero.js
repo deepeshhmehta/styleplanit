@@ -47,12 +47,7 @@ const HeroFeature = {
 
     // Hero CTA Tracking
     $(document).on("click", ".btn-ga-hero", function() {
-        if (window.gtag) {
-            gtag('event', 'select_content', {
-                content_type: 'hero_cta',
-                item_id: 'hero_main_button'
-            });
-        }
+        Analytics.trackInteraction('hero_cta', 'hero_main_button');
     });
   }
 };
