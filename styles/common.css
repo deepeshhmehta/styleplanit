@@ -1084,16 +1084,15 @@ footer {
 /* Hover States - Expand to fit text */
 .whatsapp-floating:hover, .book-now-floating:hover {
     justify-content: flex-start;
-    padding-right: 15px; /* Spacing for the expanded state only */
 }
 
 .whatsapp-floating:hover { 
-    width: 150px; 
+    width: 160px; 
     background-color: #128C7E; 
     color: white; 
 }
 .book-now-floating:hover { 
-    width: 250px; 
+    width: 260px; 
     background-color: var(--primary-accent-dark); 
     color: white; 
 }
