@@ -1079,13 +1079,12 @@ footer {
     opacity: 0;
     transition: all 0.3s ease;
     margin-right: 0;
-    padding-right: 15px; /* Add spacing from the right edge */
 }
 
 /* Hover States - Expand to fit text */
 .whatsapp-floating:hover, .book-now-floating:hover {
     justify-content: flex-start;
-    padding-right: 20px;
+    padding-right: 15px; /* Spacing for the expanded state only */
 }
 
 .whatsapp-floating:hover { 
