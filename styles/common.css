@@ -1083,7 +1083,7 @@ footer {
 
 /* Hover States - Expand to full width */
 .whatsapp-floating:hover, .book-now-floating:hover {
-    width: 180px; /* Adjust based on text length */
+    width: 250px; /* Adjust based on text length */
     justify-content: flex-start;
     padding-right: 20px;
 }
@@ -1092,7 +1092,7 @@ footer {
 .book-now-floating:hover { background-color: var(--primary-accent-dark); color: white; }
 
 .whatsapp-floating:hover .cta-text, .book-now-floating:hover .cta-text {
-    max-width: 130px;
+    max-width: 200px;
     opacity: 1;
     margin-left: -5px;
 }
