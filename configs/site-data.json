@@ -361,7 +361,7 @@
     {
       "category": "Elevate",
       "footer": "Lookbook Curation,Shopping List, In-Person Shopping",
-      "image_url": "assets/images/services-by-category/Elevate/Style-conciege.jpg",
+      "image_url": "assets/images/services-by-category/Elevate/In-person-style-concierge.jpg",
       "long_description": "Experience the ultimate luxury: effortless style without the legwork. This white-glove service handles every single detail of your wardrobe acquisition. We scour the market to curate a selection specifically for you, managing everything from sourcing hard-to-find pieces to handling all purchases, returns, and alterations. Whether you prefer a private fitting in a luxury suite or the comfort of your own home, we bring the best of the boutiques directly to you. You simply show up and look your best; we handle the rest.",
       "short_description": "Effortless luxury without the legwork. We handle every detail of your wardrobe acquisition, from elite sourcing to returns, bringing the boutique directly to you.",
       "title": "The Style Concierge (In-Person)"
@@ -369,7 +369,7 @@
     {
       "category": "Elevate",
       "footer": "Lookbook Curation, Shopping List, Virtual Shopping",
-      "image_url": "assets/images/services-by-category/Elevate/Style-conciege.jpg",
+      "image_url": "assets/images/services-by-category/Elevate/Virtual-style-concierge.jpg",
       "long_description": "Expert style, delivered digitally. We scour the global market to curate a fully personalized, shoppable lookbook tailored to your specific needs, budget, and taste. You receive a seamless digital experience featuring direct purchase links, mood boards, and detailed styling notes on how to pair every item. Enjoy the luxury of a personal stylist without the appointments\u2014just click, order, and elevate your wardrobe from the comfort of your home.",
       "short_description": "Expert styling delivered directly to your screen. Receive a fully personalized, shoppable lookbook with direct links and styling notes to elevate your wardrobe from home.",
       "title": "The Style Concierge (Virtual)"
@@ -479,7 +479,8 @@
       "OOO.jpg",
       "Showstopper.jpg",
       "Signature-foundation.jpeg",
-      "Style-conciege.jpg",
+      "In-person-style-concierge.jpg",
+      "Virtual-style-concierge.jpg",
       "The-tone-audit.jpg",
       "Virtual-tone-audit.jpg",
       "homepage_hero.jpg",
