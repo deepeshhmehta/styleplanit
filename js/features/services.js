@@ -91,8 +91,9 @@ const ServicesFeature = {
 
     container.empty();
     categories.forEach(category => {
+        const slug = this.slugify(category.name);
         container.append(`
-            <div class="category-card" data-category="${category.name}">
+            <div class="category-card" data-category="${category.name}" data-ga-category="${slug}">
                 <div class="category-card-bg" style="background-image: url('${category.image_url}')"></div>
                 <div class="category-card-content">
                     <h3>${category.name}</h3>
@@ -118,8 +119,9 @@ const ServicesFeature = {
         .filter((s) => s.category === category)
         .forEach((service) => {
           const chipsHtml = this.renderServiceChips(service.footer);
+          const serviceSlug = this.slugify(service.title);
           grid.append(`
-                    <div class="service-card" data-title="${service.title}">
+                    <div class="service-card" data-title="${service.title}" data-ga-service="${serviceSlug}" data-ga-category="${categoryId}">
                         <div class="service-card-image">
                             <img src="${service.image_url}" alt="${service.title}">
                         </div>
@@ -167,6 +169,8 @@ const ServicesFeature = {
   switchCategory: function(categoryName, noScroll = false) {
     const slug = this.slugify(categoryName);
     
+    Analytics.trackCategorySwitch(categoryName, slug);
+
     if ($("#services").is(":hidden")) {
         $("#services").fadeIn(400);
     }
@@ -196,6 +200,11 @@ const ServicesFeature = {
     const service = this.allServices.find(s => s.title === serviceTitle);
     if (!service) return;
 
+    const serviceSlug = this.slugify(service.title);
+    const categorySlug = this.slugify(service.category);
+
+    Analytics.trackServiceView(service.title, serviceSlug, service.category);
+
     const detailsContainer = $("#service-details-container");
     const chipsHtml = this.renderServiceChips(service.footer);
     
@@ -220,7 +229,11 @@ const ServicesFeature = {
                     
                     <div class="details-footer">
                         <div class="cta-row">
-                            <a href="${(Data.masterData.config.find(c => c.key === 'STEP_2_BUTTON_HREF') || {}).value || 'https://cal.com/styleplanit/15min'}" target="_blank" class="btn btn-primary-accent">${inquireText}</a>
+                            <a href="${(Data.masterData.config.find(c => c.key === 'STEP_2_BUTTON_HREF') || {}).value || 'https://cal.com/styleplanit/15min'}" 
+                               target="_blank" 
+                               class="btn btn-primary-accent btn-ga-inquiry"
+                               data-ga-service="${serviceSlug}"
+                               data-ga-category="${categorySlug}">${inquireText}</a>
                         </div>
                         <button class="btn-secondary btn-close-details">${closeBtnText}</button>
                     </div>
@@ -247,6 +260,7 @@ const ServicesFeature = {
 
     // Return to Categories Button
     $(document).on("click", "#btn-return-to-categories", function() {
+        Analytics.trackInteraction('navigation', 'return_to_categories');
         const navHeight = $("nav").outerHeight() || 0;
         $("html, body").animate({
             scrollTop: $("#experience-intro").offset().top - navHeight
@@ -267,6 +281,16 @@ const ServicesFeature = {
         
         const title = $(this).data("title");
         self.showServiceDetails(title);
+    });
+
+    // Inquiry Click Tracking
+    $(document).on("click", ".btn-ga-inquiry", function() {
+        const service = $(this).data("ga-service");
+        const category = $(this).data("ga-category");
+        Analytics.trackLead('inquiry_button', 'service_details', {
+            service_id: service,
+            category_id: category
+        });
     });
 
     // Close Details

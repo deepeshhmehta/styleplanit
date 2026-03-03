@@ -73,5 +73,14 @@ const App = {
     if (typeof DialogsFeature !== 'undefined') {
         DialogsFeature.init();
     }
+
+    // 8. Global Lead Tracking
+    $(document).on("click", ".btn-ga-whatsapp", function() {
+        Analytics.trackLead('whatsapp_floating', 'social_inquiry');
+    });
+
+    $(document).on("click", ".btn-ga-book", function() {
+        Analytics.trackLead('schedule_consultation_floating', 'appointment_booking');
+    });
   }
 };

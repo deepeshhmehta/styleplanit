@@ -1081,18 +1081,30 @@ footer {
     margin-right: 0;
 }
 
-/* Hover States - Expand to full width */
+/* Hover States - Expand to fit text */
 .whatsapp-floating:hover, .book-now-floating:hover {
-    width: 180px; /* Adjust based on text length */
     justify-content: flex-start;
-    padding-right: 20px;
 }
 
-.whatsapp-floating:hover { background-color: #128C7E; color: white; }
-.book-now-floating:hover { background-color: var(--primary-accent-dark); color: white; }
+.whatsapp-floating:hover { 
+    width: 160px; 
+    background-color: #128C7E; 
+    color: white; 
+}
+.book-now-floating:hover { 
+    width: 250px; 
+    background-color: var(--primary-accent-dark); 
+    color: white; 
+}
 
-.whatsapp-floating:hover .cta-text, .book-now-floating:hover .cta-text {
-    max-width: 130px;
+.whatsapp-floating:hover .cta-text {
+    max-width: 100px;
+    opacity: 1;
+    margin-left: -5px;
+}
+
+.book-now-floating:hover .cta-text {
+    max-width: 200px;
     opacity: 1;
     margin-left: -5px;
 }
@@ -1284,12 +1296,22 @@ footer {
     margin-bottom: 40px;
 }
 
+.details-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
 .cta-row {
-    margin-bottom: 30px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
 .btn-close-details {
-    margin-top: 20px;
+    margin-top: 0;
 }
 
 @media (max-width: 768px) {

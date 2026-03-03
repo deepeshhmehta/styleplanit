@@ -35,6 +35,8 @@ const SubscribeFeature = {
         return false;
       }
 
+      Analytics.trackLead('newsletter_signup', 'footer_subscribe');
+
       setTimeout(() => {
         container.fadeOut(600, function() {
           success.fadeIn(600);

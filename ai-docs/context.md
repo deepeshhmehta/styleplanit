@@ -38,6 +38,7 @@ This document provides a summary of the StylePlanIt website project for context 
 *   **Frameworks:** jQuery.
 *   **Core Logic:**
     *   **`js/loader.js`:** Recursive component loading and visual stability preloading.
+    *   **`js/features/analytics.js`:** Centralized Google Analytics 4 (GA4) event tracking module.
     *   **`js/app.js`:** Global feature initialization.
 *   **Plugin Features (`js/features/`):**
     *   `services.js`: Guided Experience journey with parallel data fetching.
@@ -66,6 +67,10 @@ This document provides a summary of the StylePlanIt website project for context 
 *   **Expandable CTAs:** Global floating buttons (Book Now, WhatsApp) with "Collapse & Expand" pattern.
 *   **Horizontal Affordance:** Space-saving horizontal scrollers for Logo Bands and Reviews with dynamic scroll indicators.
 *   **Icon Service:** Premium, component-based gated section with full-page immersive background.
+*   **Analytics Pattern:**
+    *   **Abstraction:** All tracking is routed through a dedicated `Analytics` module to decouple UI logic from GA4 `gtag` implementation.
+    *   **Event Strategy:** Uses standard GA4 events (`select_content`, `view_item`, `generate_lead`) with custom parameters for granular user journey analysis.
+    *   **Lead Attribution:** Captures source and context (e.g., specific service viewed) for all lead generation events.
 
 ## 6. Development & Safety
 
@@ -78,6 +83,9 @@ This document provides a summary of the StylePlanIt website project for context 
 
 *   **Status:** Production-ready (Version 4.6.0).
 *   **Recent Wins:**
+    *   **Image Optimization:** Transitioned from `.png` to `.jpg`/`.jpeg` formats for service imagery to improve load performance.
+    *   **Automation:** Enhanced `diff_site_data.py` to automatically scan `assets/images` and generate the `assets_manifest` in `site-data.json`.
+    *   **Data Integrity:** Synchronized local `site-data.json` with Google Sheets source of truth for config and dialogs.
     *   **Typography Overhaul:** Transitioned to 'Bebas Neue' and 'DM Sans' for a more modern, bold aesthetic.
     *   **Experience Refactor:** Staged services journey with detached details box.
     *   **Component Refactor:** Icon Service refactored to use dynamic component loading.

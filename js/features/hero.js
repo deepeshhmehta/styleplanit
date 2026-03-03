@@ -44,5 +44,10 @@ const HeroFeature = {
         transition: "none",
       }).addClass("active");
     }
+
+    // Hero CTA Tracking
+    $(document).on("click", ".btn-ga-hero", function() {
+        Analytics.trackInteraction('hero_cta', 'hero_main_button');
+    });
   }
 };
