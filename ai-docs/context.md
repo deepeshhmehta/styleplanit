@@ -74,8 +74,11 @@ This document provides a summary of the StylePlanIt website project for context 
 
 ## 6. Development & Safety
 
-*   **Asana Integration:** Mandatory task creation and status management. Project: "Style Plan-It Launch Plan" (`1212636326772928`).
-*   **Token Extraction:** Use subshells to keep tokens out of logs.
+*   **Asana Integration:** Mandatory task creation and status management. Project: "Style Plan-It Launch Plan" (`1212636326772928`). The `.env.asana` file contains `ASANA_PAT=<token_value>`.
+    *   **Tooling:** Use `scripts/asana_tools.py` for Asana operations.
+        *   `python3 scripts/asana_tools.py list`: View all tasks and statuses.
+        *   `python3 scripts/asana_tools.py create "Task Name" --notes "Description"`: Create a new task.
+*   **Token Extraction:** Use subshells or the integrated script to keep tokens out of logs.
 *   **Source Control:** No direct commits to `main`. Every task occurs on a dedicated `feature/` branch. Merge via PR only.
 *   **Verification:** Mandatory `test.sh` and `diff_site_data.py` runs before PR creation.
 
