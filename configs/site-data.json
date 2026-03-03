@@ -48,7 +48,7 @@
     },
     {
       "key": "HERO_FOOTER_TEXT",
-      "value": "Personal Styling | Image Consulting | Wardrobe Curation"
+      "value": "Personal Styling | Strategic Personal Branding | Wardrobe Curation"
     },
     {
       "key": "HERO_TITLE",
@@ -433,8 +433,8 @@
       "action": "https://wa.me/16479678953",
       "cta": "Get Help Now",
       "description": "WhatsApp us on 647-96(style). Get that look stylist approved.",
-      "timeInSeconds": "5",
-      "title": "Style Helpline"
+      "timeInSeconds": "20",
+      "title": "Free Style Helpline"
     }
   ],
   "assets_manifest": {

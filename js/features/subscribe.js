@@ -35,6 +35,13 @@ const SubscribeFeature = {
         return false;
       }
 
+      if (window.gtag) {
+          gtag('event', 'generate_lead', {
+              method: 'newsletter_signup',
+              content_type: 'footer_subscribe'
+          });
+      }
+
       setTimeout(() => {
         container.fadeOut(600, function() {
           success.fadeIn(600);

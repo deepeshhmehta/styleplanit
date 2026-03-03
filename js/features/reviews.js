@@ -44,6 +44,7 @@ const ReviewsFeature = {
 
     const grid = $("#reviews-container");
     const dots = $(".scroll-dot");
+    let hasTrackedEnd = false;
 
     grid.on("scroll", () => {
         const scrollLeft = grid.scrollLeft();
@@ -53,6 +54,16 @@ const ReviewsFeature = {
         
         dots.removeClass("active");
         dots.eq(activeIndex).addClass("active");
+
+        // Track when user reaches the end of reviews
+        if (progress > 0.95 && !hasTrackedEnd) {
+            hasTrackedEnd = true;
+            if (window.gtag) {
+                gtag('event', 'scroll_to_end', {
+                    content_type: 'reviews_carousel'
+                });
+            }
+        }
     });
   },
 
@@ -61,6 +72,13 @@ const ReviewsFeature = {
         const card = $(this);
         const isExpanding = !card.hasClass("expanded");
         card.toggleClass("expanded");
+        
+        if (isExpanding && window.gtag) {
+            gtag('event', 'select_content', {
+                content_type: 'review_expansion',
+                item_id: card.find('.review-author').text()
+            });
+        }
         
         const navHeight = $("nav").outerHeight() || 0;
         const extraPadding = CONFIG.SETTINGS.SCROLL_OFFSET;
