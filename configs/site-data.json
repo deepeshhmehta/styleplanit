@@ -297,12 +297,12 @@
     },
     {
       "category": "Elevate",
-      "footer": "",
+      "footer": "Color Analysis, Body Shape Analysis, Personal Style Analysis, Lookbook Curation, Shopping List, In-Person Shopping, Wardrobing",
       "image_url": "assets/images/services-by-category/Elevate/build_your_signature_self.jpg",
       "long_description": "This is the definitive personal styling experience. If you are ready for a total image reinvention, this all-inclusive package covers every angle. We combine advanced Color Analysis and Body Shape strategy with a luxury in-person shopping session. We don’t just plan your look; we build it with you, side-by-side. From defining your perfect palette to curating the final wardrobe, this is your blueprint for a signature style that commands attention and skyrockets your confidence",
       "short_description": "The ultimate style overhaul featuring color analysis, body shape strategy, and luxury in-person shopping. Build a signature wardrobe that commands attention.",
       "title": "Build Your Signature Self"
-    },
+      },
     {
       "category": "Establish",
       "footer": "Lookbook Curation, Shopping List, Virtual Shopping",
