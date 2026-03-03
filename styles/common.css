@@ -510,10 +510,10 @@ footer {
 }
 
 #reviews .review-card p {
-    font-family: var(--font-primary);
-    font-size: 1.5rem;
-    font-style: italic;
-    line-height: 1.4;
+    font-family: var(--font-secondary);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--charcoal);
 }
 
 #reviews .review-card.expanded p { margin-bottom: 30px; }
