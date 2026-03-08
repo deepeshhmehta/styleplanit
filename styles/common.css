@@ -1102,9 +1102,24 @@ footer {
 
 
 
+.services-grid {
+    display: none;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.services-grid.active { display: grid; }
+
 /* --- EXPERIENCE REFACTOR STYLES --- */
 
 /* Hide old tabs on the new experience page */
+
+/* Icon Service Page Full Background */
+.icon-service-page {
+    position: relative;
+    clip-path: inset(0);
+}
 
 .icon-service-page::before {
     content: '';
