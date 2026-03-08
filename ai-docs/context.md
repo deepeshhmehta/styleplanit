@@ -78,6 +78,7 @@ This document provides a summary of the StylePlanIt website project for context 
 
 ## 6. Development & Safety
 
+*   **CRITICAL: UNLESS EXPLICITLY INSTRUCTED TO PUSH, NEVER PUSH CODE.**
 *   **Asana Integration:** Mandatory task creation and status management. Project: "Style Plan-It Launch Plan" (`1212636326772928`). The `.env.asana` file contains `ASANA_PAT=<token_value>`.
     *   **Tooling:** Use `scripts/asana_tools.py` for Asana operations.
         *   `python3 scripts/asana_tools.py list`: View all tasks and statuses.
