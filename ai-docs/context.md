@@ -37,7 +37,7 @@ This document provides a summary of the StylePlanIt website project for context 
 
 *   **Frameworks:** jQuery.
 *   **Core Logic:**
-    *   **`js/loader.js`:** Recursive component loading and visual stability preloading.
+    *   **`js/loader.js`:** Recursive component loading, custom phrase cycling from `site-data.json`, and visual stability preloading for critical hero background images.
     *   **`js/features/analytics.js`:** Centralized Google Analytics 4 (GA4) event tracking module.
     *   **`js/app.js`:** Global feature initialization.
 *   **Plugin Features (`js/features/`):**
@@ -45,10 +45,14 @@ This document provides a summary of the StylePlanIt website project for context 
     *   `portfolio.js`: Side-by-side "Before/After" transformation pairing.
     *   `reviews.js`: Randomized 3-review preview with horizontal scroll indicators.
     *   `icon-service.js`: Component-based gated collection management.
+*   **Data Module (`js/config.js`):**
+    *   Handles stale-while-revalidate fetching of `site-data.json`.
+    *   Enforces version-based cache flushing via major version bumps.
+    *   Parses CSV exports from Google Sheets for live access lists (Icon Service).
 *   **Tooling:**
     *   **`scripts/dev_server.py`:** Multi-threaded local server with interactive port handling.
-    *   **`scripts/diff_site_data.py`:** Interactive 3-way sync engine.
-    *   **`scripts/sync_engine.py`:** Assets manifest generator and Sheets aggregator.
+    *   **`scripts/diff_site_data.py`:** Interactive 3-way sync engine for local vs remote data audit.
+    *   **`scripts/sync_engine.py`:** Automated assets manifest generator and Google Sheets aggregator.
 
 ## 4. Data & Configuration Layer
 
@@ -86,14 +90,14 @@ This document provides a summary of the StylePlanIt website project for context 
 
 *   **Status:** Production-ready (Version 4.6.0).
 *   **Recent Wins:**
-    *   **Image Optimization:** Transitioned from `.png` to `.jpg`/`.jpeg` formats for service imagery to improve load performance.
-    *   **Automation:** Enhanced `diff_site_data.py` to automatically scan `assets/images` and generate the `assets_manifest` in `site-data.json`.
-    *   **SEO Optimization:** Implemented intent-based keyword strategy targeting visionaries, newcomers, and professionals in Toronto. Optimized all meta tags and sitemap.
-    *   **Data Integrity:** Synchronized local `site-data.json` with Google Sheets source of truth for config and dialogs.
-    *   **Typography Overhaul:** Transitioned to 'Bebas Neue' and 'DM Sans' for a more modern, bold aesthetic.
-    *   **Experience Refactor:** Staged services journey with detached details box.
-    *   **Component Refactor:** Icon Service refactored to use dynamic component loading.
+    *   **Image Optimization:** Transitioned from `.png` to `.jpg`/`.jpeg` formats for service imagery.
+    *   **Automation:** Enhanced `sync_engine.py` to automatically scan `assets/images` and generate the `assets_manifest` in `site-data.json`.
+    *   **SEO Optimization:** Implemented intent-based keyword strategy and metadata synchronization across all pages.
+    *   **Asana Integration:** Developed `scripts/asana_tools.py` for automated task management within the CLI.
+    *   **Typography Overhaul:** Transitioned to 'Bebas Neue' and 'DM Sans' for a luxury minimalist aesthetic.
 *   **Next Priorities:**
-    1.  **Architecture:** Decouple config into a dedicated `style-planit-config` repository (Asana: `1213485094305648`).
-    2.  **Automation:** Implement script-based write-back to Google Sheets.
-    3.  **Refactor:** Explore build-time static site generation (Vite/11ty).
+    1.  **Content Strategy:** Implement "The Value of Styling" sections to explain the *why* behind personal branding (based on user feedback).
+    2.  **Transparency:** Integrate pricing models into service descriptions to improve client qualification.
+    3.  **Architecture:** Decouple config into a dedicated `style-planit-config` repository (Asana: `1213485094305648`).
+    4.  **Automation:** Implement script-based write-back to Google Sheets.
+    5.  **Refactor:** Explore build-time static site generation (Vite/11ty).

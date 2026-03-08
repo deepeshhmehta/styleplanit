@@ -108,31 +108,24 @@ async function loadComponents() {
     updateProgress(60);
     
     // 3. Load and apply site-wide configuration
-    const configArray = await Data.fetch('config');
-    let config = {};
-    if (configArray.length > 0) {
-        configArray.forEach(item => {
-            if (!item.key) return;
-            config[item.key] = item.value;
-        });
-        Utils.applyConfig(config);
+    const config = await Utils.getConfig();
+    
+    // Initialize GA4 if ID is present
+    if (config['GOOGLE_ANALYTICS_ID']) {
+        const gaId = config['GOOGLE_ANALYTICS_ID'];
+        const gaScript = document.createElement('script');
+        gaScript.async = true;
+        gaScript.src = `https://www.googletagmanager.com/gtag/js?id=${gaId}`;
+        document.head.appendChild(gaScript);
 
-        if (config['GOOGLE_ANALYTICS_ID']) {
-            const gaId = config['GOOGLE_ANALYTICS_ID'];
-            const gaScript = document.createElement('script');
-            gaScript.async = true;
-            gaScript.src = `https://www.googletagmanager.com/gtag/js?id=${gaId}`;
-            document.head.appendChild(gaScript);
-
-            const gaInitScript = document.createElement('script');
-            gaInitScript.innerHTML = `
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-                gtag('config', '${gaId}');
-            `;
-            document.head.appendChild(gaInitScript);
-        }
+        const gaInitScript = document.createElement('script');
+        gaInitScript.innerHTML = `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${gaId}');
+        `;
+        document.head.appendChild(gaInitScript);
     }
     updateProgress(75);
 

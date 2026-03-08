@@ -20,11 +20,8 @@ const IconServiceFeature = {
     
     await this.loadView(container, 'components/icon-service-layout.html');
     
-    // Refresh master data specifically here since access state might have changed data access needs
-    const configArray = await Data.fetch('config');
-    const config = {};
-    configArray.forEach(item => config[item.key] = item.value);
-    Utils.applyConfig(config);
+    // Use centralized config manager
+    await Utils.getConfig();
 
     if (typeof ServicesFeature !== 'undefined') {
         console.log("🔍 [IconService] Initializing Services Grid...");
@@ -47,11 +44,8 @@ const IconServiceFeature = {
   renderGate: async function (container) {
     await this.loadView(container, 'components/icon-auth-gate.html');
     
-    // Apply config to the newly loaded gate
-    const configArray = await Data.fetch('config');
-    const config = {};
-    configArray.forEach(item => config[item.key] = item.value);
-    Utils.applyConfig(config);
+    // Use centralized config manager
+    const config = await Utils.getConfig();
 
     $("#icon-gate-form").on("submit", async (e) => {
         e.preventDefault();
