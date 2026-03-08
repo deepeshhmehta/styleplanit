@@ -2,6 +2,8 @@
  * utils.js - Shared utility functions
  */
 const Utils = {
+    configCache: null,
+
     /**
      * Robust CSV parser (kept for local processing by other tools if needed)
      */
@@ -101,6 +103,27 @@ const Utils = {
         if (config['OG_IMAGE']) {
             this.updateMeta('og:image', config['OG_IMAGE'], 'property');
         }
+    },
+
+    /**
+     * Centralized way to fetch and apply config in one call.
+     * Caches the transformed object for performance across multiple features.
+     */
+    getConfig: async function(forceRefresh = false) {
+        if (this.configCache && !forceRefresh) {
+            this.applyConfig(this.configCache);
+            return this.configCache;
+        }
+        
+        const configArray = await Data.fetch('config');
+        const config = {};
+        configArray.forEach(item => {
+            if (item.key) config[item.key] = item.value;
+        });
+        
+        this.configCache = config;
+        this.applyConfig(config);
+        return config;
     },
 
     updateMeta: function(name, content, attr = 'name') {

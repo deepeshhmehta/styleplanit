@@ -164,33 +164,6 @@ h1, h2, h3, h4 {
     opacity: 0.8;
 }
 
-/* How It Works Base */
-.customer-layers {
-    display: grid;
-    gap: 40px;
-    margin-top: 80px;
-    margin-bottom: 80px;
-}
-
-.layer-card {
-    border: 1px solid var(--border-color);
-    padding: 60px 40px;
-    text-align: center;
-    transition: all 0.4s ease;
-    border-radius: var(--border-radius-pill);
-}
-
-.layer-card:hover {
-    background: var(--white);
-    border-color: var(--primary-accent);
-    transform: translateY(-5px);
-}
-
-.layer-card h3 {
-    font-size: 2rem;
-    margin-bottom: 20px;
-}
-
 /* Logo Band Base */
 .logo-band {
     text-align: center;
@@ -1126,58 +1099,8 @@ footer {
 }
 
 /* Services Page Base Layout */
-.elegant-tabs {
-    margin-bottom: 40px;
-    border-bottom: 1px solid var(--border-color);
-}
 
-.tabs-scroll-container {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-}
 
-.tabs-scroll-container::-webkit-scrollbar { display: none; }
-
-.elegant-tabs ul {
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-    min-width: max-content;
-    padding: 0 10px;
-}
-
-.elegant-tabs li {
-    padding: 15px 0;
-    cursor: pointer;
-    font-size: 0.9rem;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    position: relative;
-    color: var(--grey);
-    transition: color 0.3s ease;
-}
-
-.elegant-tabs li.active { 
-    color: var(--primary-accent);
-    font-weight: 600;
-}
-
-.elegant-tabs li::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 3px;
-    bottom: -1px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: var(--primary-accent);
-    transition: width 0.3s;
-}
-
-.elegant-tabs li.active::after { width: 100%; }
 
 .services-grid {
     display: none;
@@ -1191,7 +1114,6 @@ footer {
 /* --- EXPERIENCE REFACTOR STYLES --- */
 
 /* Hide old tabs on the new experience page */
-#services .elegant-tabs { display: none; }
 
 /* Icon Service Page Full Background */
 .icon-service-page {
