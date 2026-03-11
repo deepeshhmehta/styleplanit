@@ -8,6 +8,10 @@ const LogosFeature = {
     if (container.length === 0) return;
 
     const masterData = await Data.loadMasterData();
+    if (!masterData || !masterData.assets_manifest) {
+        console.error("❌ [Logos] Failed to load assets_manifest");
+        return;
+    }
     const logos = masterData.assets_manifest["home-page/logos"] || [];
     
     if (logos.length === 0) return;

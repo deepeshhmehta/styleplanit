@@ -6,7 +6,11 @@ const PortfolioFeature = {
         const container = $("#portfolio-carousel");
         if (container.length === 0) return;
 
-        const masterData = typeof Data !== 'undefined' ? Data.masterData : {};
+        const masterData = await Data.loadMasterData();
+        if (!masterData || !masterData.assets_manifest) {
+            console.error("❌ [Portfolio] Failed to load assets_manifest");
+            return;
+        }
         const assets = masterData.assets_manifest || {};
         const images = assets['portfolio'] || [];
 

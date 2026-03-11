@@ -8,6 +8,10 @@ const HeroFeature = {
 
     // 1. Get images from manifest
     const masterData = await Data.loadMasterData();
+    if (!masterData || !masterData.assets_manifest) {
+        console.error("❌ [Hero] Failed to load assets_manifest");
+        return;
+    }
     const images = masterData.assets_manifest["home-page/hero-images"] || [];
     
     if (images.length === 0) return;

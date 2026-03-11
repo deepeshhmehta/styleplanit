@@ -63,7 +63,7 @@ async function loadComponents() {
             element.setAttribute('data-loaded', 'true');
 
             try {
-                const response = await fetch(`components/${componentName}.html`);
+                const response = await fetch(`/components/${componentName}.html`);
                 if (!response.ok) throw new Error(`Status ${response.status}`);
                 const html = await response.text();
                 element.innerHTML = html;
@@ -97,7 +97,7 @@ async function loadComponents() {
     const featurePromises = features.map((feature) => {
         return new Promise((resolve) => {
             const script = document.createElement('script');
-            script.src = `js/features/${feature}.js?v=${new Date().getTime()}`;
+            script.src = `/js/features/${feature}.js?v=${new Date().getTime()}`;
             script.async = false;
             script.onload = () => resolve();
             script.onerror = () => resolve();
