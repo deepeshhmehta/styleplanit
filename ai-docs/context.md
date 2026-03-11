@@ -73,7 +73,7 @@ This document provides a summary of the StylePlanIt website project for context 
 *   **Horizontal Affordance:** Space-saving horizontal scrollers for Logo Bands and Reviews with dynamic scroll indicators.
 *   **Icon Service:** Premium, component-based gated section with full-page immersive background.
 *   **Value-Based Storytelling:** A home-page "Value Proposition" section designed to bridge the gap between user problems and service solutions using editorial-style typography and split-screen layouts.
-*   **Style Wiki (Knowledge Base):** A dynamic article-loading system on the `/learn` page that serves educational content (e.g., "Why Styling Matters") from `site-data.json` to build brand authority and SEO.
+*   **Style Wiki (Knowledge Base):** A dynamic article-loading system on the `/learn` page that serves educational content from `site-data.json`. Features a collapsible sidebar (web & mobile) and a luxury dark mode reader to enhance content consumption and brand authority.
 *   **Analytics Pattern:**
     *   **Abstraction:** All tracking is routed through a dedicated `Analytics` module to decouple UI logic from GA4 `gtag` implementation.
     *   **Event Strategy:** Uses standard GA4 events (`select_content`, `view_item`, `generate_lead`) with custom parameters for granular user journey analysis.
