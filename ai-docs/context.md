@@ -37,14 +37,15 @@ This document provides a summary of the StylePlanIt website project for context 
 
 *   **Frameworks:** jQuery.
 *   **Core Logic:**
-    *   **`js/loader.js`:** Recursive component loading, custom phrase cycling from `site-data.json`, and visual stability preloading for critical hero background images.
+    *   **`js/loader.js`:** Recursive component loading and asynchronous feature orchestration. Awaits script execution before application-wide initialization.
     *   **`js/features/analytics.js`:** Centralized Google Analytics 4 (GA4) event tracking module.
-    *   **`js/app.js`:** Global feature initialization.
+    *   **`js/app.js`:** Global feature initialization using an asynchronous `init` pattern to prevent race conditions.
 *   **Plugin Features (`js/features/`):**
     *   `services.js`: Guided Experience journey with parallel data fetching.
     *   `portfolio.js`: Side-by-side "Before/After" transformation pairing.
     *   `reviews.js`: Randomized 3-review preview with horizontal scroll indicators.
     *   `icon-service.js`: Component-based gated collection management.
+    *   `learn.js`: Dynamic Style Wiki article loader and sidebar navigator.
 *   **Data Module (`js/config.js`):**
     *   Handles stale-while-revalidate fetching of `site-data.json`.
     *   Enforces version-based cache flushing via major version bumps.
@@ -85,22 +86,22 @@ This document provides a summary of the StylePlanIt website project for context 
     *   **Tooling:** Use `scripts/asana_tools.py` for Asana operations.
         *   `python3 scripts/asana_tools.py list`: View all tasks and statuses.
         *   `python3 scripts/asana_tools.py create "Task Name" --notes "Description"`: Create a new task.
+        *   `python3 scripts/asana_tools.py update <GID> --completed true --assignee <USER_GID>`: Update task status or ownership.
 *   **Token Extraction:** Use subshells or the integrated script to keep tokens out of logs.
 *   **Source Control:** No direct commits to `main`. Every task occurs on a dedicated `feature/` branch. Merge via PR only.
 *   **Verification:** Mandatory `test.sh` and `diff_site_data.py` runs before PR creation.
 
 ## 7. Current Project State (March 2026)
 
-*   **Status:** Production-ready (Version 4.6.0).
+*   **Status:** Production-ready (Version 4.6.2).
 *   **Recent Wins:**
-    *   **Image Optimization:** Transitioned from `.png` to `.jpg`/`.jpeg` formats for service imagery.
-    *   **Automation:** Enhanced `sync_engine.py` to automatically scan `assets/images` and generate the `assets_manifest` in `site-data.json`.
+    *   **Value-Based Storytelling:** Implemented homepage "Why Styling" section to drive high-intent user engagement.
+    *   **Style Wiki:** Launched a dynamic educational engine (`/learn`) to establish brand authority and improve long-tail SEO.
+    *   **Async Orchestration:** Refactored entire JS initialization flow to eliminate race conditions between script loading and component logic.
     *   **SEO Optimization:** Implemented intent-based keyword strategy and metadata synchronization across all pages.
-    *   **Asana Integration:** Developed `scripts/asana_tools.py` for automated task management within the CLI.
-    *   **Typography Overhaul:** Transitioned to 'Bebas Neue' and 'DM Sans' for a luxury minimalist aesthetic.
+    *   **Asana Integration:** Developed and enhanced `scripts/asana_tools.py` for full lifecycle task management.
 *   **Next Priorities:**
-    1.  **Content Strategy:** Implement "The Value of Styling" sections to explain the *why* behind personal branding (based on user feedback).
-    2.  **Transparency:** Integrate pricing models into service descriptions to improve client qualification.
-    3.  **Architecture:** Decouple config into a dedicated `style-planit-config` repository (Asana: `1213485094305648`).
-    4.  **Automation:** Implement script-based write-back to Google Sheets.
-    5.  **Refactor:** Explore build-time static site generation (Vite/11ty).
+    1.  **Transparency:** Integrate pricing models into service descriptions to improve client qualification.
+    2.  **Architecture:** Decouple config into a dedicated `style-planit-config` repository (Asana: `1213485094305648`).
+    3.  **Automation:** Implement script-based write-back to Google Sheets.
+    4.  **Refactor:** Explore build-time static site generation (Vite/11ty).
