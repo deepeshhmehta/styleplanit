@@ -9,6 +9,11 @@ const LearnFeature = {
         const container = $("#wiki-article-container");
         if (container.length === 0) return;
 
+        // Default sidebar state based on screen width
+        if (window.innerWidth < 1024) {
+            $(".wiki-layout-wrapper").addClass("sidebar-collapsed");
+        }
+
         // Fetch articles from site-data.json
         this.articles = await Data.fetch("articles");
         
@@ -55,6 +60,9 @@ const LearnFeature = {
 
         Analytics.trackInteraction('wiki_view', slug);
 
+        // Keep dark mode state if already active
+        const isDarkMode = container.hasClass("dark-mode");
+
         container.hide().html(`
             <div class="wiki-article-view">
                 <span class="section-subtitle">${article.category || 'Article'}</span>
@@ -73,22 +81,57 @@ const LearnFeature = {
                     </div>
                 </div>
             </div>
-        `).fadeIn(400);
+        `);
 
-        // Scroll to top of article on mobile
-        if (window.innerWidth < 768) {
-            const navHeight = $("nav").outerHeight() || 0;
-            $("html, body").animate({
-                scrollTop: container.offset().top - navHeight - 20
-            }, 500);
+        if (isDarkMode) container.addClass("dark-mode");
+        container.fadeIn(400);
+
+        // Scroll to top of article
+        const scrollTarget = window.innerWidth < 768 ? container.offset().top - 100 : 0;
+        if (scrollTarget > 0) {
+            $("html, body").animate({ scrollTop: scrollTarget }, 500);
+        } else {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Close sidebar on mobile after selection
+        if (window.innerWidth < 1024) {
+            $(".wiki-layout-wrapper").addClass("sidebar-collapsed");
         }
     },
 
     bindEvents: function() {
         const self = this;
+        
+        // Article Selection
         $(document).on("click", ".wiki-nav-link", function(e) {
             const title = $(this).data("title");
             self.loadArticle(title);
+        });
+
+        // Sidebar Toggle
+        $(document).on("click", "#wiki-sidebar-toggle", function() {
+            $(".wiki-layout-wrapper").toggleClass("sidebar-collapsed");
+        });
+
+        // Sidebar Close (Mobile)
+        $(document).on("click", "#wiki-sidebar-close", function() {
+            $(".wiki-layout-wrapper").addClass("sidebar-collapsed");
+        });
+
+        // Dark Mode Toggle
+        $(document).on("click", "#dark-mode-toggle", function() {
+            const container = $("#wiki-article-container");
+            container.toggleClass("dark-mode");
+            
+            const icon = $(this).find("i");
+            if (container.hasClass("dark-mode")) {
+                icon.removeClass("fa-moon").addClass("fa-sun");
+                $(this).attr("title", "Toggle Light Mode");
+            } else {
+                icon.removeClass("fa-sun").addClass("fa-moon");
+                $(this).attr("title", "Toggle Dark Mode");
+            }
         });
     },
 

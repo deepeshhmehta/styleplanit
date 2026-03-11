@@ -403,6 +403,14 @@
     {
       "key": "VALUE_CTA",
       "value": "Explore the Style Wiki"
+    },
+    {
+      "key": "NAV_LINK_LEARN_HREF",
+      "value": "/learn"
+    },
+    {
+      "key": "NAV_LINK_LEARN_TEXT",
+      "value": "Learn"
     }
   ],
   "dialogs": [

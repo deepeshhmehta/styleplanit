@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
 
-    <link rel="stylesheet" href="styles/common.css">
-    <link rel="stylesheet" href="styles/desktop.css">
-    <link rel="stylesheet" href="styles/mobile.css">
+    <link rel="stylesheet" href="/styles/common.css">
+    <link rel="stylesheet" href="/styles/desktop.css">
+    <link rel="stylesheet" href="/styles/mobile.css">
 </head>
 <body class="bg-cream">
     <div id="site-loader" class="loader-overlay">
@@ -28,38 +28,52 @@
 
     <nav data-component="header"></nav>
 
-    <main class="section-padding">
-        <div class="container">
-            <div class="wiki-layout">
-                <aside class="wiki-sidebar">
-                    <h4 class="sidebar-title">The Style Wiki</h4>
-                    <ul id="wiki-article-list" class="article-links">
-                        <!-- Articles populated via JS -->
-                    </ul>
-                </aside>
+    <!-- Wiki Layout Wrapper -->
+    <div class="wiki-layout-wrapper">
+        <button id="wiki-sidebar-toggle" class="wiki-toggle-btn" aria-label="Toggle Index">
+            <i class="fas fa-list-ul"></i>
+        </button>
+
+        <aside class="wiki-sidebar" id="wiki-sidebar">
+            <div class="sidebar-header">
+                <h4 class="sidebar-title">The Style Wiki</h4>
+                <button id="wiki-sidebar-close" class="wiki-close-btn"><i class="fas fa-times"></i></button>
+            </div>
+            <ul id="wiki-article-list" class="article-links">
+                <!-- Articles populated via JS -->
+            </ul>
+        </aside>
+        
+        <main class="wiki-main-content">
+            <div class="wiki-reader-container">
+                <div class="wiki-reader-header">
+                    <div class="reader-controls">
+                        <button id="dark-mode-toggle" class="reader-btn" title="Toggle Dark Mode">
+                            <i class="fas fa-moon"></i>
+                        </button>
+                    </div>
+                </div>
                 
-                <article class="wiki-content">
-                    <div id="wiki-article-container">
-                        <div class="wiki-placeholder">
-                            <span class="section-subtitle">Loading Knowledge...</span>
-                            <div class="shimmer-line title"></div>
-                            <div class="shimmer-line text"></div>
-                            <div class="shimmer-line text"></div>
-                        </div>
+                <article class="wiki-content" id="wiki-article-container">
+                    <div class="wiki-placeholder">
+                        <span class="section-subtitle">Loading Knowledge...</span>
+                        <div class="shimmer-line title"></div>
+                        <div class="shimmer-line text"></div>
+                        <div class="shimmer-line text"></div>
                     </div>
                 </article>
             </div>
-        </div>
-    </main>
+        </main>
+    </div>
 
     <footer data-component="footer"></footer>
     <div data-component="book-now-floating"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@4.0.0/dist/jquery.min.js"></script>
-    <script src="js/config.js"></script>
-    <script src="js/utils.js"></script>
-    <script src="js/features/analytics.js"></script>
-    <script src="js/app.js"></script>
-    <script src="js/loader.js"></script>
+    <script src="/js/config.js"></script>
+    <script src="/js/utils.js"></script>
+    <script src="/js/features/analytics.js"></script>
+    <script src="/js/app.js"></script>
+    <script src="/js/loader.js"></script>
 </body>
 </html>
