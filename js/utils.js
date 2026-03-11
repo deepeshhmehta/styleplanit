@@ -2,8 +2,6 @@
  * utils.js - Shared utility functions
  */
 const Utils = {
-    configCache: null,
-
     /**
      * Robust CSV parser (kept for local processing by other tools if needed)
      */
@@ -56,7 +54,14 @@ const Utils = {
 
         document.querySelectorAll('[text-config-key]').forEach(element => {
             const key = element.getAttribute('text-config-key');
-            if (config[key] !== undefined) element.textContent = config[key];
+            if (config[key] !== undefined) {
+                // If it's the logo, we might want to preserve certain formatting
+                if (key === 'LOGO_TEXT') {
+                    element.innerHTML = config[key];
+                } else {
+                    element.textContent = config[key];
+                }
+            }
         });
 
         document.querySelectorAll('[href-config-key]').forEach(element => {
@@ -107,21 +112,14 @@ const Utils = {
 
     /**
      * Centralized way to fetch and apply config in one call.
-     * Caches the transformed object for performance across multiple features.
      */
-    getConfig: async function(forceRefresh = false) {
-        if (this.configCache && !forceRefresh) {
-            this.applyConfig(this.configCache);
-            return this.configCache;
-        }
-        
+    getConfig: async function() {
         const configArray = await Data.fetch('config');
         const config = {};
         configArray.forEach(item => {
             if (item.key) config[item.key] = item.value;
         });
         
-        this.configCache = config;
         this.applyConfig(config);
         return config;
     },

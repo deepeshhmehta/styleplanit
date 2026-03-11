@@ -2,9 +2,9 @@
  * app.js - Main orchestrator and global UI logic
  */
 const App = {
-  init: function (config) {
+  init: async function (config) {
     this.initNavigation();
-    this.initGlobalFeatures(config);
+    await this.initGlobalFeatures(config);
   },
 
   initNavigation: function () {

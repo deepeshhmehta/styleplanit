@@ -91,6 +91,7 @@ async function loadComponents() {
     if ($("#subscribe-container").length > 0 || $(".subscribe-form").length > 0) features.push('subscribe');
     if ($("#services").length > 0 || $("#experience-intro").length > 0 || $("#icon-service-container").length > 0) features.push('services');
     if ($("#icon-service-container").length > 0) features.push('icon-service');
+    if ($("#wiki-article-container").length > 0) features.push('learn');
     features.push('dialogs'); 
 
     const featurePromises = features.map((feature) => {
@@ -131,7 +132,7 @@ async function loadComponents() {
 
     // 4. Initialize UI interactions
     if (typeof App !== 'undefined') {
-        App.init(config);
+        await App.init(config);
     }
 
     // 5. Signal ready
