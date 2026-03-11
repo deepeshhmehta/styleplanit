@@ -120,4 +120,39 @@
         object-position: top center;
     }
     .profile-text h3 { font-size: 2.2rem; }
+
+    /* Value Section Mobile */
+    .value-split {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    .value-image-box {
+        height: 300px;
+    }
+    .value-content {
+        padding-right: 0;
+    }
+    .value-text-box .lead-text {
+        font-size: 1.1rem;
+    }
+    .pillar-num {
+        font-size: 1.4rem;
+    }
+
+    /* Style Wiki Mobile */
+    .wiki-layout {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    .wiki-content {
+        padding: 40px 20px;
+    }
+    .article-title {
+        font-size: 2.2rem;
+    }
+    .wiki-sidebar {
+        order: -1;
+        border-bottom: 1px solid var(--border-color);
+        padding-bottom: 20px;
+    }
 }

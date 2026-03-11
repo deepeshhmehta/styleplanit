@@ -1111,6 +1111,205 @@ footer {
 
 .services-grid.active { display: grid; }
 
+/* --- VALUE SECTION (WHY STYLING) --- */
+.value-split {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 80px;
+    align-items: center;
+}
+
+.value-image-box {
+    position: relative;
+    height: 600px;
+    overflow: hidden;
+    clip-path: inset(0);
+}
+
+.value-image {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.value-image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent, rgba(12, 69, 36, 0.15));
+    pointer-events: none;
+}
+
+.value-image-box:hover .value-image {
+    transform: scale(1.05);
+}
+
+.value-content {
+    padding-right: 40px;
+}
+
+.value-text-box .lead-text {
+    font-size: 1.25rem;
+    line-height: 1.6;
+    color: var(--black);
+    margin-bottom: 40px;
+    font-weight: 400;
+}
+
+.value-pillars {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-bottom: 50px;
+}
+
+.pillar {
+    position: relative;
+    padding-left: 60px;
+}
+
+.pillar-num {
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-family: var(--font-primary);
+    font-size: 1.8rem;
+    color: var(--primary-accent);
+    opacity: 0.3;
+}
+
+.pillar h4 {
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+    color: var(--primary-accent);
+}
+
+.pillar p {
+    font-size: 0.9rem;
+    color: var(--charcoal);
+    line-height: 1.6;
+}
+
+.value-footer {
+    margin-top: 20px;
+}
+
+/* --- STYLE WIKI (LEARN) --- */
+.wiki-layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 60px;
+    min-height: 70vh;
+}
+
+.sidebar-title {
+    font-size: 1.8rem;
+    margin-bottom: 30px;
+    letter-spacing: 2px;
+}
+
+.article-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.article-links li {
+    margin-bottom: 12px;
+}
+
+.wiki-nav-link {
+    font-family: var(--font-secondary);
+    font-size: 0.95rem;
+    color: var(--charcoal);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: block;
+    padding: 8px 0;
+    border-bottom: 1px solid transparent;
+}
+
+.wiki-nav-link:hover, .wiki-nav-link.active {
+    color: var(--primary-accent);
+    padding-left: 10px;
+}
+
+.wiki-nav-link.active {
+    font-weight: 600;
+}
+
+.wiki-content {
+    background: var(--white);
+    padding: 60px;
+    border: 1px solid var(--border-color);
+}
+
+.article-title {
+    font-size: 3.5rem;
+    margin-bottom: 15px;
+}
+
+.article-meta {
+    margin-bottom: 40px;
+    color: var(--grey);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.article-body {
+    font-family: var(--font-secondary);
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--charcoal);
+}
+
+.article-body p {
+    margin-bottom: 25px;
+}
+
+.article-body h2, .article-body h3 {
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+
+.article-footer {
+    margin-top: 60px;
+}
+
+.article-footer hr {
+    border: none;
+    border-top: 1px solid var(--border-color);
+    margin-bottom: 40px;
+}
+
+.article-cta {
+    text-align: center;
+    background: var(--cream);
+    padding: 40px;
+}
+
+.article-cta h4 {
+    margin-bottom: 25px;
+    font-size: 1.5rem;
+}
+
+/* Placeholder Shimmer */
+.shimmer-line {
+    height: 20px;
+    background: #f0f0f0;
+    margin-bottom: 15px;
+    border-radius: 4px;
+}
+.shimmer-line.title { height: 40px; width: 60%; margin-bottom: 30px; }
+.shimmer-line.text { width: 100%; }
+
 /* --- EXPERIENCE REFACTOR STYLES --- */
 
 /* Hide old tabs on the new experience page */

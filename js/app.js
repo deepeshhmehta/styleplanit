@@ -64,6 +64,11 @@ const App = {
         IconServiceFeature.init();
     }
 
+    // 5b. Learn (Style Wiki)
+    if (typeof LearnFeature !== 'undefined' && window.location.pathname.includes('learn')) {
+        LearnFeature.init();
+    }
+
     // 6. Subscription logic
     if (typeof SubscribeFeature !== 'undefined') {
         SubscribeFeature.init(config);
