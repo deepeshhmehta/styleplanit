@@ -1203,7 +1203,7 @@ footer {
 }
 
 .value-footer {
-    margin-top: 20px;
+    margin-top: 60px;
 }
 
 /* --- STYLE WIKI (LEARN) --- */
@@ -1433,6 +1433,32 @@ footer {
 }
 .shimmer-line.title { height: 40px; width: 60%; margin-bottom: 30px; }
 .shimmer-line.text { width: 100%; }
+
+/* Article Enhancements */
+.style-tip-box {
+    background: var(--primary-accent);
+    color: var(--white);
+    padding: 40px;
+    margin-top: 60px;
+    text-align: center;
+    border-radius: 0;
+    position: relative;
+}
+
+.style-tip-box strong {
+    display: block;
+    font-family: var(--font-primary);
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    opacity: 0.8;
+}
+
+.style-tip-box p {
+    margin-bottom: 0;
+    font-size: 1.3rem;
+    font-style: italic;
+}
 
 /* --- EXPERIENCE REFACTOR STYLES --- */
 

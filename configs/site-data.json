@@ -1,16 +1,10 @@
 {
   "articles": [
     {
-      "category": "Foundations",
-      "content": "<h2>First Impressions Are Biological</h2><p>Before you even speak, your image has already communicated your status, competence, and authority. This isn't vanity—it's biology. The human brain makes a snap judgment in less than a second. In Toronto's competitive professional landscape, ensuring that judgment is in your favor is a strategic move.</p><h3>Confidence as a Tool</h3><p>There is a psychological phenomenon called 'Enclothed Cognition.' It refers to the systematic influence that clothes have on the wearer's psychological processes. When you dress like the leader you want to be, you don't just look the part—you start to feel it, act it, and lead it. Styling is the process of aligning your external self with your internal ambition.</p>",
-      "read_time": "5 min",
-      "title": "Why Styling Matters: The Psychology of Image"
-    },
-    {
-      "category": "Career",
-      "content": "<h2>Navigating a New Professional Landscape</h2><p>Coming to a new country like Canada means navigating new non-verbal codes. Professional styling for immigrants is about more than just fitting in; it's about translating your international expertise into a visual language that is recognized and respected in your new home.</p><h3>Authenticity vs. Assimilation</h3><p>The goal is never to lose your identity. It's to find the intersection between your cultural heritage and the expectations of the local professional environment. We help you create a 'Signature Self' that feels authentic to you while opening doors in Toronto's executive circles.</p>",
-      "read_time": "6 min",
-      "title": "The Immigrant Advantage in Professional Styling"
+      "category": "Authenticity",
+      "content": "<p>We’ve all had that moment. You’re scrolling, or you’re in a fitting room, and you see it. A jacket with a ridiculous amount of fringe. A pair of shoes in a shade of electric cobalt. A silhouette that feels a little too bold, a little too 'much.'</p><p>Your gut says: <strong>Yes.</strong></p><p>Your brain says: Where would I even wear that? I’m a parent. I have a 9-to-5. I’m a grandparent. People will look.</p><p>So, you put it back. You choose the 'safe' beige knit or the practical navy blazer. And in that tiny moment, a little piece of your authentic self—that creative, fearless inner child—is told to sit down and be quiet.</p><h2>The Cost of 'Blending In'</h2><p>As we navigate life’s major transitions—climbing the corporate ladder, moving cities, or entering new stages of parenthood—we often adopt a 'uniform' of survival. We dress for the roles we play rather than the person we are.</p><p>But style isn't just about the clothes; it’s about presence. When you second-guess your instinct, you aren't just doubting a garment—you’re doubting your own identity.</p><h2>Why We Built StylePlanIt</h2><p>We didn’t build StylePlanIt to give you another checklist or to tell you what's 'trending' on TikTok this week. Trends are fleeting; your soul is permanent.</p><p>We built this platform to be the permission slip you’ve been waiting for. We are here to help you bridge the gap between the life you lead and the person you feel like inside. Whether you are navigating the boardroom or the school run, StylePlanIt is designed to help you:</p><ul><li><strong>Trust Your Gut:</strong> That 'spark' you feel when you see an item? That’s your authentic self talking. We provide the professional styling logic to help you integrate those 'bold' pieces into your daily life.</li><li><strong>Silence the Second-Guessing:</strong> We take the 'what-ifs' out of the equation by showing you how to style your most loved items in ways that feel cohesive, not chaotic.</li><li><strong>Reclaim Your Identity:</strong> You are not just a professional, a parent, or a caregiver. You are a vibrant individual who deserves to be seen.</li></ul><h2>Your Most Authentic Self is Waiting</h2><p>Style is the most immediate form of self-communication. When you dress for the version of you that exists today—not the one you think you should be—everything changes. Your posture shifts. Your energy lifts. You stop just 'showing up,' and you start having a presence.</p><p>It’s time to stop dressing for the roles and start dressing for the human. We aren't just planning your outfits; we’re helping you plan your return to yourself.</p><div class='style-tip-box'><strong>STYLE TIP</strong><p>Trends are fleeting; your soul is permanent.</p></div>",
+      "read_time": "4 min",
+      "title": "Who Are You When You Aren't Trying to Fit In?"
     }
   ],
   "assets_manifest": {
@@ -366,7 +360,7 @@
     },
     {
       "key": "VALUE_SUBTITLE",
-      "value": "THE ARCHITECTURE OF PRESENCE."
+      "value": "WE ARCHITECT YOUR PRESENCE."
     },
     {
       "key": "VALUE_IMAGE",
@@ -401,8 +395,8 @@
       "value": "For the professional who knows that in a world of split-second judgments, your image is your silent negotiator. We master the physics of the first impression, ensuring you command respect before you even say a word."
     },
     {
-      "key": "VALUE_CTA",
-      "value": "Explore the Style Wiki"
+      "key": "VALUE_CTA_TEXT",
+      "value": "Start your journey"
     },
     {
       "key": "NAV_LINK_LEARN_HREF",
