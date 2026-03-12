@@ -64,7 +64,21 @@ This document provides a summary of the StylePlanIt website project for context 
     3.  Bump the major version (e.g., `4.6.0`) in `site-data.json` to force-flush client-side caches.
 *   **Caching:** Stale-While-Revalidate pattern with 24-hour TTL and active version enforcement.
 
-## 5. Component Features & Design Patterns
+## 5. Content Management
+
+*   **Value Proposition (Home Page):**
+    *   Controlled via `VALUE_*` keys in the `config` array of `site-data.json`.
+    *   `VALUE_TITLE`, `VALUE_SUBTITLE`, `VALUE_LEAD`: Primary messaging.
+    *   `VALUE_PILLAR_[1-3]_TITLE/TEXT`: The three editorial pillars.
+    *   `VALUE_IMAGE`: Path to the high-impact visual (hidden on mobile).
+    *   `VALUE_CTA_TEXT`: Centered button text that scrolls to the journey selection.
+*   **Style Wiki (Learn Page):**
+    *   Articles are managed via the `articles` array in `site-data.json`.
+    *   Each article object requires: `title`, `category`, `read_time`, and `content` (HTML formatted).
+    *   **Style Tips:** Use `<div class='style-tip-box'><strong>STYLE TIP</strong><p>Text here...</p></div>` within article content for luxury callouts.
+    *   **Synchronization:** Always run `scripts/diff_site_data.py` after adding local articles to generate the CSV for Google Sheets ("articles" tab GID: `582124820`).
+
+## 6. Component Features & Design Patterns
 
 *   **Guided Services Experience:** A multi-stage journey (Category Pillars → Filtered Grid → Detached Details Box).
 *   **Brand Pillars:** Replaced imagery in deep-dives with branded, primary-accent blocks and SP watermark.
