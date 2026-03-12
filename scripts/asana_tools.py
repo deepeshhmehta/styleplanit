@@ -69,7 +69,7 @@ def list_tasks(project_id=DEFAULT_PROJECT_ID):
         print(f"{t['gid']} | {status} {t['name']} ({assignee})")
     print("-" * 50)
 
-def create_task(name, notes="", project_id=DEFAULT_PROJECT_ID):
+def create_task(name, notes="", project_id=DEFAULT_PROJECT_ID, assignee=None, due_on=None):
     endpoint = "tasks"
     data = {
         "data": {
@@ -78,6 +78,11 @@ def create_task(name, notes="", project_id=DEFAULT_PROJECT_ID):
             "projects": [project_id]
         }
     }
+    if assignee:
+        data["data"]["assignee"] = assignee
+    if due_on:
+        data["data"]["due_on"] = due_on
+        
     response = asana_request(endpoint, method="POST", data=data)
     task_gid = response.get("data", {}).get("gid")
     if task_gid:
@@ -106,6 +111,8 @@ def main():
     create_parser.add_argument("name", help="Task name")
     create_parser.add_argument("--notes", default="", help="Task notes/description")
     create_parser.add_argument("--project", default=DEFAULT_PROJECT_ID, help="Asana Project GID")
+    create_parser.add_argument("--assignee", help="User GID to assign the task to")
+    create_parser.add_argument("--due", help="Due date (YYYY-MM-DD)")
 
     # Update command
     update_parser = subparsers.add_parser("update", help="Update an existing task")
@@ -118,7 +125,7 @@ def main():
     if args.command == "list":
         list_tasks(args.project)
     elif args.command == "create":
-        create_task(args.name, args.notes, args.project)
+        create_task(args.name, args.notes, args.project, args.assignee, args.due)
     elif args.command == "update":
         data = {"data": {}}
         if args.completed is not None:
