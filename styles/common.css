@@ -110,6 +110,12 @@ h1, h2, h3, h4 {
 
 /* --- 3. COMMON COMPONENTS --- */
 
+.section-divider {
+    border: none;
+    border-top: 1px solid var(--border-color);
+    margin: 0;
+}
+
 /* Hero Section Base */
 .hero {
     height: 70vh;
