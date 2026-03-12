@@ -277,6 +277,13 @@ def main():
 
     if changes_to_local:
         if input("\n💾 Save updates to site-data.json? (y/n): ").strip().lower() == 'y':
+            # Ensure assets_manifest is sorted consistently
+            if "assets_manifest" in updated_local_data:
+                sorted_manifest = OrderedDict()
+                for key in sorted(updated_local_data["assets_manifest"].keys()):
+                    sorted_manifest[key] = sorted(updated_local_data["assets_manifest"][key])
+                updated_local_data["assets_manifest"] = sorted_manifest
+
             with open(JSON_PATH, "w") as f:
                 json.dump(updated_local_data, f, indent=2, ensure_ascii=False)
             print("✅ Local site-data.json updated.")
