@@ -35,6 +35,7 @@ test_endpoint "services"
 test_endpoint "meet-the-team"
 test_endpoint "icon-service"
 test_endpoint "reviews"
+test_endpoint "learn"
 test_endpoint "styles/styles.css"
 
 echo "--- Data & Scripts ---"

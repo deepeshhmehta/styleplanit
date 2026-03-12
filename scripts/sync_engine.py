@@ -14,7 +14,8 @@ GIDS = {
     "services": "439228131",
     "reviews": "1697858749",
     "team": "1489131428",
-    "dialogs": "49430965"
+    "dialogs": "49430965",
+    "articles": "582124820"
 }
 
 def run_command(cmd, silent=False):

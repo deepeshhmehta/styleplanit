@@ -20,7 +20,8 @@ GIDS = {
     "services": "439228131",
     "reviews": "1697858749",
     "team": "1489131428",
-    "dialogs": "49430965"
+    "dialogs": "49430965",
+    "articles": "582124820"
 }
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -90,7 +91,8 @@ def main():
         "services": {"key_fields": ["title", "category"]},
         "reviews": {"key_fields": ["author", "text"]}, 
         "dialogs": {"key_fields": ["title"]}, 
-        "team": {"key_fields": ["name"]}
+        "team": {"key_fields": ["name"]},
+        "articles": {"key_fields": ["title"]}
     }
 
     all_discrepancies = []
@@ -275,6 +277,13 @@ def main():
 
     if changes_to_local:
         if input("\n💾 Save updates to site-data.json? (y/n): ").strip().lower() == 'y':
+            # Ensure assets_manifest is sorted consistently
+            if "assets_manifest" in updated_local_data:
+                sorted_manifest = OrderedDict()
+                for key in sorted(updated_local_data["assets_manifest"].keys()):
+                    sorted_manifest[key] = sorted(updated_local_data["assets_manifest"][key])
+                updated_local_data["assets_manifest"] = sorted_manifest
+
             with open(JSON_PATH, "w") as f:
                 json.dump(updated_local_data, f, indent=2, ensure_ascii=False)
             print("✅ Local site-data.json updated.")

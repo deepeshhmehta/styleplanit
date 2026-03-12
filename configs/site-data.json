@@ -1,8 +1,88 @@
 {
-  "version": [
+  "articles": [
     {
-      "key": "VERSION",
-      "value": "4.6.0"
+      "category": "Authenticity",
+      "content": "<p>We’ve all had that moment. You’re scrolling, or you’re in a fitting room, and you see it. A jacket with a ridiculous amount of fringe. A pair of shoes in a shade of electric cobalt. A silhouette that feels a little too bold, a little too 'much.'</p><p>Your gut says: <strong>Yes.</strong></p><p>Your brain says: Where would I even wear that? I’m a parent. I have a 9-to-5. I’m a grandparent. People will look.</p><p>So, you put it back. You choose the 'safe' beige knit or the practical navy blazer. And in that tiny moment, a little piece of your authentic self—that creative, fearless inner child—is told to sit down and be quiet.</p><h2>The Cost of 'Blending In'</h2><p>As we navigate life’s major transitions—climbing the corporate ladder, moving cities, or entering new stages of parenthood—we often adopt a 'uniform' of survival. We dress for the roles we play rather than the person we are.</p><p>But style isn't just about the clothes; it’s about presence. When you second-guess your instinct, you aren't just doubting a garment—you’re doubting your own identity.</p><h2>Why We Built StylePlanIt</h2><p>We didn’t build StylePlanIt to give you another checklist or to tell you what's 'trending' on TikTok this week. Trends are fleeting; your soul is permanent.</p><p>We built this platform to be the permission slip you’ve been waiting for. We are here to help you bridge the gap between the life you lead and the person you feel like inside. Whether you are navigating the boardroom or the school run, StylePlanIt is designed to help you:</p><ul><li><strong>Trust Your Gut:</strong> That 'spark' you feel when you see an item? That’s your authentic self talking. We provide the professional styling logic to help you integrate those 'bold' pieces into your daily life.</li><li><strong>Silence the Second-Guessing:</strong> We take the 'what-ifs' out of the equation by showing you how to style your most loved items in ways that feel cohesive, not chaotic.</li><li><strong>Reclaim Your Identity:</strong> You are not just a professional, a parent, or a caregiver. You are a vibrant individual who deserves to be seen.</li></ul><h2>Your Most Authentic Self is Waiting</h2><p>Style is the most immediate form of self-communication. When you dress for the version of you that exists today—not the one you think you should be—everything changes. Your posture shifts. Your energy lifts. You stop just 'showing up,' and you start having a presence.</p><p>It’s time to stop dressing for the roles and start dressing for the human. We aren't just planning your outfits; we’re helping you plan your return to yourself.</p><div class='style-tip-box'><strong>STYLE TIP</strong><p>Trends are fleeting; your soul is permanent.</p></div>",
+      "read_time": "4 min",
+      "title": "Who Are You When You Aren't Trying to Fit In?"
+    }
+  ],
+  "assets_manifest": {
+    "home-page": [
+      "og-preview.jpg"
+    ],
+    "home-page/hero-images": [
+      "Hero-Image-1.JPG",
+      "Hero-image-2.png",
+      "Hero-image-3.JPG"
+    ],
+    "home-page/logos": [
+      "NYFW_SHOWS_LOCKUP_HORIZONTAL_black (1).png",
+      "ahemdabad-mirror.png",
+      "harlem-fashion-week.png",
+      "miss_universe-logo_brandlogos.net_rl7b5-512x512.png"
+    ],
+    "meet-team-page": [
+      "ayushi-intro.JPG",
+      "deepesh-intro.jpg"
+    ],
+    "portfolio": [
+      "arushi_after.jpg",
+      "arushi_before.jpg",
+      "dee_after.jpg",
+      "dee_before.jpg",
+      "harsh.jpg",
+      "janvi.jpg",
+      "riddhe.jpg",
+      "riesha_after.jpg",
+      "riesha_before.jpg",
+      "sam_after.jpg",
+      "sam_before.jpg",
+      "sanjeev_after.jpg",
+      "sanjeev_before.jpg"
+    ],
+    "services-by-category/Elevate": [
+      "30_min_style_revamp.jpeg",
+      "build_your_signature_self.jpg",
+      "homepage_hero.jpg",
+      "icon_service.png",
+      "ooo_edit.jpg",
+      "showstopper.jpg",
+      "signature_foundations.jpeg",
+      "single_occasion.jpg",
+      "style_concierge_in_person.jpg",
+      "style_concierge_virtual.jpg",
+      "tone_audit_in_person.jpg",
+      "tone_audit_virtual.jpg"
+    ],
+    "services-by-category/Establish": [
+      "hired_look.jpg",
+      "homepage_hero.jpg",
+      "newcomer_essentials.jpeg",
+      "refine_and_align.jpg"
+    ]
+  },
+  "categories": [
+    {
+      "description": "Foundational styling for newcomers and those ready to define their presence in a new environment.",
+      "href": "services#establish",
+      "image_url": "assets/images/services-by-category/Establish/homepage_hero.jpg",
+      "name": "Establish",
+      "showOnHomePage": "TRUE"
+    },
+    {
+      "description": "Strategic image enhancement for professionals and individuals ready to amplify their influence.",
+      "href": "services#elevate",
+      "image_url": "assets/images/services-by-category/Elevate/homepage_hero.jpg",
+      "name": "Elevate",
+      "showOnHomePage": "TRUE"
+    },
+    {
+      "description": "Bespoke, white-glove image management for high-profile executives and individuals.",
+      "href": "icon-service",
+      "image_url": "assets/images/services-by-category/Elevate/icon_service.png",
+      "name": "Icon Service",
+      "showOnHomePage": "FALSE"
     }
   ],
   "config": [
@@ -273,29 +353,89 @@
     {
       "key": "SUBSCRIBE_TITLE",
       "value": "Stay Inspired"
+    },
+    {
+      "key": "VALUE_TITLE",
+      "value": "BUILT FOR THE INTENTIONAL"
+    },
+    {
+      "key": "VALUE_SUBTITLE",
+      "value": "WE ARCHITECT YOUR PRESENCE."
+    },
+    {
+      "key": "VALUE_IMAGE",
+      "value": "assets/images/home-page/hero-images/Hero-image-2.png"
+    },
+    {
+      "key": "VALUE_LEAD",
+      "value": "When you know who you are, you move differently. We architect the strategy behind your style so you can focus on what matters; your only job is to show up."
+    },
+    {
+      "key": "VALUE_PILLAR_1_TITLE",
+      "value": "THE MOMENTUM OF STYLE"
+    },
+    {
+      "key": "VALUE_PILLAR_1_TEXT",
+      "value": "Designed for those who understand that style isn't just for big events; it’s for the slow, everyday moments. It’s moving with an instinctual confidence from your morning coffee to your night routine."
+    },
+    {
+      "key": "VALUE_PILLAR_2_TITLE",
+      "value": "THE TIME ECONOMY"
+    },
+    {
+      "key": "VALUE_PILLAR_2_TEXT",
+      "value": "An average person spends over 100 hours a year just deciding what to wear. We are built for those ready to outsource that analysis—reclaiming that space so you can focus on your legacy."
+    },
+    {
+      "key": "VALUE_PILLAR_3_TITLE",
+      "value": "THE 7-SECOND ADVANTAGE"
+    },
+    {
+      "key": "VALUE_PILLAR_3_TEXT",
+      "value": "For the professional who knows that in a world of split-second judgments, your image is your silent negotiator. We master the physics of the first impression, ensuring you command respect before you even say a word."
+    },
+    {
+      "key": "VALUE_CTA_TEXT",
+      "value": "Start your journey"
+    },
+    {
+      "key": "NAV_LINK_LEARN_HREF",
+      "value": "/learn"
+    },
+    {
+      "key": "NAV_LINK_LEARN_TEXT",
+      "value": "Learn"
     }
   ],
-  "categories": [
+  "dialogs": [
     {
-      "description": "Foundational styling for newcomers and those ready to define their presence in a new environment.",
-      "href": "services#establish",
-      "image_url": "assets/images/services-by-category/Establish/homepage_hero.jpg",
-      "name": "Establish",
-      "showOnHomePage": "TRUE"
+      "action": "https://wa.me/16479678953",
+      "cta": "Get Help Now",
+      "description": "WhatsApp us on 647-96(style). Get that look stylist approved.",
+      "timeInSeconds": "20",
+      "title": "Free Style Helpline"
+    }
+  ],
+  "reviews": [
+    {
+      "author": "Arushi Pandya",
+      "text": "I sought out a personal stylist because I felt like my wardrobe needed a refresh—I had a lot of pieces I liked individually, but they didn’t always come together in a way that felt cohesive or flattering. Working with Ayushi completely changed that. Before our sessions, my style was a bit all over the place. I had clothes I loved but didn’t always know how to wear or pair them. Ayushi helped me understand what flatters my body and how to create outfits that feel more *me*. I now have clarity on how to dress in a way that’s both comfortable and expressive of who I am.\nMy favorite part of the styling experience was seeing everything come together in the end. It was amazing to realize that I didn’t need to overhaul my entire closet—just learn how to use what I already had in smarter ways. One of the biggest surprises was how some simple changes in outfit combinations made a noticeable difference in how put-together and confident I looked.\nThroughout the process, I felt completely seen and supported. Ayushi really listened to what I liked and disliked, and found ways to incorporate pieces outside my usual style without pushing me to give up things I loved. It felt collaborative, not prescriptive.\nThe outfits we put together made me feel confident, comfortable, and like a more intentional version of myself. Friends and family noticed subtle but impactful changes, often complimenting how I carried myself or how certain outfits flattered me more.\nI’d absolutely recommend this experience—especially to anyone whose wardrobe feels stuck or disconnected from who they are now. Whether you're unsure of what suits you or just need a fresh perspective, working with Ayushi can be incredibly grounding and enlightening.\nThree words to describe this journey: *comfortable, insightful, and supportive.*\nThis experience didn’t just change how I dress—it changed how I approach getting dressed every day. I feel more confident, more aligned with my personal style, and most importantly, more at ease with the way I show up in the world."
     },
     {
-      "description": "Strategic image enhancement for professionals and individuals ready to amplify their influence.",
-      "href": "services#elevate",
-      "image_url": "assets/images/services-by-category/Elevate/homepage_hero.jpg",
-      "name": "Elevate",
-      "showOnHomePage": "TRUE"
+      "author": "Avani Sangani",
+      "text": "Hello Hello! \nI had a great colour analysis session with Ayushi and I can’t recommend her enough. She was very supportive throughout out the process, right from making sure the picture is right to ensuring I had my PDF in my email. I loved how detailed the analysis was - especially the mention of something as minute as a lipshade that would go with my complexion as well. There was an entire moodboard of clothes to help me understand, the kind of colours I should opt for! I am glad I was able to get this done with her and am super happy with her report."
     },
     {
-      "description": "Bespoke, white-glove image management for high-profile executives and individuals.",
-      "href": "icon-service",
-      "image_url": "assets/images/services-by-category/Elevate/icon_service.png",
-      "name": "Icon Service",
-      "showOnHomePage": "FALSE"
+      "author": "Devanshi Poddar",
+      "text": "Ayushi is an amazing personal stylist.. she really resonates with the word PERSONAL because she understands you as a person. She pays attention to your comfort, thoughts and will give you lot of options. At every step she will ask if you are okay with the progress and if not, she will work her magic and come up with solutions that one couldn’t imagine.\nShe helped me style for a baby shower recently. Her attention to intricate details about the theme of the function, mood of the weather, everyone dressing around was just amazing. I remember laughing when she told me to keep weather in mind but i realised later how important that thought was. On the day, i literally knew what to wear and what makeup to do. Life couldn’t have been simpler on that day. \nJust a wonderful person with amazing talent… loved her work."
+    },
+    {
+      "author": "Riddhi Parmar",
+      "text": "I had the absolute best experience getting styled by Ayushi for my best friend’s baby shower 🩷 She truly was there at *every step* of the styling process. We started with an initial video call where I showed her the saree I had in mind, along with the jewelry and shoes I already owned. From just that, she created a thoughtful mood board that brought the whole vision together. At first, I was planning to wear a pink saree, but I didn’t have the right blouse — so began the hunt for a ready-made one. I video-called Ayushi from the store and showed her all the options, but unfortunately nothing did justice to the saree. Instead of forcing it, she calmly helped me pivot and explore brand-new saree options. She explained that I fall into the *spring* color season and guided me on what shades to look for. While I was shopping, I kept video-calling her to show saree options, and she balanced her expert eye with my personal preferences so beautifully. We finally chose a teal dual satin saree — and she was kind enough to create an entirely new mood board for this look too, complete with hairstyle options and styling details. The final look turned out so good! I felt confident, put-together, and got so many compliments.Thank you, Ayushi, for your patience, creativity, and all the hard work you put into making me feel my best. Couldn’t have done it without you ✨ 🤗"
+    },
+    {
+      "author": "Stella Saito",
+      "text": "Ayushi is absolutely fantastic. She started by understanding my lifestyle and where I see myself professionally, which made the journey of picking the perfect outfit feel so personal. It was a seamless experience that took a huge decision off my plate during a busy week. I led my presentation with total confidence, knowing my look was tailored to the occasion. Thank you for making me feel like the best version of myself!"
     }
   ],
   "services": [
@@ -412,104 +552,24 @@
       "title": "The Tone Audit (in – person)"
     }
   ],
-  "reviews": [
-    {
-      "author": "Arushi Pandya",
-      "text": "I sought out a personal stylist because I felt like my wardrobe needed a refresh—I had a lot of pieces I liked individually, but they didn’t always come together in a way that felt cohesive or flattering. Working with Ayushi completely changed that. Before our sessions, my style was a bit all over the place. I had clothes I loved but didn’t always know how to wear or pair them. Ayushi helped me understand what flatters my body and how to create outfits that feel more *me*. I now have clarity on how to dress in a way that’s both comfortable and expressive of who I am.\nMy favorite part of the styling experience was seeing everything come together in the end. It was amazing to realize that I didn’t need to overhaul my entire closet—just learn how to use what I already had in smarter ways. One of the biggest surprises was how some simple changes in outfit combinations made a noticeable difference in how put-together and confident I looked.\nThroughout the process, I felt completely seen and supported. Ayushi really listened to what I liked and disliked, and found ways to incorporate pieces outside my usual style without pushing me to give up things I loved. It felt collaborative, not prescriptive.\nThe outfits we put together made me feel confident, comfortable, and like a more intentional version of myself. Friends and family noticed subtle but impactful changes, often complimenting how I carried myself or how certain outfits flattered me more.\nI’d absolutely recommend this experience—especially to anyone whose wardrobe feels stuck or disconnected from who they are now. Whether you're unsure of what suits you or just need a fresh perspective, working with Ayushi can be incredibly grounding and enlightening.\nThree words to describe this journey: *comfortable, insightful, and supportive.*\nThis experience didn’t just change how I dress—it changed how I approach getting dressed every day. I feel more confident, more aligned with my personal style, and most importantly, more at ease with the way I show up in the world."
-    },
-    {
-      "author": "Avani Sangani",
-      "text": "Hello Hello! \nI had a great colour analysis session with Ayushi and I can’t recommend her enough. She was very supportive throughout out the process, right from making sure the picture is right to ensuring I had my PDF in my email. I loved how detailed the analysis was - especially the mention of something as minute as a lipshade that would go with my complexion as well. There was an entire moodboard of clothes to help me understand, the kind of colours I should opt for! I am glad I was able to get this done with her and am super happy with her report."
-    },
-    {
-      "author": "Devanshi Poddar",
-      "text": "Ayushi is an amazing personal stylist.. she really resonates with the word PERSONAL because she understands you as a person. She pays attention to your comfort, thoughts and will give you lot of options. At every step she will ask if you are okay with the progress and if not, she will work her magic and come up with solutions that one couldn’t imagine.\nShe helped me style for a baby shower recently. Her attention to intricate details about the theme of the function, mood of the weather, everyone dressing around was just amazing. I remember laughing when she told me to keep weather in mind but i realised later how important that thought was. On the day, i literally knew what to wear and what makeup to do. Life couldn’t have been simpler on that day. \nJust a wonderful person with amazing talent… loved her work."
-    },
-    {
-      "author": "Riddhi Parmar",
-      "text": "I had the absolute best experience getting styled by Ayushi for my best friend’s baby shower 🩷 She truly was there at *every step* of the styling process. We started with an initial video call where I showed her the saree I had in mind, along with the jewelry and shoes I already owned. From just that, she created a thoughtful mood board that brought the whole vision together. At first, I was planning to wear a pink saree, but I didn’t have the right blouse — so began the hunt for a ready-made one. I video-called Ayushi from the store and showed her all the options, but unfortunately nothing did justice to the saree. Instead of forcing it, she calmly helped me pivot and explore brand-new saree options. She explained that I fall into the *spring* color season and guided me on what shades to look for. While I was shopping, I kept video-calling her to show saree options, and she balanced her expert eye with my personal preferences so beautifully. We finally chose a teal dual satin saree — and she was kind enough to create an entirely new mood board for this look too, complete with hairstyle options and styling details. The final look turned out so good! I felt confident, put-together, and got so many compliments.Thank you, Ayushi, for your patience, creativity, and all the hard work you put into making me feel my best. Couldn’t have done it without you ✨ 🤗"
-    },
-    {
-      "author": "Stella Saito",
-      "text": "Ayushi is absolutely fantastic. She started by understanding my lifestyle and where I see myself professionally, which made the journey of picking the perfect outfit feel so personal. It was a seamless experience that took a huge decision off my plate during a busy week. I led my presentation with total confidence, knowing my look was tailored to the occasion. Thank you for making me feel like the best version of myself!"
-    }
-  ],
   "team": [
     {
-      "name": "Ayushi Vyas",
-      "role": "Founder & Lead Stylist",
       "bio": "Hi, I’m Ayushi. I believe that getting dressed should be the easiest part of your day.\nAs a certified stylist with 8 years of experience in Toronto’s vibrant fashion scene, I’ve dedicated my career to helping individuals find their visual voice. I know that a closet can often feel overwhelming, which is why I focus on creating \"Style Plans\" that are as functional as they are beautiful.\nMy mission is to help you build a wardrobe that feels authentic to who you are today. By blending my deep industry knowledge with a personalized, one-on-one approach, I take the guesswork out of fashion—leaving you with a curated collection of pieces that make you look and feel your absolute best.",
-      "imageUrl": "https://drive.google.com/file/d/1bFO1N1zuO68iugQ9kVllJAX3oMF2jUna/view?usp=sharing"
+      "imageUrl": "https://drive.google.com/file/d/1bFO1N1zuO68iugQ9kVllJAX3oMF2jUna/view?usp=sharing",
+      "name": "Ayushi Vyas",
+      "role": "Founder & Lead Stylist"
     },
     {
-      "name": "Deepesh Mehta",
-      "role": "Founder & Lead Strategist",
       "bio": "Hi, I’m Deepesh. I believe that the best technology is the kind you don’t even have to think about—it just works.\nCurrently a Principal Engineer at Zynga, I am a self-driven developer and technical leader with a deep-rooted passion for building seamless digital experiences. My career has been defined by key roles at global leaders like Amazon and DraftKings, where I’ve focused on elite-level systems, from CI/CD automation to multi-stack frameworks. At StylePlanIt, I bring that same architectural innovation to the world of fashion, ensuring that our clients have a reliable, high-performance platform to manage their personal style. My goal is to solve the complex problems behind the scenes so that your journey to a better wardrobe is effortless.",
-      "imageUrl": "https://drive.google.com/file/d/1NLr-WJODNcng9Uz8L5pv_KWpEiWYACwP/view?usp=sharing"
+      "imageUrl": "https://drive.google.com/file/d/1NLr-WJODNcng9Uz8L5pv_KWpEiWYACwP/view?usp=sharing",
+      "name": "Deepesh Mehta",
+      "role": "Founder & Lead Strategist"
     }
   ],
-  "dialogs": [
+  "version": [
     {
-      "action": "https://wa.me/16479678953",
-      "cta": "Get Help Now",
-      "description": "WhatsApp us on 647-96(style). Get that look stylist approved.",
-      "timeInSeconds": "20",
-      "title": "Free Style Helpline"
+      "key": "VERSION",
+      "value": "4.6.0"
     }
-  ],
-  "assets_manifest": {
-    "home-page": [
-      "og-preview.jpg"
-    ],
-    "home-page/logos": [
-      "NYFW_SHOWS_LOCKUP_HORIZONTAL_black (1).png",
-      "ahemdabad-mirror.png",
-      "harlem-fashion-week.png",
-      "miss_universe-logo_brandlogos.net_rl7b5-512x512.png"
-    ],
-    "home-page/hero-images": [
-      "Hero-Image-1.JPG",
-      "Hero-image-2.png",
-      "Hero-image-3.JPG"
-    ],
-    "portfolio": [
-      "arushi_after.jpg",
-      "arushi_before.jpg",
-      "dee_after.jpg",
-      "dee_before.jpg",
-      "harsh.jpg",
-      "janvi.jpg",
-      "riddhe.jpg",
-      "riesha_after.jpg",
-      "riesha_before.jpg",
-      "sam_after.jpg",
-      "sam_before.jpg",
-      "sanjeev_after.jpg",
-      "sanjeev_before.jpg"
-    ],
-    "services-by-category/Establish": [
-      "hired_look.jpg",
-      "homepage_hero.jpg",
-      "newcomer_essentials.jpeg",
-      "refine_and_align.jpg"
-    ],
-    "services-by-category/Elevate": [
-      "30_min_style_revamp.jpeg",
-      "Showstopper.jpg",
-      "build_your_signature_self.jpg",
-      "homepage_hero.jpg",
-      "icon_service.png",
-      "ooo_edit.jpg",
-      "signature_foundations.jpeg",
-      "single_occasion.jpg",
-      "style_concierge_in_person.jpg",
-      "style_concierge_virtual.jpg",
-      "tone_audit_in_person.jpg",
-      "tone_audit_virtual.jpg"
-    ],
-    "meet-team-page": [
-      "ayushi-intro.JPG",
-      "deepesh-intro.jpg"
-    ]
-  }
+  ]
 }

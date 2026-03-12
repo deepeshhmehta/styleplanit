@@ -63,7 +63,7 @@ async function loadComponents() {
             element.setAttribute('data-loaded', 'true');
 
             try {
-                const response = await fetch(`components/${componentName}.html`);
+                const response = await fetch(`/components/${componentName}.html`);
                 if (!response.ok) throw new Error(`Status ${response.status}`);
                 const html = await response.text();
                 element.innerHTML = html;
@@ -91,12 +91,13 @@ async function loadComponents() {
     if ($("#subscribe-container").length > 0 || $(".subscribe-form").length > 0) features.push('subscribe');
     if ($("#services").length > 0 || $("#experience-intro").length > 0 || $("#icon-service-container").length > 0) features.push('services');
     if ($("#icon-service-container").length > 0) features.push('icon-service');
+    if ($("#wiki-article-container").length > 0) features.push('learn');
     features.push('dialogs'); 
 
     const featurePromises = features.map((feature) => {
         return new Promise((resolve) => {
             const script = document.createElement('script');
-            script.src = `js/features/${feature}.js?v=${new Date().getTime()}`;
+            script.src = `/js/features/${feature}.js?v=${new Date().getTime()}`;
             script.async = false;
             script.onload = () => resolve();
             script.onerror = () => resolve();
@@ -131,7 +132,7 @@ async function loadComponents() {
 
     // 4. Initialize UI interactions
     if (typeof App !== 'undefined') {
-        App.init(config);
+        await App.init(config);
     }
 
     // 5. Signal ready

@@ -37,14 +37,15 @@ This document provides a summary of the StylePlanIt website project for context 
 
 *   **Frameworks:** jQuery.
 *   **Core Logic:**
-    *   **`js/loader.js`:** Recursive component loading, custom phrase cycling from `site-data.json`, and visual stability preloading for critical hero background images.
+    *   **`js/loader.js`:** Recursive component loading and asynchronous feature orchestration. Awaits script execution before application-wide initialization.
     *   **`js/features/analytics.js`:** Centralized Google Analytics 4 (GA4) event tracking module.
-    *   **`js/app.js`:** Global feature initialization.
+    *   **`js/app.js`:** Global feature initialization using an asynchronous `init` pattern to prevent race conditions.
 *   **Plugin Features (`js/features/`):**
     *   `services.js`: Guided Experience journey with parallel data fetching.
     *   `portfolio.js`: Side-by-side "Before/After" transformation pairing.
     *   `reviews.js`: Randomized 3-review preview with horizontal scroll indicators.
     *   `icon-service.js`: Component-based gated collection management.
+    *   `learn.js`: Dynamic Style Wiki article loader and sidebar navigator.
 *   **Data Module (`js/config.js`):**
     *   Handles stale-while-revalidate fetching of `site-data.json`.
     *   Enforces version-based cache flushing via major version bumps.
@@ -63,7 +64,27 @@ This document provides a summary of the StylePlanIt website project for context 
     3.  Bump the major version (e.g., `4.6.0`) in `site-data.json` to force-flush client-side caches.
 *   **Caching:** Stale-While-Revalidate pattern with 24-hour TTL and active version enforcement.
 
-## 5. Component Features & Design Patterns
+## 5. Content Management
+
+*   **Value Proposition (Home Page):**
+    *   Controlled via `VALUE_*` keys in the `config` array of `site-data.json`.
+    *   `VALUE_TITLE`, `VALUE_SUBTITLE`, `VALUE_LEAD`: Primary messaging.
+    *   `VALUE_PILLAR_[1-3]_TITLE/TEXT`: The three editorial pillars.
+    *   `VALUE_IMAGE`: Path to the high-impact visual (hidden on mobile).
+    *   `VALUE_CTA_TEXT`: Centered button text that scrolls to the journey selection.
+*   **Style Wiki (Learn Page):**
+    *   Articles are managed via the `articles` array in `site-data.json`.
+    *   Each article object requires: `title`, `category`, `read_time`, and `content` (HTML formatted).
+    *   **Style Tips:** Use `<div class='style-tip-box'><strong>STYLE TIP</strong><p>Text here...</p></div>` within article content for luxury callouts.
+    *   **Synchronization:** Always run `scripts/diff_site_data.py` after adding local articles to generate the CSV for Google Sheets ("articles" tab GID: `582124820`).
+
+*   **Article Publication Workflow (Doc-to-Wiki):**
+    1.  **Input:** Paste Google Doc text into the CLI.
+    2.  **AI Conversion:** I transform text into semantic HTML (`<p>`, `<h2>`, `<ul>`) and wrap key takeaways in the luxury `<div class='style-tip-box'>` pattern.
+    3.  **Local Integration:** I append the new entry to the `articles` array in `site-data.json` and increment the site `VERSION` to flush client-side caches.
+    4.  **Sheets Sync:** You must run `python3 scripts/diff_site_data.py` (Option 1: Winner Local) and paste the generated CSV into the "articles" tab in Google Sheets to maintain the source of truth.
+
+## 6. Component Features & Design Patterns
 
 *   **Guided Services Experience:** A multi-stage journey (Category Pillars → Filtered Grid → Detached Details Box).
 *   **Brand Pillars:** Replaced imagery in deep-dives with branded, primary-accent blocks and SP watermark.
@@ -71,6 +92,8 @@ This document provides a summary of the StylePlanIt website project for context 
 *   **Expandable CTAs:** Global floating buttons (Book Now, WhatsApp) with "Collapse & Expand" pattern.
 *   **Horizontal Affordance:** Space-saving horizontal scrollers for Logo Bands and Reviews with dynamic scroll indicators.
 *   **Icon Service:** Premium, component-based gated section with full-page immersive background.
+*   **Value-Based Storytelling:** A home-page "Value Proposition" section designed to bridge the gap between user problems and service solutions using editorial-style typography and split-screen layouts.
+*   **Style Wiki (Knowledge Base):** A dynamic article-loading system on the `/learn` page that serves educational content from `site-data.json`. Features a collapsible sidebar (web & mobile) and a luxury dark mode reader to enhance content consumption and brand authority.
 *   **Analytics Pattern:**
     *   **Abstraction:** All tracking is routed through a dedicated `Analytics` module to decouple UI logic from GA4 `gtag` implementation.
     *   **Event Strategy:** Uses standard GA4 events (`select_content`, `view_item`, `generate_lead`) with custom parameters for granular user journey analysis.
@@ -83,22 +106,22 @@ This document provides a summary of the StylePlanIt website project for context 
     *   **Tooling:** Use `scripts/asana_tools.py` for Asana operations.
         *   `python3 scripts/asana_tools.py list`: View all tasks and statuses.
         *   `python3 scripts/asana_tools.py create "Task Name" --notes "Description"`: Create a new task.
+        *   `python3 scripts/asana_tools.py update <GID> --completed true --assignee <USER_GID>`: Update task status or ownership.
 *   **Token Extraction:** Use subshells or the integrated script to keep tokens out of logs.
 *   **Source Control:** No direct commits to `main`. Every task occurs on a dedicated `feature/` branch. Merge via PR only.
 *   **Verification:** Mandatory `test.sh` and `diff_site_data.py` runs before PR creation.
 
 ## 7. Current Project State (March 2026)
 
-*   **Status:** Production-ready (Version 4.6.0).
+*   **Status:** Production-ready (Version 4.6.2).
 *   **Recent Wins:**
-    *   **Image Optimization:** Transitioned from `.png` to `.jpg`/`.jpeg` formats for service imagery.
-    *   **Automation:** Enhanced `sync_engine.py` to automatically scan `assets/images` and generate the `assets_manifest` in `site-data.json`.
+    *   **Value-Based Storytelling:** Implemented homepage "Why Styling" section to drive high-intent user engagement.
+    *   **Style Wiki:** Launched a dynamic educational engine (`/learn`) to establish brand authority and improve long-tail SEO.
+    *   **Async Orchestration:** Refactored entire JS initialization flow to eliminate race conditions between script loading and component logic.
     *   **SEO Optimization:** Implemented intent-based keyword strategy and metadata synchronization across all pages.
-    *   **Asana Integration:** Developed `scripts/asana_tools.py` for automated task management within the CLI.
-    *   **Typography Overhaul:** Transitioned to 'Bebas Neue' and 'DM Sans' for a luxury minimalist aesthetic.
+    *   **Asana Integration:** Developed and enhanced `scripts/asana_tools.py` for full lifecycle task management.
 *   **Next Priorities:**
-    1.  **Content Strategy:** Implement "The Value of Styling" sections to explain the *why* behind personal branding (based on user feedback).
-    2.  **Transparency:** Integrate pricing models into service descriptions to improve client qualification.
-    3.  **Architecture:** Decouple config into a dedicated `style-planit-config` repository (Asana: `1213485094305648`).
-    4.  **Automation:** Implement script-based write-back to Google Sheets.
-    5.  **Refactor:** Explore build-time static site generation (Vite/11ty).
+    1.  **Transparency:** Integrate pricing models into service descriptions to improve client qualification.
+    2.  **Architecture:** Decouple config into a dedicated `style-planit-config` repository (Asana: `1213485094305648`).
+    3.  **Automation:** Implement script-based write-back to Google Sheets.
+    4.  **Refactor:** Explore build-time static site generation (Vite/11ty).

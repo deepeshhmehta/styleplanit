@@ -2,9 +2,9 @@
  * app.js - Main orchestrator and global UI logic
  */
 const App = {
-  init: function (config) {
+  init: async function (config) {
     this.initNavigation();
-    this.initGlobalFeatures(config);
+    await this.initGlobalFeatures(config);
   },
 
   initNavigation: function () {
@@ -62,6 +62,11 @@ const App = {
     // 5. Icon Service collection (Auth-gated)
     if (typeof IconServiceFeature !== 'undefined') {
         IconServiceFeature.init();
+    }
+
+    // 5b. Learn (Style Wiki)
+    if (typeof LearnFeature !== 'undefined' && window.location.pathname.includes('learn')) {
+        LearnFeature.init();
     }
 
     // 6. Subscription logic

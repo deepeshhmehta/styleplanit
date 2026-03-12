@@ -66,7 +66,7 @@ def list_tasks(project_id=DEFAULT_PROJECT_ID):
     for t in tasks:
         status = "[x]" if t.get("completed") else "[ ]"
         assignee = t.get("assignee", {}).get("name", "Unassigned") if t.get("assignee") else "Unassigned"
-        print(f"{status} {t['name']} ({assignee})")
+        print(f"{t['gid']} | {status} {t['name']} ({assignee})")
     print("-" * 50)
 
 def create_task(name, notes="", project_id=DEFAULT_PROJECT_ID):
@@ -85,6 +85,14 @@ def create_task(name, notes="", project_id=DEFAULT_PROJECT_ID):
         return task_gid
     return None
 
+def update_task(task_gid, data):
+    endpoint = f"tasks/{task_gid}"
+    response = asana_request(endpoint, method="PUT", data=data)
+    if response.get("data"):
+        print(f"✅ Task {task_gid} updated successfully!")
+        return response.get("data")
+    return None
+
 def main():
     parser = argparse.ArgumentParser(description="Style Plan-It Asana Helper Tool")
     subparsers = parser.add_subparsers(dest="command", help="Command to execute")
@@ -98,6 +106,12 @@ def main():
     create_parser.add_argument("name", help="Task name")
     create_parser.add_argument("--notes", default="", help="Task notes/description")
     create_parser.add_argument("--project", default=DEFAULT_PROJECT_ID, help="Asana Project GID")
+
+    # Update command
+    update_parser = subparsers.add_parser("update", help="Update an existing task")
+    update_parser.add_argument("gid", help="Task GID")
+    update_parser.add_argument("--completed", help="Set completed status (true/false)")
+    update_parser.add_argument("--assignee", help="User GID to assign the task to")
     
     args = parser.parse_args()
     
@@ -105,6 +119,13 @@ def main():
         list_tasks(args.project)
     elif args.command == "create":
         create_task(args.name, args.notes, args.project)
+    elif args.command == "update":
+        data = {"data": {}}
+        if args.completed is not None:
+            data["data"]["completed"] = args.completed.lower() == 'true'
+        if args.assignee:
+            data["data"]["assignee"] = args.assignee
+        update_task(args.gid, data)
     else:
         parser.print_help()
 

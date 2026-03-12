@@ -120,4 +120,54 @@
         object-position: top center;
     }
     .profile-text h3 { font-size: 2.2rem; }
+
+    /* Value Section Mobile */
+    .value-split {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    .value-image-box {
+        display: none;
+    }
+    .value-content {
+        padding-right: 0;
+    }
+    .value-text-box .lead-text {
+        font-size: 1.1rem;
+    }
+    .pillar-num {
+        font-size: 1.4rem;
+    }
+    .value-footer {
+        margin-top: 40px;
+    }
+
+    /* Style Wiki Mobile Overrides */
+    .wiki-layout-wrapper {
+        padding-top: 80px;
+    }
+    .wiki-sidebar {
+        width: 100%;
+        max-width: 320px;
+        top: 0;
+        z-index: 1100;
+        transform: translateX(-100%);
+        box-shadow: 20px 0 50px rgba(0,0,0,0.2);
+    }
+    .wiki-layout-wrapper:not(.sidebar-collapsed) .wiki-sidebar {
+        transform: translateX(0);
+    }
+    .wiki-close-btn {
+        display: block;
+    }
+    .wiki-main-content {
+        margin-left: 0;
+        padding: 40px 20px;
+    }
+    .wiki-content {
+        padding: 40px 20px;
+    }
+    .article-title {
+        font-size: 2.2rem;
+    }
 }
