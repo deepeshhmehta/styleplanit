@@ -1,15 +1,8 @@
-# StylePlanIt AI Encyclopedia
+# StylePlanIt Context & Governance
 
-Welcome. This directory serves as the comprehensive source of truth for the StylePlanIt project architecture, tooling, and workflows. It is designed specifically for AI Agents to achieve rapid context parity.
+This document provides the high-level project summary and critical safety mandates. For deep-dives into architecture, data, or workflows, consult the [**Encyclopedia Index**](index.md).
 
-## 1. Directory Map
-
-*   [**Technical Architecture**](architecture.md): Core logic, the recursive component loader, and initialization sequencing.
-*   [**Data Schema**](data-schema.md): Structure of `site-data.json` and synchronization logic.
-*   [**Tooling & Automation**](tooling.md): CLI tools for data auditing, task management, and local development.
-*   [**Business Workflows**](workflows.md): Article publication and synchronization procedures.
-
-## 2. Project Overview
+## 1. Project Overview
 
 *   **Project:** A portfolio website for StylePlanIt, a premium personal styling consultancy in Toronto.
 *   **Founders:** Ayushi Vyas and Deepesh Mehta.
@@ -17,19 +10,20 @@ Welcome. This directory serves as the comprehensive source of truth for the Styl
 *   **Stack:** Vanilla HTML/CSS, jQuery, Python (Automation).
 *   **Production Domain:** `https://styleplanit.com` (Managed via Cloudflare).
 
-## 3. High-Level Design Standards
+## 2. High-Level Design Standards
 
 *   **Aesthetic:** "Modern Bold," "Luxury Minimalist," "High Impact."
 *   **Typography:** 'Bebas Neue' (Headings), 'DM Sans' (Body).
 *   **Routing:** Extensionless URLs enforced via Cloudflare/GitHub Pages.
 *   **Logic:** Data-driven. Content is managed in Google Sheets and injected via `loader.js`.
 
-## 4. Safety & Governance
+## 3. Safety & Governance
 
 *   **CRITICAL: UNLESS EXPLICITLY INSTRUCTED TO PUSH, NEVER PUSH CODE.**
 *   **Source Control:** No direct commits to `main`. Every task occurs on a dedicated `feature/` branch. Merge via PR only.
 *   **Verification:** Mandatory `test.sh` and `diff_site_data.py` runs before PR creation.
 *   **Asana Integration:** Every non-trivial change must be tracked via `scripts/asana_tools.py`.
 
-## 5. Current State (v4.6.4)
-The site is production-ready. Recent focus has been on shifting from a "Service Menu" to an **Authority Platform** through the launch of the **Style Wiki** and **Value-Based Storytelling** pillars.
+## 4. Current State (v4.6.4)
+The site is production-ready. Recent focus has been on shifting from a "Service Menu" to an **Authority Platform** through the launch of the **Style Wiki** and **Value-Based Storytelling** pillars. For upcoming roadmap items, see the `Next Priorities` section in the deep-dive docs.
+
