@@ -78,6 +78,12 @@ This document provides a summary of the StylePlanIt website project for context 
     *   **Style Tips:** Use `<div class='style-tip-box'><strong>STYLE TIP</strong><p>Text here...</p></div>` within article content for luxury callouts.
     *   **Synchronization:** Always run `scripts/diff_site_data.py` after adding local articles to generate the CSV for Google Sheets ("articles" tab GID: `582124820`).
 
+*   **Article Publication Workflow (Doc-to-Wiki):**
+    1.  **Input:** Paste Google Doc text into the CLI.
+    2.  **AI Conversion:** I transform text into semantic HTML (`<p>`, `<h2>`, `<ul>`) and wrap key takeaways in the luxury `<div class='style-tip-box'>` pattern.
+    3.  **Local Integration:** I append the new entry to the `articles` array in `site-data.json` and increment the site `VERSION` to flush client-side caches.
+    4.  **Sheets Sync:** You must run `python3 scripts/diff_site_data.py` (Option 1: Winner Local) and paste the generated CSV into the "articles" tab in Google Sheets to maintain the source of truth.
+
 ## 6. Component Features & Design Patterns
 
 *   **Guided Services Experience:** A multi-stage journey (Category Pillars → Filtered Grid → Detached Details Box).
