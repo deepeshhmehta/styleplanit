@@ -212,6 +212,7 @@ const ServicesFeature = {
     const inclusionsTitle = (Data.masterData.config.find(c => c.key === 'SERVICE_INCLUSIONS_TITLE') || {value: "What's Included?"}).value;
     const inquireText = (Data.masterData.config.find(c => c.key === 'STEP_2_BUTTON_TEXT') || {value: "Inquire Now"}).value;
     const closeBtnText = (Data.masterData.config.find(c => c.key === 'EXPERIENCE_CLOSE_BTN') || {value: "Close & Return to List"}).value;
+    const taxesNote = (Data.masterData.config.find(c => c.key === 'PRICE_TAXES_TEXT') || {value: "+ taxes"}).value;
 
     detailsContainer.html(`
         <div class="active-service-details">
@@ -224,7 +225,15 @@ const ServicesFeature = {
                     <h3>${service.title}</h3>
                     <p class="long-desc">${service.long_description}</p>
                     
-                    <span class="inclusions-title">${inclusionsTitle}</span>
+                    <div class="inclusions-header">
+                        <span class="inclusions-title">${inclusionsTitle}</span>
+                        ${service.price ? `
+                            <div class="price-container">
+                                <span class="service-price">${service.price}</span>
+                                <span class="taxes-note" text-config-key="PRICE_TAXES_TEXT">${taxesNote}</span>
+                            </div>
+                        ` : ''}
+                    </div>
                     <div class="service-chips">${chipsHtml}</div>
                     
                     <div class="details-footer">

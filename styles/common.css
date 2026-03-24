@@ -552,8 +552,39 @@ footer {
     font-weight: 500;
 }
 
+.inclusions-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
 .active-service-details .inclusions-title {
     display: block; /* Visible in details box */
+    margin-bottom: 0;
+}
+
+.service-price {
+    font-family: var(--font-secondary);
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--primary-accent);
+}
+
+.price-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.taxes-note {
+    font-size: 0.6rem;
+    color: var(--charcoal);
+    opacity: 0.3;
+    margin-top: 2px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .service-chips {

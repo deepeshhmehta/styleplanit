@@ -16,13 +16,29 @@ def normalize_value(v):
     if v is None:
         return ""
     # Strip whitespace and normalize all newline variants to \n
-    return str(v).strip().replace('\r\n', '\n').replace('\r', '\n')
+    val = str(v).strip().replace('\r\n', '\n').replace('\r', '\n')
+    
+    # Strip .00 or .0 from numerical strings (e.g., "$348.00" -> "$348")
+    if val.endswith(".00"):
+        val = val[:-3]
+    elif val.endswith(".0"):
+        val = val[:-2]
+        
+    return val
 
 def parse_csv_to_list(csv_text):
     reader = csv.DictReader(io.StringIO(csv_text))
     processed_list = []
     for row in reader:
-        processed_row = {k.strip(): normalize_value(v) for k, v in row.items()}
+        processed_row = {}
+        for k, v in row.items():
+            val = normalize_value(v)
+            # Extra cleanup for numerical strings with .00
+            if val.endswith(".00"):
+                val = val[:-3]
+            elif val.endswith(".0"):
+                val = val[:-2]
+            processed_row[k.strip()] = val
         processed_list.append(processed_row)
     return processed_list
 
