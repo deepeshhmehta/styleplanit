@@ -62,25 +62,31 @@
   },
   "categories": [
     {
-      "description": "Foundational styling for newcomers and those ready to define their presence in a new environment.",
-      "href": "services#establish",
+      "description": "For new professionals, students and newcomers to Canada.",
+      "price": "From $280",
+      "inclusions": "Style Language definition session|Wardrobe audit with keep/release guidance|Gap analysis & prioritised shopping list|The digital Style Dossier™|30-day email check-in",
+      "booking_link": "https://cal.com/styleplanit/15min",
       "image_url": "assets/images/services-by-category/Establish/homepage_hero.jpg",
       "name": "Establish",
       "showOnHomePage": "TRUE"
     },
     {
-      "description": "Strategic image enhancement for professionals and individuals ready to amplify their influence.",
-      "href": "services#elevate",
-      "image_url": "assets/images/services-by-category/Elevate/homepage_hero.jpg",
-      "name": "Elevate",
+      "description": "For returning moms, career-changers and reinventors.",
+      "price": "From $480",
+      "inclusions": "Everything in Establish|Extended discovery & life-stage mapping|Full in-home wardrobe edit (3 hrs)|2-hour personal shopping session|Style Dossier™ — digital + printed",
+      "booking_link": "https://cal.com/styleplanit/15min",
+      "image_url": "assets/images/services-by-category/Establish/homepage_hero.jpg",
+      "name": "Reclaim",
       "showOnHomePage": "TRUE"
     },
     {
-      "description": "Bespoke, white-glove image management for high-profile executives and individuals.",
-      "href": "icon-service",
-      "image_url": "assets/images/services-by-category/Elevate/icon_service.png",
-      "name": "Icon Service",
-      "showOnHomePage": "FALSE"
+      "description": "For high-performers and executives. Strategic image architecture.",
+      "price": "From $780",
+      "inclusions": "Everything in Reclaim|Brand identity & presence session|Full-day wardrobe transformation|Half-day curated personal shopping|Seasonal check-ins (12 months)",
+      "booking_link": "https://cal.com/styleplanit/15min",
+      "image_url": "assets/images/services-by-category/Elevate/homepage_hero.jpg",
+      "name": "Elevate",
+      "showOnHomePage": "TRUE"
     }
   ],
   "config": [
