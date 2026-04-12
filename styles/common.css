@@ -101,14 +101,14 @@ h1, h2, h3, h4 {
 
 /* Secondary Button (Minimalist Text Link) */
 .btn-secondary {
-    font-size: 0.65rem;
-    color: var(--grey);
+    font-size: 0.7rem;
+    color: var(--primary-accent);
     text-transform: uppercase;
     letter-spacing: 2px;
     text-decoration: none;
     border: none;
     border-bottom: 1px solid transparent;
-    padding: 5px 0;
+    padding: 8px 20px;
     transition: all 0.3s ease;
     opacity: 0.8;
     background: transparent;
@@ -117,8 +117,7 @@ h1, h2, h3, h4 {
 }
 
 .btn-secondary:hover {
-    color: var(--black);
-    border-bottom-color: var(--black);
+    border-bottom-color: var(--primary-accent);
     opacity: 1;
 }
 
@@ -270,6 +269,7 @@ h1, h2, h3, h4 {
 .dribbble-cta-btn:hover {
     transform: scale(1.05);
     background-color: var(--white);
+    color: var(--black);
 }
 
 
@@ -591,6 +591,7 @@ footer {
     background: var(--cream);
     padding: 60px 40px;
     border: 1px solid var(--border-color);
+    border-radius: var(--standard-radius);
     position: relative;
     max-height: 400px;
     overflow: hidden;
@@ -672,6 +673,7 @@ footer {
     flex-direction: column;
     cursor: pointer;
     opacity: 1;
+    border-radius: var(--standard-radius);
 }
 
 .service-card.active { 
@@ -1404,51 +1406,37 @@ footer {
 /* --- STYLE WIKI (LEARN) --- */
 .wiki-layout-wrapper {
     display: flex;
-    min-height: 100vh;
-    padding-top: 100px; /* Offset for fixed nav */
+    gap: 40px;
+    padding: 140px 4vw 80px;
     position: relative;
-    overflow-x: hidden;
+    max-width: 1400px;
+    margin: 0 auto;
 }
 
 .wiki-sidebar {
     width: 300px;
+    height: calc(100vh - 200px);
     background: var(--white);
-    border-right: 1px solid var(--border-color);
+    border: 1px solid var(--border-color);
     padding: 40px 30px;
-    position: fixed;
-    top: 100px;
-    bottom: 0;
-    left: 0;
-    z-index: 900;
-    transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    position: sticky;
+    top: 140px;
+    z-index: 10;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
     overflow-y: auto;
+    border-radius: var(--standard-radius);
+    flex-shrink: 0;
 }
 
 .wiki-layout-wrapper.sidebar-collapsed .wiki-sidebar {
-    transform: translateX(-100%);
-}
-
-.sidebar-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 30px;
-}
-
-.sidebar-title {
-    font-size: 1.2rem;
-    letter-spacing: 2px;
-    margin-bottom: 0;
-    color: var(--primary-accent);
+    display: none;
 }
 
 .wiki-main-content {
     flex: 1;
-    margin-left: 300px;
-    transition: margin-left 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-    padding: 60px;
-    background: var(--cream);
-    min-height: calc(100vh - 100px);
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    padding: 0;
+    background: var(--white);
 }
 
 .wiki-layout-wrapper.sidebar-collapsed .wiki-main-content {
@@ -1688,6 +1676,8 @@ footer {
     background: var(--white);
     border: 1px solid var(--border-color);
     width: 100%;
+    border-radius: var(--standard-radius);
+    overflow: hidden;
 }
 
 .active-service-details {
@@ -2250,4 +2240,15 @@ footer {
     border-radius: 4px;
     color: var(--charcoal);
     font-weight: 500;
+}
+
+.mt-xl { margin-top: 80px; }
+
+.discovery-callout {
+    padding: 40px;
+    border-radius: var(--standard-radius);
+    background: var(--cream);
+    border: 1px solid rgba(0,0,0,0.03);
+    max-width: 600px;
+    margin: 0 auto;
 }

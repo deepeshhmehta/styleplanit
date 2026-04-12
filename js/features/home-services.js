@@ -33,7 +33,7 @@ const HomeServicesFeature = {
                         <div class="package-label">Tier 0${index + 1}</div>
                         <h3>${category.name}</h3>
                         <div class="package-price">${cleanPrice}</div>
-                        <p class="desc-small">${category.description}</p>
+                        <p class="desc-small">${category.short_description || category.description}</p>
                         
                         <div class="package-details-expanded">
                             <div class="details-left">

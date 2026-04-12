@@ -42,6 +42,7 @@
         height: 500px;
         object-fit: cover;
         object-position: top center;
+        border-radius: var(--standard-radius);
     }
 
     .profile-text { flex: 1; }
