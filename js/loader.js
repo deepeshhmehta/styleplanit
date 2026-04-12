@@ -85,6 +85,7 @@ async function loadComponents() {
     if ($(".hero-bg").length > 0) features.push('hero');
     if ($("#logos-container").length > 0) features.push('logos');
     if ($("#packages-grid-container").length > 0 || $("#home-categories-container").length > 0) features.push('home-services');
+    if ($("#personas-grid").length > 0) features.push('personas');
     if ($("#portfolio-carousel").length > 0) features.push('portfolio');
     if ($("#reviews-container").length > 0) features.push('reviews');
     if ($("#team-container").length > 0) features.push('team');

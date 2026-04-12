@@ -562,13 +562,22 @@ footer {
     margin-top: 20px;
 }
 
+.scroll-indicator {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 40px;
+    width: 100%;
+}
+
 .scroll-dot {
-    width: 6px;
-    height: 6px;
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
     background: var(--grey);
     opacity: 0.3;
     transition: all 0.3s ease;
+    cursor: pointer;
 }
 
 .scroll-dot.active {
@@ -2159,4 +2168,86 @@ footer {
         gap: 40px;
     }
     .package-card h3 { font-size: 2rem; }
+}
+
+/* --- PERSONAS SECTION (RECOGNIZE YOURSELF) --- */
+.personas-section {
+    padding: 100px 0;
+    background-color: var(--white);
+}
+
+.personas-grid-wrapper {
+    overflow-x: auto;
+    padding: 40px 0;
+    margin: 0 -40px; /* Bleed out of container */
+    padding-left: 40px;
+    scrollbar-width: none;
+}
+
+.personas-grid-wrapper::-webkit-scrollbar {
+    display: none;
+}
+
+.personas-grid {
+    display: flex;
+    gap: 30px;
+    width: max-content;
+}
+
+.persona-card {
+    background: var(--cream);
+    padding: 40px;
+    border-radius: var(--standard-radius);
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border: 1px solid rgba(0,0,0,0.03);
+    transition: all 0.3s ease;
+}
+
+.persona-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.05);
+}
+
+.persona-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--primary-accent);
+    letter-spacing: 2px;
+}
+
+.persona-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-style: italic;
+    color: var(--black);
+}
+
+.persona-quote {
+    font-style: italic;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    line-height: 1.5;
+    color: var(--charcoal);
+    border-left: 2px solid var(--primary-accent);
+    padding-left: 20px;
+}
+
+.persona-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: auto;
+}
+
+.persona-tag {
+    font-size: 0.7rem;
+    background: rgba(var(--charcoal-rgb), 0.05);
+    padding: 6px 12px;
+    border-radius: 4px;
+    color: var(--charcoal);
+    font-weight: 500;
 }

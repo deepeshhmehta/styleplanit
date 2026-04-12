@@ -35,6 +35,9 @@ const App = {
     if (typeof HomeServicesFeature !== 'undefined') {
         HomeServicesFeature.init();
     }
+    if (typeof PersonasFeature !== 'undefined') {
+        PersonasFeature.init();
+    }
     if (typeof PortfolioFeature !== 'undefined') {
         PortfolioFeature.init();
     }
