@@ -18,6 +18,13 @@
     --grey-rgb: 170, 170, 170;
     --logo-band-bg: #abc5ae;
     
+    /* Z-Index Scale */
+    --z-ui: 10;
+    --z-sticky: 100;
+    --z-overlay: 500;
+    --z-modal: 1000;
+    --z-loader: 9999;
+    
     /* Anchors */
     --anchor-color: #24301B;
     --anchor-color-rgb: 36, 48, 27;

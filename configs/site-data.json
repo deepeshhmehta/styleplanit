@@ -92,6 +92,38 @@
       "showOnHomePage": "TRUE"
     }
   ],
+  "personas": [
+    {
+      "label": "Establish · New arrival",
+      "title": "The Pioneer",
+      "quote": "I'm brilliant at what I do. Nobody in this room knows it yet.",
+      "tags": "New to Canada|Corporate entry|Visibility"
+    },
+    {
+      "label": "Reclaim · Returning mom",
+      "title": "The Lioness",
+      "quote": "I forgot I could look like this. I want her back — but for who I am now.",
+      "tags": "Back to work|Identity shift|Confidence"
+    },
+    {
+      "label": "Elevate · The reinventer",
+      "title": "The Phoenix",
+      "quote": "Everything in my life has changed. My wardrobe hasn't caught up yet.",
+      "tags": "New chapter|After divorce|Reinvention"
+    },
+    {
+      "label": "Elevate · Sudden CEO",
+      "title": "The Godfather",
+      "quote": "The title changed overnight. The wardrobe didn't get the memo.",
+      "tags": "Executive|360 upgrade|Authority"
+    },
+    {
+      "label": "Establish · The over-buyer",
+      "title": "The Maximalist",
+      "quote": "I have everything. I wear nothing. Help me make sense of it.",
+      "tags": "Full wardrobe|No system|Edit needed"
+    }
+  ],
   "config": [
     {
       "key": "ACCESS_GID",

@@ -3,7 +3,6 @@
  */
 const HomeServicesFeature = {
     init: async function() {
-        console.log("🔍 [HomeServices] Init called");
         const container = $("#packages-grid-container");
         if (container.length === 0) return;
 

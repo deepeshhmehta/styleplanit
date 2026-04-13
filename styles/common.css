@@ -336,7 +336,7 @@ nav {
     left: 0;
     right: 0;
     padding: 5vh 4vw; /* Responsive padding using vh and vw */
-    z-index: 1000;
+    z-index: var(--z-sticky);
     background: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, transparent 100%);
 }
 
@@ -485,8 +485,8 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 9999;
-    transition: opacity 0.8s ease, visibility 0.8s;
+    z-index: var(--z-loader);
+    transition: opacity 0.8s ease, visibility 0.8s ease;
 }
 
 .loader-overlay.fade-out {
@@ -1212,7 +1212,7 @@ footer {
     flex-direction: column;
     align-items: flex-end;
     gap: 15px;
-    z-index: 1000;
+    z-index: var(--z-overlay);
 }
 
 .whatsapp-floating, .book-now-floating {

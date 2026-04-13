@@ -5,8 +5,6 @@ const ServicesFeature = {
   allServices: [],
 
   init: async function (options = {}) {
-    console.log("🔍 [Services] Init started");
-    
     // Fetch only services and filter out Icon Service
     const services = await Data.fetch("services");
     this.allServices = services.filter(s => s.category !== "Icon Service");
