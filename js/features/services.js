@@ -127,6 +127,7 @@ const ServicesFeature = {
                         <div class="cta-row">
                             <a href="${(Data.masterData.config.find(c => c.key === 'STEP_2_BUTTON_HREF') || {}).value || 'https://cal.com/styleplanit/15min'}" 
                                target="_blank" 
+                               rel="noopener noreferrer"
                                class="btn btn-primary-accent btn-ga-inquiry"
                                data-ga-service="${serviceSlug}">${inquireText}</a>
                         </div>
