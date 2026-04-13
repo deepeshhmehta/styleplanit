@@ -23,7 +23,18 @@ The loader is the first script executed. It handles:
 The orchestrator initializes global UI behaviors:
 *   **Navigation:** Mobile menu translucent toggles and unified header behavior.
 *   **Feature Lifecycle:** Calls `.init()` on all detected features (e.g., `HomeServicesFeature.init()`).
-*   **Z-Index Management:** Standardized UI layering (UI=10, Sticky=100, Overlay=500, Modal=1000).
+*   **Z-Index Management:** Standardized UI layering using variables:
+    *   `--z-ui: 10` (Basic UI elements)
+    *   `--z-sticky: 100` (Header/Nav)
+    *   `--z-overlay: 500` (Floating buttons, overlays)
+    *   `--z-modal: 1000` (Popups, focused states)
+    *   `--z-loader: 9999` (Loading screen)
+
+## 3. Anchor Scroll Lifecycle
+Because components are loaded dynamically, standard browser anchor links (`#id`) often fail on initial load.
+1.  **Loader Detection:** `loader.js` detects the hash in the URL.
+2.  **App Init:** `app.js` waits for the feature grids (Packages, Personas) to initialize and render.
+3.  **Deferred Scroll:** A 500ms `setTimeout` is triggered to calculate the final `offsetTop` of the dynamic component and perform a smooth scroll.
 
 ## 3. Key Feature Patterns
 

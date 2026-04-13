@@ -28,3 +28,13 @@ To update the main packages (Establish, Reclaim, Elevate):
 1.  **Add:** Drop new images into subfolders (e.g., `assets/images/services-by-category/Reclaim/`).
 2.  **Manifest Update:** Run `python3 scripts/diff_site_data.py`. The script scans and updates `assets_manifest` in `site-data.json`.
 3.  **Config:** Update the `image_url` field in `site-data.json` to point to the new path.
+
+## 5. Agent Review Protocol (Principal Engineer Mode)
+
+Before concluding any major refactor or feature, the agent must perform a **Surgical Scrutiny** across these categories:
+
+1.  **High Risk:** Scan for race conditions in `loader.js` and `app.js`. Ensure async operations (fetching JSON) don't block UI renders.
+2.  **Blockers:** Verify DOM IDs match between HTML and JS (e.g., `#packages-grid-container`).
+3.  **Security Check:** Run `grep -rn "target=\"_blank\""` and ensure every match has `rel="noopener noreferrer"`.
+4.  **Design Tokens:** Verify no hardcoded colors (`#FFF`) or spacing (`20px`) exist where `var(--white)` or `var(--standard-radius)` should be used.
+5.  **State Cleanup:** Ensure `.has-active` or `.active` classes are correctly toggled and removed during resets.

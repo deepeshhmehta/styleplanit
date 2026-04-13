@@ -78,7 +78,7 @@ const HomeServicesFeature = {
             
             $(".package-card").removeClass("active");
             $(this).addClass("active");
-            grid.addClass("has-active");
+            grid.addClass("has-active").attr("data-state", "active");
             $(".packages-section").addClass("has-active");
             resetButton.fadeIn();
             indicator.hide();
@@ -95,7 +95,7 @@ const HomeServicesFeature = {
         // 2. Reset Button
         $(document).on("click", "#btn-packages-reset", function() {
             $(".package-card").removeClass("active");
-            grid.removeClass("has-active");
+            grid.removeClass("has-active").removeAttr("data-state");
             $(".packages-section").removeClass("has-active");
             resetButton.fadeOut();
             if (window.innerWidth < 992) indicator.show(); // Show dots back on mobile

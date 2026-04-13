@@ -139,8 +139,8 @@ async function loadComponents() {
     // 5. Signal ready
     document.dispatchEvent(new CustomEvent('appReady'));
 
-    // 5b. Wait for critical hero images
-    const criticalElements = document.querySelectorAll('[style-bg-config-key]');
+    // 5b. Wait for critical hero images and journey cards
+    const criticalElements = document.querySelectorAll('[style-bg-config-key], .package-card-bg');
     let loadedCount = 0;
     const totalToLoad = criticalElements.length;
 

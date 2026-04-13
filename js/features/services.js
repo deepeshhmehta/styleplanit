@@ -1,5 +1,5 @@
 /**
- * services.js - Simplified À La Carte menu
+ * services.js - Simplified Grouped À La Carte menu
  */
 const ServicesFeature = {
   allServices: [],
@@ -7,44 +7,66 @@ const ServicesFeature = {
   init: async function (options = {}) {
     // Fetch only services and filter out Icon Service
     const services = await Data.fetch("services");
-    this.allServices = services.filter(s => s.category !== "Icon Service");
+    this.allServices = services.filter(s => s.category.toLowerCase().trim() !== "icon service");
 
     if (this.allServices.length === 0) {
-      console.warn("⚠️ [Services] No services found.");
-      $(".service-content").html('<p class="text-center section-padding">Service menu is temporarily unavailable. Please check back later.</p>');
+      $(".service-content").html('<p class="text-center section-padding">Service menu is temporarily unavailable.</p>');
       return;
     }
 
-    // Render everything in one grid
-    this.renderAllServices(this.allServices);
+    this.renderGroupedServices(this.allServices);
     this.bindEvents();
   },
 
-  renderAllServices: function (services) {
+  renderGroupedServices: function (services) {
     const container = $(".service-content");
     if (container.length === 0) return;
 
     container.empty();
-    const grid = $('<div class="services-grid active" style="display: grid;"></div>');
 
-    services.forEach((service) => {
-        const chipsHtml = this.renderServiceChips(service.footer);
-        const serviceSlug = this.slugify(service.title);
-        grid.append(`
-            <div class="service-card" data-title="${service.title}" data-ga-service="${serviceSlug}">
-                <div class="service-card-image">
-                    <img src="${service.image_url}" alt="${service.title}">
-                </div>
-                <div class="service-card-content">
-                    <h3>${service.title}</h3>
-                    <p class="short-desc">${service.short_description}</p>
-                    <div class="service-chips">${chipsHtml}</div>
-                </div>
+    // 1. Group services by category
+    const groups = {};
+    services.forEach(s => {
+        if (!groups[s.category]) groups[s.category] = [];
+        groups[s.category].push(s);
+    });
+
+    // 2. Add Jump-links
+    const jumpLinks = $('<div class="menu-jump-links"></div>');
+    Object.keys(groups).forEach(cat => {
+        jumpLinks.append(`<a href="#cat-${this.slugify(cat)}" class="btn-secondary">${cat}</a>`);
+    });
+    container.append(jumpLinks);
+
+    // 3. Render Sections
+    Object.keys(groups).forEach(cat => {
+        const sectionId = `cat-${this.slugify(cat)}`;
+        const section = $(`
+            <div class="menu-section" id="${sectionId}">
+                <h2 class="menu-section-title">${cat}</h2>
+                <div class="services-grid active" style="display: grid; margin-bottom: 60px;"></div>
             </div>
         `);
+        
+        const grid = section.find(".services-grid");
+        groups[cat].forEach(service => {
+            const chipsHtml = this.renderServiceChips(service.footer);
+            const serviceSlug = this.slugify(service.title);
+            grid.append(`
+                <div class="service-card" data-title="${service.title}" data-ga-service="${serviceSlug}">
+                    <div class="service-card-image">
+                        <img src="${service.image_url}" alt="${service.title}">
+                    </div>
+                    <div class="service-card-content">
+                        <h3>${service.title}</h3>
+                        <p class="short-desc">${service.short_description}</p>
+                        <div class="service-chips">${chipsHtml}</div>
+                    </div>
+                </div>
+            `);
+        });
+        container.append(section);
     });
-    
-    container.append(grid);
   },
 
   renderServiceChips: function (footerText) {
@@ -169,6 +191,16 @@ const ServicesFeature = {
             $(this).empty();
             $(".service-card").removeClass("active");
         });
+    });
+
+    // Smooth scroll for jump links
+    $(document).on("click", ".menu-jump-links a", function(e) {
+        e.preventDefault();
+        const targetId = $(this).attr("href");
+        const navHeight = $("nav").outerHeight() || 0;
+        $('html, body').animate({
+            scrollTop: $(targetId).offset().top - navHeight - 20
+        }, 600);
     });
   },
 
