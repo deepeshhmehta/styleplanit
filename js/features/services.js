@@ -5,16 +5,33 @@ const ServicesFeature = {
   allServices: [],
 
   init: async function (options = {}) {
-    // Fetch only services and filter out Icon Service
+    // Fetch only services
     const services = await Data.fetch("services");
-    this.allServices = services.filter(s => s.category.toLowerCase().trim() !== "icon service");
+    
+    // Filter logic
+    if (options.filter) {
+        if (options.mode === "include") {
+            this.allServices = services.filter(s => s.category === options.filter);
+        } else {
+            this.allServices = services.filter(s => s.category !== options.filter);
+        }
+    } else {
+        // Default à-la-carte filter
+        this.allServices = services.filter(s => s.category.toLowerCase().trim() !== "icon service");
+    }
 
     if (this.allServices.length === 0) {
       $(".service-content").html('<p class="text-center section-padding">Service menu is temporarily unavailable.</p>');
       return;
     }
 
-    this.renderGroupedServices(this.allServices);
+    if (options.autoExpand && this.allServices.length > 0) {
+        this.renderGroupedServices(this.allServices);
+        this.showServiceDetails(this.allServices[0].title);
+    } else {
+        this.renderGroupedServices(this.allServices);
+    }
+    
     this.bindEvents();
   },
 

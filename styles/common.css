@@ -139,7 +139,6 @@ h1, h2, h3, h4 {
 
 .hero-modern-inner {
     height: 90vh;
-    border-radius: var(--standard-radius); 
     overflow: hidden;
     position: relative;
     display: flex;
@@ -1048,11 +1047,13 @@ footer {
     border: 1px solid var(--border-color);
     padding: 40px 30px;
     box-shadow: 0 20px 50px rgba(0,0,0,0.1);
-    z-index: 2000;
+    z-index: var(--z-modal);
     transform: translateY(100px);
     opacity: 0;
     visibility: hidden;
     transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+    border-radius: var(--standard-radius);
+    overflow: hidden;
 }
 
 .luxury-dialog.visible {
@@ -1440,16 +1441,41 @@ footer {
 }
 
 /* Dark Mode Reader */
-.wiki-content.dark-mode {
-    background: #1a1a1a;
-    color: #e0e0e0;
-    border-color: #333;
+.wiki-content {
+    transition: background 0.3s ease, color 0.3s ease;
+    border-radius: var(--standard-radius);
+    padding: 60px;
 }
 
-.wiki-content.dark-mode .article-title { color: var(--white); }
-.wiki-content.dark-mode .article-body { color: #ccc; }
-.wiki-content.dark-mode h2, .wiki-content.dark-mode h3 { color: var(--white); }
-.wiki-content.dark-mode .article-footer hr { border-color: #333; }
+.wiki-content.dark-mode {
+    background: #121212 !important;
+    color: #e0e0e0 !important;
+}
+
+.wiki-content.dark-mode .article-title,
+.wiki-content.dark-mode h1,
+.wiki-content.dark-mode h2,
+.wiki-content.dark-mode h3,
+.wiki-content.dark-mode h4,
+.wiki-content.dark-mode strong { 
+    color: var(--white) !important; 
+}
+
+.wiki-content.dark-mode .article-body,
+.wiki-content.dark-mode p,
+.wiki-content.dark-mode li,
+.wiki-content.dark-mode em { 
+    color: #bbb !important; 
+}
+
+.wiki-content.dark-mode .article-footer hr { 
+    border-color: rgba(255,255,255,0.1); 
+}
+
+.wiki-content.dark-mode .style-tip-box {
+    background: #1e1e1e;
+    border-color: var(--primary-accent);
+}
 
 .article-title {
     font-size: 3.5rem;
