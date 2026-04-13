@@ -58,70 +58,76 @@
       "homepage_hero.jpg",
       "newcomer_essentials.jpeg",
       "refine_and_align.jpg"
+    ],
+    "services-by-category/Reclaim": [
+      "reclaim_hero.jpg"
     ]
   },
   "categories": [
     {
-      "name": "Establish",
-      "short_description": "Foundational arrival capsule for newcomers.",
+      "booking_link": "https://cal.com/styleplanit/15min",
       "description": "Land with confidence using a personal styling service designed specifically for newcomers to Canada. We build your foundational arrival capsule wardrobe—a curated set of versatile, high-quality essentials tailored to the local climate and lifestyle.",
-      "price": "$330",
-      "inclusions": "Body Shape Analysis|Personal Style Analysis|Lookbook Curation|Shopping List|Virtual Shopping",
-      "booking_link": "https://cal.com/styleplanit/15min",
+      "href": "",
       "image_url": "assets/images/services-by-category/Establish/homepage_hero.jpg",
+      "inclusions": "Body Shape Analysis|Personal Style Analysis|Lookbook Curation|Shopping List|Virtual Shopping",
+      "name": "Establish",
+      "price": "$330",
+      "short_description": "Foundational arrival capsule for newcomers.",
       "showOnHomePage": "TRUE"
     },
     {
-      "name": "Reclaim",
-      "short_description": "Rediscover yourself during life transitions.",
+      "booking_link": "https://cal.com/styleplanit/15min",
       "description": "Life shifts, and your wardrobe should evolve with you. Whether you are navigating postpartum life, stepping back into the workforce after a hiatus, or entering a new personal chapter, this service is designed to help you rediscover your confidence.",
-      "price": "$501",
-      "inclusions": "Body Shape Analysis|Lifestyle Analysis|Personal Style Analysis|Color Analysis|Lookbook Curation|Shopping List|Wardrobing|Virtual Shopping|Moodboard curation",
-      "booking_link": "https://cal.com/styleplanit/15min",
+      "href": "",
       "image_url": "assets/images/services-by-category/Reclaim/reclaim_hero.jpg",
+      "inclusions": "Body Shape Analysis|Lifestyle Analysis|Personal Style Analysis|Color Analysis|Lookbook Curation|Shopping List|Wardrobing|Virtual Shopping|Moodboard curation",
+      "name": "Reclaim",
+      "price": "$501",
+      "short_description": "Rediscover yourself during life transitions.",
       "showOnHomePage": "TRUE"
     },
     {
-      "name": "Elevate",
-      "short_description": "Strategic image architecture for high-performers.",
-      "description": "Step into your power era. We curate a master-level wardrobe of exceptional quality, refined silhouettes, and strategic statement pieces that speak before you do. Elevate your presence from simply successful to truly iconic.",
-      "price": "$627",
-      "inclusions": "Body Shape Analysis|Lifestyle Analysis|Personal Style Analysis|Color Analysis|Lookbook Curation|Shopping List|In-Person Shopping|Wardrobing|Moodboard curation|Event Styling|Luxury charge",
       "booking_link": "https://cal.com/styleplanit/15min",
+      "description": "Step into your power era. We curate a master-level wardrobe of exceptional quality, refined silhouettes, and strategic statement pieces that speak before you do. Elevate your presence from simply successful to truly iconic.",
+      "href": "",
       "image_url": "assets/images/services-by-category/Elevate/homepage_hero.jpg",
+      "inclusions": "Body Shape Analysis|Lifestyle Analysis|Personal Style Analysis|Color Analysis|Lookbook Curation|Shopping List|In-Person Shopping|Wardrobing|Moodboard curation|Event Styling",
+      "name": "Elevate",
+      "price": "$627",
+      "short_description": "Strategic image architecture for high-performers.",
       "showOnHomePage": "TRUE"
     }
   ],
   "personas": [
     {
       "label": "Establish · New arrival",
-      "title": "The Pioneer",
       "quote": "I'm brilliant at what I do. Nobody in this room knows it yet.",
-      "tags": "New to Canada|Corporate entry|Visibility"
+      "tags": "New to Canada|Corporate entry|Visibility",
+      "title": "The Pioneer"
     },
     {
       "label": "Reclaim · Returning mom",
-      "title": "The Lioness",
       "quote": "I forgot I could look like this. I want her back — but for who I am now.",
-      "tags": "Back to work|Identity shift|Confidence"
+      "tags": "Back to work|Identity shift|Confidence",
+      "title": "The Lioness"
     },
     {
       "label": "Elevate · The reinventer",
-      "title": "The Phoenix",
       "quote": "Everything in my life has changed. My wardrobe hasn't caught up yet.",
-      "tags": "New chapter|After divorce|Reinvention"
+      "tags": "New chapter|After divorce|Reinvention",
+      "title": "The Phoenix"
     },
     {
       "label": "Elevate · Sudden CEO",
-      "title": "The Godfather",
       "quote": "The title changed overnight. The wardrobe didn't get the memo.",
-      "tags": "Executive|360 upgrade|Authority"
+      "tags": "Executive|360 upgrade|Authority",
+      "title": "The Godfather"
     },
     {
       "label": "Establish · The over-buyer",
-      "title": "The Maximalist",
       "quote": "I have everything. I wear nothing. Help me make sense of it.",
-      "tags": "Full wardrobe|No system|Edit needed"
+      "tags": "Full wardrobe|No system|Edit needed",
+      "title": "The Maximalist"
     }
   ],
   "config": [
