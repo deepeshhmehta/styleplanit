@@ -78,7 +78,7 @@
       "price": "$501",
       "inclusions": "Body Shape Analysis|Lifestyle Analysis|Personal Style Analysis|Color Analysis|Lookbook Curation|Shopping List|Wardrobing|Virtual Shopping|Moodboard curation",
       "booking_link": "https://cal.com/styleplanit/15min",
-      "image_url": "assets/images/services-by-category/Establish/homepage_hero.jpg",
+      "image_url": "assets/images/services-by-category/Reclaim/reclaim_hero.jpg",
       "showOnHomePage": "TRUE"
     },
     {
@@ -227,7 +227,7 @@
     },
     {
       "key": "NAV_LINK_3_HREF",
-      "value": "#services"
+      "value": "/#services"
     },
     {
       "key": "NAV_LINK_3_TEXT",

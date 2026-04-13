@@ -199,6 +199,18 @@ async function loadComponents() {
             loader.classList.add('fade-out');
             setTimeout(() => {
                 document.body.style.overflow = '';
+                
+                // 7. Check for hash and scroll
+                if (window.location.hash) {
+                    const target = document.querySelector(window.location.hash);
+                    if (target) {
+                        const navHeight = document.querySelector('nav')?.offsetHeight || 0;
+                        window.scrollTo({
+                            top: target.offsetTop - navHeight,
+                            behavior: 'smooth'
+                        });
+                    }
+                }
             }, 800);
         }
     }, 400); 

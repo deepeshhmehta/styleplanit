@@ -14,6 +14,7 @@ const HomeServicesFeature = {
         });
 
         this.renderPackages(container, homeCategories);
+        this.initScrollDots(homeCategories.length);
         this.bindEvents();
     },
 
@@ -53,11 +54,24 @@ const HomeServicesFeature = {
         });
     },
 
+    initScrollDots: function(count) {
+        const indicator = $("#packages-scroll-indicator");
+        if (indicator.length === 0) return;
+        
+        indicator.empty();
+        for (let i = 0; i < count; i++) {
+            indicator.append(`<div class="scroll-dot ${i === 0 ? 'active' : ''}" data-index="${i}"></div>`);
+        }
+    },
+
     bindEvents: function() {
         const self = this;
         const grid = $("#packages-grid-container");
+        const wrapper = $("#packages-grid-wrapper");
+        const indicator = $("#packages-scroll-indicator");
         const resetButton = $("#btn-packages-reset");
 
+        // 1. Card Click - Expand
         $(document).on("click", ".package-card", function(e) {
             if ($(this).hasClass("active") || $(e.target).closest('.package-details-expanded').length > 0) return;
 
@@ -66,17 +80,52 @@ const HomeServicesFeature = {
             $(".package-card").removeClass("active");
             $(this).addClass("active");
             grid.addClass("has-active");
+            $(".packages-section").addClass("has-active");
             resetButton.fadeIn();
+            indicator.hide();
 
-            $('html, body').animate({
-                scrollTop: $(".packages-section").offset().top - 100
-            }, 500);
+            // Scroll to the specific card that was clicked
+            const self_card = $(this);
+            setTimeout(() => {
+                $('html, body').animate({
+                    scrollTop: self_card.offset().top - 120
+                }, 600);
+            }, 100); 
         });
 
+        // 2. Reset Button
         $(document).on("click", "#btn-packages-reset", function() {
             $(".package-card").removeClass("active");
             grid.removeClass("has-active");
+            $(".packages-section").removeClass("has-active");
             resetButton.fadeOut();
+            if (window.innerWidth < 992) indicator.show(); // Show dots back on mobile
+        });
+
+        // 3. Scroll Tracking for Dots
+        wrapper.on("scroll", () => {
+            if (grid.hasClass("has-active")) return;
+            
+            const scrollLeft = wrapper.scrollLeft();
+            const maxScroll = wrapper[0].scrollWidth - wrapper.outerWidth();
+            if (maxScroll <= 0) return;
+            
+            const scrollPercent = scrollLeft / maxScroll;
+            const dots = indicator.find(".scroll-dot");
+            const activeIndex = Math.round(scrollPercent * (dots.length - 1));
+            
+            dots.removeClass("active");
+            dots.eq(activeIndex).addClass("active");
+        });
+
+        // 4. Dot Click to Scroll
+        $(document).on("click", "#packages-scroll-indicator .scroll-dot", function() {
+            const index = $(this).data("index");
+            const cardWidth = $(".package-card").first().outerWidth() + 20;
+            
+            wrapper.animate({
+                scrollLeft: index * cardWidth
+            }, 500);
         });
     }
 };
