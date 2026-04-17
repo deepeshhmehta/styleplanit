@@ -19,14 +19,14 @@
         position: absolute;
         top: 80px;
         right: 4vw;
-        width: auto; /* Use auto width as verified in browser */
+        width: 50vw; /* Half viewport width */
         background: rgba(255, 255, 255, 0.85); /* Translucent background */
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
         flex-direction: column;
-        align-items: flex-end; /* Align items to the right */
-        gap: 12px; /* Tighter gap */
-        padding: 30px 40px;
+        align-items: flex-start; /* Align items to the left */
+        gap: 15px;
+        padding: 25px 40px;
         border-radius: 20px;
         box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         z-index: 1001;
@@ -37,9 +37,8 @@
         color: var(--black); 
         font-weight: 700;
         font-family: var(--font-primary);
-        font-size: 1.1rem; /* Slightly smaller to fit */
-        text-align: right;
-        white-space: nowrap; /* Prevent wrapping */
+        font-size: 1.2rem;
+        text-align: left;
     }
 
     .nav-divider { display: none; }
@@ -137,15 +136,46 @@
     }
 
     .services-grid {
-        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-        gap: 20px;
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 15px;
+    }
+
+    .service-card {
+        padding: 15px;
+    }
+
+    .service-card .service-card-image img {
+        height: 120px;
+        margin-bottom: 10px;
+    }
+
+    .service-card h3 {
+        font-size: 1.1rem;
+        margin-bottom: 5px;
+    }
+
+    .service-card p {
+        display: none; /* Hide description in grid view on mobile */
     }
 
     .service-card.active {
         /* Keep in place, just let common.css handle the highlight border */
     }
 
-    .service-details-container { padding: 30px 20px; }
+    .service-details-container { 
+        padding: 0; 
+        max-width: 100%;
+        margin: 20px 0;
+        border-radius: var(--standard-radius);
+    }
+    
+    .active-service-details {
+        padding: 40px 25px;
+    }
+
+    .active-service-details h3 {
+        font-size: 1.8rem;
+    }
 
     /* Team Page Mobile Layout */
     .profile-card, .profile-card.image-right {
@@ -179,8 +209,11 @@
     .value-text-box .lead-text {
         font-size: 1.1rem;
     }
+    .pillar {
+        padding-left: 0;
+    }
     .pillar-num {
-        font-size: 1.4rem;
+        display: none;
     }
     .value-footer {
         margin-top: 40px;
