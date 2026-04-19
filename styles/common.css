@@ -224,7 +224,7 @@ h1, h2, h3, h4 {
 }
 
 .dribbble-serif {
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-primary);
     font-size: 6rem;
     font-style: italic;
     font-weight: 400;
@@ -1294,8 +1294,8 @@ footer {
     top: 0;
     font-family: var(--font-primary);
     font-size: 1.8rem;
-    color: var(--primary-accent);
-    opacity: 0.3;
+    color: var(--logo-band-bg);
+    opacity: 1;
 }
 
 .pillar h4 {
@@ -1857,7 +1857,7 @@ footer {
 }
 
 .package-card h3 {
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-primary);
     font-size: 2.5rem;
     font-style: italic;
     margin: 0;
@@ -2074,7 +2074,7 @@ footer {
 }
 
 .persona-title {
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-primary);
     font-size: 2rem;
     font-style: italic;
     color: var(--black);
@@ -2082,7 +2082,7 @@ footer {
 
 .persona-quote {
     font-style: italic;
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-primary);
     font-size: 1.1rem;
     line-height: 1.5;
     color: var(--charcoal);
@@ -2184,7 +2184,7 @@ footer {
 }
 
 .menu-section-title {
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-primary);
     font-size: 2.2rem;
     font-style: italic;
     text-align: center;
