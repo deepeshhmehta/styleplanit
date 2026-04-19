@@ -5,11 +5,19 @@ This document details the procedures for managing site content and environments.
 ## 1. Environment Synchronization (CD)
 
 The site uses a tiered deployment model:
-1.  **Develop:** Features are merged here via PR.
-2.  **Staging:** Merged from `develop`. Triggers a **GitHub Action** to push code to `styleplanit-staging` repo.
+1.  **Develop:** Features are merged here via PR. Triggers **Sync to Develop Repo** (`develop-sync.yml`) which pushes to `styleplanit-develop` repo for preview.
+2.  **Staging:** Merged from `develop`. Triggers **Sync to Staging Repo** (`staging-sync.yml`) which pushes to `styleplanit-staging` repo.
 3.  **Main:** Merged from `staging` only after visual sign-off.
 
-## 2. Service Bundle Updates (Pick A Journey)
+## 2. Content Updates (Bespoke Services)
+
+To update the individual services on the Experience page:
+1.  Edit `services` array in `configs/site-data.json`.
+2.  **Category Mapping:** Use "Establish" or "Elevate" to group internal logic, though they appear in a unified grid.
+3.  **Footer Icons:** Use comma-separated strings for inclusions (e.g., "Wardrobing, Shopping List"). The UI automatically maps these to FontAwesome icons.
+4.  **Sync:** Run `python3 scripts/diff_site_data.py` to push changes to the Google Sheet.
+
+## 3. Service Bundle Updates (Pick A Journey)
 
 To update the main packages (Establish, Reclaim, Elevate):
 1.  Edit `categories` array in `configs/site-data.json`.

@@ -43,6 +43,12 @@ Located in `js/features/home-services.js`, this uses a **State-Based Expansion**
 *   **Default State:** Centered flex-row cards showing `short_description`.
 *   **Active State:** The section receives a `.has-active` class. The active card expands full-width (`order: -1`) and reveals `long_description`, `inclusions`, and a CTA. Minimized cards stack as cream-colored buttons.
 
+### "Bespoke Services" (Unified Grid)
+Located in `js/features/services.js`, this uses a **Fade-Based Transition** pattern:
+*   **Single Grid:** All services (excluding "Icon Service") are rendered into a single responsive grid (140px min-width on mobile for 2-column layout).
+*   **Expansion:** Clicking a card triggers a `fadeOut` of the grid followed by a `fadeIn` of the detailed service card.
+*   **Navigation:** The details view is a centered vertical card using `var(--logo-band-bg)` for visual distinction.
+
 ### "Recognize Yourself" (Personas)
 Located in `js/features/personas.js`, this uses **Horizontal Scroll Tracking**:
 *   Calculates scroll percentage of the container to sync with a dot-indicator system.
