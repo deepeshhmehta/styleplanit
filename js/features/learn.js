@@ -76,7 +76,7 @@ const LearnFeature = {
                 <div class="article-footer">
                     <hr>
                     <div class="article-cta">
-                        <h4>Ready to apply this to your own brand?</h4>
+                        <h4>Ready to uplift yourself</h4>
                         <a href="https://cal.com/styleplanit/15min" target="_blank" rel="noopener noreferrer" class="btn btn-primary-accent">Book a Discovery Call</a>
                     </div>
                 </div>

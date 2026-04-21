@@ -187,8 +187,8 @@
     }
     .profile-image { max-width: 100%; }
     .profile-image img { 
-        height: 400px; 
         width: 100%; 
+        aspect-ratio: 3 / 4;
         object-fit: cover;
         object-position: top center;
         border-radius: var(--standard-radius);
