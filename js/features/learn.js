@@ -27,7 +27,7 @@ const LearnFeature = {
 
         // Load default article (first one) or from Hash
         const hash = window.location.hash.substring(1);
-        const defaultArticle = this.articles.find(a => this.slugify(a.title) === hash) || this.articles[0];
+        const defaultArticle = this.articles.find(a => (a.id === hash) || (this.slugify(a.title) === hash)) || this.articles[0];
         this.loadArticle(defaultArticle.title);
     },
 
@@ -36,7 +36,7 @@ const LearnFeature = {
         list.empty();
         
         this.articles.forEach(article => {
-            const slug = this.slugify(article.title);
+            const slug = article.id || this.slugify(article.title);
             list.append(`
                 <li>
                     <a href="#${slug}" class="wiki-nav-link" data-title="${article.title}">
@@ -52,7 +52,7 @@ const LearnFeature = {
         if (!article) return;
 
         const container = $("#wiki-article-container");
-        const slug = this.slugify(article.title);
+        const slug = article.id || this.slugify(article.title);
 
         // Update active state in sidebar
         $(".wiki-nav-link").removeClass("active");

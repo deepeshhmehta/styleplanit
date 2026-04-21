@@ -105,7 +105,7 @@ def main():
         "reviews": {"key_fields": ["author", "text"], "sheet_gid": GIDS["reviews"]}, 
         "dialogs": {"key_fields": ["title"], "sheet_gid": GIDS["dialogs"]}, 
         "team": {"key_fields": ["name"], "sheet_gid": GIDS["team"]},
-        "articles": {"key_fields": ["title"], "sheet_gid": GIDS["articles"]},
+        "articles": {"key_fields": ["id", "title"], "sheet_gid": GIDS["articles"]},
         "personas": {"key_fields": ["title"], "sheet_gid": GIDS["personas"]}
     }
 
