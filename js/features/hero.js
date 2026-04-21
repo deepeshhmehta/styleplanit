@@ -31,6 +31,16 @@ const HeroFeature = {
     const heroBgs = $(".hero-bg");
     if (heroBgs.length <= 1) return;
 
+    // 3. Inject Pills from config
+    const pillsContainer = $("#dynamic-hero-pills");
+    if (pillsContainer.length > 0) {
+        const pillsStr = Data.getConfig('HERO_PILLS') || "";
+        if (pillsStr) {
+            const pills = pillsStr.split('|');
+            pillsContainer.html(pills.map(p => `<div class="floating-pill">${p}</div>`).join(''));
+        }
+    }
+
     let current = 0;
     // Start global crossfade slideshow (for both web and mobile)
     setInterval(() => {
