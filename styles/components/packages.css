@@ -297,6 +297,10 @@
     font-weight: bold;
 }
 
+.package-card.active .inclusions-list li::before {
+    color: var(--white);
+}
+
 .packages-grid-wrapper {
     width: 100%;
     scrollbar-width: none;
@@ -358,3 +362,23 @@
     }
 }
 
+
+.discovery-callout {
+    padding: 40px;
+    border-radius: var(--standard-radius);
+    background: var(--cream);
+    border: 1px solid rgba(0,0,0,0.03);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.highlighter {
+    background-color: var(--logo-band-bg);
+    padding: 2px 8px;
+    margin: 0 -4px;
+    border-radius: 4px;
+    display: inline-block;
+    transform: rotate(-1deg);
+    color: var(--primary-accent);
+    font-weight: 700;
+}
