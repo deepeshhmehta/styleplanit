@@ -19,14 +19,15 @@
       "value-section.jpg"
     ],
     "home-page/hero-images": [
-      "Hero-Image-1.JPG",
-      "Hero-image-2.png",
-      "Hero-image-3.JPG"
+      "hero-1-portrait.jpg",
+      "hero-2-landscape.jpg",
+      "hero-3-landscape.jpg",
+      "hero-4-landscape.jpg"
     ],
     "home-page/logos": [
       "NYFW_SHOWS_LOCKUP_HORIZONTAL_black (1).png",
       "ahemdabad-mirror.png",
-      "harlem-fashion-week.png",
+      "hfw.png",
       "miss_universe-logo_brandlogos.net_rl7b5-512x512.png"
     ],
     "meet-team-page": [
