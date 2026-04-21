@@ -38,10 +38,10 @@ async function loadComponents() {
     // 1. Check version and start fetching master data immediately
     if (typeof Data !== 'undefined') {
         const masterData = await Data.loadMasterData();
-        if (masterData && masterData.config) {
-            const phrasesConfig = masterData.config.find(item => item.key === 'LOADER_PHRASES');
-            if (phrasesConfig && phrasesConfig.value) {
-                phrases = phrasesConfig.value.split('|').map(p => p.trim());
+        if (masterData) {
+            const phrasesConfig = Data.getConfig('LOADER_PHRASES');
+            if (phrasesConfig) {
+                phrases = phrasesConfig.split('|').map(p => p.trim());
             }
         }
         await Data.checkVersion();

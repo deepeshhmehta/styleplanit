@@ -110,10 +110,10 @@ const ServicesFeature = {
     const detailsContainer = $("#service-details-container");
     const gridContainer = $(".service-content");
     
-    const inclusionsTitle = (Data.masterData.config.find(c => c.key === 'SERVICE_INCLUSIONS_TITLE') || {value: "What's Included?"}).value;
-    const inquireText = (Data.masterData.config.find(c => c.key === 'STEP_2_BUTTON_TEXT') || {value: "Inquire Now"}).value;
-    const closeBtnText = (Data.masterData.config.find(c => c.key === 'EXPERIENCE_CLOSE_BTN') || {value: "Close"}).value;
-    const taxesNote = (Data.masterData.config.find(c => c.key === 'PRICE_TAXES_TEXT') || {value: "+ taxes"}).value;
+    const inclusionsTitle = Data.getConfig('SERVICE_INCLUSIONS_TITLE') || "What's Included?";
+    const inquireText = Data.getConfig('STEP_2_BUTTON_TEXT') || "Inquire Now";
+    const closeBtnText = Data.getConfig('EXPERIENCE_CLOSE_BTN') || "Close";
+    const taxesNote = Data.getConfig('PRICE_TAXES_TEXT') || "+ taxes";
 
     const inclusionsHtml = this.renderInclusionsList(service.footer);
 
@@ -142,7 +142,7 @@ const ServicesFeature = {
                     
                     <div class="details-footer">
                         <div class="cta-row">
-                            <a href="${(Data.masterData.config.find(c => c.key === 'STEP_2_BUTTON_HREF') || {}).value || 'https://cal.com/styleplanit/15min'}" 
+                            <a href="${Data.getConfig('STEP_2_BUTTON_HREF') || 'https://cal.com/styleplanit/15min'}" 
                                target="_blank" 
                                rel="noopener noreferrer"
                                class="btn btn-primary-accent btn-ga-inquiry"
