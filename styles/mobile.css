@@ -61,10 +61,10 @@
     .hero-bg.active { opacity: 1; }
 
     /* Trait: Compact typography to reveal more image */
-    .hero-modern[data-active-traits*="compact"] .hero-content-box h1 {
+    .hero-modern .hero-content-box h1 {
         font-size: 1.6rem;
     }
-    .hero-modern[data-active-traits*="compact"] .hero-sub-mantra {
+    .hero-modern .hero-sub-mantra {
         font-size: 0.75rem;
         letter-spacing: 2px;
     }
