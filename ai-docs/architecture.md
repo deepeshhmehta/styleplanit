@@ -1,9 +1,15 @@
 # StylePlanIt Technical Architecture
 
-This document details the core logic and orchestration patterns of the StylePlanIt website following the v5.0 "Luxury Cutout" Refactor.
+This document details the core logic and orchestration patterns of the StylePlanIt website for the **v1.0.0 Production Baseline**.
 
 ## 1. Orchestration Philosophy
 StylePlanIt uses a **Single-Page Initialization (SPI)** pattern. While the site has multiple HTML files, the logic is unified through a central loader and orchestrator. 
+
+### Modular CSS Architecture
+Following the v1.0.0 stabilization, the project transitioned from a monolith `common.css` to a modular, component-based system:
+*   **`styles/base/`**: Global resets, typography, and core navigation.
+*   **`styles/components/`**: Isolated styles for specific UI modules (Hero, Packages, Services, etc.).
+*   **`styles/styles.css`**: Central orchestrator for all CSS modules.
 
 ### The "Site Wrapper" Pattern
 Every page is wrapped in a `.site-wrapper` div. This achieves the "White Box on Green Backdrop" luxury card effect.
@@ -14,9 +20,11 @@ Every page is wrapped in a `.site-wrapper` div. This achieves the "White Box on 
 
 ### `js/loader.js` (The Engine)
 The loader is the first script executed. It handles:
+*   **Split-Atom Data Ingestion:** Fetches `site-data.json` (content) and `site-config.json` (metadata) in parallel via `Promise.all`.
+*   **Surgical Configuration:** Uses `Utils.applyConfig(config, container)` to apply data-binding ONLY to newly injected components, ensuring high performance.
 *   **Recursive Component Loading:** Scans the DOM for `[data-component]` attributes, fetches the corresponding `.html` from `/components/`, and injects it.
-*   **Dynamic Feature Detection:** Based on the presence of specific IDs or classes, it dynamically injects feature scripts (e.g., `js/features/hero.js`).
-*   **Deep Link Anchoring:** Contains a post-load callback that checks for a URL hash (e.g., `/#services`) and executes a smooth scroll once all dynamic components are rendered.
+*   **Dynamic Feature Detection:** Dynamically injects feature scripts (e.g., `js/features/hero.js`).
+*   **Deep Link Anchoring:** Post-load smooth scroll once all dynamic components are rendered.
 *   **Visual Stability:** Preloads critical background images before hiding the loading overlay.
 
 ### `js/app.js` (The Orchestrator)

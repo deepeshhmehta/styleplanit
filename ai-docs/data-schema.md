@@ -1,42 +1,47 @@
 # StylePlanIt Data Schema
 
-`configs/site-data.json` is the atomic source of truth for the entire website. This document defines its structure.
+The platform uses a **Split-Atom** data model to separate UI metadata from structured content.
 
-## 1. Schema Overview
+## 1. `configs/site-config.json` (Flat Metadata)
 
-### `version` (Array)
-*   Used for cache busting. Incrementing this value forces clients to fetch fresh data.
+This file contains all flattened Key-Value pairs for UI strings, URLs, and environment settings.
+*   **`VERSION`**: Core production baseline (e.g., "1.0.0").
+*   **`LOADER_*`**: Text and progress settings for the loading sequence.
+*   **`HERO_*`**: High-impact titles, mantra, and button text.
+*   **`VALUE_*`**: Storytelling pillars for the "Why Styling" section.
+*   **`NAV_*`**: Navigation text and destination anchors (e.g., `/#services`).
+*   **`ICON_*`**: Metadata for the invitation-only collection.
 
-### `config` (Array)
-Key-Value pairs for global site settings.
-*   `VALUE_*`: Storytelling copy for the "Why Styling" section.
-*   `NAV_LINK_*`: Anchor-based URLs (e.g., `/#services`).
-*   `PILL_TAG`: The floating hero badge text.
+## 2. `configs/site-data.json` (Structured Content)
+
+This file houses high-volume data arrays managed via Google Sheets.
 
 ### `categories` (Array)
 Defines the **Service Bundles** shown in "Pick A Journey."
 *   `name`: Display title (Establish, Reclaim, Elevate).
-*   `short_description`: Displayed in minimized card state.
-*   `description`: Displayed in expanded card state.
+*   `short_description`: Minimized state teaser.
+*   `description`: Full expanded copy.
 *   `price`: Formatted string (e.g., "$330").
 *   `inclusions`: Pipe-separated string (`|`) for list generation.
-*   `booking_link`: Direct link to scheduling (Cal.com).
-*   `image_url`: Path to background image.
+*   `booking_link`: Direct Cal.com path.
 
 ### `services` (Array)
-Individual **À La Carte** offerings shown on the Experiences page.
-*   **Note:** Categorized as "Bespoke" but filtered to exclude "Icon Service."
-*   `footer`: Comma-separated tags for icon-chip generation.
+Individual **À La Carte** offerings.
+*   `footer`: Comma-separated tags for icon generation.
 
 ### `team` (Array)
 Profiles for "The Collective."
-*   `bio`: Long-form text. Displayed with `text-align: justify`.
+*   `imageUrl`: Precise path to the optimized team photo.
 
 ### `articles` (Array)
-Style Wiki content. Managed via the **Article Publication Workflow**.
+Style Wiki content.
+*   `id`: Immutable routing key (e.g., `privacy-policy`).
+*   `content`: Semantic HTML block.
 
-## 2. Synchronization Logic
-Data flow: **Google Sheets** → **CSV** → **site-data.json** → **Website UI**.
+### `assets_manifest` (Object)
+Automatically generated index of all site images, grouped by page context.
 
-*   Use `scripts/diff_site_data.py` to bridge local changes to the Sheet.
-*   Use `scripts/sync_engine.py` to bulk-override local data from the Sheet.
+## 3. Synchronization Logic
+Data flow: **Google Sheets** → **CSV** → **Local JSON** → **Website UI**.
+
+*   Use `scripts/diff_site_data.py` to reconcile both local JSON files with their respective Google Sheet tabs.
