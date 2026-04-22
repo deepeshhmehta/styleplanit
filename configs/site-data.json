@@ -77,7 +77,7 @@
   },
   "categories": [
     {
-      "booking_link": "https://cal.com/styleplanit/15min",
+      "booking_link": "https://cal.com/styleplanit/establish",
       "description": "Land with confidence using a personal styling service designed specifically for newcomers to Canada. We build your foundational arrival capsule wardrobe—a curated set of versatile, high-quality essentials tailored to the local climate and lifestyle.",
       "href": "",
       "image_url": "assets/images/services-by-category/Establish/homepage_hero.jpg",
@@ -88,7 +88,7 @@
       "showOnHomePage": "TRUE"
     },
     {
-      "booking_link": "https://cal.com/styleplanit/15min",
+      "booking_link": "https://cal.com/styleplanit/reclaim",
       "description": "Life shifts, and your wardrobe should evolve with you. Whether you are navigating postpartum life, stepping back into the workforce after a hiatus, or entering a new personal chapter, this service is designed to help you rediscover your confidence.",
       "href": "",
       "image_url": "assets/images/services-by-category/Reclaim/reclaim_hero.jpg",
@@ -99,7 +99,7 @@
       "showOnHomePage": "TRUE"
     },
     {
-      "booking_link": "https://cal.com/styleplanit/15min",
+      "booking_link": "https://cal.com/styleplanit/elevate",
       "description": "Step into your power era. We curate a master-level wardrobe of exceptional quality, refined silhouettes, and strategic statement pieces that speak before you do. Elevate your presence from simply successful to truly iconic.",
       "href": "",
       "image_url": "assets/images/services-by-category/Elevate/homepage_hero.jpg",
