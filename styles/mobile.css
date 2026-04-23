@@ -9,26 +9,53 @@
     .section-title { font-size: 2.5rem; margin-bottom: 30px; }
 
     /* Navigation Mobile */
-    .menu-toggle { display: block; }
+    .menu-toggle { 
+        display: flex; 
+        z-index: 1002;
+    }
+    
     .nav-links {
         display: none;
         position: absolute;
         top: 80px;
-        left: 25px;
-        right: 25px;
-        background: var(--white);
+        right: 4vw;
+        width: 50vw; /* Half viewport width */
+        background: rgba(255, 255, 255, 0.85); /* Translucent background */
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
         flex-direction: column;
-        gap: 18px;
-        padding: 25px;
-        border: 1px solid var(--border-color);
-        box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        align-items: flex-start; /* Align items to the left */
+        gap: 15px;
+        padding: 25px 40px;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         z-index: 1001;
     }
 
     .nav-links.active { display: flex; }
-    .nav-links a { color: var(--charcoal); }
+    .nav-links a { 
+        color: var(--black); 
+        font-weight: 700;
+        font-family: var(--font-primary);
+        font-size: 1.2rem;
+        text-align: left;
+    }
+
+    .availability-badge {
+        padding-bottom: 10px;
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+        width: 100%;
+        margin-bottom: 5px;
+    }
+
+    .nav-divider { display: none; }
+    .nav-container { background: none; border: none; box-shadow: none; padding: 0; }
 
     /* Hero Mobile */
+    .hero-modern-inner {
+        height: 60vh;
+    }
+    
     .hero-bg {
         width: 100%;
         position: absolute;
@@ -40,8 +67,38 @@
 
     .hero-bg.active { opacity: 1; }
 
-    .hero-content-box { padding: 40px; max-width: 90%; z-index: 10; }
+    /* Trait: Compact typography to reveal more image */
+    .hero-modern .hero-content-box h1 {
+        font-size: 1.6rem;
+    }
+    .hero-modern .hero-sub-mantra {
+        font-size: 0.75rem;
+        letter-spacing: 2px;
+    }
+
+    .hero-content-float { 
+        padding: 0;
+        max-width: none;
+        left: 20px;
+        right: 20px;
+        bottom: 40px;
+        z-index: 10; 
+    }
+    
     .hero-content-box h1 { font-size: 2rem; }
+
+    .dribbble-sans { font-size: 3rem; }
+    .dribbble-serif { font-size: 3.5rem; }
+    .hero-sub-mantra { font-size: 0.9rem; letter-spacing: 3px; }
+
+    .dribbble-pills {
+        display: none !important; /* Hide pills on mobile to save space */
+    }
+
+    .dribbble-cta-btn {
+        padding: 12px 30px;
+        font-size: 0.85rem;
+    }
 
     /* How It Works Mobile Layout */
     .customer-layers { grid-template-columns: 1fr; gap: 20px; }
@@ -95,31 +152,69 @@
     }
 
     .services-grid {
-        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-        gap: 20px;
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 15px;
+    }
+
+    .service-card {
+        padding: 15px;
+    }
+
+    .service-card .service-card-image img {
+        height: 120px;
+        margin-bottom: 10px;
+    }
+
+    .service-card h3 {
+        font-size: 1.1rem;
+        margin-bottom: 5px;
+    }
+
+    .service-card p {
+        display: none; /* Hide description in grid view on mobile */
     }
 
     .service-card.active {
         /* Keep in place, just let common.css handle the highlight border */
     }
 
-    .service-details-container { padding: 30px 20px; }
+    .service-details-container { 
+        padding: 0; 
+        max-width: 100%;
+        margin: 20px 0;
+        border-radius: var(--standard-radius);
+    }
+    
+    .active-service-details {
+        padding: 40px 25px;
+    }
+
+    .active-service-details h3 {
+        font-size: 1.8rem;
+    }
 
     /* Team Page Mobile Layout */
     .profile-card, .profile-card.image-right {
         flex-direction: column;
-        gap: 30px;
+        gap: 40px; /* Space between photo and text of SAME person */
         align-items: center;
         text-align: center;
+        margin-bottom: 80px; /* Space between different team members */
     }
     .profile-image { max-width: 100%; }
     .profile-image img { 
-        height: 400px; 
         width: 100%; 
+        aspect-ratio: 3 / 4;
         object-fit: cover;
         object-position: top center;
+        border-radius: var(--standard-radius);
     }
     .profile-text h3 { font-size: 2.2rem; }
+    .profile-text .role {
+        letter-spacing: 1px;
+        font-size: 0.7rem;
+        margin-bottom: 15px;
+    }
 
     /* Value Section Mobile */
     .value-split {
@@ -135,8 +230,11 @@
     .value-text-box .lead-text {
         font-size: 1.1rem;
     }
+    .pillar {
+        padding-left: 0;
+    }
     .pillar-num {
-        font-size: 1.4rem;
+        display: none;
     }
     .value-footer {
         margin-top: 40px;

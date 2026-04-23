@@ -9,21 +9,23 @@ This document provides the high-level project summary and critical safety mandat
 *   **Mission:** To combine the immigrant experience with professional styling.
 *   **Stack:** Vanilla HTML/CSS, jQuery, Python (Automation).
 *   **Production Domain:** `https://styleplanit.com` (Managed via Cloudflare).
+*   **Staging Domain:** `https://staging.styleplanit.com` (Sync via GitHub Action).
 
 ## 2. High-Level Design Standards
 
-*   **Aesthetic:** "Modern Bold," "Luxury Minimalist," "High Impact."
-*   **Typography:** 'Bebas Neue' (Headings), 'DM Sans' (Body).
-*   **Routing:** Extensionless URLs enforced via Cloudflare/GitHub Pages.
-*   **Logic:** Data-driven. Content is managed in Google Sheets and injected via `loader.js`.
+*   **Aesthetic:** "Luxury Minimalist," "Modern Dribbble," "Editorial Layout."
+*   **Design Token:** Standard Border Radius (`40px`).
+*   **Typography:** 'Cormorant Garamond' (Headings/Display), 'DM Sans' (Body/Labels).
+*   **Routing:** Extensionless URLs. All navigation links default to homepage anchors (e.g., `/#services`).
 
 ## 3. Safety & Governance
 
 *   **CRITICAL: UNLESS EXPLICITLY INSTRUCTED TO PUSH, NEVER PUSH CODE.**
-*   **Source Control:** No direct commits to `main`. Every task occurs on a dedicated `feature/` branch. Merge via PR only.
-*   **Verification:** Mandatory `test.sh` and `diff_site_data.py` runs before PR creation.
-*   **Asana Integration:** Every non-trivial change must be tracked via `scripts/asana_tools.py`.
+*   **Branching Strategy:**
+    *   `main`: Production (Locked).
+    *   `staging`: Pre-release testing (`https://staging.styleplanit.com`).
+    *   `develop`: Integration branch (`https://develop.styleplanit.com`).
+*   **Verification:** Mandatory `test.sh` run before PR creation.
 
-## 4. Current State (v4.6.4)
-The site is production-ready. Recent focus has been on shifting from a "Service Menu" to an **Authority Platform** through the launch of the **Style Wiki** and **Value-Based Storytelling** pillars. For upcoming roadmap items, see the `Next Priorities` section in the deep-dive docs.
-
+## 4. Current State (v1.0.0)
+The platform has officially reached its first **Production Baseline (v1.0.0)**. The site is a fully data-driven **Authority Platform** utilizing a split-atom configuration model and modular component architecture.

@@ -47,28 +47,35 @@ const Utils = {
     },
 
     /**
-     * Applies configuration object to elements with specific data attributes
+     * Applies configuration object to elements with specific data attributes.
+     * Can be applied to a specific container for efficiency.
      */
-    applyConfig: function(config) {
+    applyConfig: function(config, container = document) {
         if (!config || Object.keys(config).length === 0) return;
 
-        document.querySelectorAll('[text-config-key]').forEach(element => {
+        container.querySelectorAll('[text-config-key]').forEach(element => {
             const key = element.getAttribute('text-config-key');
             if (config[key] !== undefined) {
-                // If it's the logo, we might want to preserve certain formatting
                 if (key === 'LOGO_TEXT') {
                     element.innerHTML = config[key];
                 } else {
                     element.textContent = config[key];
                 }
+                
+                // Toggle entire badge visibility if status is empty
+                if (key === 'AVAILABILITY_STATUS') {
+                    const badge = element.closest('.availability-badge');
+                    if (badge) {
+                        badge.style.display = config[key].trim() ? 'flex' : 'none';
+                    }
+                }
             }
         });
 
-        document.querySelectorAll('[href-config-key]').forEach(element => {
+        container.querySelectorAll('[href-config-key]').forEach(element => {
             const key = element.getAttribute('href-config-key');
             if (config[key] !== undefined) {
                 let value = config[key];
-                // Smart handling for WhatsApp numbers
                 if (key === 'WHATSAPP_NUMBER' && !value.startsWith('http')) {
                     value = `https://wa.me/${value.replace(/\D/g, '')}`;
                 }
@@ -76,37 +83,40 @@ const Utils = {
             }
         });
 
-        document.querySelectorAll('[placeholder-config-key]').forEach(element => {
+        container.querySelectorAll('[placeholder-config-key]').forEach(element => {
             const key = element.getAttribute('placeholder-config-key');
             if (config[key] !== undefined) element.placeholder = config[key];
         });
 
-        document.querySelectorAll('[src-config-key]').forEach(element => {
+        container.querySelectorAll('[src-config-key]').forEach(element => {
             const key = element.getAttribute('src-config-key');
             if (config[key] !== undefined) element.src = config[key];
         });
 
-        document.querySelectorAll('[property-config-key]').forEach(element => {
+        container.querySelectorAll('[property-config-key]').forEach(element => {
             const key = element.getAttribute('property-config-key');
             if (config[key] !== undefined) element.setAttribute('content', config[key]);
         });
 
-        document.querySelectorAll('[style-bg-config-key]').forEach(element => {
+        container.querySelectorAll('[style-bg-config-key]').forEach(element => {
             const key = element.getAttribute('style-bg-config-key');
             if (config[key] !== undefined) {
                 element.style.backgroundImage = 'url("' + config[key] + '")';
             }
         });
 
-        if (config['PAGE_DESCRIPTION']) {
-            this.updateMeta('description', config['PAGE_DESCRIPTION']);
-            this.updateMeta('og:description', config['PAGE_DESCRIPTION'], 'property');
-        }
-        if (config['PAGE_TITLE']) {
-            this.updateMeta('og:title', config['PAGE_TITLE'], 'property');
-        }
-        if (config['OG_IMAGE']) {
-            this.updateMeta('og:image', config['OG_IMAGE'], 'property');
+        // Meta tags only need to be updated once globally
+        if (container === document) {
+            if (config['PAGE_DESCRIPTION']) {
+                this.updateMeta('description', config['PAGE_DESCRIPTION']);
+                this.updateMeta('og:description', config['PAGE_DESCRIPTION'], 'property');
+            }
+            if (config['PAGE_TITLE']) {
+                this.updateMeta('og:title', config['PAGE_TITLE'], 'property');
+            }
+            if (config['OG_IMAGE']) {
+                this.updateMeta('og:image', config['OG_IMAGE'], 'property');
+            }
         }
     },
 
@@ -114,14 +124,9 @@ const Utils = {
      * Centralized way to fetch and apply config in one call.
      */
     getConfig: async function() {
-        const configArray = await Data.fetch('config');
-        const config = {};
-        configArray.forEach(item => {
-            if (item.key) config[item.key] = item.value;
-        });
-        
-        this.applyConfig(config);
-        return config;
+        const master = await Data.loadMasterData();
+        this.applyConfig(master);
+        return master;
     },
 
     updateMeta: function(name, content, attr = 'name') {
@@ -137,13 +142,13 @@ const Utils = {
 };
 
 /**
- * Data - Centralized data provider using atomic site-data.json
+ * Data - Centralized data provider using atomic site-data.json and site-config.json
  */
 const Data = {
     masterData: null,
 
     /**
-     * Load the master JSON file
+     * Load the master JSON files
      */
     loadMasterData: async function() {
         if (this.masterData) return this.masterData;
@@ -171,21 +176,26 @@ const Data = {
     },
 
     /**
-     * Fetch fresh JSON from repository
+     * Fetch fresh JSON from repository (Atomic split)
      */
     refreshMasterData: async function() {
         try {
-            const response = await fetch(`${CONFIG.DATA_PATH}?v=${new Date().getTime()}`);
-            if (response.ok) {
-                const freshData = await response.json();
+            const timestamp = new Date().getTime();
+            const [dataRes, configRes] = await Promise.all([
+                fetch(`${CONFIG.DATA_PATH}?v=${timestamp}`),
+                fetch(`/configs/site-config.json?v=${timestamp}`)
+            ]);
+
+            if (dataRes.ok && configRes.ok) {
+                const freshData = await dataRes.json();
+                const freshConfig = await configRes.json();
                 const now = new Date().getTime();
                 
+                // Unified object
+                const unified = { ...freshData, ...freshConfig };
+                
                 // Version check logic
-                let newVersion = "0.0.0";
-                if (freshData.version && freshData.version.length > 0) {
-                    newVersion = freshData.version[0].value || freshData.version[0].version;
-                }
-
+                const newVersion = freshConfig.VERSION || "0.0.0";
                 const cachedVersion = localStorage.getItem('app_version');
                 
                 // If versions mismatch, clear cache and reload to force fresh state
@@ -195,14 +205,14 @@ const Data = {
                     localStorage.setItem('app_version', newVersion);
                     localStorage.setItem('cache_timestamp', now);
                     window.location.reload(); 
-                    return freshData;
+                    return unified;
                 }
 
                 localStorage.setItem('app_version', newVersion);
-                localStorage.setItem('site_data_cache', JSON.stringify(freshData));
+                localStorage.setItem('site_data_cache', JSON.stringify(unified));
                 localStorage.setItem('cache_timestamp', now);
-                this.masterData = freshData;
-                return freshData;
+                this.masterData = unified;
+                return unified;
             }
         } catch (e) {
             console.warn("Failed to refresh site data from server", e);
@@ -219,7 +229,15 @@ const Data = {
     },
 
     /**
-     * Backward compatibility checkVersion (logic moved to refreshMasterData)
+     * Simple config helper
+     */
+    getConfig: function(key) {
+        if (!this.masterData) return null;
+        return this.masterData[key] !== undefined ? this.masterData[key] : null;
+    },
+
+    /**
+     * Backward compatibility checkVersion
      */
     checkVersion: async function() {
         await this.loadMasterData();

@@ -16,13 +16,19 @@ def normalize_value(v):
     if v is None:
         return ""
     # Strip whitespace and normalize all newline variants to \n
-    val = str(v).strip().replace('\r\n', '\n').replace('\r', '\n')
+    # Also handle literal '\n' strings that might come from Sheets
+    val = str(v).strip().replace('\r\n', '\n').replace('\r', '\n').replace('\\n', '\n')
     
     # Strip .00 or .0 from numerical strings (e.g., "$348.00" -> "$348")
     if val.endswith(".00"):
         val = val[:-3]
     elif val.endswith(".0"):
         val = val[:-2]
+    
+    # Consolidate multiple spaces and newlines for comparison
+    import re
+    val = re.sub(r' +', ' ', val) # Multiple spaces to single
+    val = re.sub(r'\n+', '\n', val).strip() # Multiple newlines to single
         
     return val
 

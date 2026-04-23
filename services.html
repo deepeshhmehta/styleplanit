@@ -15,56 +15,41 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="icon" type="image/png" href="favicon.svg">
     <link rel="apple-touch-icon" href="favicon.svg">
 
-    <link rel="stylesheet" href="styles/common.css">
-    <link rel="stylesheet" href="styles/desktop.css">
-    <link rel="stylesheet" href="styles/mobile.css">
+    <link rel="stylesheet" href="styles/styles.css">
 </head>
 <body>
     <div id="site-loader" class="loader-overlay">
         <div class="loader-content">
-            <div class="loader-banner">Style Plan(it)</div>
+            <div class="loader-banner" text-config-key="LOADER_BANNER">Style Plan(it)</div>
             
-            <div class="loader-phrase" id="loader-phrase">Refining your style...</div>
+            <div class="loader-phrase" id="loader-phrase" text-config-key="LOADER_PHRASE">Refining your style...</div>
             <div class="loader-progress-container"><div class="loader-progress-bar" id="loader-progress"></div></div>
         </div>
     </div>
+    <div class="site-wrapper">
     <nav data-component="header"></nav>
-
     <main>
-        <!-- Phase 1: The Pillars (Entry Gate) -->
-        <section id="experience-intro" class="section-padding" style="padding-top: 140px;">
+        <!-- The Menu -->
+        <section id="services" class="section-padding" style="padding-top: 140px;">
             <div class="container">
                 <div class="text-center">
-                    <span class="section-subtitle" text-config-key="EXPERIENCE_SUBTITLE">[EXPERIENCE_SUBTITLE]</span>
-                    <h2 class="section-title" text-config-key="EXPERIENCE_JOURNEY_TITLE">[EXPERIENCE_JOURNEY_TITLE]</h2>
-                </div>
-                <div class="services-category-grid" id="services-category-selector">
-                    <!-- Category cards will be dynamically inserted here -->
-                </div>
-            </div>
-        </section>
-
-        <!-- Phase 2: The Deep Dive -->
-        <section id="services" class="section-padding">
-            <div class="container">
-                <div class="text-center">
-                    <span class="section-subtitle" text-config-key="EXPERIENCE_MENUS_SUBTITLE">[EXPERIENCE_MENUS_SUBTITLE]</span>
-                    <h2 class="section-title" id="active-category-title">The Collection</h2>
-                    <button class="btn-secondary" id="btn-return-to-categories" text-config-key="EXPERIENCE_CHANGE_BTN" style="margin-bottom: 40px;">[EXPERIENCE_CHANGE_BTN]</button>
+                    <span class="section-subtitle" text-config-key="SERVICES_SUBTITLE">À La Carte</span>
+                    <h2 class="section-title" text-config-key="SERVICES_TITLE">The Styling Menu</h2>
+                    <p class="lead-text" style="max-width: 800px; margin: 0 auto 60px;" text-config-key="SERVICES_LEAD_TEXT">Build your own experience. Choose from our curated selection of individual services to target your specific needs.</p>
                 </div>
 
                 <div class="service-content">
-                    <!-- Service cards will be dynamically inserted here -->
+                    <!-- ALL services will be dynamically inserted here in one grid -->
                 </div>
 
-                <!-- NEW: Service Details Box (Below all services) -->
+                <!-- Service Details Box -->
                 <div id="service-details-container" class="service-details-container" style="display: none;">
                     <!-- Active service details will be injected here -->
                 </div>
@@ -73,9 +58,10 @@
 
         <!-- Social Proof -->
         <div data-component="reviews-section"></div>
-    </main>
+    </main>    
 
     <footer data-component="footer"></footer>
+    </div>
     <div data-component="book-now-floating"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@4.0.0/dist/jquery.min.js"></script>

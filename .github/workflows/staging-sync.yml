@@ -1,0 +1,29 @@
+name: Sync to Staging Repo
+
+on:
+  push:
+    branches:
+      - staging
+
+jobs:
+  sync-to-staging:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false # Important: allow manual push with PAT
+
+      - name: Configure CNAME for Staging
+        run: echo "staging.styleplanit.com" > CNAME
+
+      - name: Push to Staging Repository
+        env:
+          SYNC_TOKEN: ${{ secrets.STAGING_SYNC_TOKEN }}
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add CNAME
+          git commit -m "chore: update CNAME for staging environment" || echo "No CNAME change needed"
+          git push https://x-access-token:${SYNC_TOKEN}@github.com/deepeshhmehta/styleplanit-staging.git staging:main --force

@@ -8,6 +8,8 @@ const App = {
   },
 
   initNavigation: function () {
+    const self = this;
+
     $(document).on("click", ".menu-toggle", function () {
       var expanded = $(this).attr("aria-expanded") === "true";
       $(this).attr("aria-expanded", String(!expanded));
@@ -15,8 +17,52 @@ const App = {
     });
 
     $(document).on("click", ".nav-links a", function () {
+      const linkText = $(this).text().trim();
+      Analytics.trackInteraction('nav_click', linkText);
+
       $(".nav-links").removeClass("active");
       $(".menu-toggle").attr("aria-expanded", "false");
+      
+      // Update active state immediately on click (for hash links)
+      self.updateActiveNavLink();
+    });
+
+    // Handle initial state and hash changes
+    this.updateActiveNavLink();
+    $(window).on('hashchange', () => this.updateActiveNavLink());
+  },
+
+  updateActiveNavLink: function() {
+    const currentPath = window.location.pathname.replace(/^\/|\/$/g, '');
+    const currentHash = window.location.hash;
+    const isHome = currentPath === '' || currentPath === 'index.html';
+
+    $(".nav-links a").each(function() {
+        const href = $(this).attr('href');
+        const linkPath = href.split('#')[0].replace(/^\/|\/$/g, '');
+        const linkHash = href.includes('#') ? '#' + href.split('#')[1] : '';
+        
+        let isActive = false;
+
+        if (linkHash) {
+            // Anchor link logic
+            if (isHome && currentHash === linkHash) {
+                isActive = true;
+            }
+        } else {
+            // Page link logic
+            if (currentPath === linkPath || (isHome && (linkPath === '' || linkPath === 'index.html'))) {
+                // If it's a page link but we are currently on a hash, don't mark as active 
+                // if there is another specific anchor link in the nav for this hash.
+                if (currentHash && $(".nav-links a[href*='" + currentHash + "']").length > 0) {
+                    isActive = false;
+                } else {
+                    isActive = true;
+                }
+            }
+        }
+
+        $(this).toggleClass('active', isActive);
     });
   },
 
@@ -34,6 +80,9 @@ const App = {
     // 1c. Home Page Features
     if (typeof HomeServicesFeature !== 'undefined') {
         HomeServicesFeature.init();
+    }
+    if (typeof PersonasFeature !== 'undefined') {
+        PersonasFeature.init();
     }
     if (typeof PortfolioFeature !== 'undefined') {
         PortfolioFeature.init();
@@ -87,5 +136,18 @@ const App = {
     $(document).on("click", ".btn-ga-book", function() {
         Analytics.trackLead('schedule_consultation_floating', 'appointment_booking');
     });
+
+    // 9. Handle deep links/hash scroll after dynamic components settle
+    if (window.location.hash) {
+        setTimeout(() => {
+            const target = $(window.location.hash);
+            if (target.length) {
+                const navHeight = $("nav").outerHeight() || 0;
+                $('html, body').animate({
+                    scrollTop: target.offset().top - (navHeight - 100) // Negative 100px deeper scroll
+                }, 800);
+            }
+        }, 500); // Give dynamic grids time to paint
+    }
   }
 };

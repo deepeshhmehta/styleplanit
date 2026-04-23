@@ -8,65 +8,65 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
 
-    <link rel="stylesheet" href="/styles/common.css">
-    <link rel="stylesheet" href="/styles/desktop.css">
-    <link rel="stylesheet" href="/styles/mobile.css">
+    <link rel="stylesheet" href="/styles/styles.css">
 </head>
-<body class="bg-cream">
+<body>
     <div id="site-loader" class="loader-overlay">
         <div class="loader-content">
-            <div class="loader-banner">Style Plan(it)</div>
-            <div class="loader-phrase" id="loader-phrase">Curating knowledge...</div>
+            <div class="loader-banner" text-config-key="LOADER_BANNER">Style Plan(it)</div>
+            <div class="loader-phrase" id="loader-phrase" text-config-key="LOADER_PHRASE_WIKI">Curating knowledge...</div>
             <div class="loader-progress-container"><div class="loader-progress-bar" id="loader-progress"></div></div>
         </div>
     </div>
 
-    <nav data-component="header"></nav>
+    <div class="site-wrapper">
+        <nav data-component="header"></nav>
 
-    <!-- Wiki Layout Wrapper -->
-    <div class="wiki-layout-wrapper">
-        <button id="wiki-sidebar-toggle" class="wiki-toggle-btn" aria-label="Toggle Index">
-            <i class="fas fa-list-ul"></i>
-        </button>
+        <!-- Wiki Layout Wrapper -->
+        <div class="wiki-layout-wrapper">
+            <button id="wiki-sidebar-toggle" class="wiki-toggle-btn" aria-label="Toggle Index">
+                <i class="fas fa-list-ul"></i>
+            </button>
 
-        <aside class="wiki-sidebar" id="wiki-sidebar">
-            <div class="sidebar-header">
-                <h4 class="sidebar-title">The Style Wiki</h4>
-                <button id="wiki-sidebar-close" class="wiki-close-btn"><i class="fas fa-times"></i></button>
-            </div>
-            <ul id="wiki-article-list" class="article-links">
-                <!-- Articles populated via JS -->
-            </ul>
-        </aside>
-        
-        <main class="wiki-main-content">
-            <div class="wiki-reader-container">
-                <div class="wiki-reader-header">
-                    <div class="reader-controls">
-                        <button id="dark-mode-toggle" class="reader-btn" title="Toggle Dark Mode">
-                            <i class="fas fa-moon"></i>
-                        </button>
-                    </div>
+            <aside class="wiki-sidebar" id="wiki-sidebar">
+                <div class="sidebar-header">
+                    <h4 class="sidebar-title" text-config-key="WIKI_SIDEBAR_TITLE">The Style Wiki</h4>
+                    <button id="wiki-sidebar-close" class="wiki-close-btn"><i class="fas fa-times"></i></button>
                 </div>
-                
-                <article class="wiki-content" id="wiki-article-container">
-                    <div class="wiki-placeholder">
-                        <span class="section-subtitle">Loading Knowledge...</span>
-                        <div class="shimmer-line title"></div>
-                        <div class="shimmer-line text"></div>
-                        <div class="shimmer-line text"></div>
+                <ul id="wiki-article-list" class="article-links">
+                    <!-- Articles populated via JS -->
+                </ul>
+            </aside>
+            
+            <main class="wiki-main-content">
+                <div class="wiki-reader-container">
+                    <div class="wiki-reader-header">
+                        <div class="reader-controls">
+                            <button id="dark-mode-toggle" class="reader-btn" title="Toggle Dark Mode">
+                                <i class="fas fa-moon"></i>
+                            </button>
+                        </div>
                     </div>
-                </article>
-            </div>
-        </main>
-    </div>
+                    
+                    <article class="wiki-content" id="wiki-article-container">
+                        <div class="wiki-placeholder">
+                            <span class="section-subtitle">Loading Knowledge...</span>
+                            <div class="shimmer-line title"></div>
+                            <div class="shimmer-line text"></div>
+                            <div class="shimmer-line text"></div>
+                        </div>
+                    </article>
+                </div>
+            </main>
+        </div>
 
-    <footer data-component="footer"></footer>
+        <footer data-component="footer"></footer>
+    </div>
     <div data-component="book-now-floating"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@4.0.0/dist/jquery.min.js"></script>

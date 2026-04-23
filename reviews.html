@@ -12,44 +12,44 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="icon" type="image/png" href="favicon.svg">
     <link rel="apple-touch-icon" href="favicon.svg">
-    <link rel="stylesheet" href="styles/common.css">
-    <link rel="stylesheet" href="styles/desktop.css">
-    <link rel="stylesheet" href="styles/mobile.css">
+    <link rel="stylesheet" href="styles/styles.css">
 </head>
 <body>
     <div id="site-loader" class="loader-overlay">
         <div class="loader-content">
-            <div class="loader-banner">Style Plan(it)</div>
+            <div class="loader-banner" text-config-key="LOADER_BANNER">Style Plan(it)</div>
             
-            <div class="loader-phrase" id="loader-phrase">Refining your style...</div>
+            <div class="loader-phrase" id="loader-phrase" text-config-key="LOADER_PHRASE">Refining your style...</div>
             <div class="loader-progress-container"><div class="loader-progress-bar" id="loader-progress"></div></div>
         </div>
     </div>
 
-    <nav data-component="header"></nav>
+    <div class="site-wrapper">
+        <nav data-component="header"></nav>
 
-    <main>
-        <section id="reviews" class="section-padding" style="background-color: var(--white); padding-top: 140px;">
-            <div class="container">
-                <div class="text-center">
-                    <span class="section-subtitle">Kind Words</span>
-                    <h2 class="section-title" text-config-key="REVIEWS_TITLE">[REVIEWS_TITLE]</h2>
+        <main>
+            <section id="reviews" class="section-padding" style="background-color: var(--white); padding-top: 140px;">
+                <div class="container">
+                    <div class="text-center">
+                        <span class="section-subtitle">Kind Words</span>
+                        <h2 class="section-title" text-config-key="REVIEWS_TITLE">[REVIEWS_TITLE]</h2>
+                    </div>
+
+                    <div class="reviews-grid" id="reviews-container">
+                        <!-- Reviews will be dynamically inserted here -->
+                    </div>
                 </div>
+            </section>
+        </main>
 
-                <div class="reviews-grid" id="reviews-container">
-                    <!-- Reviews will be dynamically inserted here -->
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer data-component="footer"></footer>
+        <footer data-component="footer"></footer>
+    </div>
     <div data-component="book-now-floating"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@4.0.0/dist/jquery.min.js"></script>

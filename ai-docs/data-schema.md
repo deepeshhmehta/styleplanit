@@ -1,52 +1,47 @@
 # StylePlanIt Data Schema
 
-`configs/site-data.json` is the atomic source of truth for the entire website. This document defines its structure.
+The platform uses a **Split-Atom** data model to separate UI metadata from structured content.
 
-## 1. Schema Overview
+## 1. `configs/site-config.json` (Flat Metadata)
 
-### `version` (Array)
-Contains a single object with the `VERSION` key.
-*   **Usage:** Used for cache busting. Incrementing this value forces clients to flush `localStorage` and fetch fresh data.
+This file contains all flattened Key-Value pairs for UI strings, URLs, and environment settings.
+*   **`VERSION`**: Core production baseline (e.g., "1.0.0").
+*   **`LOADER_*`**: Text and progress settings for the loading sequence.
+*   **`HERO_*`**: High-impact titles, mantra, and button text.
+*   **`VALUE_*`**: Storytelling pillars for the "Why Styling" section.
+*   **`NAV_*`**: Navigation text and destination anchors (e.g., `/#services`).
+*   **`ICON_*`**: Metadata for the invitation-only collection.
 
-### `config` (Array)
-Key-Value pairs for global site settings and text.
-*   **Naming Convention:** ALL_CAPS_SNAKE_CASE.
-*   **Special Keys:**
-    *   `LOGO_TEXT`: The main brand display name.
-    *   `GOOGLE_ANALYTICS_ID`: GA4 measurement ID.
-    *   `VALUE_*`: Controls the Home Page "Why Styling" section.
-    *   `NAV_LINK_*`: Dynamic URLs and labels for the header.
+## 2. `configs/site-data.json` (Structured Content)
 
-### `articles` (Array)
-Dynamic content for the Style Wiki (`/learn`).
-*   **Fields:**
-    *   `title`: Used as the H1 and for URL slug generation.
-    *   `category`: Displayed as a subtitle (e.g., "Foundations").
-    *   `read_time`: Manual string (e.g., "5 min").
-    *   `content`: Raw HTML string. Use standard semantic tags.
+This file houses high-volume data arrays managed via Google Sheets.
 
 ### `categories` (Array)
-Top-level service groupings (e.g., "Establish", "Elevate").
-*   **Fields:**
-    *   `name`: The display name and filter key.
-    *   `description`: The card body text.
-    *   `showOnHomePage`: "TRUE" or "FALSE" string.
+Defines the **Service Bundles** shown in "Pick A Journey."
+*   `name`: Display title (Establish, Reclaim, Elevate).
+*   `short_description`: Minimized state teaser.
+*   `description`: Full expanded copy.
+*   `price`: Formatted string (e.g., "$330").
+*   `inclusions`: Pipe-separated string (`|`) for list generation.
+*   `booking_link`: Direct Cal.com path.
 
 ### `services` (Array)
-Individual service offerings.
-*   **Fields:**
-    *   `category`: Must match a name in the `categories` array.
-    *   `title`, `short_description`, `long_description`: Content levels.
-    *   `image_url`: Path to service visual.
-    *   `footer`: Comma-separated list of inclusions.
+Individual **À La Carte** offerings.
+*   `footer`: Comma-separated tags for icon generation.
+
+### `team` (Array)
+Profiles for "The Collective."
+*   `imageUrl`: Precise path to the optimized team photo.
+
+### `articles` (Array)
+Style Wiki content.
+*   `id`: Immutable routing key (e.g., `privacy-policy`).
+*   `content`: Semantic HTML block.
 
 ### `assets_manifest` (Object)
-Automatically generated mapping of image folders.
-*   **Structure:** `{ "folder/path": ["image1.jpg", "image2.png"] }`.
-*   **Generation:** Updated via `scripts/diff_site_data.py`.
+Automatically generated index of all site images, grouped by page context.
 
-## 2. Synchronization Logic
-Data flow: **Google Sheets** → **CSV** → **site-data.json** → **Website UI**.
+## 3. Synchronization Logic
+Data flow: **Google Sheets** → **CSV** → **Local JSON** → **Website UI**.
 
-*   Use `scripts/diff_site_data.py` to bridge local changes to the Sheet.
-*   Use `scripts/sync_engine.py` to bulk-override local data from the Sheet.
+*   Use `scripts/diff_site_data.py` to reconcile both local JSON files with their respective Google Sheet tabs.

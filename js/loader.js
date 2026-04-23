@@ -38,10 +38,10 @@ async function loadComponents() {
     // 1. Check version and start fetching master data immediately
     if (typeof Data !== 'undefined') {
         const masterData = await Data.loadMasterData();
-        if (masterData && masterData.config) {
-            const phrasesConfig = masterData.config.find(item => item.key === 'LOADER_PHRASES');
-            if (phrasesConfig && phrasesConfig.value) {
-                phrases = phrasesConfig.value.split('|').map(p => p.trim());
+        if (masterData) {
+            const phrasesConfig = Data.getConfig('LOADER_PHRASES');
+            if (phrasesConfig) {
+                phrases = phrasesConfig.split('|').map(p => p.trim());
             }
         }
         await Data.checkVersion();
@@ -67,6 +67,12 @@ async function loadComponents() {
                 if (!response.ok) throw new Error(`Status ${response.status}`);
                 const html = await response.text();
                 element.innerHTML = html;
+                
+                // SURGICAL FIX: Re-apply config for the newly added HTML only
+                if (typeof Utils !== 'undefined' && Data.masterData) {
+                    Utils.applyConfig(Data.masterData, element);
+                }
+
                 await processComponents(); 
             } catch (error) {
                 console.warn(`[Loader] Failed to load component: ${componentName} (${error.message})`);
@@ -84,7 +90,8 @@ async function loadComponents() {
     const features = [];
     if ($(".hero-bg").length > 0) features.push('hero');
     if ($("#logos-container").length > 0) features.push('logos');
-    if ($("#home-categories-container").length > 0) features.push('home-services');
+    if ($("#packages-grid-container").length > 0 || $("#home-categories-container").length > 0) features.push('home-services');
+    if ($("#personas-grid").length > 0) features.push('personas');
     if ($("#portfolio-carousel").length > 0) features.push('portfolio');
     if ($("#reviews-container").length > 0) features.push('reviews');
     if ($("#team-container").length > 0) features.push('team');
@@ -111,8 +118,9 @@ async function loadComponents() {
     // 3. Load and apply site-wide configuration
     const config = await Utils.getConfig();
     
-    // Initialize GA4 if ID is present
-    if (config['GOOGLE_ANALYTICS_ID']) {
+    // Initialize GA4 only on production domain if ID is present
+    const isProd = window.location.hostname === 'styleplanit.com';
+    if (config['GOOGLE_ANALYTICS_ID'] && isProd) {
         const gaId = config['GOOGLE_ANALYTICS_ID'];
         const gaScript = document.createElement('script');
         gaScript.async = true;
@@ -138,8 +146,8 @@ async function loadComponents() {
     // 5. Signal ready
     document.dispatchEvent(new CustomEvent('appReady'));
 
-    // 5b. Wait for critical hero images
-    const criticalElements = document.querySelectorAll('[style-bg-config-key]');
+    // 5b. Wait for critical hero images and journey cards
+    const criticalElements = document.querySelectorAll('[style-bg-config-key], .package-card-bg');
     let loadedCount = 0;
     const totalToLoad = criticalElements.length;
 
