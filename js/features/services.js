@@ -54,6 +54,7 @@ const ServicesFeature = {
                     <img src="${service.image_url}" alt="${service.title}">
                 </div>
                 <div class="service-card-content">
+                    <div class="service-price">${service.price || ''}</div>
                     <h3>${service.title}</h3>
                     <p class="short-desc">${service.short_description}</p>
                     <div class="service-chips">${chipsHtml}</div>
@@ -86,9 +87,11 @@ const ServicesFeature = {
       "Virtual Shopping": "fa-laptop",
       "Lookbook Curation": "fa-book-open",
       "Shopping List": "fa-list-ul",
+      "In-Person Color Analysis": "fa-palette",
       "In-Person Shopping": "fa-shopping-bag",
       "Event Styling": "fa-magic",
       "Moodboard curation": "fa-images",
+      "Moodboard": "fa-images",
       "Luxury charge": "fa-gem",
     };
     return map[item] || "fa-check-circle";
