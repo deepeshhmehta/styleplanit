@@ -3,6 +3,8 @@
  */
 const ServicesFeature = {
   allServices: [],
+  originalServices: [],
+  seenServices: new Set(),
 
   init: async function (options = {}) {
     // Fetch only services
@@ -19,6 +21,8 @@ const ServicesFeature = {
         // Default à-la-carte filter
         this.allServices = services.filter(s => s.category.toLowerCase().trim() !== "icon service");
     }
+
+    this.originalServices = [...this.allServices];
 
     if (this.allServices.length === 0) {
       $(".service-content").html('<p class="text-center section-padding">Service menu is temporarily unavailable.</p>');
@@ -48,8 +52,10 @@ const ServicesFeature = {
     services.forEach((service) => {
         const chipsHtml = this.renderServiceChips(service.footer);
         const serviceSlug = this.slugify(service.title);
+        const isSeen = this.seenServices.has(service.title) ? "seen" : "";
+
         grid.append(`
-            <div class="service-card" data-title="${service.title}" data-ga-service="${serviceSlug}">
+            <div class="service-card ${isSeen}" data-title="${service.title}" data-ga-service="${serviceSlug}">
                 <div class="service-card-image">
                     <img src="${service.image_url}" alt="${service.title}">
                 </div>
@@ -128,6 +134,12 @@ const ServicesFeature = {
         bookingUrl = `${baseHref}${separator}notes=Interested in ${encodeURIComponent(service.title)}`;
     }
 
+    // Hide sorting controls when details are shown
+    $(".services-controls").fadeOut(300);
+
+    // Track as seen
+    this.seenServices.add(serviceTitle);
+
     // Fade out grid, then show details
     gridContainer.fadeOut(300, function() {
         detailsContainer.html(`
@@ -187,6 +199,39 @@ const ServicesFeature = {
         self.showServiceDetails(title);
     });
 
+    $(document).on("click", ".sort-label", function(e) {
+        e.stopPropagation();
+        $("#luxury-sort").toggleClass("active");
+    });
+
+    $(document).on("click", ".sort-menu li", function(e) {
+        const val = $(this).data("value");
+        const label = $(this).text();
+        
+        // Update UI
+        $("#current-sort").text(label);
+        $(".sort-menu li").removeClass("active");
+        $(this).addClass("active");
+        $("#luxury-sort").removeClass("active");
+
+        // Mobile: Hide "Arrange By" prefix if not default
+        if (window.innerWidth <= 768) {
+            if (val !== 'default') {
+                $(".label-prefix").hide();
+            } else {
+                $(".label-prefix").show();
+            }
+        }
+        
+        Analytics.trackInteraction('service_sort_change', val);
+        self.sortServices(val);
+    });
+
+    // Close dropdown when clicking outside
+    $(document).on("click", function() {
+        $("#luxury-sort").removeClass("active");
+    });
+
     $(document).on("click", ".btn-ga-inquiry", function() {
         const serviceName = $(this).closest(".active-service-details").find("h3").text();
         Analytics.trackLead('bespoke_service_inquiry', serviceName);
@@ -198,8 +243,20 @@ const ServicesFeature = {
         
         detailsContainer.fadeOut(300, function() {
             $(this).empty();
+            
+            // Apply seen class to all cards that have been viewed
+            $(".service-card").each(function() {
+                const title = $(this).data("title");
+                if (self.seenServices.has(title)) {
+                    $(this).addClass("seen");
+                }
+            });
+
             $(".service-card").removeClass("active");
             gridContainer.fadeIn(400);
+            
+            // Show sorting controls again
+            $(".services-controls").fadeIn(400);
 
             // Scroll back to top of services section
             const navHeight = $("nav").outerHeight() || 0;
@@ -212,5 +269,37 @@ const ServicesFeature = {
 
   slugify: function(text) {
     return text.trim().replace(/\s+/g, "-").toLowerCase();
+  },
+
+  sortServices: function(criteria) {
+    let sorted = [...this.allServices];
+
+    switch(criteria) {
+        case 'investment':
+            sorted.sort((a, b) => this.parsePrice(b.price) - this.parsePrice(a.price));
+            break;
+        case 'entry':
+            sorted.sort((a, b) => this.parsePrice(a.price) - this.parsePrice(b.price));
+            break;
+        case 'journey':
+            const order = { "Establish": 1, "Reclaim": 2, "Elevate": 3 };
+            sorted.sort((a, b) => (order[a.category] || 99) - (order[b.category] || 99));
+            break;
+        case 'alphabetical':
+            sorted.sort((a, b) => a.title.localeCompare(b.title));
+            break;
+        default:
+            sorted = [...this.originalServices];
+    }
+
+    this.allServices = sorted;
+    this.renderServicesGrid(this.allServices);
+  },
+
+  parsePrice: function(priceStr) {
+    if (!priceStr) return 0;
+    // Remove "$", ",", and any non-numeric characters except "."
+    const num = parseFloat(priceStr.replace(/[^\d.]/g, ''));
+    return isNaN(num) ? 0 : num;
   }
 };
