@@ -72,11 +72,15 @@ const HomeServicesFeature = {
 
         // 1. Card Click - Expand or Contract
         $(document).on("click", ".package-card", function(e) {
-            // If clicking inside the details (like the button), do nothing special
-            if ($(e.target).closest('.package-details-expanded').length > 0) return;
+            // If clicking a link or button, don't trigger toggle
+            if ($(e.target).closest('a, button').length > 0) return;
 
-            // If already active, contract it (same as reset)
-            if ($(this).hasClass("active")) {
+            // If already expanded, contract all
+            if (grid.hasClass("has-active")) {
+                // Set the clicked card as active so the reset logic scrolls to it
+                $(".package-card").removeClass("active");
+                $(this).addClass("active");
+                
                 $("#btn-packages-reset").trigger("click");
                 return;
             }
@@ -91,24 +95,74 @@ const HomeServicesFeature = {
             grid.addClass("has-active").attr("data-state", "active");
             $(".packages-section").addClass("has-active");
             resetButton.fadeIn();
-            indicator.hide();
+            // indicator.show(); // Always visible
 
-            // Scroll to the specific card that was clicked
-            const self_card = $(this);
+            // Calculate horizontal offset to center the card
+            const card = $(this);
+            const index = card.index();
+            const wrapperWidth = wrapper.outerWidth();
+            
+            // Expanded dimensions from CSS
+            const expandedWidth = window.innerWidth > 1024 ? 800 : (window.innerWidth * 0.82);
+            const gap = 30;
+            
+            // Calculate where the center of the target card will be in the expanded grid
+            const targetCenter = (index * (expandedWidth + gap)) + (expandedWidth / 2);
+            const targetScroll = targetCenter - (wrapperWidth / 2);
+
             setTimeout(() => {
-                $('html, body').animate({
-                    scrollTop: self_card.offset().top - 120
+                wrapper.animate({
+                    scrollLeft: Math.max(0, targetScroll)
                 }, 600);
-            }, 100); 
+            }, 150); 
         });
 
         // 2. Reset Button
         $(document).on("click", "#btn-packages-reset", function() {
+            const activeCard = $(".package-card.active");
+            const activeIndex = activeCard.length > 0 ? activeCard.index() : 0;
+            
             Analytics.trackInteraction('package_reset', 'return_to_grid');
             $(".package-card").removeClass("active");
             grid.removeClass("has-active").removeAttr("data-state");
             $(".packages-section").removeClass("has-active");
             resetButton.fadeOut();
+            
+            // Calculate horizontal offset to center the card in CONTRACTED state
+            const wrapperWidth = wrapper.outerWidth();
+            let contractedWidth, gap, padding;
+
+            if (window.innerWidth > 1024) {
+                contractedWidth = 380; 
+                gap = 30;
+                padding = 0;
+            } else {
+                contractedWidth = window.innerWidth * 0.80;
+                gap = 20;
+                padding = window.innerWidth * 0.04; // Match 4vw padding
+            }
+            
+            // Replicate expanded logic: calculate center based on known layout
+            const targetCenter = padding + (activeIndex * (contractedWidth + gap)) + (contractedWidth / 2);
+            const targetScroll = targetCenter - (wrapperWidth / 2);
+
+            wrapper.animate({
+                scrollLeft: Math.max(0, targetScroll)
+            }, 500);
+
+            // Vertical scroll back to section header
+            const section = $("#services");
+            if (section.length > 0) {
+                // Factor in CSS: scroll-padding-top (120px desktop / 90px mobile) 
+                // and scroll-margin-top (-10vh)
+                const scrollPadding = window.innerWidth > 768 ? 120 : 90;
+                const scrollMargin = window.innerHeight * -0.1; // -10vh
+                
+                $('html, body').animate({
+                    scrollTop: section.offset().top - scrollPadding - scrollMargin
+                }, 500);
+            }
+
             if (window.innerWidth < 992) indicator.show(); // Show dots back on mobile
         });
 
@@ -123,7 +177,7 @@ const HomeServicesFeature = {
 
         // 3. Scroll Tracking for Dots
         wrapper.on("scroll", () => {
-            if (grid.hasClass("has-active")) return;
+            // Remove check for grid.hasClass("has-active") so dots update in both states
             
             const scrollLeft = wrapper.scrollLeft();
             const maxScroll = wrapper[0].scrollWidth - wrapper.outerWidth();
