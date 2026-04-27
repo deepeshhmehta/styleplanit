@@ -59,7 +59,7 @@ const ReviewsFeature = {
         // Track when user reaches the end of reviews
         if (progress > 0.95 && !hasTrackedEnd) {
             hasTrackedEnd = true;
-            Analytics.trackScrollEnd('reviews_carousel');
+            Analytics.trackEngagement('scroll_to_end', 'reviews', 'carousel');
         }
     });
   },
@@ -74,7 +74,7 @@ const ReviewsFeature = {
         card.find(".read-more").text(isExpanding ? "Read less" : "Read more");
         
         if (isExpanding) {
-            Analytics.trackInteraction('review_expansion', card.find('.review-author').text());
+            Analytics.trackUI('expand', 'reviews', card.find('.review-author').text());
         }
         
         const navHeight = $("nav").outerHeight() || 0;

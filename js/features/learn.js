@@ -58,7 +58,10 @@ const LearnFeature = {
         $(".wiki-nav-link").removeClass("active");
         $(`.wiki-nav-link[data-title="${title}"]`).addClass("active");
 
-        Analytics.trackInteraction('wiki_view', slug);
+        Analytics.trackEngagement('view', article.title, article.category || 'Article', { 
+            item_id: slug,
+            read_time: article.read_time 
+        });
 
         // Keep dark mode state if already active
         const isDarkMode = container.hasClass("dark-mode");
