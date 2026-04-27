@@ -290,8 +290,8 @@
     }
     
     .packages-grid:not(.has-active) .package-card {
-        flex: 0 0 80vw;
-        max-width: 80vw;
+        flex: 0 0 320px;
+        max-width: 320px;
     }
 
     #packages-scroll-indicator {
@@ -299,13 +299,13 @@
     }
 
     .packages-grid.has-active .package-card {
-        flex: 0 0 82vw;
-        max-width: 82vw;
-        min-height: 500px;
+        flex: 0 0 550px;
+        max-width: 550px;
+        min-height: 600px;
     }
 
     .packages-grid.has-active .package-card .package-card-content {
-        padding: 50px 25px;
+        padding: 50px 35px;
     }
     
     .packages-grid.has-active .package-card .package-details-expanded {

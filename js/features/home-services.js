@@ -103,7 +103,14 @@ const HomeServicesFeature = {
             const wrapperWidth = wrapper.outerWidth();
             
             // Expanded dimensions from CSS
-            const expandedWidth = window.innerWidth > 1024 ? 800 : (window.innerWidth * 0.82);
+            let expandedWidth;
+            if (window.innerWidth > 1024) {
+                expandedWidth = 800;
+            } else if (window.innerWidth > 768) {
+                expandedWidth = 550; // Tablet fixed width
+            } else {
+                expandedWidth = window.innerWidth * 0.82; // Mobile proportional
+            }
             const gap = 30;
             
             // Calculate where the center of the target card will be in the expanded grid
@@ -136,6 +143,10 @@ const HomeServicesFeature = {
                 contractedWidth = 380; 
                 gap = 30;
                 padding = 0;
+            } else if (window.innerWidth > 768) {
+                contractedWidth = 320; // Tablet contracted width
+                gap = 20;
+                padding = window.innerWidth * 0.04;
             } else {
                 contractedWidth = window.innerWidth * 0.80;
                 gap = 20;
