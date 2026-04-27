@@ -38,7 +38,7 @@ const HomeServicesFeature = {
                         <div class="package-details-expanded">
                             <div class="details-left">
                                 <p class="desc-large">${category.description} Built into a comprehensive bundle to ensure you move forward with clarity and confidence.</p>
-                                <a href="${category.booking_link || '#'}" class="btn btn-primary-accent">Schedule a call</a>
+                                <a href="${category.booking_link || '#'}" target="_blank" rel="noopener noreferrer" class="btn btn-primary-accent">Schedule a call</a>
                             </div>
                             <div class="details-right">
                                 <div class="package-label">What's included</div>
