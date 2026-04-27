@@ -88,7 +88,7 @@ const HomeServicesFeature = {
             const tier = $(this).data("tier");
             const packageName = $(this).find("h3").text();
             
-            Analytics.trackInteraction('package_expand', packageName);
+            Analytics.trackUI('expand', 'packages', packageName, { tier: tier });
 
             $(".package-card").removeClass("active");
             $(this).addClass("active");
@@ -128,8 +128,9 @@ const HomeServicesFeature = {
         $(document).on("click", "#btn-packages-reset", function() {
             const activeCard = $(".package-card.active");
             const activeIndex = activeCard.length > 0 ? activeCard.index() : 0;
+            const activeName = activeCard.find("h3").text() || 'none';
             
-            Analytics.trackInteraction('package_reset', 'return_to_grid');
+            Analytics.trackUI('reset', 'packages', 'return_to_grid', { last_active: activeName });
             $(".package-card").removeClass("active");
             grid.removeClass("has-active").removeAttr("data-state");
             $(".packages-section").removeClass("has-active");
@@ -179,12 +180,13 @@ const HomeServicesFeature = {
 
         // 2b. Bespoke Menu CTAs
         $(document).on("click", ".discovery-callout .btn-primary-accent", function() {
-            Analytics.trackLead('bespoke_discovery_call', 'home_callout');
+            Analytics.trackUI('click', 'bespoke_callout', 'explore_services');
         });
 
         $(document).on("click", ".discovery-callout .btn-secondary", function() {
-            Analytics.trackInteraction('bespoke_menu_view', 'home_callout_link');
+            Analytics.trackConversion('discovery_call', 'bespoke_callout', 5);
         });
+
 
         // 3. Scroll Tracking for Dots
         wrapper.on("scroll", () => {

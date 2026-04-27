@@ -116,6 +116,13 @@ const ServicesFeature = {
     if (!service) return;
 
     const serviceSlug = this.slugify(service.title);
+    
+    // Track detailed view
+    Analytics.trackEngagement('view', service.title, service.category, { 
+        item_id: serviceSlug,
+        price: service.price 
+    });
+
     const detailsContainer = $("#service-details-container");
     const gridContainer = $(".service-content");
     
@@ -195,13 +202,14 @@ const ServicesFeature = {
         $(this).addClass("active");
         
         const title = $(this).data("title");
-        Analytics.trackInteraction('service_card_click', title);
+        Analytics.trackUI('click', 'services_grid', title);
         self.showServiceDetails(title);
     });
 
     $(document).on("click", ".sort-label", function(e) {
         e.stopPropagation();
         $("#luxury-sort").toggleClass("active");
+        Analytics.trackUI('toggle', 'services_sort', 'sort_menu');
     });
 
     $(document).on("click", ".sort-menu li", function(e) {
@@ -223,18 +231,20 @@ const ServicesFeature = {
             }
         }
         
-        Analytics.trackInteraction('service_sort_change', val);
+        Analytics.trackUI('select', 'services_sort', label, { sort_value: val });
         self.sortServices(val);
     });
 
     // Close dropdown when clicking outside
     $(document).on("click", function() {
-        $("#luxury-sort").removeClass("active");
+        if ($("#luxury-sort").hasClass("active")) {
+            $("#luxury-sort").removeClass("active");
+        }
     });
 
     $(document).on("click", ".btn-ga-inquiry", function() {
         const serviceName = $(this).closest(".active-service-details").find("h3").text();
-        Analytics.trackLead('bespoke_service_inquiry', serviceName);
+        Analytics.trackConversion('service_inquiry', 'service_details', 10, { service_name: serviceName });
     });
 
     $(document).on("click", ".btn-close-details", function() {
