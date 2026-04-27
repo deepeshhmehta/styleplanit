@@ -130,11 +130,11 @@ const App = {
     }
 
     // 8. Global Lead Tracking
-    $(document).on("click", ".btn-ga-whatsapp", function() {
+    $(".whatsapp-floating").on("click", function() {
         Analytics.trackConversion('whatsapp_inquiry', 'floating_cta', 0, { platform: 'whatsapp' });
     });
 
-    $(document).on("click", ".btn-ga-book", function() {
+    $(".book-now-floating").on("click", function() {
         Analytics.trackConversion('appointment_booking', 'floating_cta', 10, { platform: 'cal_com' });
     });
 

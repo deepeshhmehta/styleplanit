@@ -78,19 +78,19 @@ const ReviewsFeature = {
         }
         
         const navHeight = $("nav").outerHeight() || 0;
-        const extraPadding = CONFIG.SETTINGS.SCROLL_OFFSET;
+        const extraPadding = CONFIG.THEME.SCROLL.GLOBAL_OFFSET;
 
         if (isExpanding) {
             setTimeout(() => {
                 $("html, body").animate({
                     scrollTop: card.offset().top - navHeight - extraPadding
-                }, 400);
+                }, CONFIG.THEME.ANIMATION.DURATION_STANDARD);
             }, 100);
         } else {
             card.scrollTop(0);
             $("html, body").animate({
                 scrollTop: card.offset().top - navHeight - extraPadding
-            }, 200);
+            }, CONFIG.THEME.ANIMATION.DURATION_FAST);
         }
     });
   }

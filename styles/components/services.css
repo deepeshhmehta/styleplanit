@@ -1,9 +1,9 @@
 /* --- 8. SERVICES / EXPERIENCE --- */
 .service-card {
     border: 1px solid var(--border-color);
-    padding: 30px;
+    padding: var(--space-lg);
     text-align: center;
-    transition: all 0.4s ease;
+    transition: all var(--transition-standard);
     background: var(--cream);
     display: flex;
     flex-direction: column;
@@ -52,13 +52,13 @@
     width: 100%;
     height: 200px;
     object-fit: cover;
-    margin-bottom: 20px;
+    margin-bottom: var(--space-md);
     border-radius: var(--standard-radius);
 }
 
-.service-card h3 { font-size: 1.5rem; margin-bottom: 10px; }
+.service-card h3 { font-size: 1.5rem; margin-bottom: var(--space-sm); }
 .service-card .service-price { margin-bottom: 8px; display: block; }
-.service-card p { font-size: 0.85rem; margin-bottom: 15px; }
+.service-card p { font-size: 0.85rem; margin-bottom: var(--space-md); }
 
 .service-card .long-desc { display: none; }
 

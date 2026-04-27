@@ -141,14 +141,16 @@ const ServicesFeature = {
         bookingUrl = `${baseHref}${separator}notes=Interested in ${encodeURIComponent(service.title)}`;
     }
 
-    // Hide sorting controls when details are shown
-    $(".services-controls").fadeOut(300);
+    // Hide sorting controls using central timing
+    $(".services-controls").fadeOut(CONFIG.THEME.ANIMATION.DURATION_FAST);
 
     // Track as seen
     this.seenServices.add(serviceTitle);
 
+    const self = this;
+
     // Fade out grid, then show details
-    gridContainer.fadeOut(300, function() {
+    gridContainer.fadeOut(CONFIG.THEME.ANIMATION.DURATION_FAST, function() {
         detailsContainer.html(`
             <div class="active-service-details">
                 <div class="details-content-inner">
@@ -182,20 +184,21 @@ const ServicesFeature = {
                     </div>
                 </div>
             </div>
-        `).fadeIn(400);
+        `).fadeIn(CONFIG.THEME.ANIMATION.DURATION_STANDARD);
 
         // Scroll so the opened card content is at the top
         const navHeight = $("nav").outerHeight() || 0;
         $("html, body").animate({
             scrollTop: detailsContainer.offset().top - navHeight
-        }, 400);
+        }, CONFIG.THEME.ANIMATION.DURATION_STANDARD);
     });
   },
 
   bindEvents: function () {
     const self = this;
+    const gridContainer = $(".service-content");
 
-    $(document).on("click", ".service-card", function(e) {
+    gridContainer.off("click", ".service-card").on("click", ".service-card", function(e) {
         if ($(e.target).closest('.service-chips').length > 0) return;
         
         $(".service-card").removeClass("active");
@@ -206,13 +209,13 @@ const ServicesFeature = {
         self.showServiceDetails(title);
     });
 
-    $(document).on("click", ".sort-label", function(e) {
+    $(".services-controls").off("click", ".sort-label").on("click", ".sort-label", function(e) {
         e.stopPropagation();
         $("#luxury-sort").toggleClass("active");
         Analytics.trackUI('toggle', 'services_sort', 'sort_menu');
     });
 
-    $(document).on("click", ".sort-menu li", function(e) {
+    $(".services-controls").off("click", ".sort-menu li").on("click", ".sort-menu li", function(e) {
         const val = $(this).data("value");
         const label = $(this).text();
         
@@ -223,7 +226,7 @@ const ServicesFeature = {
         $("#luxury-sort").removeClass("active");
 
         // Mobile: Hide "Arrange By" prefix if not default
-        if (window.innerWidth <= 768) {
+        if (window.innerWidth <= CONFIG.THEME.BREAKPOINTS.MOBILE) {
             if (val !== 'default') {
                 $(".label-prefix").hide();
             } else {
@@ -242,16 +245,16 @@ const ServicesFeature = {
         }
     });
 
-    $(document).on("click", ".btn-ga-inquiry", function() {
+    $(document).off("click", ".btn-ga-inquiry").on("click", ".btn-ga-inquiry", function() {
         const serviceName = $(this).closest(".active-service-details").find("h3").text();
         Analytics.trackConversion('service_inquiry', 'service_details', 10, { service_name: serviceName });
     });
 
-    $(document).on("click", ".btn-close-details", function() {
+    $(document).off("click", ".btn-close-details").on("click", ".btn-close-details", function() {
         const gridContainer = $(".service-content");
         const detailsContainer = $("#service-details-container");
         
-        detailsContainer.fadeOut(300, function() {
+        detailsContainer.fadeOut(CONFIG.THEME.ANIMATION.DURATION_FAST, function() {
             $(this).empty();
             
             // Apply seen class to all cards that have been viewed
@@ -263,16 +266,16 @@ const ServicesFeature = {
             });
 
             $(".service-card").removeClass("active");
-            gridContainer.fadeIn(400);
+            gridContainer.fadeIn(CONFIG.THEME.ANIMATION.DURATION_STANDARD);
             
             // Show sorting controls again
-            $(".services-controls").fadeIn(400);
+            $(".services-controls").fadeIn(CONFIG.THEME.ANIMATION.DURATION_STANDARD);
 
             // Scroll back to top of services section
             const navHeight = $("nav").outerHeight() || 0;
             $('html, body').animate({
                 scrollTop: $("#services").offset().top - navHeight
-            }, 400);
+            }, CONFIG.THEME.ANIMATION.DURATION_STANDARD);
         });
     });
   },

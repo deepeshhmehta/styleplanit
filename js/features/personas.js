@@ -50,7 +50,7 @@ const PersonasFeature = {
         });
 
         // 5. Dot Click to Scroll
-        $(document).on("click", "#personas-scroll-indicator .scroll-dot", function() {
+        indicator.on("click", ".scroll-dot", function() {
             const index = $(this).data("index");
             const persona = personas[index];
             Analytics.trackUI('click', 'personas_carousel', persona.title, { index: index });
@@ -59,7 +59,7 @@ const PersonasFeature = {
             
             wrapper.animate({
                 scrollLeft: index * cardWidth
-            }, 500);
+            }, CONFIG.THEME.ANIMATION.DURATION_STANDARD);
         });
     },
 

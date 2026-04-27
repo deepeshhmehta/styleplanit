@@ -1,6 +1,6 @@
 /* --- 6. PACKAGES (PICK YOUR JOURNEY) --- */
 .packages-section {
-    padding: 100px 0;
+    padding: var(--space-section) 0;
     position: relative;
     scroll-margin-top: -10vh;
 }
@@ -13,7 +13,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 60px;
+    margin-bottom: var(--space-xxl);
     width: 100%;
 }
 
@@ -58,11 +58,11 @@
 .packages-grid {
     display: flex;
     justify-content: center;
-    gap: 30px;
+    gap: var(--space-lg);
 }
 
 .packages-grid[data-state="active"] {
-    gap: 30px;
+    gap: var(--space-lg);
 }
 
 .package-card {
@@ -79,7 +79,7 @@
     flex: 1;
     min-width: 320px;
     max-width: 380px;
-    transition: transform 0.4s ease, opacity 0.4s ease, flex 0.6s cubic-bezier(0.16, 1, 0.3, 1), max-width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform var(--transition-standard), opacity var(--transition-standard), flex var(--transition-slow), max-width var(--transition-slow);
 }
 
 .package-card-bg {
@@ -90,7 +90,7 @@
     height: 100%;
     background-size: cover;
     background-position: center;
-    transition: transform 0.6s ease;
+    transition: transform var(--transition-slow);
     z-index: 1;
 }
 
@@ -102,7 +102,7 @@
     height: 100%;
     background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.8) 100%);
     z-index: 2;
-    transition: opacity 0.3s ease;
+    transition: opacity var(--transition-fast);
 }
 
 .package-card:hover .package-card-overlay {
@@ -112,10 +112,10 @@
 .package-card-content {
     position: relative;
     z-index: 3;
-    padding: 40px;
+    padding: var(--space-xl);
     margin-top: auto;
     color: var(--white);
-    transition: padding 0.6s ease;
+    transition: padding var(--transition-slow);
 }
 
 .package-card:hover .package-card-bg {
@@ -162,7 +162,7 @@
     max-width: 800px;
     background: var(--black);
     border: none;
-    animation: simpleFadeIn 0.8s ease forwards;
+    animation: simpleFadeIn var(--transition-standard) forwards;
 }
 
 @keyframes simpleFadeIn {
@@ -183,7 +183,7 @@
     margin-top: 0;
     color: var(--white);
     width: 100%;
-    padding: 80px 60px;
+    padding: 80px var(--space-xxl);
 }
 
 .packages-grid.has-active .package-card h3, 
@@ -196,7 +196,7 @@
 .packages-grid.has-active .package-card .package-details-expanded {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 60px;
+    gap: var(--space-xxl);
     border-top-color: rgba(255,255,255,0.1);
 }
 
@@ -277,16 +277,16 @@
 
 @media (max-width: 1024px) {
     .packages-grid-wrapper {
-        padding-bottom: 20px;
+        padding-bottom: var(--space-md);
     }
 
     .packages-grid:not(.has-active) {
         display: flex;
         flex-direction: row;
         width: max-content;
-        padding: 20px 4vw;
+        padding: var(--space-md) 4vw;
         margin: 0 -4vw;
-        gap: 20px;
+        gap: var(--space-md);
     }
     
     .packages-grid:not(.has-active) .package-card {
@@ -310,7 +310,7 @@
     
     .packages-grid.has-active .package-card .package-details-expanded {
         grid-template-columns: 1fr;
-        gap: 30px;
+        gap: var(--space-lg);
     }
 
     .inclusions-list li {

@@ -2,6 +2,29 @@
  * home-services.js - Interactive package cards for "Pick Your Journey"
  */
 const HomeServicesFeature = {
+    // Feature-Specific Constants (Local tokens only)
+    LAYOUT: {
+        DIMENSIONS: {
+            EXPANDED: {
+                DESKTOP: 800,
+                TABLET: 550,
+                MOBILE_VW: 0.82
+            },
+            CONTRACTED: {
+                DESKTOP: 380,
+                TABLET: 320,
+                MOBILE_VW: 0.80
+            }
+        },
+        GAPS: {
+            EXPANDED: 30,
+            CONTRACTED: 20
+        },
+        PADDINGS: {
+            MOBILE_CONTAINER_VW: 0.04
+        }
+    },
+
     init: async function() {
         const container = $("#packages-grid-container");
         if (container.length === 0) return;
@@ -71,16 +94,12 @@ const HomeServicesFeature = {
         const resetButton = $("#btn-packages-reset");
 
         // 1. Card Click - Expand or Contract
-        $(document).on("click", ".package-card", function(e) {
-            // If clicking a link or button, don't trigger toggle
+        grid.on("click", ".package-card", function(e) {
             if ($(e.target).closest('a, button').length > 0) return;
 
-            // If already expanded, contract all
             if (grid.hasClass("has-active")) {
-                // Set the clicked card as active so the reset logic scrolls to it
                 $(".package-card").removeClass("active");
                 $(this).addClass("active");
-                
                 $("#btn-packages-reset").trigger("click");
                 return;
             }
@@ -95,87 +114,74 @@ const HomeServicesFeature = {
             grid.addClass("has-active").attr("data-state", "active");
             $(".packages-section").addClass("has-active");
             resetButton.fadeIn();
-            // indicator.show(); // Always visible
 
-            // Calculate horizontal offset to center the card
-            const card = $(this);
-            const index = card.index();
+            // Calculate horizontal offset using both global and local tokens
+            const index = $(this).index();
             const wrapperWidth = wrapper.outerWidth();
-            
-            // Expanded dimensions from CSS
             let expandedWidth;
-            if (window.innerWidth > 1024) {
-                expandedWidth = 800;
-            } else if (window.innerWidth > 768) {
-                expandedWidth = 550; // Tablet fixed width
-            } else {
-                expandedWidth = window.innerWidth * 0.82; // Mobile proportional
-            }
-            const gap = 30;
             
-            // Calculate where the center of the target card will be in the expanded grid
-            const targetCenter = (index * (expandedWidth + gap)) + (expandedWidth / 2);
+            if (window.innerWidth > CONFIG.THEME.BREAKPOINTS.TABLET) {
+                expandedWidth = self.LAYOUT.DIMENSIONS.EXPANDED.DESKTOP;
+            } else if (window.innerWidth > CONFIG.THEME.BREAKPOINTS.MOBILE) {
+                expandedWidth = self.LAYOUT.DIMENSIONS.EXPANDED.TABLET;
+            } else {
+                expandedWidth = window.innerWidth * self.LAYOUT.DIMENSIONS.EXPANDED.MOBILE_VW;
+            }
+
+            const targetCenter = (index * (expandedWidth + self.LAYOUT.GAPS.EXPANDED)) + (expandedWidth / 2);
             const targetScroll = targetCenter - (wrapperWidth / 2);
 
             setTimeout(() => {
-                wrapper.animate({
-                    scrollLeft: Math.max(0, targetScroll)
-                }, 600);
+                wrapper.animate({ scrollLeft: Math.max(0, targetScroll) }, CONFIG.THEME.ANIMATION.DURATION_SLOW);
             }, 150); 
         });
 
-        // 2. Reset Button
+        // 2. Reset Button / Contraction
         $(document).on("click", "#btn-packages-reset", function() {
             const activeCard = $(".package-card.active");
             const activeIndex = activeCard.length > 0 ? activeCard.index() : 0;
             const activeName = activeCard.find("h3").text() || 'none';
             
             Analytics.trackUI('reset', 'packages', 'return_to_grid', { last_active: activeName });
+            
             $(".package-card").removeClass("active");
             grid.removeClass("has-active").removeAttr("data-state");
             $(".packages-section").removeClass("has-active");
             resetButton.fadeOut();
             
-            // Calculate horizontal offset to center the card in CONTRACTED state
             const wrapperWidth = wrapper.outerWidth();
             let contractedWidth, gap, padding;
 
-            if (window.innerWidth > 1024) {
-                contractedWidth = 380; 
-                gap = 30;
+            if (window.innerWidth > CONFIG.THEME.BREAKPOINTS.TABLET) {
+                contractedWidth = self.LAYOUT.DIMENSIONS.CONTRACTED.DESKTOP; 
+                gap = self.LAYOUT.GAPS.EXPANDED;
                 padding = 0;
-            } else if (window.innerWidth > 768) {
-                contractedWidth = 320; // Tablet contracted width
-                gap = 20;
-                padding = window.innerWidth * 0.04;
+            } else if (window.innerWidth > CONFIG.THEME.BREAKPOINTS.MOBILE) {
+                contractedWidth = self.LAYOUT.DIMENSIONS.CONTRACTED.TABLET;
+                gap = self.LAYOUT.GAPS.CONTRACTED;
+                padding = window.innerWidth * self.LAYOUT.PADDINGS.MOBILE_CONTAINER_VW;
             } else {
-                contractedWidth = window.innerWidth * 0.80;
-                gap = 20;
-                padding = window.innerWidth * 0.04; // Match 4vw padding
+                contractedWidth = window.innerWidth * self.LAYOUT.DIMENSIONS.CONTRACTED.MOBILE_VW;
+                gap = self.LAYOUT.GAPS.CONTRACTED;
+                padding = window.innerWidth * self.LAYOUT.PADDINGS.MOBILE_CONTAINER_VW;
             }
             
-            // Replicate expanded logic: calculate center based on known layout
             const targetCenter = padding + (activeIndex * (contractedWidth + gap)) + (contractedWidth / 2);
             const targetScroll = targetCenter - (wrapperWidth / 2);
 
-            wrapper.animate({
-                scrollLeft: Math.max(0, targetScroll)
-            }, 500);
+            wrapper.animate({ scrollLeft: Math.max(0, targetScroll) }, CONFIG.THEME.ANIMATION.DURATION_STANDARD);
 
-            // Vertical scroll back to section header
             const section = $("#services");
             if (section.length > 0) {
-                // Factor in CSS: scroll-padding-top (120px desktop / 90px mobile) 
-                // and scroll-margin-top (-10vh)
-                const scrollPadding = window.innerWidth > 768 ? 120 : 90;
-                const scrollMargin = window.innerHeight * -0.1; // -10vh
+                const scrollPadding = window.innerWidth > CONFIG.THEME.BREAKPOINTS.MOBILE ? CONFIG.THEME.SCROLL.PADDING_DESKTOP : CONFIG.THEME.SCROLL.PADDING_MOBILE;
+                const scrollMargin = window.innerHeight * CONFIG.THEME.SCROLL.MARGIN_VH;
                 
                 $('html, body').animate({
                     scrollTop: section.offset().top - scrollPadding - scrollMargin
-                }, 500);
+                }, CONFIG.THEME.ANIMATION.DURATION_STANDARD);
             }
 
-            if (window.innerWidth < 992) indicator.show(); // Show dots back on mobile
+            if (window.innerWidth < CONFIG.THEME.BREAKPOINTS.TABLET) indicator.show();
         });
 
         // 2b. Bespoke Menu CTAs
@@ -187,11 +193,8 @@ const HomeServicesFeature = {
             Analytics.trackConversion('discovery_call', 'bespoke_callout', 5);
         });
 
-
         // 3. Scroll Tracking for Dots
         wrapper.on("scroll", () => {
-            // Remove check for grid.hasClass("has-active") so dots update in both states
-            
             const scrollLeft = wrapper.scrollLeft();
             const maxScroll = wrapper[0].scrollWidth - wrapper.outerWidth();
             if (maxScroll <= 0) return;
@@ -205,13 +208,11 @@ const HomeServicesFeature = {
         });
 
         // 4. Dot Click to Scroll
-        $(document).on("click", "#packages-scroll-indicator .scroll-dot", function() {
+        indicator.on("click", ".scroll-dot", function() {
             const index = $(this).data("index");
-            const cardWidth = $(".package-card").first().outerWidth() + 20;
+            const cardWidth = $(".package-card").first().outerWidth() + self.LAYOUT.GAPS.CONTRACTED;
             
-            wrapper.animate({
-                scrollLeft: index * cardWidth
-            }, 500);
+            wrapper.animate({ scrollLeft: index * cardWidth }, CONFIG.THEME.ANIMATION.DURATION_STANDARD);
         });
     }
 };
