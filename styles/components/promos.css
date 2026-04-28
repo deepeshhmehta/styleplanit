@@ -8,7 +8,9 @@
     background: var(--black);
     display: flex;
     flex-direction: column;
+    align-items: center;
     justify-content: center;
+    text-align: center;
     color: var(--white);
     border: 1px solid var(--border-color);
 }
@@ -39,8 +41,6 @@
     margin: var(--space-xxl) auto;
     min-height: 350px;
     padding: 60px 4vw;
-    text-align: center;
-    align-items: center;
 }
 
 /* 3. Modal Mode (Centered Takeover) */

@@ -143,7 +143,7 @@ const PromosFeature = {
     bindEvents: function (el, config, storageKey, backdrop = null) {
         const self = this;
         const isModal = el.hasClass('modal');
-        const isPersistable = config.persist === 'TRUE' || config.persist === true;
+        const isPersistable = String(config.persist).toUpperCase() === 'TRUE';
 
         // CTA Click
         el.find('.promo-cta').on('click', function() {
