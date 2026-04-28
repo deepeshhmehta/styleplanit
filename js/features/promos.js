@@ -172,11 +172,14 @@ const PromosFeature = {
             if (backdrop) backdrop.removeClass('visible');
             $('body').css('overflow', ''); 
             
+            // Save dismissal immediately
+            if (storageKey) {
+                sessionStorage.setItem(storageKey, 'true');
+            }
+
             // If it's a modal and persistable, show the floating trigger instead of permanent dismissal
             if (isModal && isPersistable && !permanent) {
                 self.showPromoTrigger(config);
-            } else if (storageKey) {
-                sessionStorage.setItem(storageKey, 'true');
             }
 
             setTimeout(() => {
