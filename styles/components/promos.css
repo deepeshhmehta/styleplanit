@@ -259,7 +259,31 @@
 /* Mobile Adjustments */
 @media (max-width: 768px) {
     .promo-card.modal {
-        padding: 50px 25px;
+        width: 82vw;
+        max-height: 75vh;
+        padding: 40px var(--space-md);
+        overflow-y: auto;
+    }
+
+    .promo-title { 
+        font-size: 1.5rem; 
+        margin-bottom: var(--space-lg);
+    }
+    
+    .promo-desc {
+        font-size: 0.9rem;
+        line-height: 1.5;
+    }
+
+    .promo-list {
+        font-size: 0.85rem;
+        margin: var(--space-sm) 0;
+    }
+
+    .promo-content .promo-cta {
+        margin-top: var(--space-md);
+        padding: 12px 30px;
+        font-size: 0.75rem;
     }
 
     .promo-card.floating {
@@ -267,7 +291,6 @@
         left: 20px !important;
         bottom: 20px !important;
     }
-    .promo-title { font-size: 2.2rem; }
 }
 
 /* 4. Persistent Trigger */
