@@ -108,6 +108,8 @@
     background-position: center;
     z-index: 1;
     transition: transform 0.6s ease;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 
 .promo-card.has-bg .promo-bg-overlay::after {
@@ -249,7 +251,7 @@
 
 /* Desktop Hover Effects */
 @media (min-width: 1025px) {
-    .promo-card.has-bg:hover .promo-bg-overlay {
+    .promo-card.has-bg:not(.modal):hover .promo-bg-overlay {
         transform: scale(1.05);
     }
 }
