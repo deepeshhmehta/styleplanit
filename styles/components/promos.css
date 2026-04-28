@@ -293,6 +293,20 @@
     }
 }
 
+/* Tall Mobile Device Optimization (e.g. Pixel 10 Pro) */
+@media (max-width: 768px) and (min-height: 850px) {
+    .promo-card.modal {
+        max-height: 80vh;
+        padding: 60px var(--space-lg);
+    }
+    .promo-title {
+        font-size: 2rem;
+    }
+    .promo-desc {
+        font-size: 1.05rem;
+    }
+}
+
 /* 4. Persistent Trigger */
 .promo-trigger-floating {
     position: relative;
