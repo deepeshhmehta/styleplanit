@@ -25,6 +25,13 @@ const PromosFeature = {
         const type = config.type || 'toast'; 
         const promoId = config.id || `promo-${index}`;
         
+        // Expiry Logic: Skip if current date is past expiryDate
+        if (config.expiryDate) {
+            const now = new Date();
+            const expiry = new Date(config.expiryDate);
+            if (now > expiry) return;
+        }
+
         // Fix: Use URI encoding + btoa to support emojis/Unicode in storage keys
         const safeTitle = encodeURIComponent(config.title || promoId);
         const storageKey = `dismissed_promo_${btoa(safeTitle).substring(0, 10)}`;
