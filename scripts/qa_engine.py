@@ -30,7 +30,7 @@ def run_tests(env, headless=True):
     # Build the pytest command
     cmd = [
         sys.executable, "-m", "pytest",
-        "tests/test_sanity.py",
+        "tests/",
         f"--env={env}",
         "--browser", "chromium",
         "-v"
