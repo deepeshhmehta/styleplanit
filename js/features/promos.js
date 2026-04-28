@@ -141,26 +141,70 @@ const PromosFeature = {
     },
 
     bindEvents: function (el, config, storageKey, backdrop = null) {
+        const self = this;
+        const isModal = el.hasClass('modal');
+        const isPersistable = config.persist === 'TRUE' || config.persist === true;
+
         // CTA Click
         el.find('.promo-cta').on('click', function() {
-            Analytics.trackConversion('promo_click', config.title, 5, { type: el.hasClass('inline') ? 'inline' : 'modal' });
-            if (backdrop) closeCleanup();
+            Analytics.trackConversion('promo_click', config.title, 5, { type: isModal ? 'modal' : 'inline' });
+            if (backdrop) closeCleanup(false); // Persistent or not, CTA usually closes modal
         });
 
         // Close Click
-        const closeCleanup = () => {
+        const closeCleanup = (permanent = true) => {
             el.removeClass('visible');
             if (backdrop) backdrop.removeClass('visible');
-            $('body').css('overflow', ''); // Re-enable scroll
+            $('body').css('overflow', ''); 
             
-            if (storageKey) sessionStorage.setItem(storageKey, 'true');
+            // If it's a modal and persistable, show the floating trigger instead of permanent dismissal
+            if (isModal && isPersistable && !permanent) {
+                self.showPromoTrigger(config);
+            } else if (storageKey) {
+                sessionStorage.setItem(storageKey, 'true');
+            }
+
             setTimeout(() => {
                 el.remove();
                 if (backdrop && $('.promo-card.modal').length === 0) backdrop.remove();
             }, 600);
         };
 
-        el.find('.promo-close').on('click', closeCleanup);
-        if (backdrop) backdrop.on('click', closeCleanup);
+        el.find('.promo-close').on('click', () => closeCleanup(!isPersistable));
+        if (backdrop) backdrop.on('click', () => closeCleanup(!isPersistable));
+    },
+
+    /**
+     * Shows a persistent floating trigger (e.g., a gift icon) to re-open the promo
+     */
+    showPromoTrigger: function (config) {
+        if ($('#promo-trigger-floating').length > 0) return;
+
+        const triggerHtml = `
+            <div class="promo-trigger-floating" id="promo-trigger-floating" title="${config.subtitle || 'Special Offer'}">
+                <i class="fas fa-gift"></i>
+                <span class="trigger-ping"></span>
+            </div>
+        `;
+
+        // Logic: Try to append to existing floating CTAs container for perfect alignment
+        const ctaContainer = $('.floating-ctas');
+        if (ctaContainer.length > 0) {
+            ctaContainer.prepend(triggerHtml);
+        } else {
+            $('body').append(triggerHtml);
+        }
+
+        const trigger = $('#promo-trigger-floating');
+        setTimeout(() => trigger.addClass('visible'), 100);
+
+        trigger.on('click', () => {
+            trigger.removeClass('visible');
+            setTimeout(() => trigger.remove(), 600);
+            
+            // Re-trigger the original promo as a modal immediately
+            this.renderModal(config, null, 999);
+            Analytics.trackUI('reopen', 'promotion', config.title);
+        });
     }
 };

@@ -120,6 +120,7 @@
       "imageUrl": "assets/images/promos/mothers-day-bg.jpg",
       "action": "https://cal.com/styleplanit/15min",
       "cta": "Celebrate Her ✨",
+      "persist": "TRUE",
       "timeInSeconds": "5"
     },
     {
