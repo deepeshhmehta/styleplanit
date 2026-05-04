@@ -33,7 +33,7 @@ def run_tests(env, headless=True):
         "tests/",
         f"--env={env}",
         "--browser", "chromium",
-        "-n", "3", # Run 3 tests in parallel
+        "-n", "5", # Run 5 tests in parallel
         "-v"
     ]
     
