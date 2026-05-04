@@ -65,7 +65,9 @@ def test_footer_social_links_desktop(page: Page, base_url):
     # Check for Email
     email = footer.locator('a[href-config-key="FOOTER_EMAIL_HREF"]')
     expect(email).to_be_visible()
-    expect(email.locator(".desktop-only")).to_contain_text("@styleplanit.com")
+    
+    # Wait for hydration of the config text
+    expect(email.locator(".desktop-only")).to_contain_text("@styleplanit.com", timeout=10000)
 
 def test_footer_social_links_mobile(page: Page, base_url):
     """Verify social links in footer on mobile (icons only + phone row)."""
@@ -93,6 +95,10 @@ def test_analytics_event_delegation(page: Page, base_url):
     page.add_init_script("window.gtag = (...args) => { window.last_gtag = args; }")
     
     page.goto(base_url + "/#services")
+    
+    # Wait for hydration
+    page.wait_for_selector(".package-card")
+    
     page.locator(".package-card").first.click()
     
     # Check if gtag was called

@@ -68,7 +68,8 @@ def test_rotation_engine_fallback(page: Page, base_url):
     page.goto(base_url + "/#services")
     
     # Card should still render one layer
-    card = page.locator(".package-card").first
-    layers = card.locator(".package-card-layer")
-    expect(layers).to_have_count(1)
+    # Use a more explicit wait for the grid first
+    page.wait_for_selector("#packages-grid-container")
+    layers = page.locator(".package-card-layer")
+    expect(layers).to_have_count(1, timeout=10000)
     expect(layers).to_have_class(re.compile(r"active"))

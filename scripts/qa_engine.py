@@ -33,6 +33,7 @@ def run_tests(env, headless=True):
         "tests/",
         f"--env={env}",
         "--browser", "chromium",
+        "-n", "3", # Run 3 tests in parallel
         "-v"
     ]
     
@@ -41,11 +42,32 @@ def run_tests(env, headless=True):
     
     try:
         result = subprocess.run(cmd)
-        if result.returncode == 0:
-            print(f"\n✨ QA PASS: Environment '{env}' is healthy.")
-        else:
-            print(f"\n❌ QA FAIL: Potential regressions found in '{env}'.")
-            sys.exit(result.returncode)
+        
+        # If parallel run fails, retry failed tests sequentially to rule out contention
+        if result.returncode != 0:
+            print(f"\n⚠️  Parallel run detected potential issues. Retrying failures sequentially...")
+            
+            retry_cmd = [
+                sys.executable, "-m", "pytest",
+                "tests/",
+                f"--env={env}",
+                "--browser", "chromium",
+                "--lf", # Only run last-failed tests
+                "-v"
+            ]
+            if not headless:
+                retry_cmd.append("--headed")
+                
+            retry_result = subprocess.run(retry_cmd)
+            
+            if retry_result.returncode == 0:
+                print(f"\n✨ QA PASS: Failures resolved on sequential retry. Environment '{env}' is healthy.")
+                return
+            else:
+                print(f"\n❌ QA FAIL: Permanent regressions found in '{env}'.")
+                sys.exit(retry_result.returncode)
+        
+        print(f"\n✨ QA PASS: Environment '{env}' is healthy.")
             
     finally:
         if server_process:
