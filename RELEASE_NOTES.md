@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.0.0] - 2026-05-03 (Milestone: Platform Governance & v2 Architecture)
+### Added
+- **Self-Healing QA Engine**: Implemented tiered parallel execution (50% faster) and automatic sequential retries to eliminate environmental flakiness.
+- **PR Audit Workflow**: Integrated GitHub Actions to enforce semantic version jumps for all PRs targeting `staging` or `main`.
+- **Architectural Integrity Tests**: Added automated verification for security headers, data schema validity, and responsive UX ordering.
+
+### Changed
+- **Smart Data Normalization**: Improved the diff engine to recursively handle Google Sheets numerical formatting (e.g., treating `2.0.0` and `2` as equivalent).
+- **Context Evolution**: Updated project governance docs to reflect the new Tiered Promotion Model.
+
 ## [1.2.0] - 2026-05-03 (Project Milestone: Demographic Expansion)
 ### Added
 - **Alternating Category Imagery**: Implemented a dynamic demographic rotation system (Male/Female) for 'Pick Your Journey' cards to broaden customer appeal.

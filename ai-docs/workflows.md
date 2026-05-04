@@ -9,7 +9,8 @@ The project follows a strict tiered promotion model to ensure environment stabil
 ### Phase 1: Integration (Develop)
 *   **Targeting:** ALL Pull Requests from feature or fix branches MUST target the `develop` branch.
 *   **Merge Strategy:** **Squash and Merge**. This collapses granular feature development into a single semantic commit on `develop`.
-*   **Versioning Requirement**: Before promoting from `develop` to `staging`, the `VERSION` string in `configs/site-config.json` MUST be incremented. This change must be committed to `develop`.
+*   **Versioning Requirement**: Before promoting from `develop` to `staging`, the `VERSION` string in `configs/site-config.json` MUST be incremented.
+*   **Documentation Requirement**: The `RELEASE_NOTES.md` MUST be updated to reflect the changes included in the new version.
 *   **Preview:** Merging triggers the `develop-sync.yml` action, deploying to `https://develop.styleplanit.com`.
 *   **Verification:** Visual and functional sign-off in the develop environment.
 
