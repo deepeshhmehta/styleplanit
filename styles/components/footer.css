@@ -31,9 +31,33 @@ footer {
     align-items: center;
 }
 
+.social-icons a i {
+    margin-right: 8px;
+}
+
 .social-icons .separator {
     opacity: 0.3;
     font-weight: 300;
+}
+
+@media (min-width: 1025px) {
+    .social-icons {
+        display: flex;
+        justify-content: center;
+    }
+    /* HTML order is IG, TT, Email, LI, Phone. 
+       We want: IG | TT | Phone | Email | LI */
+    .social-link:nth-of-type(1) { order: 1; } /* IG */
+    .social-icons .separator:nth-of-type(1) { order: 2; }
+    .social-link:nth-of-type(2) { order: 3; } /* TT */
+    .social-icons .separator:nth-of-type(2) { order: 4; }
+    
+    .phone-link { order: 5; } /* Phone in middle */
+    
+    .social-icons .separator:nth-of-type(4) { order: 6; } /* The desktop-only pipe */
+    .social-link:nth-of-type(3) { order: 7; } /* Email */
+    .social-icons .separator:nth-of-type(3) { order: 8; }
+    .social-link:nth-of-type(4) { order: 9; } /* LI */
 }
 
 @media (max-width: 1024px) {
