@@ -14,14 +14,44 @@ footer {
     text-align: center;
 }
 
-.social-icons { text-align: center; }
+.social-icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
 
-.social-icons a {
+.social-icons a, .social-icons .separator {
     color: var(--white);
-    margin: 0 15px;
+    margin: 0 10px;
     font-size: 1.1rem;
     transition: 0.3s;
     text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+}
+
+.social-icons .separator {
+    opacity: 0.3;
+    font-weight: 300;
+}
+
+@media (max-width: 1024px) {
+    .social-icons .desktop-only {
+        display: none;
+    }
+    
+    .social-link, .social-icons .separator {
+        order: 1;
+        margin: 0 8px;
+    }
+    
+    .phone-link {
+        order: 2;
+        flex-basis: 100%;
+        margin-top: 20px;
+        justify-content: center;
+    }
 }
 
 .footer-copyright {
