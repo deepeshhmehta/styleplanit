@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.0.3] - 2026-05-18
+### Added
+- **Style Archetypes Wiki**: Integrated the 'Find Your Archetype' article into the Style Wiki, defining the 5 core customer archetypes.
+
 ## [2.0.2] - 2026-05-06
 ### Added
 - **Analytics Architecture v2**: Transitioned from basic click tracking to high-fidelity business intelligence.

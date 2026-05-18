@@ -24,10 +24,12 @@ This document provides the high-level project summary and critical safety mandat
 *   **Workflow Requirement:** All changes must be pushed to a feature/fix branch and merged via Pull Request.
 *   **Mandatory QA:** Agents MUST run and pass `./qa.sh local` before concluding any technical task.
 
-## 4. Current State (v2.0.2)
+## 4. Current State (v2.0.3)
 The platform has evolved into an **Enterprise-Grade Authority Platform**. It features a robust, configuration-driven architecture with automated regression testing, high-fidelity demographic targeting, and professional release governance.
 
 ### Recent Major Wins:
+- **v2.0.3 (Style Wiki Expansion)**:
+  - **Archetype Strategy**: Launched the 'Find Your Archetype' long-form content to deepen brand resonance.
 - **v2.0.2 (Analytics Architecture v2)**:
   - **Funnel Logic**: Implemented 3-step conversion funnel tracking for deep user journey analysis.
   - **External Attribution**: Unified outbound link monitoring for ShopMy and Booking platform performance.
