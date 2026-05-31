@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.0.3] - 2026-05-31
+### Added
+- **Data Sync Robustness**: Updated `diff_site_data.py` to support partial key matching (`any` vs `all`), improving the reliability of the Google Sheets to JSON sync engine.
+
+### Changed
+- **Service Catalog Refinement**:
+  - Updated "30 Min Style Revamp" with a price reduction ($114 -> $87) and focused footer scope (removed Color Analysis).
+  - Normalized `site-data.json` schema by moving the `price` field to a consistent position across all service entries.
+
 ## [2.0.2] - 2026-05-06
 ### Added
 - **Analytics Architecture v2**: Transitioned from basic click tracking to high-fidelity business intelligence.
