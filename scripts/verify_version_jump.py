@@ -53,9 +53,42 @@ def main():
     print(f"📍 Current Version: {current_version}")
     print(f"📍 Base Version ({base_ref}): {base_version}")
 
+    # Check for changes in configs/ directory
+    print(f"🔍 Checking for changes in configs/ directory...")
+    try:
+        data_diff = subprocess.run(
+            ["git", "diff", "--quiet", f"origin/{base_ref}", "--", "configs/"],
+            capture_output=True
+        )
+        data_changed = data_diff.returncode != 0
+    except Exception as e:
+        print(f"⚠️ Warning: Could not check for config diff ({e}). Defaulting to enforcement.")
+        data_changed = True
+
+    if not data_changed:
+        print("✅ Success: No changes detected in configs/ directory. Version jump not required.")
+        sys.exit(0)
+
+    print("📝 Changes detected in configs/ directory. Enforcing version jump...")
     if is_version_higher(current_version, base_version):
         print(f"✅ Success: Version jump detected ({base_version} -> {current_version})")
-        sys.exit(0)
+        
+        # Verify RELEASE_NOTES.md contains the new version
+        print(f"🔍 Verifying RELEASE_NOTES.md for version {current_version}...")
+        try:
+            with open("RELEASE_NOTES.md", "r") as f:
+                notes_content = f.read()
+                version_header = f"## [{current_version}]"
+                if version_header in notes_content:
+                    print(f"✅ Success: Found entry for {current_version} in RELEASE_NOTES.md")
+                    sys.exit(0)
+                else:
+                    print(f"❌ Error: RELEASE_NOTES.md is missing an entry for version {current_version}.")
+                    print(f"   Please add a section starting with '{version_header}'.")
+                    sys.exit(1)
+        except FileNotFoundError:
+            print("❌ Error: RELEASE_NOTES.md not found.")
+            sys.exit(1)
     else:
         print(f"❌ Error: VERSION must be incremented in configs/site-config.json.")
         print(f"   Ensure {current_version} is higher than {base_version}.")
