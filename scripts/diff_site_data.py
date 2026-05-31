@@ -130,13 +130,13 @@ def main():
         for item in local_list:
             norm_item = {h: data_utils.normalize_value(item.get(h, "")) for h in headers}
             ckey = tuple(norm_item.get(f) for f in key_fields)
-            if all(ckey): local_map[ckey] = norm_item
+            if any(ckey): local_map[ckey] = norm_item
 
         remote_map = OrderedDict()
         for item in remote_list:
             norm_item = {h: data_utils.normalize_value(item.get(h, "")) for h in headers}
             ckey = tuple(norm_item.get(f) for f in key_fields)
-            if all(ckey): remote_map[ckey] = norm_item
+            if any(ckey): remote_map[ckey] = norm_item
 
         all_keys = list(local_map.keys())
         for k in remote_map.keys():
