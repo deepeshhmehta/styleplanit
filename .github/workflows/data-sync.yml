@@ -1,0 +1,59 @@
+name: Data Sync Engine
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  data-sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          ref: develop
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Run Sync Engine
+        run: |
+          printf "2\ny\n" | python3 scripts/diff_site_data.py
+
+      - name: Check for changes
+        id: check_changes
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "changes=true" >> $GITHUB_OUTPUT
+          else
+            echo "changes=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create Pull Request
+        if: steps.check_changes.outputs.changes == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TIMESTAMP=$(date +%s)
+          BRANCH_NAME="chore/data-sync-$TIMESTAMP"
+          
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          git checkout -b "$BRANCH_NAME"
+          git add configs/site-data.json configs/site-config.json
+          git commit -m "chore: automated data sync from Google Sheets"
+          git push origin "$BRANCH_NAME"
+          
+          gh pr create \
+            --title "chore: automated data sync ($TIMESTAMP)" \
+            --body "Automated data sync triggered via GitHub Action. Updated site-data and site-config from Google Sheets." \
+            --base develop \
+            --head "$BRANCH_NAME" \
+            --reviewer deepeshhmehta
