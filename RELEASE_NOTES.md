@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.0.4] - 2026-06-14
+### Added
+- **Father's Day Promotion**: Added and activated the Father's Day promo modal with updated copy ("To the man beneath the title of Dad"), CTA ("Celebrate Him ✨"), background image asset (`fathers-day-bg.jpg`), and pricing ($114) targeting Father's Day 2026.
+- **Promo Persistence**: Configured the promotion modal with `"persist": "TRUE"` to convert the modal into a persistent floating gift icon upon dismissal, allowing users to easily re-trigger the offer.
+
+### Changed
+- **Mother's Day Archive**: Preserved the expired Mother's Day promotion configuration in `site-data.json` for historical/audit purposes.
+
 ## [2.0.3] - 2026-05-31
 ### Added
 - **Data Sync Robustness**: Updated `diff_site_data.py` to support partial key matching (`any` vs `all`), improving the reliability of the Google Sheets to JSON sync engine.
