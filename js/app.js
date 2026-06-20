@@ -4,6 +4,7 @@
 const App = {
   init: async function (config) {
     this.initNavigation();
+    this.initCurrencyDropdown();
     await this.initGlobalFeatures(config);
   },
 
@@ -75,6 +76,65 @@ const App = {
         }
 
         $(this).toggleClass('active', isActive);
+    });
+  },
+
+  initCurrencyDropdown: function () {
+    const self = this;
+    const currency = Utils.getCurrentCurrency();
+    
+    // Set initial label and active class
+    $(".active-currency-label").text(currency);
+    $(".currency-dropdown-item").removeClass("active");
+    $(`.currency-dropdown-item[data-currency="${currency}"]`).addClass("active");
+
+    // Toggle dropdown menu
+    $(document).on("click", ".currency-dropdown-trigger", function (e) {
+        e.stopPropagation();
+        const trigger = $(this);
+        const dropdown = trigger.closest(".currency-dropdown");
+        const expanded = trigger.attr("aria-expanded") === "true";
+        
+        trigger.attr("aria-expanded", String(!expanded));
+        dropdown.toggleClass("open", !expanded);
+    });
+
+    // Close on click outside
+    $(document).on("click", function (e) {
+        if (!$(e.target).closest(".currency-dropdown").length) {
+            $(".currency-dropdown-trigger").attr("aria-expanded", "false");
+            $(".currency-dropdown").removeClass("open");
+        }
+    });
+
+    // Select currency item
+    $(document).on("click", ".currency-dropdown-item", function () {
+        const currency = $(this).attr("data-currency");
+        Utils.setCurrency(currency);
+        
+        $(".currency-dropdown-trigger").attr("aria-expanded", "false");
+        $(".currency-dropdown").removeClass("open");
+    });
+
+    // Handle currency changes globally
+    $(document).on("currencyChange", function (e) {
+        const selectedCurrency = e.detail.currency;
+        $(".active-currency-label").text(selectedCurrency);
+        $(".currency-dropdown-item").each(function () {
+            const itemCurrency = $(this).attr("data-currency");
+            $(this).toggleClass("active", itemCurrency === selectedCurrency);
+        });
+
+        // Update BESPOKE_PRICE elements
+        const bespokePriceEl = $('[text-config-key="BESPOKE_PRICE"]');
+        if (bespokePriceEl.length > 0) {
+            if (selectedCurrency === 'INR') {
+                bespokePriceEl.text("Starting at ₹4,999.99");
+            } else {
+                const basePrice = Data.getConfig('BESPOKE_PRICE') || "Starting at $78";
+                bespokePriceEl.text(basePrice);
+            }
+        }
     });
   },
 
