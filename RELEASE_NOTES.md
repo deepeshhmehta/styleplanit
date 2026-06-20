@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.1.0] - 2026-06-19
+### Added
+- **Indian Pricing (INR)**: Integrated Indian Pricing support from the Google Sheets, syncing `price_inr` for all categories and services.
+- **Dynamic Currency Switcher**: Implemented a luxury-minimalist custom currency dropdown switcher next to the shop icon in the top header.
+- **Location-Based Detection**: Added automatic currency auto-detection defaulting to `INR` for Indian users (via timezone and locale flags) and `CAD` for all others.
+- **URL Overrides**: Added support for URL parameters (`?currency=INR` or `?currency=CAD`) to override location defaults.
+- **Automated Tests**: Added E2E Playwright tests verifying currency location-detection, URL overrides, and precedence logic.
+
 ## [2.0.4] - 2026-06-14
 ### Added
 - **Father's Day Promotion**: Added and activated the Father's Day promo modal with updated copy ("To the man beneath the title of Dad"), CTA ("Celebrate Him ✨"), background image asset (`fathers-day-bg.jpg`), and pricing ($114) targeting Father's Day 2026.

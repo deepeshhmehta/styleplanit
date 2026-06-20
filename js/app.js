@@ -79,6 +79,11 @@ const App = {
   },
 
   initGlobalFeatures: async function (config) {
+    // 0. Currency Selector Component
+    if (typeof CurrencySelectorFeature !== 'undefined') {
+        CurrencySelectorFeature.init();
+    }
+
     // 1. Hero Slideshow
     if (typeof HeroFeature !== 'undefined') {
         await HeroFeature.init();
