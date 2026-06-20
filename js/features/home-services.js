@@ -30,14 +30,19 @@ const HomeServicesFeature = {
         if (container.length === 0) return;
 
         const categories = await Data.fetch("categories");
-        const homeCategories = categories.filter(c => {
+        this.homeCategories = categories.filter(c => {
             const val = String(c.showOnHomePage).toUpperCase();
             return val === 'TRUE';
         });
 
-        this.renderPackages(container, homeCategories);
-        this.initScrollDots(homeCategories.length);
+        this.renderPackages(container, this.homeCategories);
+        this.initScrollDots(this.homeCategories.length);
         this.bindEvents();
+
+        // Listen for currency changes to update prices dynamically
+        document.addEventListener('currencyChange', () => {
+            this.renderPackages(container, this.homeCategories);
+        });
     },
 
     renderPackages: function(container, categories) {
@@ -46,7 +51,8 @@ const HomeServicesFeature = {
             const inclusions = category.inclusions ? category.inclusions.split('|') : [];
             const inclusionsHtml = inclusions.map(item => `<li>${item}</li>`).join('');
             
-            const cleanPrice = category.price ? category.price.replace('From ', '') : '';
+            const priceVal = Utils.formatPrice(category);
+            const cleanPrice = priceVal ? priceVal.replace('From ', '') : '';
 
             // Handle multiple background layers for alternating imagery
             const imageUrls = (category.image_urls || category.image_url || "").split('|').filter(url => url.trim());

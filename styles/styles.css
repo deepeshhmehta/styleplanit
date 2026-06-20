@@ -10,6 +10,7 @@
 @import url('base/navigation.css');
 
 /* 2. Components */
+@import url('components/currency-selector.css');
 @import url('components/hero.css');
 @import url('components/logo-band.css');
 @import url('components/packages.css');
