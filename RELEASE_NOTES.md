@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.1.1] - 2026-06-21
+### Added
+- **Country-Based Category Filtering**: Implemented dynamic category swapping on the homepage "Pick a Journey" packages section based on the user's location/currency. INR preference loads Indian categories (`Align`, `Refine`, `Visionary`) and default/CAD loads default categories (`Establish`, `Reclaim`, `Elevate`).
+- **Dynamic Grid Reset**: Configured the package grid to instantly reset any expanded or active card states when toggling currency, preventing layout alignment issues.
+- **Unit and E2E Tests Support**: Updated mock data structures in existing test files (`test_journeys.py`, `test_features_v1_2.py`) to align with the new country/location logic, ensuring 100% automated test compliance.
+
 ## [2.1.0] - 2026-06-19
 ### Added
 - **Indian Pricing (INR)**: Integrated Indian Pricing support from the Google Sheets, syncing `price_inr` for all categories and services.
