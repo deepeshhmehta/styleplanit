@@ -92,6 +92,7 @@
   "categories": [
     {
       "booking_link": "https://cal.com/styleplanit/establish",
+      "country": "DEFAULT",
       "description": "Land with confidence using a personal styling service designed specifically for newcomers to Canada. We build your foundational arrival capsule wardrobe—a curated set of versatile, high-quality essentials tailored to the local climate and lifestyle.",
       "href": "",
       "image_url": "",
@@ -105,6 +106,7 @@
     },
     {
       "booking_link": "https://cal.com/styleplanit/reclaim",
+      "country": "DEFAULT",
       "description": "Life shifts, and your wardrobe should evolve with you. Whether you are navigating postpartum life, stepping back into the workforce after a hiatus, or entering a new personal chapter, this service is designed to help you rediscover your confidence.",
       "href": "",
       "image_url": "",
@@ -118,6 +120,7 @@
     },
     {
       "booking_link": "https://cal.com/styleplanit/elevate",
+      "country": "DEFAULT",
       "description": "Step into your power era. We curate a master-level wardrobe of exceptional quality, refined silhouettes, and strategic statement pieces that speak before you do. Elevate your presence from simply successful to truly iconic.",
       "href": "",
       "image_url": "",
@@ -127,6 +130,48 @@
       "price": "$627",
       "price_inr": "₹40,999.99",
       "short_description": "Strategic image architecture for high-performers.",
+      "showOnHomePage": "TRUE"
+    },
+    {
+      "booking_link": "https://cal.com/styleplanit/establish?notes=Country:%India",
+      "country": "IN",
+      "description": "Build your personal style blueprint from the ground up. This focused, data-driven service is engineered for individuals ready to stop guessing and start projecting their inherent value. By decoding your unique color profile and style personality, we deliver an actionable, personalized Style Guide. It is the ultimate foundational toolkit to streamline your wardrobe choices, giving you the immediate clarity and confidence to look sharp, effortless, and perfectly aligned with your ambitions.",
+      "href": "",
+      "image_url": "",
+      "image_urls": "assets/images/services-by-category/Establish/male_hero.png|assets/images/services-by-category/Establish/homepage_hero.jpg",
+      "inclusions": "Personal Style Analysis | Color Analysis | 9 styled looks",
+      "name": "Align",
+      "price": "$168",
+      "price_inr": "₹6,499.99",
+      "short_description": "For those ready to stop guessing and nail down their signature style blueprint.",
+      "showOnHomePage": "TRUE"
+    },
+    {
+      "booking_link": "https://cal.com/styleplanit/reclaim?notes=Country:%India",
+      "country": "IN",
+      "description": "Step into a completely elevated version of yourself. This comprehensive, deep-dive transformation goes beyond the basics to strategically reinvent your daily aesthetic. By masterfully auditing your body shape, color palette, and lifestyle dynamics, we curate an exclusive digital lookbook and execute virtual shopping tailored entirely to your trajectory. We don’t just change your clothes—we refine how you occupy space, leaving you with a highly functional, sophisticated wardrobe that commands respect.",
+      "href": "",
+      "image_url": "",
+      "image_urls": "assets/images/services-by-category/Reclaim/reclaim_hero.jpg|assets/images/services-by-category/Reclaim/male_hero.png",
+      "inclusions": "Personal Style Analysis | Body Shape Analysis | Color Analysis | Wardrobing | Lookbook Curation | Virtual Shopping",
+      "name": "Refine",
+      "price": "$402",
+      "price_inr": "₹15,999.99",
+      "short_description": "For those who want to completely upgrade their wardrobe and step into a sharper, more powerful daily presence.",
+      "showOnHomePage": "TRUE"
+    },
+    {
+      "booking_link": "https://cal.com/styleplanit/elevate?notes=Country:%India",
+      "country": "IN",
+      "description": "The pinnacle of luxury lifestyle styling, meticulously engineered for high-profile calendars, global jet-setting, and landmark occasions. Whether you are commanding a corporate stage, packing for an exclusive resort getaway, or anchoring high-society events, this master-tier service commands every detail of your visual narrative. From conceptual moodboards to multi-phase strategic consultations and elite event curation, we ensure your presence is unforgettable. This is styling as an art form—uncompromising, iconic, and tailored exclusively for those who demand to reign supreme.",
+      "href": "",
+      "image_url": "",
+      "image_urls": "assets/images/services-by-category/Elevate/male_hero.png|assets/images/services-by-category/Elevate/homepage_hero.jpg",
+      "inclusions": "Personal Style Analysis | Body Shape Analysis | Color Analysis | Wardrobing | Lookbook Curation | Vacation Styling | Lifestyle Analysis | Virtual Shopping | Luxury charge | Moodboard curation | Event Styling | Shopping List",
+      "name": "Visionary",
+      "price": "$627",
+      "price_inr": "₹24,999.99",
+      "short_description": "For high-profile individuals who demand elite, effortless styling across every event, trip, and major milestone.",
       "showOnHomePage": "TRUE"
     }
   ],

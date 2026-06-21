@@ -31,7 +31,8 @@ def run_tests(env, headless=True):
     # Tier 1: Light (Structural, Sanity, Low-Server-Load)
     tier1 = [
         "tests/test_architectural_integrity.py",
-        "tests/test_sanity.py"
+        "tests/test_sanity.py",
+        "tests/test_currency.py"
     ]
     # Tier 2: Heavy (Dynamic Features, Promos, Interaction Heavy)
     tier2 = [
