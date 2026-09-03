@@ -99,7 +99,6 @@ async function loadComponents() {
     if ($("#services").length > 0 || $("#experience-intro").length > 0 || $("#icon-service-container").length > 0) features.push('services');
     if ($("#icon-service-container").length > 0) features.push('icon-service');
     if ($("#wiki-article-container").length > 0) features.push('learn');
-    if ($("[data-component='currency-selector']").length > 0 || $(".currency-dropdown").length > 0) features.push('currency-selector');
     features.push('promos'); 
 
     const featurePromises = features.map((feature) => {

@@ -37,6 +37,7 @@ def kill_process_on_port(port):
 class ThreadingHTTPServer(socketserver.ThreadingMixIn, socketserver.TCPServer):
     """Handle requests in a separate thread."""
     daemon_threads = True
+    allow_reuse_address = True
 
 def start_server(port):
     # Ensure we run from project root
@@ -54,6 +55,15 @@ def start_server(port):
         except OSError as e:
             if e.errno == 48: # Address already in use
                 print(f"\n❌ Port {port} is already in use.")
+                if not sys.stdin.isatty():
+                    if kill_process_on_port(port):
+                        print("✅ Process killed in non-interactive mode. Retrying...")
+                        time.sleep(1)
+                        continue
+                    else:
+                        print("❌ Non-interactive mode: Failed to kill process on port.")
+                        sys.exit(1)
+                
                 choice = input(f"Would you like to (k)ill existing process, (s)witch to a new port, or (q)uit? [k/s/q]: ").lower()
                 
                 if choice == 'k':

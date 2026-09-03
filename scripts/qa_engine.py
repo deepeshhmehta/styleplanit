@@ -15,24 +15,35 @@ def run_tests(env, headless=True):
     print(f"🕵️  STYLEPLANIT QA ENGINE - Targeting: {env.upper()}")
     print(f"============================================================\n")
     
+    import urllib.request
+
     server_process = None
     
     if env == "local":
-        print("🚀 Starting local dev server...")
-        # Start dev server in background
-        server_process = subprocess.Popen(
-            [sys.executable, "scripts/dev_server.py"],
-            stdout=subprocess.DEVNULL,
-            stderr=subprocess.DEVNULL
-        )
-        time.sleep(2) # Give it time to bind port
+        is_already_running = False
+        try:
+            with urllib.request.urlopen("http://localhost:8000", timeout=1) as resp:
+                if resp.status == 200:
+                    is_already_running = True
+                    print("⚡ Reusing active local dev server on port 8000...")
+        except Exception:
+            pass
+
+        if not is_already_running:
+            print("🚀 Starting local dev server...")
+            server_process = subprocess.Popen(
+                [sys.executable, "scripts/dev_server.py"],
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL
+            )
+            time.sleep(2) # Give it time to bind port
 
     # Define Test Tiers for Logical Batching
     # Tier 1: Light (Structural, Sanity, Low-Server-Load)
     tier1 = [
         "tests/test_architectural_integrity.py",
         "tests/test_sanity.py",
-        "tests/test_currency.py"
+        "tests/test_unified_packages.py"
     ]
     # Tier 2: Heavy (Dynamic Features, Promos, Interaction Heavy)
     tier2 = [

@@ -15,9 +15,9 @@ def mock_journey_data(page: Page, categories):
 def test_journey_desktop_expansion_and_centering(page: Page, base_url):
     """System Test: Verify horizontal expansion and JS centering on desktop."""
     mock_journey_data(page, [
-        {"name": "Establish", "showOnHomePage": "TRUE", "image_url": "", "country": "DEFAULT"},
-        {"name": "Reclaim", "showOnHomePage": "TRUE", "image_url": "", "country": "DEFAULT"},
-        {"name": "Elevate", "showOnHomePage": "TRUE", "image_url": "", "country": "DEFAULT"}
+        {"name": "Establish", "showOnHomePage": "TRUE", "image_url": ""},
+        {"name": "Reclaim", "showOnHomePage": "TRUE", "image_url": ""},
+        {"name": "Elevate", "showOnHomePage": "TRUE", "image_url": ""}
     ])
     
     page.goto(base_url + "/#services")
@@ -47,7 +47,7 @@ def test_journey_mobile_responsive_width(browser, base_url):
     page = context.new_page()
     
     mock_journey_data(page, [
-        {"name": "Mobile Tier", "showOnHomePage": "TRUE", "image_url": "", "country": "DEFAULT"}
+        {"name": "Mobile Tier", "showOnHomePage": "TRUE", "image_url": ""}
     ])
     
     page.goto(base_url + "/#services")
