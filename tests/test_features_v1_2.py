@@ -24,8 +24,7 @@ def test_alternating_category_images(page: Page, base_url):
                 "image_urls": "img1.jpg|img2.jpg",
                 "inclusions": "Test",
                 "description": "Test",
-                "booking_link": "#",
-                "country": "DEFAULT"
+                "booking_link": "#"
             }
         ]
     })

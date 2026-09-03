@@ -58,13 +58,6 @@ const Utils = {
             if (config[key] !== undefined) {
                 if (key === 'LOGO_TEXT') {
                     element.innerHTML = config[key];
-                } else if (key === 'BESPOKE_PRICE') {
-                    const currency = this.getCurrentCurrency();
-                    if (currency === 'INR') {
-                        element.textContent = "Starting at ₹4,999.99";
-                    } else {
-                        element.textContent = config[key];
-                    }
                 } else {
                     element.textContent = config[key];
                 }
@@ -150,59 +143,6 @@ const Utils = {
             document.head.appendChild(el);
         }
         el.setAttribute('content', content);
-    },
-
-    getCurrentCurrency: function() {
-        // 1. Check URL query parameters first (override)
-        const urlParams = new URLSearchParams(window.location.search);
-        let currency = urlParams.get('currency');
-        if (currency) {
-            currency = currency.toUpperCase().trim();
-            if (currency === 'INR' || currency === 'CAD') {
-                localStorage.setItem('currency_preference', currency);
-                return currency;
-            }
-        }
-
-        // 2. Check localStorage next
-        let pref = localStorage.getItem('currency_preference');
-        if (pref) {
-            pref = pref.toUpperCase().trim();
-            if (pref === 'INR' || pref === 'CAD') {
-                return pref;
-            }
-        }
-
-        // 3. Fallback: Browser location detection
-        try {
-            const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
-            const isIndiaTimezone = tz && (tz.includes('Kolkata') || tz.includes('Calcutta') || tz.includes('Asia/India'));
-            
-            const locales = navigator.languages || [navigator.language || navigator.userLanguage];
-            const isIndiaLocale = locales.some(locale => locale && (locale.includes('-IN') || locale === 'in'));
-            
-            const defaultCurrency = (isIndiaTimezone || isIndiaLocale) ? 'INR' : 'CAD';
-            localStorage.setItem('currency_preference', defaultCurrency);
-            return defaultCurrency;
-        } catch (e) {
-            console.warn("Currency location detection error, defaulting to CAD:", e);
-            return 'CAD';
-        }
-    },
-
-    setCurrency: function(currency) {
-        currency = currency.toUpperCase().trim();
-        localStorage.setItem('currency_preference', currency);
-        document.dispatchEvent(new CustomEvent('currencyChange', { detail: { currency } }));
-    },
-
-    formatPrice: function(item) {
-        if (!item) return '';
-        const currency = this.getCurrentCurrency();
-        if (currency === 'INR' && item.price_inr) {
-            return item.price_inr;
-        }
-        return item.price || '';
     }
 };
 
