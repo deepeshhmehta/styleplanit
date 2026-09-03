@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.2.0] - 2026-09-02
+### Added & Changed
+- **Unified CAD Packages**: Standardized homepage journey bundles to `Align` ($168), `Refine` ($402), and `Visionary` ($627) priced in CAD.
+- **Single Currency Architecture**: Reverted multi-currency switching and country-specific package toggles, standardizing all services and packages in CAD across the platform.
+
 ## [2.1.1] - 2026-06-21
 ### Added
 - **Country-Based Category Filtering**: Implemented dynamic category swapping on the homepage "Pick a Journey" packages section based on the user's location/currency. INR preference loads Indian categories (`Align`, `Refine`, `Visionary`) and default/CAD loads default categories (`Establish`, `Reclaim`, `Elevate`).

@@ -29,37 +29,15 @@ const HomeServicesFeature = {
         const container = $("#packages-grid-container");
         if (container.length === 0) return;
 
-        this.allCategories = await Data.fetch("categories");
-        this.updateHomeCategories();
-
-        this.renderPackages(container, this.homeCategories);
-        this.initScrollDots(this.homeCategories.length);
-        this.bindEvents();
-
-        // Listen for currency changes to update prices dynamically
-        document.addEventListener('currencyChange', () => {
-            // Reset active card states on change
-            const grid = $("#packages-grid-container");
-            grid.removeClass("has-active").removeAttr("data-state");
-            $(".packages-section").removeClass("has-active");
-            $("#btn-packages-reset").fadeOut();
-            if (this.rotationInterval) clearInterval(this.rotationInterval);
-
-            this.updateHomeCategories();
-            this.renderPackages(container, this.homeCategories);
-            this.initScrollDots(this.homeCategories.length);
-        });
-    },
-
-    updateHomeCategories: function() {
-        const currency = Utils.getCurrentCurrency();
-        const targetCountry = (currency === 'INR') ? 'IN' : 'DEFAULT';
-        
-        this.homeCategories = this.allCategories.filter(c => {
+        const categories = await Data.fetch("categories");
+        const homeCategories = categories.filter(c => {
             const val = String(c.showOnHomePage).toUpperCase();
-            const country = c.country || 'DEFAULT';
-            return val === 'TRUE' && country === targetCountry;
+            return val === 'TRUE';
         });
+
+        this.renderPackages(container, homeCategories);
+        this.initScrollDots(homeCategories.length);
+        this.bindEvents();
     },
 
     renderPackages: function(container, categories) {
@@ -68,8 +46,7 @@ const HomeServicesFeature = {
             const inclusions = category.inclusions ? category.inclusions.split('|') : [];
             const inclusionsHtml = inclusions.map(item => `<li>${item}</li>`).join('');
             
-            const priceVal = Utils.formatPrice(category);
-            const cleanPrice = priceVal ? priceVal.replace('From ', '') : '';
+            const cleanPrice = category.price ? category.price.replace('From ', '') : '';
 
             // Handle multiple background layers for alternating imagery
             const imageUrls = (category.image_urls || category.image_url || "").split('|').filter(url => url.trim());
