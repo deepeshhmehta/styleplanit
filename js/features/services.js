@@ -38,21 +38,6 @@ const ServicesFeature = {
     }
     
     this.bindEvents();
-
-    // Listen for currency changes to update prices dynamically
-    if (!this.currencyListenerAdded) {
-        document.addEventListener('currencyChange', () => {
-            if ($(".service-content").is(":visible")) {
-                this.renderServicesGrid(this.allServices);
-            }
-            const activeDetails = $(".active-service-details");
-            if (activeDetails.length > 0) {
-                const title = activeDetails.find("h3").text();
-                this.showServiceDetails(title);
-            }
-        });
-        this.currencyListenerAdded = true;
-    }
   },
 
   renderServicesGrid: function (services) {
@@ -75,7 +60,7 @@ const ServicesFeature = {
                     <img src="${service.image_url}" alt="${service.title}">
                 </div>
                 <div class="service-card-content">
-                    <div class="service-price">${Utils.formatPrice(service)}</div>
+                    <div class="service-price">${service.price || ''}</div>
                     <h3>${service.title}</h3>
                     <p class="short-desc">${service.short_description}</p>
                     <div class="service-chips">${chipsHtml}</div>
@@ -176,9 +161,9 @@ const ServicesFeature = {
                     
                     <div class="inclusions-header">
                         <span class="inclusions-title">${inclusionsTitle}</span>
-                        ${Utils.formatPrice(service) ? `
+                        ${service.price ? `
                             <div class="price-container">
-                                <span class="service-price">${Utils.formatPrice(service)}</span>
+                                <span class="service-price">${service.price}</span>
                                 <span class="taxes-note">${taxesNote}</span>
                             </div>
                         ` : ''}
@@ -306,10 +291,10 @@ const ServicesFeature = {
 
     switch(criteria) {
         case 'investment':
-            sorted.sort((a, b) => this.parsePrice(Utils.formatPrice(b)) - this.parsePrice(Utils.formatPrice(a)));
+            sorted.sort((a, b) => this.parsePrice(b.price) - this.parsePrice(a.price));
             break;
         case 'entry':
-            sorted.sort((a, b) => this.parsePrice(Utils.formatPrice(a)) - this.parsePrice(Utils.formatPrice(b)));
+            sorted.sort((a, b) => this.parsePrice(a.price) - this.parsePrice(b.price));
             break;
         case 'journey':
             const order = { "Establish": 1, "Reclaim": 2, "Elevate": 3 };
